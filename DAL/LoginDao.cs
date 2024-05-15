@@ -17,19 +17,18 @@ namespace DAL
             string query = "SELECT PersoneelId, Voornaam, Achternaam, Wachtwoord, Functie, Fooi FROM Personeel WHERE Voornaam=@Voornaam AND Wachtwoord=@Wachtwoord";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", personeel.FirstName),
-                new SqlParameter("@Wachtwoord", personeel.Password)
+                new SqlParameter("@Voornaam", personeel.VoorNaam),
+                new SqlParameter("@Wachtwoord", personeel.WachtWoord)
             };
-            DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);
-            return ReadTables(dataTable).FirstOrDefault();
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
         }
-        public void ChangePassword(Personeel personeel, string Wachtwoord)
+        public void ChangePassword(Personeel personeel)
         {
             string query = "UPDATE Personeel SET Wachtwoord = @Wachtwoord WHERE PersoneelID = @Id;";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Id", personeel.Id),
-                new SqlParameter("@Wachtwoord", personeel.Password)
+                new SqlParameter("@Wachtwoord", personeel.WachtWoord)
             };
             ExecuteEditQuery(query, sqlParameters);
         }
@@ -39,34 +38,15 @@ namespace DAL
             string query = "INSERT INTO Personeel(Voornaam, Achternaam, Wachtwoord, Functie) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @Functie, @Fooi)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", personeel.FirstName),
-                new SqlParameter("@Achternaam", personeel.LastName),
-                new SqlParameter("@Wachtwoord", personeel.Password),
+                new SqlParameter("@Voornaam", personeel.VoorNaam),
+                new SqlParameter("@Achternaam", personeel.AchterNaam),
+                new SqlParameter("@Wachtwoord", personeel.WachtWoord),
                 new SqlParameter("@Functie", personeel.Functie),
                 new SqlParameter("@Fooi", personeel.Fooi)
             };
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        private List<Personeel> ReadPersoneel(DataTable dataTable)
-        {
-            List<Personeel> personeel = new List<Personeel>();
-
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                Personeel student = new Personeel()
-                {
-                    Id = (int)dr["PersoneelId"],
-                    FirstName = dr["Voornaam"].ToString(),
-                    LastName = dr["Achternaam"].ToString(),
-                    Password = dr["Wachtwoord"].ToString(),
-                    Functie = (Functie)dr["Functie"],
-                    Fooi = (float)dr["Fooi"]
-                };
-                personeel.Add(student);
-            }
-            return personeel;
-        }
         private List<Personeel> ReadTables(DataTable dataTable)
         {
             List<Personeel> personeel = new List<Personeel>();
@@ -76,9 +56,9 @@ namespace DAL
                 Personeel student = new Personeel()
                 {
                     Id = (int)dr["PersoneelId"],
-                    FirstName = dr["Voornaam"].ToString(),
-                    LastName = dr["Achternaam"].ToString(),
-                    Password = dr["Wachtwoord"].ToString(),
+                    VoorNaam = dr["Voornaam"].ToString(),
+                    AchterNaam = dr["Achternaam"].ToString(),
+                    WachtWoord = (byte[])dr["Wachtwoord"],
                     Functie = (Functie)dr["Functie"],
                     Fooi = (float)dr["Fooi"]
                 };

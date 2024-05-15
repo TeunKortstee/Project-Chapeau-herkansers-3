@@ -22,22 +22,22 @@ namespace Service
         }
         public void ChangePassword(Personeel personeel, string wachtwoord)
         {
-            loginDao.ChangePassword(personeel, ComputeSha256Hash(wachtwoord));
+
         }
         public void InsertPersoneel(Personeel personeel)
         {
             loginDao.InsertPersoneel(personeel);
         }
-        private string ComputeSha256Hash(string computeThis)
+        static byte[] HashPassword(string password, byte[] salt)
         {
-            SHA256 sha256 = SHA256.Create();
-            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(computeThis));
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (byte bit in bytes)
+            using (var sha256 = SHA256.Create())
             {
-                stringBuilder.Append(bit.ToString("x2"));
+                // Combine password and salt
+                byte[] saltedPassword = Encoding.UTF8.GetBytes(password).Concat(salt).ToArray();
+
+                // Compute hash
+                return sha256.ComputeHash(saltedPassword);
             }
-            return stringBuilder.ToString();
         }
     }
 }
