@@ -3,9 +3,9 @@
     public class Personeel
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public byte[] Password { get; set; }
+        public string VoorNaam { get; set; }
+        public string AchterNaam { get; set; }
+        public byte[] WachtWoord { get; set; }
         public Functie Functie { get; set; }
         public float Fooi { get; set; }
 
