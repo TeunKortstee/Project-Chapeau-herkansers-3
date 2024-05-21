@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public int Capaciteit { get; set; }
         public Personeel personeel { get; set; }
-        public Reservering Reservering { get; set; }
+        public Reservering reservering { get; set; }
     }
 }
