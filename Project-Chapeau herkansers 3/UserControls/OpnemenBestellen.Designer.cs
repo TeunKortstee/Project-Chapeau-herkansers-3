@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OpnemenBestellen));
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelSelectedTable = new System.Windows.Forms.Label();
             this.btnGebruiker = new System.Windows.Forms.Button();
@@ -39,8 +39,8 @@
             this.listViewKaart = new System.Windows.Forms.ListView();
             this.columnHeaderNaam = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderPrijs = new System.Windows.Forms.ColumnHeader();
-            this.btnToevoegenBestelling = new System.Windows.Forms.Button();
             this.columnHeaderVoorraad = new System.Windows.Forms.ColumnHeader();
+            this.btnToevoegenBestelling = new System.Windows.Forms.Button();
             this.labelBestelling = new System.Windows.Forms.Label();
             this.listViewBestelling = new System.Windows.Forms.ListView();
             this.columnHeaderNaamBestelling = new System.Windows.Forms.ColumnHeader();
@@ -71,7 +71,7 @@
             this.labelSelectedTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
             this.labelSelectedTable.Location = new System.Drawing.Point(139, 14);
             this.labelSelectedTable.Name = "labelSelectedTable";
-            this.labelSelectedTable.Size = new System.Drawing.Size(145, 46);
+            this.labelSelectedTable.Size = new System.Drawing.Size(142, 45);
             this.labelSelectedTable.TabIndex = 1;
             this.labelSelectedTable.Text = "Tafel #1";
             // 
@@ -127,7 +127,7 @@
             this.columnHeaderPrijs,
             this.columnHeaderVoorraad});
             this.listViewKaart.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem10});
+            listViewItem1});
             this.listViewKaart.Location = new System.Drawing.Point(16, 153);
             this.listViewKaart.Name = "listViewKaart";
             this.listViewKaart.Size = new System.Drawing.Size(374, 309);
@@ -138,11 +138,16 @@
             // columnHeaderNaam
             // 
             this.columnHeaderNaam.Text = "Naam";
-            this.columnHeaderNaam.Width = 250;
+            this.columnHeaderNaam.Width = 210;
             // 
             // columnHeaderPrijs
             // 
             this.columnHeaderPrijs.Text = "prijs";
+            // 
+            // columnHeaderVoorraad
+            // 
+            this.columnHeaderVoorraad.Text = "Voorraad";
+            this.columnHeaderVoorraad.Width = 100;
             // 
             // btnToevoegenBestelling
             // 
@@ -155,10 +160,6 @@
             this.btnToevoegenBestelling.Text = "TOEVOEGEN BESTELLING";
             this.btnToevoegenBestelling.UseVisualStyleBackColor = false;
             this.btnToevoegenBestelling.Click += new System.EventHandler(this.btnToevoegenBestelling_Click);
-            // 
-            // columnHeaderVoorraad
-            // 
-            this.columnHeaderVoorraad.Text = "Voorraad";
             // 
             // labelBestelling
             // 
