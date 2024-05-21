@@ -5,7 +5,6 @@ namespace Project_Chapeau_herkansers_3
         public Form1()
         {
             InitializeComponent();
-            UserControl1 control1 = new UserControl1();
         }
     }
 }
