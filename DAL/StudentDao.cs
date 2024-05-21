@@ -6,20 +6,20 @@ namespace DAL
 {
     public class StudentDao : BaseDao
     {
-        public List<Student> GetAllStudents()
+        public List<Personeel> GetAllStudents()
         {
             string query = "SELECT StudentId, Name FROM [TABLE]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        private List<Student> ReadTables(DataTable dataTable)
+        private List<Personeel> ReadTables(DataTable dataTable)
         {
-            List<Student> students = new List<Student>();
+            List<Personeel> students = new List<Personeel>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                Student student = new Student()
+                Personeel student = new Personeel()
                 {
                     Number = (int)dr["StudentId"],
                     Name = dr["Name"].ToString()

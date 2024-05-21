@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControl1
+    partial class UserControlDashboardManager
     {
         /// <summary> 
         /// Required designer variable.
@@ -45,6 +45,7 @@
             btnTableView.TabIndex = 0;
             btnTableView.Text = "Table View";
             btnTableView.UseVisualStyleBackColor = false;
+            btnTableView.Click += btnTableView_Click;
             // 
             // btnEmployee
             // 
@@ -57,6 +58,7 @@
             btnEmployee.TabIndex = 3;
             btnEmployee.Text = "Employee Management";
             btnEmployee.UseVisualStyleBackColor = false;
+            btnEmployee.Click += btnEmployee_Click;
             // 
             // btnMenu
             // 
@@ -69,6 +71,7 @@
             btnMenu.TabIndex = 4;
             btnMenu.Text = "Menu";
             btnMenu.UseVisualStyleBackColor = false;
+            btnMenu.Click += btnMenu_Click;
             // 
             // txtManager
             // 
