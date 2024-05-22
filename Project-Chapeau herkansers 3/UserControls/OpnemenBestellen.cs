@@ -85,12 +85,12 @@ namespace Project_Chapeau_herkansers_3
             listView.Columns.Add("Prijs", 60);
             listView.Columns.Add("Voorraad", 100);
 
-            //foreach (MenuItem menuItem in menu.MenuItems)
-            //{
-            //    ListViewItem item = new ListViewItem(menuItem.Naam);
-            //    item.SubItems.Add(menuItem.Prijs.ToString());
+            foreach (MenuItem menuItem in menu.MenuItems)
+            {
+                ListViewItem item = new ListViewItem(menuItem.Naam);
+                item.SubItems.Add(menuItem.Prijs.ToString());
                 
-            //}
+            }
         }
     }
 }

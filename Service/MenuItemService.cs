@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
-
+using Model;
 
 namespace Service
 {
@@ -17,6 +17,13 @@ namespace Service
             menuItemDao = new MenuItemDao();
         }
 
-
+        //public MenuItem GetById(int id)
+        //{
+        //    return menuItemDao.GetById(id);
+        //}
+        //public List<MenuItem> GetByItemType(ItemType itemType, int menuId)
+        //{
+        //    return menuItemDao.GetByItemType(itemType, menuId);
+        //}
     }
 }
