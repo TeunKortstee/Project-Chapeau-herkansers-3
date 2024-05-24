@@ -1,6 +1,6 @@
-﻿namespace Project_Chapeau_herkansers_3.UserControls
+﻿namespace Project_Chapeau_herkansers_3
 {
-    partial class UserControl1
+    partial class TafelStatusUI
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,17 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            SuspendLayout();
-            // 
-            // UserControl1
-            // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            CausesValidation = false;
-            Margin = new Padding(4, 4, 4, 4);
-            Name = "UserControl1";
-            Size = new Size(518, 920);
-            ResumeLayout(false);
+            components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion
