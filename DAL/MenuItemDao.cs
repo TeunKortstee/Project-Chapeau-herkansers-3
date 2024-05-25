@@ -34,5 +34,41 @@ namespace DAL
         //    };
         //    return null;
         //}
+
+        public List<MenuItem> GetAllItems()
+        {
+            string query = "SELECT Menu.MenuId, Menu.MenuType, MenuItems.MenuItemId, MenuItems.Naam, " +
+                "MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.MenuId AS MenuItem_MenuId, " +
+                "MenuItems.Voorraad FROM Menu JOIN MenuItems ON Menu.MenuId = MenuItems.MenuId;";   
+            return ReadTables(ExecuteSelectQuery(query));
+        }
+
+        private List<MenuItem> ReadTables(DataTable dataTable)
+        {
+            List<MenuItem> menuItems = new List<MenuItem>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                MenuItem menuItem = CreateMenuItemFromRow(row);
+                menuItems.Add(menuItem);
+            }
+            return menuItems;
+        }
+
+        private MenuItem CreateMenuItemFromRow(DataRow row)
+        {
+            Menu menu = new Menu()
+            {
+                menuId = (int)row["Menu.Id"],
+            };
+            return new MenuItem()
+            {
+                MenuItemId = (int)row["MenuItem_Id"],
+                menu = menu,
+                Voorraad = (int)row["MenuItems.Voorraad"],
+                Prijs = (float)row["MenuItems.Prijs"],
+                Naam = (string)row["MenuItems.Naam"],
+                IsAlcoholisch = (bool)row["MenuItems.Alcoholisch"],
+            };
+        }
     }
 }

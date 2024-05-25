@@ -9,17 +9,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Project_Chapeau_herkansers_3
 {
     public partial class OpnemenBestellen : UserControl
     {
-        Menu menu = new Menu();
+        MenuItemService menuItemService;
+        Model.Menu menu = new Model.Menu(); //Menu wordt hier aangemaakt, Model. want model en window menu
+        
+        private Tafel tafel;
+        private Personeel personeel;
 
-        public OpnemenBestellen(/*Table table, Personeel, personeel*/)
+        public OpnemenBestellen(Tafel tafel, Personeel personeel)
         {
             InitializeComponent();
+            menuItemService = new MenuItemService();
+            //menu.MenuItems = menuItemService.GetAllItems();
+            this.tafel = tafel;
+            this.personeel = personeel;
+            btnGebruiker.Text = personeel.VoorNaam.ToString();
         }
 
         private void btnGebruiker_Click(object sender, EventArgs e)
@@ -34,7 +44,7 @@ namespace Project_Chapeau_herkansers_3
 
         private void btnLunchKaart_Click(object sender, EventArgs e)
         {
-
+            //VullenListView(listViewKaart, )
         }
 
         private void btnDinerKaart_Click(object sender, EventArgs e)
@@ -69,13 +79,12 @@ namespace Project_Chapeau_herkansers_3
 
         private void btnAfrekenen_Click(object sender, EventArgs e)
         {
-
         }
 
-        private void VullenListView(System.Windows.Forms.ListView listView/*, ItemType itemType, int menuId*/)
+        private void VullenListView(System.Windows.Forms.ListView listView, int menuId)
         {
             MenuItemService menuItemService = new MenuItemService();
-            //menu.MenuItems = menuItemService.GetByItemType(itemType, menuId);
+            //menu.MenuItems = menuItemService.GetByItemType(menuType, menuId);
 
 
             listView.Clear();
