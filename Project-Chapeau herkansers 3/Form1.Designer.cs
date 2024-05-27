@@ -35,14 +35,14 @@
             // 
             panel1.Location = new Point(1, 1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(787, 446);
+            panel1.Size = new Size(787, 607);
             panel1.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(790, 450);
+            ClientSize = new Size(790, 608);
             Controls.Add(panel1);
             Name = "Form1";
             Text = "Form1";
