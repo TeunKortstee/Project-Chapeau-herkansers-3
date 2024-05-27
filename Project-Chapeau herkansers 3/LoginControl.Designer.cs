@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            checkBox1 = new CheckBox();
+            EmailTxt = new TextBox();
+            PasswordTxt = new TextBox();
+            CreateUserCheck = new CheckBox();
             LoginBtn = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // EmailTxt
             // 
-            textBox1.Location = new Point(130, 118);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 31);
-            textBox1.TabIndex = 0;
+            EmailTxt.Location = new Point(130, 118);
+            EmailTxt.Name = "EmailTxt";
+            EmailTxt.Size = new Size(150, 31);
+            EmailTxt.TabIndex = 0;
             // 
-            // textBox2
+            // PasswordTxt
             // 
-            textBox2.Location = new Point(130, 194);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(150, 31);
-            textBox2.TabIndex = 1;
+            PasswordTxt.Location = new Point(130, 194);
+            PasswordTxt.Name = "PasswordTxt";
+            PasswordTxt.Size = new Size(150, 31);
+            PasswordTxt.TabIndex = 1;
             // 
-            // checkBox1
+            // CreateUserCheck
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(130, 277);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(121, 29);
-            checkBox1.TabIndex = 2;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            CreateUserCheck.AutoSize = true;
+            CreateUserCheck.Location = new Point(130, 277);
+            CreateUserCheck.Name = "CreateUserCheck";
+            CreateUserCheck.Size = new Size(163, 29);
+            CreateUserCheck.TabIndex = 2;
+            CreateUserCheck.Text = "Create new user";
+            CreateUserCheck.UseVisualStyleBackColor = true;
             // 
             // LoginBtn
             // 
@@ -73,9 +73,9 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(LoginBtn);
-            Controls.Add(checkBox1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(CreateUserCheck);
+            Controls.Add(PasswordTxt);
+            Controls.Add(EmailTxt);
             Name = "LoginControl";
             Size = new Size(411, 500);
             ResumeLayout(false);
@@ -84,9 +84,9 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private CheckBox checkBox1;
+        private TextBox EmailTxt;
+        private TextBox PasswordTxt;
+        private CheckBox CreateUserCheck;
         private Button LoginBtn;
     }
 }
