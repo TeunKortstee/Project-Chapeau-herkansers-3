@@ -29,7 +29,10 @@ namespace Project_Chapeau_herkansers_3
             menu = menuItemService.GetAllItems();
             this.tafel = tafel;
             this.personeel = personeel;
-            //btnGebruiker.Text = personeel.VoorNaam.ToString();
+            if(personeel.VoorNaam != null)
+            {
+                btnGebruiker.Text = personeel.VoorNaam.ToString();
+            }
         }
 
         private void btnGebruiker_Click(object sender, EventArgs e)
@@ -44,22 +47,24 @@ namespace Project_Chapeau_herkansers_3
 
         private void btnLunchKaart_Click(object sender, EventArgs e)
         {
-            //VullenListView(listViewKaart, )
+
+            VullenListView(listViewKaart, (int)MenuType.Lunch);
         }
 
         private void btnDinerKaart_Click(object sender, EventArgs e)
         {
-
+            VullenListView(listViewKaart, (int)MenuType.Diner);
         }
 
         private void btnDrankKaart_Click(object sender, EventArgs e)
         {
-
+            VullenListView(listViewKaart, (int)MenuType.Drank);
         }
 
         private void btnToevoegenBestelling_Click(object sender, EventArgs e)
         {
-
+            MenuItem menuItem = (MenuItem)listViewKaart.SelectedItems[0].Tag;
+            
         }
 
         private void btnComment_Click(object sender, EventArgs e)
@@ -92,9 +97,14 @@ namespace Project_Chapeau_herkansers_3
 
             foreach (MenuItem menuItem in menu.MenuItems)
             {
-                ListViewItem item = new ListViewItem(menuItem.Naam);
-                item.SubItems.Add(menuItem.Prijs.ToString());
-                item.SubItems.Add(menuItem.Voorraad.ToString());
+                if(menuItem.MenuId == menuId)
+                {
+                    ListViewItem item = new ListViewItem(menuItem.Naam);
+                    item.SubItems.Add(menuItem.Prijs.ToString());
+                    item.SubItems.Add(menuItem.Voorraad.ToString());
+                    item.Tag = menuItem;
+                    listView.Items.Add(item);
+                }
             }
         }
     }
