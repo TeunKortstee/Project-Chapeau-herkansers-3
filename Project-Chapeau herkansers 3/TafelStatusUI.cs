@@ -48,7 +48,6 @@ namespace Project_Chapeau_herkansers_3
         }
         private void AddUserControl(UserControl userControl)
         {
-            form1.AddUserControl(userControl);
         }
         private void SaveTafel()
         {

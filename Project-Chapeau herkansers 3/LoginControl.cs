@@ -41,7 +41,6 @@ namespace Project_Chapeau_herkansers_3
                 if (CheckPassword() && IsValidEmail())
                 {
                     personeel.email = EmailTxt.Text;
-                    _form1.AddUserControl(new TafelOverzichtUserControl());
                     if (CreateUserCheck.Checked)
                     {
                         //Send user to database
