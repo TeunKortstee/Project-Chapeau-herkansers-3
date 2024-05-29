@@ -13,7 +13,7 @@ namespace DAL
     {
         public List<Personeel> GetAllPersoneel()
         {
-            string query = "SELECT StudentId, Name FROM [TABLE]";
+            string query = "SELECT PersoneelId, Voornaam, Achternaam, Wachtwoord, Functie FROM Personeel"; ;
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }

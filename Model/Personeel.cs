@@ -7,6 +7,5 @@
         public string Achternaam { get; set; }
         public string Wachtwoord { get; set; }
         public Functie Functie { get; set; }
-        public float Fooi { get; set; }
     }
 }

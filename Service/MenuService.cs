@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,11 @@ namespace Service
 {
     public class MenuService
     {
+        private MenuDao menuDao;
+
+        public MenuService()
+        {
+            this.menuDao = new MenuDao();
+        }
     }
 }

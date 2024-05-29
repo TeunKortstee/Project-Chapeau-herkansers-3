@@ -40,9 +40,10 @@
             // lsvDatabaseItems
             // 
             lsvDatabaseItems.Columns.AddRange(new ColumnHeader[] { Items, Voorraad });
-            lsvDatabaseItems.Location = new Point(26, 188);
+            lsvDatabaseItems.Location = new Point(30, 251);
+            lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
             lsvDatabaseItems.Name = "lsvDatabaseItems";
-            lsvDatabaseItems.Size = new Size(298, 296);
+            lsvDatabaseItems.Size = new Size(340, 393);
             lsvDatabaseItems.TabIndex = 0;
             lsvDatabaseItems.UseCompatibleStateImageBehavior = false;
             // 
@@ -50,19 +51,20 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(26, 120);
+            label1.Location = new Point(30, 160);
             label1.Name = "label1";
-            label1.Size = new Size(129, 65);
+            label1.Size = new Size(306, 81);
             label1.TabIndex = 1;
-            label1.Text = "Titel";
+            label1.Text = "Personeel";
             // 
             // btnAddNew
             // 
             btnAddNew.BackColor = Color.FromArgb(138, 210, 176);
             btnAddNew.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNew.Location = new Point(179, 143);
+            btnAddNew.Location = new Point(205, 191);
+            btnAddNew.Margin = new Padding(3, 4, 3, 4);
             btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(145, 36);
+            btnAddNew.Size = new Size(166, 48);
             btnAddNew.TabIndex = 2;
             btnAddNew.Text = "Nieuw Toevoegen";
             btnAddNew.UseVisualStyleBackColor = false;
@@ -71,9 +73,10 @@
             // 
             btnConfirm.BackColor = Color.FromArgb(138, 210, 176);
             btnConfirm.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnConfirm.Location = new Point(26, 490);
+            btnConfirm.Location = new Point(30, 653);
+            btnConfirm.Margin = new Padding(3, 4, 3, 4);
             btnConfirm.Name = "btnConfirm";
-            btnConfirm.Size = new Size(97, 39);
+            btnConfirm.Size = new Size(111, 52);
             btnConfirm.TabIndex = 3;
             btnConfirm.Text = "Bevestig";
             btnConfirm.UseVisualStyleBackColor = false;
@@ -82,24 +85,26 @@
             // 
             btnCancel.BackColor = Color.FromArgb(245, 108, 117);
             btnCancel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancel.Location = new Point(129, 490);
+            btnCancel.Location = new Point(147, 653);
+            btnCancel.Margin = new Padding(3, 4, 3, 4);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(97, 39);
+            btnCancel.Size = new Size(111, 52);
             btnCancel.TabIndex = 4;
             btnCancel.Text = "Annuleer";
             btnCancel.UseVisualStyleBackColor = false;
             // 
             // UserControlEmployees
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             Controls.Add(btnAddNew);
             Controls.Add(label1);
             Controls.Add(lsvDatabaseItems);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlEmployees";
-            Size = new Size(362, 552);
+            Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();
         }
