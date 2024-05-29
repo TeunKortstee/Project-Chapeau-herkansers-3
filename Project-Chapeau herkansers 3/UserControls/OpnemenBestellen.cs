@@ -17,7 +17,7 @@ namespace Project_Chapeau_herkansers_3
     public partial class OpnemenBestellen : UserControl
     {
         MenuItemService menuItemService;
-        Model.Menu menu; //Menu wordt hier aangemaakt, Model. want model en window menu
+        Model.Menu menu;
         
         private Tafel tafel;
         private Personeel personeel;
