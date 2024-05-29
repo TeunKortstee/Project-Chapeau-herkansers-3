@@ -1,7 +1,6 @@
 ﻿using DAL;
 using Model;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Service
 {
@@ -22,22 +21,36 @@ namespace Service
         }
         public void ChangePassword(Personeel personeel, string wachtwoord)
         {
-
+            personeel.Salt = GenerateSalt();
+            personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
+            loginDao.ChangePassword(personeel);
         }
-        public void InsertPersoneel(Personeel personeel)
+        public void InsertPersoneel(Personeel personeel, string wachtwoord)
         {
+            personeel.Salt = GenerateSalt();
+            personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
             loginDao.InsertPersoneel(personeel);
         }
-        static byte[] HashPassword(string password, byte[] salt)
+        public static byte[] GenerateSalt()
         {
-            using (var sha256 = SHA256.Create())
+            byte[] salt = new byte[32];
+            using (var rng = new RNGCryptoServiceProvider())
             {
-                // Combine password and salt
-                byte[] saltedPassword = Encoding.UTF8.GetBytes(password).Concat(salt).ToArray();
-
-                // Compute hash
-                return sha256.ComputeHash(saltedPassword);
+                rng.GetBytes(salt);
             }
+            return salt;
+        }
+        public static byte[] GenerateSaltedHash(string plainText, byte[] salt, int iterations = 10000)
+        {
+            using (var pbkdf2 = new Rfc2898DeriveBytes(plainText, salt, iterations))
+            {
+                return pbkdf2.GetBytes(32); // 256-bit hash
+            }
+        }
+        public bool VerifyPassword(string enteredPassword, byte[] storedSalt, byte[] storedHash)
+        {
+            byte[] hash = GenerateSaltedHash(enteredPassword, storedSalt);
+            return hash.SequenceEqual(storedHash);
         }
     }
 }
