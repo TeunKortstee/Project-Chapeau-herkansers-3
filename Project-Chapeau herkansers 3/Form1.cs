@@ -1,4 +1,3 @@
-using Project_Chapeau_herkansers_3.UserControls;
 using Model;
 
 namespace Project_Chapeau_herkansers_3
