@@ -101,6 +101,6 @@
         private TextBox txtManager;
     }
 
-    #endregion
 }
+#endregion
 
