@@ -95,6 +95,9 @@
             ResumeLayout(false);
             PerformLayout();
         }
+
+        #endregion
+
         private Button btnTableView;
         private Button btnEmployee;
         private Button btnMenu;
@@ -102,5 +105,3 @@
     }
 
 }
-#endregion
-
