@@ -28,20 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            SuspendLayout();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.AutoScroll = true;
+            this.mainPanel.Location = new System.Drawing.Point(12, 12);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(414, 1060);
+            this.mainPanel.TabIndex = 0;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Name = "Form1";
-            Text = "Form1";
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(472, 1055);
+            this.Controls.Add(this.mainPanel);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel mainPanel;
     }
 }
