@@ -2,7 +2,7 @@
 {
     public class Menu
     {
-        public int menuId;
+        public int MenuId { get;}
         private List<MenuItem> menuItems;
         private MenuType menuType;
 

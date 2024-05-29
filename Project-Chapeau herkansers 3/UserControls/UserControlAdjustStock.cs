@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlMenu : UserControl
+    public partial class UserControlAdjustStock : UserControl
     {
-        public UserControlMenu()
+        public UserControlAdjustStock()
         {
             InitializeComponent();
         }

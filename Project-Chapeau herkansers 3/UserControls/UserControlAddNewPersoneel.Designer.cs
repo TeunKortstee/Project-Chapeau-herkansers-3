@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlEmployees
+    partial class UserControlAddNewPersoneel
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,24 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lsvDatabaseItems = new ListView();
-            Items = new ColumnHeader();
-            Voorraad = new ColumnHeader();
             lblPersoneel = new Label();
-            btnAddNew = new Button();
             btnConfirm = new Button();
             btnCancel = new Button();
+            picName = new PictureBox();
+            picDropdown = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picDropdown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
-            // 
-            // lsvDatabaseItems
-            // 
-            lsvDatabaseItems.Columns.AddRange(new ColumnHeader[] { Items, Voorraad });
-            lsvDatabaseItems.Location = new Point(30, 251);
-            lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
-            lsvDatabaseItems.Name = "lsvDatabaseItems";
-            lsvDatabaseItems.Size = new Size(340, 393);
-            lsvDatabaseItems.TabIndex = 0;
-            lsvDatabaseItems.UseCompatibleStateImageBehavior = false;
             // 
             // lblPersoneel
             // 
@@ -53,21 +47,9 @@
             lblPersoneel.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
             lblPersoneel.Location = new Point(28, 187);
             lblPersoneel.Name = "lblPersoneel";
-            lblPersoneel.Size = new Size(175, 46);
+            lblPersoneel.Size = new Size(287, 46);
             lblPersoneel.TabIndex = 1;
-            lblPersoneel.Text = "Personeel";
-            // 
-            // btnAddNew
-            // 
-            btnAddNew.BackColor = Color.FromArgb(138, 210, 176);
-            btnAddNew.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNew.Location = new Point(205, 191);
-            btnAddNew.Margin = new Padding(3, 4, 3, 4);
-            btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(166, 48);
-            btnAddNew.TabIndex = 2;
-            btnAddNew.Text = "Nieuw Toevoegen";
-            btnAddNew.UseVisualStyleBackColor = false;
+            lblPersoneel.Text = "Nieuw Personeel";
             // 
             // btnConfirm
             // 
@@ -93,30 +75,73 @@
             btnCancel.Text = "Annuleer";
             btnCancel.UseVisualStyleBackColor = false;
             // 
-            // UserControlEmployees
+            // picName
+            // 
+            picName.BackColor = Color.FromArgb(196, 196, 196);
+            picName.Location = new Point(46, 271);
+            picName.Name = "picName";
+            picName.Size = new Size(285, 62);
+            picName.TabIndex = 6;
+            picName.TabStop = false;
+            // 
+            // picDropdown
+            // 
+            picDropdown.BackColor = Color.FromArgb(196, 196, 196);
+            picDropdown.Location = new Point(46, 339);
+            picDropdown.Name = "picDropdown";
+            picDropdown.Size = new Size(285, 62);
+            picDropdown.TabIndex = 7;
+            picDropdown.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.FromArgb(196, 196, 196);
+            pictureBox3.Location = new Point(46, 407);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(285, 62);
+            pictureBox3.TabIndex = 8;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.BackColor = Color.FromArgb(196, 196, 196);
+            pictureBox4.Location = new Point(46, 475);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(285, 62);
+            pictureBox4.TabIndex = 9;
+            pictureBox4.TabStop = false;
+            // 
+            // UserControlAddNew
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(picDropdown);
+            Controls.Add(picName);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
-            Controls.Add(btnAddNew);
             Controls.Add(lblPersoneel);
-            Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlEmployees";
+            Name = "UserControlAddNew";
             Size = new Size(414, 736);
+            ((System.ComponentModel.ISupportInitialize)picName).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picDropdown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private ListView lsvDatabaseItems;
-        private ColumnHeader Items;
-        private ColumnHeader Voorraad;
         private Label lblPersoneel;
-        private Button btnAddNew;
         private Button btnConfirm;
         private Button btnCancel;
+        private PictureBox pictureBox1;
+        private PictureBox picName;
+        private PictureBox picDropdown;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox5;
     }
 }

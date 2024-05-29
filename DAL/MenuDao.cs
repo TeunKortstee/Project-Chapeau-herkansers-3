@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MenuDao
+    public class MenuDao : BaseDao
     {
         public Menu GetMenu()
         {
             string query = "SELECT * FROM Menu WHERE"; ;
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            SqlParameter[] sqlParameters = new SqlParameter[]
+{
+                new SqlParameter("@Voornaam", personeel.Voornaam),
+                new SqlParameter("@Wachtwoord", personeel.Wachtwoord)
+};
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
     }

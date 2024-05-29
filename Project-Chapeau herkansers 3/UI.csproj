@@ -24,6 +24,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="UserControls\UserControlAdjustStock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\UserControlAddNewMenuItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\UserControlAddNewPersoneel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
