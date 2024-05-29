@@ -12,9 +12,8 @@ namespace DAL
         public BaseDao()
         {
 
-            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["projectchapeauserver3"].ConnectionString);
+            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChapeauHerkansing3"].ConnectionString);
             adapter = new SqlDataAdapter();
-
         }
 
         protected SqlConnection OpenConnection()

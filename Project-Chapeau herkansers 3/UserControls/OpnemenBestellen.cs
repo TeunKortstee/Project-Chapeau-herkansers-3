@@ -17,7 +17,7 @@ namespace Project_Chapeau_herkansers_3
     public partial class OpnemenBestellen : UserControl
     {
         MenuItemService menuItemService;
-        Model.Menu menu = new Model.Menu(); //Menu wordt hier aangemaakt, Model. want model en window menu
+        Model.Menu menu; //Menu wordt hier aangemaakt, Model. want model en window menu
         
         private Tafel tafel;
         private Personeel personeel;
@@ -26,10 +26,10 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             menuItemService = new MenuItemService();
-            //menu.MenuItems = menuItemService.GetAllItems();
+            menu = menuItemService.GetAllItems();
             this.tafel = tafel;
             this.personeel = personeel;
-            btnGebruiker.Text = personeel.VoorNaam.ToString();
+            //btnGebruiker.Text = personeel.VoorNaam.ToString();
         }
 
         private void btnGebruiker_Click(object sender, EventArgs e)
@@ -83,10 +83,6 @@ namespace Project_Chapeau_herkansers_3
 
         private void VullenListView(System.Windows.Forms.ListView listView, int menuId)
         {
-            MenuItemService menuItemService = new MenuItemService();
-            //menu.MenuItems = menuItemService.GetByItemType(menuType, menuId);
-
-
             listView.Clear();
             listView.View = View.Details;
 
@@ -98,7 +94,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 ListViewItem item = new ListViewItem(menuItem.Naam);
                 item.SubItems.Add(menuItem.Prijs.ToString());
-                
+                item.SubItems.Add(menuItem.Voorraad.ToString());
             }
         }
     }

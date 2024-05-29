@@ -26,7 +26,7 @@ namespace Service
         //    return menuItemDao.GetByItemType(itemType, menuId);
         //}
 
-        public List<MenuItem> GetAllItems()
+        public Menu GetAllItems()
         {
             return menuItemDao.GetAllItems();
         }

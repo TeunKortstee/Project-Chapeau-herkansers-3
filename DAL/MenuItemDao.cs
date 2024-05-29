@@ -11,63 +11,34 @@ namespace DAL
 {
     public class MenuItemDao : BaseDao
     {
-        //public MenuItem GetById(int id)
-        //{
-        //    string query =
-        //        "SELECT MenuItemId, MenuItem.Naam, MenuItem.Alcoholisch, MenuItem.MenuType" +
-        //        "Menu.id , Menu.[name] FROM MenuItem" +
-        //        "JOIN Menu ON MenuItem.Menu_id = Menu.id " +
-        //        "WHERE MenuItem.id = @id";
-        //    SqlParameter[] sqlParameters = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@id", id),
-        //    };
-        //    return ReadSingle(ExecuteSelectQuery(query, sqlParameters));
-        //}
-
-        //private MenuItem ReadSingle(DataTable dataTable)
-        //{
-        //    DataRow row = dataTable.Rows[0];
-        //    if (dataTable.Rows.Count > 0)
-        //    {
-        //        return CreateMenuItemFromRow(row);
-        //    };
-        //    return null;
-        //}
-
-        public List<MenuItem> GetAllItems()
+        public Menu GetAllItems()
         {
-            string query = "SELECT Menu.MenuId, Menu.MenuType, MenuItems.MenuItemId, MenuItems.Naam, " +
-                "MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.MenuId AS MenuItem_MenuId, " +
-                "MenuItems.Voorraad FROM Menu JOIN MenuItems ON Menu.MenuId = MenuItems.MenuId;";   
+            string query = "SELECT MenuItems.MenuItemId, MenuItems.Naam, " +
+                "MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.Voorraad, " +
+                "MenuItems.MenuId FROM MenuItems";   
             return ReadTables(ExecuteSelectQuery(query));
         }
 
-        private List<MenuItem> ReadTables(DataTable dataTable)
+        private Menu ReadTables(DataTable dataTable)
         {
-            List<MenuItem> menuItems = new List<MenuItem>();
+            Menu menu = new Menu();
             foreach (DataRow row in dataTable.Rows)
             {
                 MenuItem menuItem = CreateMenuItemFromRow(row);
-                menuItems.Add(menuItem);
+                menu.MenuItems.Add(menuItem);
             }
-            return menuItems;
+            return menu;
         }
 
         private MenuItem CreateMenuItemFromRow(DataRow row)
         {
-            Menu menu = new Menu()
-            {
-                menuId = (int)row["Menu.Id"],
-            };
             return new MenuItem()
             {
-                MenuItemId = (int)row["MenuItem_Id"],
-                menu = menu,
-                Voorraad = (int)row["MenuItems.Voorraad"],
-                Prijs = (float)row["MenuItems.Prijs"],
-                Naam = (string)row["MenuItems.Naam"],
-                IsAlcoholisch = (bool)row["MenuItems.Alcoholisch"],
+                MenuItemId = Convert.ToInt32(row["MenuItemId"]),
+                Voorraad = Convert.ToInt32(row["Voorraad"]),
+                Prijs = (decimal)row["Prijs"],
+                Naam = (string)row["Naam"],
+                IsAlcoholisch = (bool)row["Alcoholisch"],
             };
         }
     }

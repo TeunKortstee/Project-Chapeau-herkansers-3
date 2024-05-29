@@ -8,6 +8,6 @@ namespace Model
 {
     public enum MenuType
     {
-        Lunch, Diner, Drank
+        Lunch=1, Diner, Drank
     }
 }

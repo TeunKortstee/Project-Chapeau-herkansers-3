@@ -8,7 +8,8 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             //UserControl1 control1 = new UserControl1();
-            OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
+            
+            OpnemenBestellen opnemenBestellen = new OpnemenBestellen(new Model.Tafel(), new Model.Personeel());
             mainPanel.Controls.Add(opnemenBestellen);
         }
     }
