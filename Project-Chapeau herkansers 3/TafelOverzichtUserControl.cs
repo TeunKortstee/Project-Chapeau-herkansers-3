@@ -7,15 +7,11 @@ namespace Project_Chapeau_herkansers_3
     {
         private List<Tafel> tafels;
         public Form1 form;
-        public TafelOverzichtUserControl(Form1 form)
+        public TafelOverzichtUserControl()
         {
-            this.form = form;
+            this.form = Form1.Instance;
             InitializeComponent();
-            tafels = new List<Tafel>();
-            for (int i = 1; i < 11; i++)
-            {
-                tafels.Add(new Tafel(i, TafelStatus.Bezet));
-            }
+            tafels = GetTafels();
             FillTableLayoutPanel();
         }
         private void Table_Click(object sender, EventArgs e)
@@ -23,7 +19,6 @@ namespace Project_Chapeau_herkansers_3
             //button click naar volgende pagina om status aan te passen
             Button btn = (Button)sender;
             TafelStatusUI tafelstatusui = new TafelStatusUI((Tafel)btn.Tag);
-            tafelstatusui.Tag = this;
             this.form.AddUserControl(tafelstatusui);
         }
 
@@ -80,7 +75,12 @@ namespace Project_Chapeau_herkansers_3
         private List<Tafel> GetTafels()
         {
             //Get alle tafels van db
-            return new List<Tafel>();
+            List<Tafel> tafelen = new List<Tafel>();
+            for (int i = 1; i < 10; i++)
+            {
+                tafelen.Add(new Tafel(i, TafelStatus.Bezet));
+            }
+            return tafelen;
         }
     }
 }

@@ -5,9 +5,11 @@ namespace Project_Chapeau_herkansers_3
     public partial class TafelStatusUI : UserControl
     {
         private Tafel tafel;
+        private Form1 form1;
         public TafelStatusUI(Tafel tafel)
         {
             InitializeComponent();
+            form1 = Form1.Instance;
             this.tafel = tafel;
             SetLabels();
             FillComboBox();
@@ -39,17 +41,14 @@ namespace Project_Chapeau_herkansers_3
 
         private void TerugBtn_Click(object sender, EventArgs e)
         {
-
             //sla tafel op in db
 
             //ga terug naar tafeloverzicht
-            TafelOverzichtUserControl tafelOverzichtUserControl = (TafelOverzichtUserControl)this.Tag;
-            AddUserControl(new TafelOverzichtUserControl(tafelOverzichtUserControl.form));
+            AddUserControl(new TafelOverzichtUserControl());
         }
         private void AddUserControl(UserControl userControl)
         {
-            TafelOverzichtUserControl tafelOverzicht = (TafelOverzichtUserControl)this.Tag;
-            tafelOverzicht.form.AddUserControl(userControl);
+            form1.AddUserControl(userControl);
         }
         private void SaveTafel()
         {

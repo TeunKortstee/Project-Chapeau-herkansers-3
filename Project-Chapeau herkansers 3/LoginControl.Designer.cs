@@ -32,6 +32,7 @@
             PasswordTxt = new TextBox();
             CreateUserCheck = new CheckBox();
             LoginBtn = new Button();
+            ErrorLbl = new Label();
             SuspendLayout();
             // 
             // EmailTxt
@@ -45,6 +46,7 @@
             // 
             PasswordTxt.Location = new Point(130, 194);
             PasswordTxt.Name = "PasswordTxt";
+            PasswordTxt.PasswordChar = '*';
             PasswordTxt.Size = new Size(150, 31);
             PasswordTxt.TabIndex = 1;
             // 
@@ -68,10 +70,20 @@
             LoginBtn.UseVisualStyleBackColor = true;
             LoginBtn.Click += LoginBtn_Click;
             // 
+            // ErrorLbl
+            // 
+            ErrorLbl.AutoSize = true;
+            ErrorLbl.ForeColor = Color.Red;
+            ErrorLbl.Location = new Point(130, 228);
+            ErrorLbl.Name = "ErrorLbl";
+            ErrorLbl.Size = new Size(0, 25);
+            ErrorLbl.TabIndex = 4;
+            // 
             // LoginControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(ErrorLbl);
             Controls.Add(LoginBtn);
             Controls.Add(CreateUserCheck);
             Controls.Add(PasswordTxt);
@@ -88,5 +100,6 @@
         private TextBox PasswordTxt;
         private CheckBox CreateUserCheck;
         private Button LoginBtn;
+        private Label ErrorLbl;
     }
 }

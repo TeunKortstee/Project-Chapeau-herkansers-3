@@ -7,6 +7,7 @@
         public string VoorNaam { get; set; }
         public string AchterNaam { get; set; }
         public byte[] WachtWoord { get; set; }
+        public byte[] Salt { get; set; }
         public Functie Functie { get; set; }
         public float Fooi { get; set; }
 

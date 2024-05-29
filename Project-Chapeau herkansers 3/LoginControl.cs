@@ -1,54 +1,94 @@
-﻿using System.Text.RegularExpressions;
+﻿using Model;
+using Service;
+using System.Text.RegularExpressions;
 
 namespace Project_Chapeau_herkansers_3
 {
     public partial class LoginControl : UserControl
     {
+        private Form1 _form1;
+        private LoginService loginService;
         public LoginControl()
         {
             InitializeComponent();
+            _form1 = Form1.Instance;
         }
-        private bool IsPersoneel()
+        private bool IsPersoneel(Personeel p)
         {
-            return true;
+            //get user from db
+            Personeel personeel = loginService.GetPersoneel(p);
+            if (personeel == null)
+            {
+                return false;
+            }
+            if (!loginService.VerifyPassword(PasswordTxt.Text, personeel.Salt, personeel.WachtWoord))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             //write method that checks regex
-            if (CheckPassword())
+            Personeel personeel = new Personeel();
+            try
             {
-                if (CreateUserCheck.Checked)
+                if (CheckPassword() && IsValidEmail())
                 {
-                    //Send user to database
-                }
-                else
-                {
-                    if (IsPersoneel())
+                    personeel.email = EmailTxt.Text;
+                    _form1.AddUserControl(new TafelOverzichtUserControl());
+                    if (CreateUserCheck.Checked)
                     {
-                        //return user to mainform
+                        //Send user to database
                     }
                     else
                     {
-                        SomethingWentWrong();
+                        //if (IsPersoneel(personeel))
+                        //{
+                        //    //return user to mainform
+
+                        //    //Open volgende UserControl
+
+                        //}
+                        //else
+                        //{
+                        //    throw new LoginException();
+                        //}
                     }
                 }
+                else
+                {
+                    throw new LoginException();
+                }
             }
-            else
+            catch (LoginException ex)
             {
-                SomethingWentWrong();
+                SomethingWentWrong(ex.Message);
+
             }
+
         }
         private bool CheckPassword()
         {
             string pattern = "^[0-9]{4}$";
             return Regex.IsMatch(PasswordTxt.Text, pattern);
         }
-        private void SomethingWentWrong()
+        public bool IsValidEmail()
+        {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(EmailTxt.Text, pattern);
+        }
+        private void SomethingWentWrong(string message)
         {
             //display errors
 
             PasswordTxt.Clear();
+            ErrorLbl.Text = message;
         }
     }
 }
