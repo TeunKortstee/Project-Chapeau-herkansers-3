@@ -11,5 +11,5 @@ namespace Project_Chapeau_herkansers_3
             OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
             mainPanel.Controls.Add(opnemenBestellen);
         }
-    }
+      }
 }

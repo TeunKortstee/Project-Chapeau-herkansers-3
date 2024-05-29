@@ -10,11 +10,26 @@ using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControl1 : UserControl
+    public partial class UserControlDashboardManager : UserControl
     {
-        public UserControl1()
+        public UserControlDashboardManager()
         {
             InitializeComponent();
+        }
+
+        private void btnTableView_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEmployee_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

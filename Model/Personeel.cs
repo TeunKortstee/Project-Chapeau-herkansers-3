@@ -2,13 +2,10 @@
 {
     public class Personeel
     {
-        public int Id { get; set; }
-        public string VoorNaam { get; set; }
-        public string AchterNaam { get; set; }
-        public byte[] WachtWoord { get; set; }
+        public int PersoneelId { get; set; }
+        public string Voornaam { get; set; }
+        public string Achternaam { get; set; }
+        public string Wachtwoord { get; set; }
         public Functie Functie { get; set; }
-        public float Fooi { get; set; }
-
-
     }
 }
