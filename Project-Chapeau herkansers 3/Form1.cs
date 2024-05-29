@@ -20,19 +20,6 @@ namespace Project_Chapeau_herkansers_3
         private Form1()
         {
             InitializeComponent();
-            _instance = this;
-            personeel = new Personeel();
-            panel1.Controls.Add(new LoginControl());
-        }
-        public void AddUserControl(UserControl control)
-        {
-            panel1.Controls.Clear();
-            control.Dock = DockStyle.Fill;
-            panel1.Controls.Add(control);
-        }
-        public void ShowForm()
-        {
-            this.Show();
         }
     }
 }
