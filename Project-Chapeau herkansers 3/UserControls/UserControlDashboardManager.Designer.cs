@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControl1
+    partial class UserControlDashboardManager
     {
         /// <summary> 
         /// Required designer variable.
@@ -43,8 +43,9 @@
             btnTableView.Name = "btnTableView";
             btnTableView.Size = new Size(256, 50);
             btnTableView.TabIndex = 0;
-            btnTableView.Text = "Table View";
+            btnTableView.Text = "Tafeloverzicht";
             btnTableView.UseVisualStyleBackColor = false;
+            btnTableView.Click += btnTableView_Click;
             // 
             // btnEmployee
             // 
@@ -55,8 +56,9 @@
             btnEmployee.Name = "btnEmployee";
             btnEmployee.Size = new Size(256, 50);
             btnEmployee.TabIndex = 3;
-            btnEmployee.Text = "Employee Management";
+            btnEmployee.Text = "Personeel Management";
             btnEmployee.UseVisualStyleBackColor = false;
+            btnEmployee.Click += btnEmployee_Click;
             // 
             // btnMenu
             // 
@@ -69,6 +71,7 @@
             btnMenu.TabIndex = 4;
             btnMenu.Text = "Menu";
             btnMenu.UseVisualStyleBackColor = false;
+            btnMenu.Click += btnMenu_Click;
             // 
             // txtManager
             // 
@@ -81,7 +84,7 @@
             txtManager.TabIndex = 5;
             txtManager.Text = "Manager";
             // 
-            // UserControl1
+            // UserControlDashboardManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -90,7 +93,7 @@
             Controls.Add(btnEmployee);
             Controls.Add(btnTableView);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "UserControl1";
+            Name = "UserControlDashboardManager";
             Size = new Size(362, 552);
             ResumeLayout(false);
             PerformLayout();
