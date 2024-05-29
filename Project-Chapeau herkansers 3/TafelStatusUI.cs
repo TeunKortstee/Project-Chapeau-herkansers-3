@@ -34,9 +34,9 @@ namespace Project_Chapeau_herkansers_3
         private void MaakBestellingBtn_Click(object sender, EventArgs e)
         {
             //Open naar bestelling Ui
-            OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
+            /*OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
             opnemenBestellen.Tag = this;
-            AddUserControl(opnemenBestellen);
+            AddUserControl(opnemenBestellen);*/
         }
 
         private void TerugBtn_Click(object sender, EventArgs e)
