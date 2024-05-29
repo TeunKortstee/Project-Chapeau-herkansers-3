@@ -59,8 +59,8 @@ namespace DAL
                     VoorNaam = dr["Voornaam"].ToString(),
                     AchterNaam = dr["Achternaam"].ToString(),
                     WachtWoord = (byte[])dr["Wachtwoord"],
-                    Functie = (Functie)dr["Functie"],
-                    Fooi = (float)dr["Fooi"]
+                    Functie = (Functie)dr["Functie"]
+                    
                 };
                 personeel.Add(student);
             }

@@ -11,7 +11,7 @@ namespace Project_Chapeau_herkansers_3
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Form1 form1 = new Form1();
+            Form1 form1 = Form1.Instance;
             form1.Size = new Size(490, 1000);
             Application.Run(form1);
         }
