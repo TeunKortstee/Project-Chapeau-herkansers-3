@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace DAL
 {
@@ -10,11 +11,9 @@ namespace DAL
 
         public BaseDao()
         {
-            // DO NOT FORGET TO INSERT YOUR CONNECTION STRING NAMED 'SOMEREN DATABASE' IN YOUR APP.CONFIG!!
-            /*
-                conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SomerenDatabase"].ConnectionString);
-                adapter = new SqlDataAdapter();
-             */
+
+            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChapeauHerkansing3"].ConnectionString);
+            adapter = new SqlDataAdapter();
         }
 
         protected SqlConnection OpenConnection()

@@ -1,7 +1,19 @@
 ﻿namespace Model
 {
-    public enum Menu
+    public class Menu
     {
-        Lunch, Diner, Drank
+        public int menuId;
+        private List<MenuItem> menuItems;
+        private MenuType menuType;
+
+        public List<MenuItem> MenuItems { get { return menuItems; } set { menuItems = value; } }
+        public MenuType MenuType { get { return menuType; } set { menuType = value; } }
+
+        public Menu()
+        {
+            menuId = 1;
+            menuItems = new List<MenuItem>();
+            menuType = MenuType.Lunch;
+        }
     }
 }
