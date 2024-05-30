@@ -7,6 +7,9 @@ namespace Project_Chapeau_herkansers_3
         public Form1()
         {
             InitializeComponent();
+
+            OpnemenBestellen opnemenBestellen = new OpnemenBestellen(new Model.Tafel());
+            mainPanel.Controls.Add(opnemenBestellen);
         }
     }
 }
