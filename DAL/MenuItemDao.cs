@@ -42,6 +42,11 @@ namespace DAL
                 "MenuItems.Voorraad FROM Menu JOIN MenuItems ON Menu.MenuId = MenuItems.MenuId;";   
             return ReadTables(ExecuteSelectQuery(query));
         }
+        public List<MenuItem> GetMenuItemsByMenu(MenuType menuType)
+        {
+            string query = "SELECT mi.* FROM MenuItems mi JOIN Menu m ON mi.MenuId = m.MenuId";
+            return ReadTables(ExecuteSelectQuery(query));
+        }
 
         private List<MenuItem> ReadTables(DataTable dataTable)
         {
@@ -58,11 +63,10 @@ namespace DAL
         {
             Menu menu = new Menu()
             {
-                menuId = (int)row["Menu.Id"],
+                MenuId = (int)row["Menu.Id"],
             };
             return new MenuItem()
             {
-                MenuItemId = (int)row["MenuItem_Id"],
                 menu = menu,
                 Voorraad = (int)row["MenuItems.Voorraad"],
                 Prijs = (float)row["MenuItems.Prijs"],

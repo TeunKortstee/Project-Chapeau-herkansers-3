@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlAddNewMenuItem
+    partial class UserControlNewMenuItem
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,22 +32,27 @@
             btnConfirm = new Button();
             btnCancel = new Button();
             picName = new PictureBox();
-            textBox1 = new TextBox();
-            btnAdd = new Button();
-            btnSubtract = new Button();
+            txtNaam = new TextBox();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
+            txtPrijs = new TextBox();
+            chkAlcoholisch = new CheckBox();
+            cmbMenuType = new ComboBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblMenuItem
             // 
             lblMenuItem.AutoSize = true;
             lblMenuItem.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblMenuItem.Location = new Point(28, 187);
+            lblMenuItem.Location = new Point(27, 170);
             lblMenuItem.Name = "lblMenuItem";
-            lblMenuItem.Size = new Size(168, 46);
+            lblMenuItem.Size = new Size(298, 46);
             lblMenuItem.TabIndex = 1;
-            lblMenuItem.Text = "Voorraad";
+            lblMenuItem.Text = "Nieuw MenuItem";
             // 
             // btnConfirm
             // 
@@ -76,58 +81,99 @@
             // picName
             // 
             picName.BackColor = Color.FromArgb(196, 196, 196);
-            picName.Location = new Point(46, 271);
+            picName.Location = new Point(30, 295);
             picName.Name = "picName";
             picName.Size = new Size(285, 62);
             picName.TabIndex = 6;
             picName.TabStop = false;
             // 
-            // textBox1
+            // txtNaam
             // 
-            textBox1.Location = new Point(261, 292);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(31, 27);
-            textBox1.TabIndex = 10;
-            // 
-            // btnAdd
-            // 
-            btnAdd.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAdd.Location = new Point(298, 292);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(24, 29);
-            btnAdd.TabIndex = 11;
-            btnAdd.Text = "+";
-            btnAdd.UseVisualStyleBackColor = true;
-            // 
-            // btnSubtract
-            // 
-            btnSubtract.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSubtract.Location = new Point(231, 292);
-            btnSubtract.Name = "btnSubtract";
-            btnSubtract.Size = new Size(24, 29);
-            btnSubtract.TabIndex = 12;
-            btnSubtract.Text = "-";
-            btnSubtract.UseVisualStyleBackColor = true;
+            txtNaam.Location = new Point(177, 314);
+            txtNaam.Name = "txtNaam";
+            txtNaam.Size = new Size(121, 27);
+            txtNaam.TabIndex = 10;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.FromArgb(196, 196, 196);
             label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(65, 292);
+            label1.Location = new Point(49, 314);
             label1.Name = "label1";
             label1.Size = new Size(62, 25);
             label1.TabIndex = 13;
-            label1.Text = "Name";
+            label1.Text = "Naam";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.FromArgb(196, 196, 196);
+            pictureBox1.Location = new Point(30, 363);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(285, 62);
+            pictureBox1.TabIndex = 14;
+            pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.FromArgb(196, 196, 196);
+            label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(49, 382);
+            label2.Name = "label2";
+            label2.Size = new Size(48, 25);
+            label2.TabIndex = 17;
+            label2.Text = "Prijs";
+            // 
+            // txtPrijs
+            // 
+            txtPrijs.Location = new Point(177, 382);
+            txtPrijs.Name = "txtPrijs";
+            txtPrijs.Size = new Size(121, 27);
+            txtPrijs.TabIndex = 16;
+            // 
+            // chkAlcoholisch
+            // 
+            chkAlcoholisch.AutoSize = true;
+            chkAlcoholisch.Location = new Point(30, 431);
+            chkAlcoholisch.Name = "chkAlcoholisch";
+            chkAlcoholisch.Size = new Size(107, 24);
+            chkAlcoholisch.TabIndex = 21;
+            chkAlcoholisch.Text = "Alcoholisch";
+            chkAlcoholisch.UseVisualStyleBackColor = true;
+            chkAlcoholisch.Visible = false;
+            // 
+            // cmbMenuType
+            // 
+            cmbMenuType.FormattingEnabled = true;
+            cmbMenuType.Location = new Point(30, 261);
+            cmbMenuType.Name = "cmbMenuType";
+            cmbMenuType.Size = new Size(151, 28);
+            cmbMenuType.TabIndex = 26;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = SystemColors.Control;
+            label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(30, 233);
+            label3.Name = "label3";
+            label3.Size = new Size(61, 25);
+            label3.TabIndex = 27;
+            label3.Text = "Menu";
             // 
             // UserControlAddNewMenuItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label3);
+            Controls.Add(cmbMenuType);
+            Controls.Add(chkAlcoholisch);
+            Controls.Add(label2);
+            Controls.Add(txtPrijs);
+            Controls.Add(pictureBox1);
             Controls.Add(label1);
-            Controls.Add(btnSubtract);
-            Controls.Add(btnAdd);
-            Controls.Add(textBox1);
+            Controls.Add(txtNaam);
             Controls.Add(picName);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
@@ -136,6 +182,7 @@
             Name = "UserControlAddNewMenuItem";
             Size = new Size(414, 736);
             ((System.ComponentModel.ISupportInitialize)picName).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -147,9 +194,12 @@
         private PictureBox pictureBox1;
         private PictureBox picName;
         private PictureBox pictureBox5;
-        private TextBox textBox1;
-        private Button btnAdd;
-        private Button btnSubtract;
+        private TextBox txtNaam;
         private Label label1;
+        private Label label2;
+        private TextBox txtPrijs;
+        private CheckBox chkAlcoholisch;
+        private ComboBox cmbMenuType;
+        private Label label3;
     }
 }

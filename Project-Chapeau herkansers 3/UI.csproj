@@ -24,10 +24,10 @@
     <Compile Update="UserControls\UserControlAdjustStock.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControls\UserControlAddNewMenuItem.cs">
+    <Compile Update="UserControls\UserControlNewMenuItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControls\UserControlAddNewPersoneel.cs">
+    <Compile Update="UserControls\UserControlNewPersoneel.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

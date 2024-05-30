@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlEmployees
+    partial class UserControlOverview
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,33 +29,32 @@
         private void InitializeComponent()
         {
             lsvDatabaseItems = new ListView();
-            Items = new ColumnHeader();
-            Voorraad = new ColumnHeader();
-            lblPersoneel = new Label();
+            lblOverview = new Label();
             btnAddNew = new Button();
             btnConfirm = new Button();
             btnCancel = new Button();
+            cmbCategorie = new ComboBox();
             SuspendLayout();
             // 
             // lsvDatabaseItems
             // 
-            lsvDatabaseItems.Columns.AddRange(new ColumnHeader[] { Items, Voorraad });
             lsvDatabaseItems.Location = new Point(30, 251);
             lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
             lsvDatabaseItems.Name = "lsvDatabaseItems";
             lsvDatabaseItems.Size = new Size(340, 393);
             lsvDatabaseItems.TabIndex = 0;
             lsvDatabaseItems.UseCompatibleStateImageBehavior = false;
+            lsvDatabaseItems.View = View.Details;
             // 
-            // lblPersoneel
+            // lblOverview
             // 
-            lblPersoneel.AutoSize = true;
-            lblPersoneel.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblPersoneel.Location = new Point(28, 187);
-            lblPersoneel.Name = "lblPersoneel";
-            lblPersoneel.Size = new Size(175, 46);
-            lblPersoneel.TabIndex = 1;
-            lblPersoneel.Text = "Personeel";
+            lblOverview.AutoSize = true;
+            lblOverview.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOverview.Location = new Point(119, 14);
+            lblOverview.Name = "lblOverview";
+            lblOverview.Size = new Size(172, 46);
+            lblOverview.TabIndex = 1;
+            lblOverview.Text = "Overzicht";
             // 
             // btnAddNew
             // 
@@ -93,17 +92,26 @@
             btnCancel.Text = "Annuleer";
             btnCancel.UseVisualStyleBackColor = false;
             // 
-            // UserControlEmployees
+            // cmbCategorie
+            // 
+            cmbCategorie.FormattingEnabled = true;
+            cmbCategorie.Location = new Point(30, 191);
+            cmbCategorie.Name = "cmbCategorie";
+            cmbCategorie.Size = new Size(151, 28);
+            cmbCategorie.TabIndex = 27;
+            // 
+            // UserControlOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(cmbCategorie);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             Controls.Add(btnAddNew);
-            Controls.Add(lblPersoneel);
+            Controls.Add(lblOverview);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlEmployees";
+            Name = "UserControlOverview";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();
@@ -112,11 +120,10 @@
         #endregion
 
         private ListView lsvDatabaseItems;
-        private ColumnHeader Items;
-        private ColumnHeader Voorraad;
-        private Label lblPersoneel;
+        private Label lblOverview;
         private Button btnAddNew;
         private Button btnConfirm;
         private Button btnCancel;
+        private ComboBox cmbCategorie;
     }
 }

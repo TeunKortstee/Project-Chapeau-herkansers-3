@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlAddNewPersoneel : UserControl
+    public partial class UserControlNewPersoneel : UserControl
     {
-        public UserControlAddNewPersoneel()
+        public UserControlNewPersoneel()
         {
             InitializeComponent();
         }

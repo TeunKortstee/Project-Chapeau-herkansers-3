@@ -30,6 +30,10 @@ namespace Service
         {
             return menuItemDao.GetAllItems();
         }
+        public List<MenuItem> GetMenuItemsByMenu(MenuType menuType)
+        {
+            return menuItemDao.GetMenuItemsByMenu(menuType);
+        }
 
     }
 }

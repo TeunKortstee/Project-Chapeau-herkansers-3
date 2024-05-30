@@ -32,7 +32,18 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-
+        public void InsertPersoneel(Personeel personeel)
+        {
+            string query = "INSERT INTO Personeel (Voornaam, Achternaam, Wachtwoord, Functie) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @Functie)";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Voornaam", personeel.Voornaam),
+                new SqlParameter("@Achternaam", personeel.Achternaam),
+                new SqlParameter("@Wachtwoord", personeel.Wachtwoord),
+                new SqlParameter("@Functie", personeel.Functie),
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
 
         private List<Personeel> ReadTables(DataTable dataTable)
         {

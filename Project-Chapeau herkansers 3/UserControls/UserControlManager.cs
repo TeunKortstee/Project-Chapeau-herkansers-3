@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,26 +11,27 @@ using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlDashboardManager : UserControl
+    public partial class UserControlManager : UserControl
     {
-        public UserControlDashboardManager()
+        private Form1 form1;
+
+        public UserControlManager(Form1 form1)
         {
             InitializeComponent();
+            this.form1 = form1;
         }
 
         private void btnTableView_Click(object sender, EventArgs e)
         {
 
         }
-
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-
+            form1.Switchpanels(new UserControlOverview(form1));
         }
-
         private void btnMenu_Click(object sender, EventArgs e)
         {
-
+            form1.Switchpanels(new UserControlOverview(form1, MenuType.Drank));
         }
     }
 }

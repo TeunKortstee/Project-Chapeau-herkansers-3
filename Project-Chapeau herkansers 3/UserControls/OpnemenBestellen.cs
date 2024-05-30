@@ -22,14 +22,14 @@ namespace Project_Chapeau_herkansers_3
         private Tafel tafel;
         private Personeel personeel;
 
-        public OpnemenBestellen(Tafel tafel, Personeel personeel)
+        public OpnemenBestellen()
         {
             InitializeComponent();
             menuItemService = new MenuItemService();
             //menu.MenuItems = menuItemService.GetAllItems();
             this.tafel = tafel;
             this.personeel = personeel;
-            btnGebruiker.Text = personeel.VoorNaam.ToString();
+            btnGebruiker.Text = personeel.Voornaam.ToString();
         }
 
         private void btnGebruiker_Click(object sender, EventArgs e)

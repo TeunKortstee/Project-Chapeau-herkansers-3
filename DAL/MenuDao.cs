@@ -10,15 +10,15 @@ namespace DAL
 {
     public class MenuDao : BaseDao
     {
-        public Menu GetMenu()
-        {
-            string query = "SELECT * FROM Menu WHERE"; ;
-            SqlParameter[] sqlParameters = new SqlParameter[]
-{
-                new SqlParameter("@Voornaam", personeel.Voornaam),
-                new SqlParameter("@Wachtwoord", personeel.Wachtwoord)
-};
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
+//        public Menu GetMenu()
+//        {
+//            string query = "SELECT * FROM Menu WHERE"; ;
+//            SqlParameter[] sqlParameters = new SqlParameter[]
+//{
+//                new SqlParameter("@Voornaam", personeel.Voornaam),
+//                new SqlParameter("@Wachtwoord", personeel.Wachtwoord)
+//};
+//            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+//        }
     }
 }
