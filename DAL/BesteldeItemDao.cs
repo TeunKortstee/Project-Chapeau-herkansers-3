@@ -13,7 +13,7 @@ namespace DAL
     {
         public List<BesteldeItem> GetItemsFromBestelling(int bestellingID)
         {
-            string query = "SELECT BesteldItemId, Opmerking, Instuurtijd, MenuItemId, BestellingId, Hoeveelheid FROM BesteldeItems WHERE BestellingsId = @bestellingId";
+            string query = "SELECT BesteldItemId, Opmerking, Instuurtijd, MenuItemId, BestellingsId, Hoeveelheid FROM BesteldeItems WHERE BestellingsId = @bestellingId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@bestellingId", bestellingID),
@@ -34,7 +34,7 @@ namespace DAL
                     Opmerking = row["Opmerking"].ToString(),
                     InstuurTijd = (DateTime)row["InstuurTijd"],
                     MenuItemID = Convert.ToInt32(row["MenuItemID"]),                    
-                    BestellingsID = Convert.ToInt32(row["Betaald"]),
+                    BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"])
                 };
                 items.Add(item);
