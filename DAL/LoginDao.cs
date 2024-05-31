@@ -35,14 +35,14 @@ namespace DAL
 
         public void InsertPersoneel(Personeel personeel)
         {
-            string query = "INSERT INTO Personeel(Voornaam, Achternaam, Wachtwoord, Functie) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @Functie, @Fooi)";
+            string query = "INSERT INTO Personeel(Voornaam, Achternaam, Wachtwoord, Functie) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @Functie)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Voornaam", personeel.VoorNaam),
                 new SqlParameter("@Achternaam", personeel.AchterNaam),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord),
                 new SqlParameter("@Functie", personeel.Functie),
-                new SqlParameter("@Fooi", personeel.Fooi)
+               
             };
             ExecuteEditQuery(query, sqlParameters);
         }
