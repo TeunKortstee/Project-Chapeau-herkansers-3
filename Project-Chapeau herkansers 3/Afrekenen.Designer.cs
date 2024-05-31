@@ -34,7 +34,7 @@
             "8,50"}, -1);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.billTitleText = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.billListView = new System.Windows.Forms.ListView();
             this.billColumnAmount = new System.Windows.Forms.ColumnHeader();
             this.billColumnName = new System.Windows.Forms.ColumnHeader();
             this.billColumnPrice = new System.Windows.Forms.ColumnHeader();
@@ -68,20 +68,21 @@
             this.billTitleText.TabIndex = 1;
             this.billTitleText.Text = "BILL";
             // 
-            // listView1
+            // billListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.billListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.billColumnAmount,
             this.billColumnName,
             this.billColumnPrice});
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            this.billListView.FullRowSelect = true;
+            this.billListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(8, 64);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(322, 251);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.billListView.Location = new System.Drawing.Point(8, 64);
+            this.billListView.Name = "billListView";
+            this.billListView.Size = new System.Drawing.Size(322, 251);
+            this.billListView.TabIndex = 2;
+            this.billListView.UseCompatibleStateImageBehavior = false;
+            this.billListView.View = System.Windows.Forms.View.Details;
             // 
             // billColumnAmount
             // 
@@ -122,7 +123,7 @@
             this.panel1.Controls.Add(this.billTotalAmountText);
             this.panel1.Controls.Add(this.billTitleText);
             this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.listView1);
+            this.panel1.Controls.Add(this.billListView);
             this.panel1.Controls.Add(this.billTotalText);
             this.panel1.Location = new System.Drawing.Point(4, 59);
             this.panel1.Name = "panel1";
@@ -131,13 +132,15 @@
             // 
             // billTotalAmountText
             // 
+            this.billTotalAmountText.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.billTotalAmountText.AutoSize = true;
             this.billTotalAmountText.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.billTotalAmountText.Location = new System.Drawing.Point(269, 325);
+            this.billTotalAmountText.Location = new System.Drawing.Point(239, 324);
             this.billTotalAmountText.Name = "billTotalAmountText";
-            this.billTotalAmountText.Size = new System.Drawing.Size(61, 30);
+            this.billTotalAmountText.Size = new System.Drawing.Size(91, 30);
             this.billTotalAmountText.TabIndex = 5;
-            this.billTotalAmountText.Text = "€113";
+            this.billTotalAmountText.Text = "€113.00";
+            this.billTotalAmountText.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Afrekenen
             // 
@@ -164,7 +167,7 @@
 
         private PictureBox pictureBox1;
         private Label billTitleText;
-        private ListView listView1;
+        private ListView billListView;
         private ColumnHeader billColumnAmount;
         private ColumnHeader billColumnName;
         private ColumnHeader billColumnPrice;
