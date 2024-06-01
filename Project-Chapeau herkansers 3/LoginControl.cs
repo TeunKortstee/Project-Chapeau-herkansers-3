@@ -11,7 +11,6 @@ namespace Project_Chapeau_herkansers_3
         public LoginControl()
         {
             InitializeComponent();
-            _form1 = Form1.Instance;
         }
         private bool IsPersoneel(Personeel p)
         {

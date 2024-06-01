@@ -19,7 +19,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         public UserControlNewMenuItem()
         {
             InitializeComponent();
-            form1 = Form1.Instance;
+            //form1 = Form1.Instance;
         }
     }
 }

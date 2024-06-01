@@ -9,7 +9,7 @@ namespace Project_Chapeau_herkansers_3
         public TafelStatusUI(Tafel tafel)
         {
             InitializeComponent();
-            form1 = Form1.Instance;
+            //form1 = Form1.Instance;
             this.tafel = tafel;
             SetLabels();
             FillComboBox();
