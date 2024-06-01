@@ -10,8 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-
 namespace Project_Chapeau_herkansers_3
 {
     public partial class OpnemenBestellen : UserControl
@@ -22,62 +20,77 @@ namespace Project_Chapeau_herkansers_3
             MenuItemService menuItemService = new MenuItemService();
             Menu menu = menuItemService.GetAllItems();
             Bestelling bestelling = new Bestelling();
-            btnLunchKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Lunch);
-            btnDinerKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Diner);
-            btnDrankKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Drank);
-            
+            buttonsVullen(menu, bestelling);
             VulListMetColumns();
         }
 
-        private void btnVerwijderAlles_Click(object sender, EventArgs e)
+        private void buttonsVullen(Menu menu, Bestelling bestelling)
         {
-            Bestelling bestelling = new Bestelling();
-            bestelling.BestellingItems.Clear();
-            listViewBestelling.Items.Clear();
+            btnLunchKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Lunch);
+            btnDinerKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Diner);
+            btnDrankKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Drank);
+            btnToevoegenBestelling.Click += (sender, e) => ToevoegenAanBestelling(bestelling);
+            btnOpmerking.Click += (sender, e) => ToevoegenOpmerkingAanBestelling(bestelling);
+            btnVerwijderAlles.Click += (sender, e) => VerwijderAllesUitListView(bestelling);
+            btnRijVerwijderen.Click += (sender, e) => RijVerwijderen(listViewBestelling, bestelling);
         }
+
+        private void btnVerwijderAlles_Click(object sender, EventArgs e) { }
 
         private void btnLunchKaart_Click(object sender, EventArgs e) { }
 
         private void btnDinerKaart_Click(object sender, EventArgs e) { }
 
-        private void btnDrankKaart_Click(object sender, EventArgs e)
-        {
-            VullenListView(listViewKaart, new Menu(), MenuType.Drank);
-        }
+        private void btnDrankKaart_Click(object sender, EventArgs e) { }
 
-        private void btnToevoegenBestelling_Click(object sender, EventArgs e)
-        {
-            if (listViewKaart.SelectedItems.Count > 0)
-            {
-                MenuItem menuItem = (MenuItem)listViewKaart.SelectedItems[0].Tag;
-                Bestelling bestelling = new Bestelling();
-                bestelling.BestellingItems.Add(new BesteldItem(menuItem));
-                VulListViewBestelling(listViewBestelling, bestelling);
-            }
-        }
+        private void btnToevoegenBestelling_Click(object sender, EventArgs e) { }
 
-        private void btnComment_Click(object sender, EventArgs e)
-        {
-            if (listViewBestelling.SelectedItems.Count > 0)
-            {
-                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
-                besteldItem.Opmerking = txtOpmerking.Text;
-                VulListViewBestelling(listViewBestelling, new Bestelling());
-            }
-        }
+        private void btnComment_Click(object sender, EventArgs e) { }
+
+        private void btnRijVerwijderen_Click(object sender, EventArgs e) { }
 
         private void btnVerwijderEen_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnRijVerwijderen_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAfrekenen_Click(object sender, EventArgs e)
         {
+        }
+
+        private void RijVerwijderen(System.Windows.Forms.ListView listView, Bestelling bestelling)
+        {
+            if (listView.SelectedItems.Count > 0)
+            {
+                bestelling.BestellingItems.Remove((BesteldItem)listView.SelectedItems[0].Tag);
+                listView.Items.Remove(listView.SelectedItems[0]);
+            }
+        }
+
+        private void ToevoegenAanBestelling(Bestelling bestelling)
+        {
+            if (listViewKaart.SelectedItems.Count > 0)
+            {
+                MenuItem menuItem = (MenuItem)listViewKaart.SelectedItems[0].Tag;
+                bestelling.BestellingItems.Add(new BesteldItem(menuItem));
+                VulListViewBestelling(listViewBestelling, bestelling);
+            }
+        }
+
+        private void ToevoegenOpmerkingAanBestelling(Bestelling bestelling)
+        {
+            if (listViewBestelling.SelectedItems.Count > 0)
+            {
+                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
+                besteldItem.Opmerking = txtOpmerking.Text;
+                VulListViewBestelling(listViewBestelling, bestelling);
+            }
+        }
+
+        private void VerwijderAllesUitListView(Bestelling bestelling)
+        {
+            bestelling.BestellingItems.Clear();
+            listViewBestelling.Items.Clear();
         }
 
         private void VullenListView(System.Windows.Forms.ListView listView, Menu menu ,MenuType menuType)
@@ -125,11 +138,6 @@ namespace Project_Chapeau_herkansers_3
             listViewBestelling.Columns.Add("Naam", 210);
             listViewBestelling.Columns.Add("Prijs", 60);
             listViewBestelling.Columns.Add("Opmerking", 100);
-        }
-
-        private void VerwijderAllesVanList(Bestelling bestelling)
-        {
-
         }
     }
 }
