@@ -22,13 +22,13 @@ namespace Service
         public void ChangePassword(Personeel personeel, string wachtwoord)
         {
             personeel.Salt = GenerateSalt();
-            personeel.Wachtwoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
+            personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
             loginDao.ChangePassword(personeel);
         }
         public void InsertPersoneel(Personeel personeel, string wachtwoord)
         {
             personeel.Salt = GenerateSalt();
-            personeel.Wachtwoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
+            personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
             loginDao.InsertPersoneel(personeel);
         }
         public static byte[] GenerateSalt()

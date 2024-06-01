@@ -34,6 +34,7 @@
             btnConfirm = new Button();
             btnCancel = new Button();
             cmbCategorie = new ComboBox();
+            btnReturn = new Button();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -99,11 +100,26 @@
             cmbCategorie.Name = "cmbCategorie";
             cmbCategorie.Size = new Size(151, 28);
             cmbCategorie.TabIndex = 27;
+            cmbCategorie.SelectedIndexChanged += cmbCategorie_SelectedIndexChanged;
+            // 
+            // btnReturn
+            // 
+            btnReturn.BackColor = Color.FromArgb(255, 179, 71);
+            btnReturn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnReturn.Location = new Point(303, 20);
+            btnReturn.Margin = new Padding(3, 4, 3, 4);
+            btnReturn.Name = "btnReturn";
+            btnReturn.Size = new Size(68, 48);
+            btnReturn.TabIndex = 28;
+            btnReturn.Text = "Terug";
+            btnReturn.UseVisualStyleBackColor = false;
+            btnReturn.Click += btnReturn_Click;
             // 
             // UserControlOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnReturn);
             Controls.Add(cmbCategorie);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
@@ -125,5 +141,6 @@
         private Button btnConfirm;
         private Button btnCancel;
         private ComboBox cmbCategorie;
+        private Button btnReturn;
     }
 }

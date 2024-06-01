@@ -17,8 +17,8 @@ namespace DAL
             string query = "SELECT PersoneelId, Voornaam, Achternaam, Wachtwoord, Functie, Fooi FROM Personeel WHERE Voornaam=@Voornaam AND Wachtwoord=@Wachtwoord";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", personeel.Voornaam),
-                new SqlParameter("@Wachtwoord", personeel.Wachtwoord)
+                new SqlParameter("@Voornaam", personeel.VoorNaam),
+                new SqlParameter("@Wachtwoord", personeel.WachtWoord)
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
         }
@@ -27,8 +27,8 @@ namespace DAL
             string query = "UPDATE Personeel SET Wachtwoord = @Wachtwoord WHERE PersoneelsId = @PersoneelsId;";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@PersoneelsId", personeel.PersoneelsId),
-                new SqlParameter("@Wachtwoord", personeel.Wachtwoord)
+                new SqlParameter("@PersoneelsId", personeel.Id),
+                new SqlParameter("@Wachtwoord", personeel.WachtWoord)
             };
             ExecuteEditQuery(query, sqlParameters);
         }
@@ -37,9 +37,9 @@ namespace DAL
             string query = "INSERT INTO Personeel(Voornaam, Achternaam, Wachtwoord, Functie) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @Functie)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", personeel.Voornaam),
-                new SqlParameter("@Achternaam", personeel.Achternaam),
-                new SqlParameter("@Wachtwoord", personeel.Wachtwoord),
+                new SqlParameter("@Voornaam", personeel.VoorNaam),
+                new SqlParameter("@Achternaam", personeel.AchterNaam),
+                new SqlParameter("@Wachtwoord", personeel.WachtWoord),
                 new SqlParameter("@Functie", personeel.Functie),
                
             };

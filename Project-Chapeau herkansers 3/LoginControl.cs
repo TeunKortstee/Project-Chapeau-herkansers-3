@@ -20,7 +20,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 return false;
             }
-            if (!loginService.VerifyPassword(PasswordTxt.Text, personeel.Salt, personeel.Wachtwoord))
+            if (!loginService.VerifyPassword(PasswordTxt.Text, personeel.Salt, personeel.WachtWoord))
             {
                 return false;
             }
