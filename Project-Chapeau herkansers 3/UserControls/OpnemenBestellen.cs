@@ -33,29 +33,43 @@ namespace Project_Chapeau_herkansers_3
             btnOpmerking.Click += (sender, e) => ToevoegenOpmerkingAanBestelling(bestelling);
             btnVerwijderAlles.Click += (sender, e) => VerwijderAllesUitListView(bestelling);
             btnRijVerwijderen.Click += (sender, e) => RijVerwijderen(listViewBestelling, bestelling);
+            btnToevoegenEen.Click += (sender, e) => ToevoegenEenAanBestelling(listViewBestelling, bestelling, menu);
+            btnVerwijderEen.Click += (sender, e) => VerwijderenEenAanBestelling(listViewBestelling, bestelling);
         }
 
         private void btnVerwijderAlles_Click(object sender, EventArgs e) { }
-
         private void btnLunchKaart_Click(object sender, EventArgs e) { }
-
         private void btnDinerKaart_Click(object sender, EventArgs e) { }
-
         private void btnDrankKaart_Click(object sender, EventArgs e) { }
-
         private void btnToevoegenBestelling_Click(object sender, EventArgs e) { }
-
         private void btnComment_Click(object sender, EventArgs e) { }
-
         private void btnRijVerwijderen_Click(object sender, EventArgs e) { }
+        private void btnToevoegenEen_Click(object sender, EventArgs e) { }
+        private void btnVerwijderEen_Click(object sender, EventArgs e) { }
 
-        private void btnVerwijderEen_Click(object sender, EventArgs e)
+        private void btnAfrekenen_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnAfrekenen_Click(object sender, EventArgs e)
+        private void ToevoegenEenAanBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling, Menu menu)
         {
+            if(listView.SelectedItems.Count > 0)
+            {
+                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
+                besteldItem.Aantal++;
+                VulListViewBestelling(listViewBestelling, bestelling);
+            }
+        }
+
+        private void VerwijderenEenAanBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling)
+        {
+            if (listView.SelectedItems.Count > 0)
+            {
+                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
+                besteldItem.Aantal--;
+                VulListViewBestelling(listViewBestelling, bestelling);
+            }
         }
 
         private void RijVerwijderen(System.Windows.Forms.ListView listView, Bestelling bestelling)
@@ -118,6 +132,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 ListViewItem item = new ListViewItem(besteldItem.menuItem.Naam);
                 item.SubItems.Add(besteldItem.menuItem.Prijs.ToString());
+                item.SubItems.Add(besteldItem.Aantal.ToString());
                 item.SubItems.Add(besteldItem.Opmerking);
                 item.Tag = besteldItem;
                 listView.Items.Add(item);
@@ -135,9 +150,11 @@ namespace Project_Chapeau_herkansers_3
             listViewKaart.Columns.Add("Prijs", 60);
             listViewKaart.Columns.Add("Voorraad", 100);
 
-            listViewBestelling.Columns.Add("Naam", 210);
-            listViewBestelling.Columns.Add("Prijs", 60);
+            listViewBestelling.Columns.Add("Naam", 170);
+            listViewBestelling.Columns.Add("Prijs", 50);
+            listViewBestelling.Columns.Add("Aantal", 60);
             listViewBestelling.Columns.Add("Opmerking", 100);
         }
+
     }
 }

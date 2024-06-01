@@ -51,6 +51,7 @@
             this.btnOpmerking = new System.Windows.Forms.Button();
             this.btnAfrekenen = new System.Windows.Forms.Button();
             this.txtOpmerking = new System.Windows.Forms.TextBox();
+            this.btnToevoegenEen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -198,9 +199,9 @@
             // 
             // btnVerwijderAlles
             // 
-            this.btnVerwijderAlles.Location = new System.Drawing.Point(122, 899);
+            this.btnVerwijderAlles.Location = new System.Drawing.Point(246, 541);
             this.btnVerwijderAlles.Name = "btnVerwijderAlles";
-            this.btnVerwijderAlles.Size = new System.Drawing.Size(144, 50);
+            this.btnVerwijderAlles.Size = new System.Drawing.Size(144, 38);
             this.btnVerwijderAlles.TabIndex = 13;
             this.btnVerwijderAlles.Text = "Alles verwijderen";
             this.btnVerwijderAlles.UseVisualStyleBackColor = true;
@@ -245,11 +246,22 @@
             this.txtOpmerking.Size = new System.Drawing.Size(259, 27);
             this.txtOpmerking.TabIndex = 17;
             // 
+            // btnToevoegenEen
+            // 
+            this.btnToevoegenEen.Location = new System.Drawing.Point(139, 899);
+            this.btnToevoegenEen.Name = "btnToevoegenEen";
+            this.btnToevoegenEen.Size = new System.Drawing.Size(119, 50);
+            this.btnToevoegenEen.TabIndex = 18;
+            this.btnToevoegenEen.Text = "Toevoegen 1";
+            this.btnToevoegenEen.UseVisualStyleBackColor = true;
+            this.btnToevoegenEen.Click += new System.EventHandler(this.btnToevoegenEen_Click);
+            // 
             // OpnemenBestellen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnToevoegenEen);
             this.Controls.Add(this.txtOpmerking);
             this.Controls.Add(this.btnAfrekenen);
             this.Controls.Add(this.btnOpmerking);
@@ -296,5 +308,6 @@
         private Button btnOpmerking;
         private Button btnAfrekenen;
         private TextBox txtOpmerking;
+        private Button btnToevoegenEen;
     }
 }
