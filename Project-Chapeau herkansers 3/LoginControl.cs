@@ -11,7 +11,6 @@ namespace Project_Chapeau_herkansers_3
         public LoginControl()
         {
             InitializeComponent();
-            _form1 = Form1.Instance;
         }
         private bool IsPersoneel(Personeel p)
         {
@@ -21,7 +20,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 return false;
             }
-            if (!loginService.VerifyPassword(PasswordTxt.Text, personeel.Salt, personeel.WachtWoord))
+            if (!loginService.VerifyPassword(PasswordTxt.Text, personeel.Salt, personeel.Wachtwoord))
             {
                 return false;
             }

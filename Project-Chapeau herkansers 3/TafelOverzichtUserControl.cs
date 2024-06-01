@@ -9,7 +9,7 @@ namespace Project_Chapeau_herkansers_3
         public Form1 form;
         public TafelOverzichtUserControl()
         {
-            this.form = Form1.Instance;
+            //this.form = Form1.Instance;
             InitializeComponent();
             tafels = GetTafels();
             FillTableLayoutPanel();

@@ -18,6 +18,11 @@ namespace DAL
                 "MenuItems.MenuId FROM MenuItems";   
             return ReadTables(ExecuteSelectQuery(query));
         }
+        public List<MenuItem> GetMenuItemsByMenu(MenuType menuType)
+        {
+            string query = "SELECT mi.* FROM MenuItems mi JOIN Menu m ON mi.MenuId = m.MenuId";
+            return ReadTables(ExecuteSelectQuery(query));
+        }
 
         private Menu ReadTables(DataTable dataTable)
         {
