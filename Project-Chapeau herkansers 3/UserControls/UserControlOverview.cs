@@ -41,28 +41,57 @@ namespace Project_Chapeau_herkansers_3.UserControls
             if (this.personeelService == null)
             {
                 lblOverview.Text = "Menu";
-                cmbCategorie.DataSource = Enum.GetValues(typeof(MenuType));
-                cmbCategorie.SelectedIndex = 2;
-                FillMenuListView((MenuType)cmbCategorie.SelectedIndex);
+                //btn2.Location = new Point(158, 194);
+                btn1.Text = "Lunch";
+                btn2.Text = "Diner";
+                btn3.Text = "Drank";
+                FillMenuListView((MenuType)1);
             }
             else
             {
                 lblOverview.Text = "Personeel";
-                cmbCategorie.DataSource = Enum.GetValues(typeof(Functie));
-                cmbCategorie.SelectedIndex = 0;
-                FillEmployeeListView((Functie)cmbCategorie.SelectedIndex);
+                btn1.Text = "Serveerder";
+                btn2.Text = "Keuken";
+                btn3.Text = "Bar";
+                FillEmployeeListView((Functie)1);
             }
         }
-        private void RefreshListView()
+        private void btn1_Click(object sender, EventArgs e)
         {
             lsvDatabaseItems.Clear();
             if (this.personeelService == null)
             {
-                FillMenuListView((MenuType)cmbCategorie.SelectedIndex);
+                FillMenuListView((MenuType)1);
             }
             else
             {
-                FillEmployeeListView((Functie)cmbCategorie.SelectedIndex);
+                FillEmployeeListView((Functie)3);
+            }
+        }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            lsvDatabaseItems.Clear();
+            if (this.personeelService == null)
+            {
+                FillMenuListView((MenuType)2);
+            }
+            else
+            {
+                FillEmployeeListView((Functie)3);
+            }
+        }
+
+        private void btn3_Click(object sender, EventArgs e)
+        {
+            lsvDatabaseItems.Clear();
+            if (this.personeelService == null)
+            {
+                FillMenuListView((MenuType)3);
+            }
+            else
+            {
+                FillEmployeeListView((Functie)3);
             }
         }
         private void FillMenuListView(MenuType menuType)
@@ -77,7 +106,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 if (menuItem.MenuId == (int)menuType)
                 {
                     ListViewItem item = new ListViewItem(menuItem.Naam);
-                    item.SubItems.Add(menuItem.Prijs.ToString());
                     item.SubItems.Add(menuItem.Voorraad.ToString());
                     item.Tag = menuItem;
                     lsvDatabaseItems.Items.Add(item);
@@ -98,11 +126,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 lsvDatabaseItems.Items.Add(item);
             }
 
-        }
-
-        private void cmbCategorie_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RefreshListView();
         }
 
         private void btnReturn_Click(object sender, EventArgs e)

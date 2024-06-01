@@ -33,16 +33,18 @@
             btnAddNew = new Button();
             btnConfirm = new Button();
             btnCancel = new Button();
-            cmbCategorie = new ComboBox();
             btnReturn = new Button();
+            btn1 = new Button();
+            btn2 = new Button();
+            btn3 = new Button();
             SuspendLayout();
             // 
             // lsvDatabaseItems
             // 
-            lsvDatabaseItems.Location = new Point(30, 251);
+            lsvDatabaseItems.Location = new Point(14, 251);
             lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
             lsvDatabaseItems.Name = "lsvDatabaseItems";
-            lsvDatabaseItems.Size = new Size(340, 393);
+            lsvDatabaseItems.Size = new Size(380, 380);
             lsvDatabaseItems.TabIndex = 0;
             lsvDatabaseItems.UseCompatibleStateImageBehavior = false;
             lsvDatabaseItems.View = View.Details;
@@ -61,10 +63,10 @@
             // 
             btnAddNew.BackColor = Color.FromArgb(138, 210, 176);
             btnAddNew.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNew.Location = new Point(205, 191);
+            btnAddNew.Location = new Point(14, 139);
             btnAddNew.Margin = new Padding(3, 4, 3, 4);
             btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(166, 48);
+            btnAddNew.Size = new Size(380, 48);
             btnAddNew.TabIndex = 2;
             btnAddNew.Text = "Nieuw Toevoegen";
             btnAddNew.UseVisualStyleBackColor = false;
@@ -73,7 +75,7 @@
             // 
             btnConfirm.BackColor = Color.FromArgb(138, 210, 176);
             btnConfirm.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnConfirm.Location = new Point(30, 653);
+            btnConfirm.Location = new Point(14, 651);
             btnConfirm.Margin = new Padding(3, 4, 3, 4);
             btnConfirm.Name = "btnConfirm";
             btnConfirm.Size = new Size(111, 52);
@@ -85,7 +87,7 @@
             // 
             btnCancel.BackColor = Color.FromArgb(245, 108, 117);
             btnCancel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancel.Location = new Point(147, 653);
+            btnCancel.Location = new Point(131, 651);
             btnCancel.Margin = new Padding(3, 4, 3, 4);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(111, 52);
@@ -93,20 +95,11 @@
             btnCancel.Text = "Annuleer";
             btnCancel.UseVisualStyleBackColor = false;
             // 
-            // cmbCategorie
-            // 
-            cmbCategorie.FormattingEnabled = true;
-            cmbCategorie.Location = new Point(30, 191);
-            cmbCategorie.Name = "cmbCategorie";
-            cmbCategorie.Size = new Size(151, 28);
-            cmbCategorie.TabIndex = 27;
-            cmbCategorie.SelectedIndexChanged += cmbCategorie_SelectedIndexChanged;
-            // 
             // btnReturn
             // 
             btnReturn.BackColor = Color.FromArgb(255, 179, 71);
             btnReturn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnReturn.Location = new Point(303, 20);
+            btnReturn.Location = new Point(326, 20);
             btnReturn.Margin = new Padding(3, 4, 3, 4);
             btnReturn.Name = "btnReturn";
             btnReturn.Size = new Size(68, 48);
@@ -115,12 +108,50 @@
             btnReturn.UseVisualStyleBackColor = false;
             btnReturn.Click += btnReturn_Click;
             // 
+            // btn1
+            // 
+            btn1.BackColor = Color.FromArgb(138, 210, 176);
+            btn1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn1.Location = new Point(14, 194);
+            btn1.Name = "btn1";
+            btn1.Size = new Size(123, 50);
+            btn1.TabIndex = 29;
+            btn1.Text = "Optie 1";
+            btn1.UseVisualStyleBackColor = false;
+            btn1.Click += btn1_Click;
+            // 
+            // btn2
+            // 
+            btn2.BackColor = Color.FromArgb(138, 210, 176);
+            btn2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn2.Location = new Point(143, 194);
+            btn2.Name = "btn2";
+            btn2.Size = new Size(123, 50);
+            btn2.TabIndex = 30;
+            btn2.Text = "Optie 2";
+            btn2.UseVisualStyleBackColor = false;
+            btn2.Click += btn2_Click;
+            // 
+            // btn3
+            // 
+            btn3.BackColor = Color.FromArgb(138, 210, 176);
+            btn3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn3.Location = new Point(272, 194);
+            btn3.Name = "btn3";
+            btn3.Size = new Size(123, 50);
+            btn3.TabIndex = 31;
+            btn3.Text = "Optie 3";
+            btn3.UseVisualStyleBackColor = false;
+            btn3.Click += btn3_Click;
+            // 
             // UserControlOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btn3);
+            Controls.Add(btn2);
+            Controls.Add(btn1);
             Controls.Add(btnReturn);
-            Controls.Add(cmbCategorie);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             Controls.Add(btnAddNew);
@@ -140,7 +171,9 @@
         private Button btnAddNew;
         private Button btnConfirm;
         private Button btnCancel;
-        private ComboBox cmbCategorie;
         private Button btnReturn;
+        private Button btn1;
+        private Button btn2;
+        private Button btn3;
     }
 }
