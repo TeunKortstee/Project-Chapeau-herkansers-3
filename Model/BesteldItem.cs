@@ -6,13 +6,13 @@
         public string Opmerking { get; set; }
         public DateTime InstuurTijd { get; set; }
         public MenuItem menuItem { get; set; }
-        public int Aantal { get; set; }
+        public int Hoeveelheid { get; set; }
 
         public BesteldItem(MenuItem menuItem)
         {
             Opmerking = "";
             InstuurTijd = DateTime.Now;
-            Aantal = 1;
+            Hoeveelheid = 1;
             this.menuItem = menuItem;
         }
     }

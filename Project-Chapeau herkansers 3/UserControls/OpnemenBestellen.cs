@@ -29,7 +29,7 @@ namespace Project_Chapeau_herkansers_3
             btnLunchKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Lunch);
             btnDinerKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Diner);
             btnDrankKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Drank);
-            btnToevoegenBestelling.Click += (sender, e) => ToevoegenAanBestelling(bestelling);
+            btnToevoegenBestelling.Click += (sender, e) => ToevoegenAanBestelling(bestelling, menu);
             btnOpmerking.Click += (sender, e) => ToevoegenOpmerkingAanBestelling(bestelling);
             btnVerwijderAlles.Click += (sender, e) => VerwijderAllesUitListView(bestelling);
             btnRijVerwijderen.Click += (sender, e) => RijVerwijderen(listViewBestelling, bestelling);
@@ -57,7 +57,7 @@ namespace Project_Chapeau_herkansers_3
             if(listView.SelectedItems.Count > 0)
             {
                 BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
-                besteldItem.Aantal++;
+                besteldItem.Hoeveelheid++;
                 VulListViewBestelling(listViewBestelling, bestelling);
             }
         }
@@ -67,7 +67,7 @@ namespace Project_Chapeau_herkansers_3
             if (listView.SelectedItems.Count > 0)
             {
                 BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
-                besteldItem.Aantal--;
+                besteldItem.Hoeveelheid--;
                 VulListViewBestelling(listViewBestelling, bestelling);
             }
         }
@@ -81,13 +81,21 @@ namespace Project_Chapeau_herkansers_3
             }
         }
 
-        private void ToevoegenAanBestelling(Bestelling bestelling)
+        private void ToevoegenAanBestelling(Bestelling bestelling, Menu menu)
         {
             if (listViewKaart.SelectedItems.Count > 0)
             {
                 MenuItem menuItem = (MenuItem)listViewKaart.SelectedItems[0].Tag;
-                bestelling.BestellingItems.Add(new BesteldItem(menuItem));
-                VulListViewBestelling(listViewBestelling, bestelling);
+                if(menuItem.Voorraad > 0)
+                {
+                    menuItem.Voorraad--;
+                    bestelling.BestellingItems.Add(new BesteldItem(menuItem));
+                    VulListViewBestelling(listViewBestelling, bestelling);
+                    VullenListView(listViewKaart, menu, menu.MenuType);
+                } else
+                {
+                    MessageBox.Show("Er is geen voorraad voor dit menu item.");
+                }
             }
         }
 
@@ -132,7 +140,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 ListViewItem item = new ListViewItem(besteldItem.menuItem.Naam);
                 item.SubItems.Add(besteldItem.menuItem.Prijs.ToString());
-                item.SubItems.Add(besteldItem.Aantal.ToString());
+                item.SubItems.Add(besteldItem.Hoeveelheid.ToString());
                 item.SubItems.Add(besteldItem.Opmerking);
                 item.Tag = besteldItem;
                 listView.Items.Add(item);
