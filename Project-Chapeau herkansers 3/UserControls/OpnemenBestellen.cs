@@ -89,7 +89,15 @@ namespace Project_Chapeau_herkansers_3
                 if(menuItem.Voorraad > 0)
                 {
                     menuItem.Voorraad--;
-                    bestelling.BestellingItems.Add(new BesteldItem(menuItem));
+                    BesteldItem besteldItem = new BesteldItem(menuItem);
+                    if (bestelling.BestellingItems.Contains(besteldItem))
+                    {
+                        besteldItem.Hoeveelheid++;
+                        MessageBox.Show("test");
+                    } else
+                    {
+                        bestelling.BestellingItems.Add(besteldItem);
+                    }
                     VulListViewBestelling(listViewBestelling, bestelling);
                     VullenListView(listViewKaart, menu, menu.MenuType);
                 } else
