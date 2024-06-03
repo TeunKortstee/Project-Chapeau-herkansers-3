@@ -21,6 +21,7 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             _instance = this;
+            AddUserControl(new TafelOverzichtUserControl());
         }
 
         public void AddUserControl(UserControl userControl)
