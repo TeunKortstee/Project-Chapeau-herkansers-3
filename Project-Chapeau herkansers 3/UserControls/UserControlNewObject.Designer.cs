@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlNewPersoneel
+    partial class UserControlNewObject
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,23 +32,20 @@
             btnConfirm = new Button();
             btnCancel = new Button();
             picName = new PictureBox();
-            txtVoornaam = new TextBox();
+            txt1 = new TextBox();
             lbl1 = new Label();
             pictureBox1 = new PictureBox();
             lbl2 = new Label();
-            txtAchternaam = new TextBox();
+            txt2 = new TextBox();
+            chkAlcoholisch = new CheckBox();
             cmbType = new ComboBox();
-            label3 = new Label();
+            lblType = new Label();
             lbl3 = new Label();
-            txtEmail = new TextBox();
+            txt3 = new TextBox();
             pictureBox2 = new PictureBox();
-            lbl4 = new Label();
-            txtWachtwoord = new TextBox();
-            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // lblObject
@@ -57,9 +54,9 @@
             lblObject.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
             lblObject.Location = new Point(27, 170);
             lblObject.Name = "lblObject";
-            lblObject.Size = new Size(287, 46);
+            lblObject.Size = new Size(132, 46);
             lblObject.TabIndex = 1;
-            lblObject.Text = "Nieuw Personeel";
+            lblObject.Text = "Nieuw ";
             // 
             // btnConfirm
             // 
@@ -72,6 +69,7 @@
             btnConfirm.TabIndex = 3;
             btnConfirm.Text = "Bevestig";
             btnConfirm.UseVisualStyleBackColor = false;
+            btnConfirm.Click += btnConfirm_Click;
             // 
             // btnCancel
             // 
@@ -84,6 +82,7 @@
             btnCancel.TabIndex = 4;
             btnCancel.Text = "Annuleer";
             btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
             // 
             // picName
             // 
@@ -94,12 +93,12 @@
             picName.TabIndex = 6;
             picName.TabStop = false;
             // 
-            // txtVoornaam
+            // txt1
             // 
-            txtVoornaam.Location = new Point(177, 314);
-            txtVoornaam.Name = "txtVoornaam";
-            txtVoornaam.Size = new Size(121, 27);
-            txtVoornaam.TabIndex = 10;
+            txt1.Location = new Point(177, 314);
+            txt1.Name = "txt1";
+            txt1.Size = new Size(121, 27);
+            txt1.TabIndex = 10;
             // 
             // lbl1
             // 
@@ -108,9 +107,9 @@
             lbl1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl1.Location = new Point(49, 314);
             lbl1.Name = "lbl1";
-            lbl1.Size = new Size(99, 25);
+            lbl1.Size = new Size(59, 25);
             lbl1.TabIndex = 13;
-            lbl1.Text = "Voornaam";
+            lbl1.Text = "Veld1";
             // 
             // pictureBox1
             // 
@@ -128,16 +127,27 @@
             lbl2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl2.Location = new Point(49, 382);
             lbl2.Name = "lbl2";
-            lbl2.Size = new Size(116, 25);
+            lbl2.Size = new Size(59, 25);
             lbl2.TabIndex = 17;
-            lbl2.Text = "Achternaam";
+            lbl2.Text = "Veld2";
             // 
-            // txtAchternaam
+            // txt2
             // 
-            txtAchternaam.Location = new Point(177, 382);
-            txtAchternaam.Name = "txtAchternaam";
-            txtAchternaam.Size = new Size(121, 27);
-            txtAchternaam.TabIndex = 16;
+            txt2.Location = new Point(177, 382);
+            txt2.Name = "txt2";
+            txt2.Size = new Size(121, 27);
+            txt2.TabIndex = 16;
+            // 
+            // chkAlcoholisch
+            // 
+            chkAlcoholisch.AutoSize = true;
+            chkAlcoholisch.Location = new Point(27, 499);
+            chkAlcoholisch.Name = "chkAlcoholisch";
+            chkAlcoholisch.Size = new Size(107, 24);
+            chkAlcoholisch.TabIndex = 21;
+            chkAlcoholisch.Text = "Alcoholisch";
+            chkAlcoholisch.UseVisualStyleBackColor = true;
+            chkAlcoholisch.Visible = false;
             // 
             // cmbType
             // 
@@ -146,17 +156,18 @@
             cmbType.Name = "cmbType";
             cmbType.Size = new Size(151, 28);
             cmbType.TabIndex = 26;
+            cmbType.SelectedIndexChanged += cmbType_SelectedIndexChanged;
             // 
-            // label3
+            // lblType
             // 
-            label3.AutoSize = true;
-            label3.BackColor = SystemColors.Control;
-            label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(30, 233);
-            label3.Name = "label3";
-            label3.Size = new Size(74, 25);
-            label3.TabIndex = 27;
-            label3.Text = "Functie";
+            lblType.AutoSize = true;
+            lblType.BackColor = SystemColors.Control;
+            lblType.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblType.Location = new Point(30, 233);
+            lblType.Name = "lblType";
+            lblType.Size = new Size(60, 25);
+            lblType.TabIndex = 27;
+            lblType.Text = "Enum";
             // 
             // lbl3
             // 
@@ -165,16 +176,16 @@
             lbl3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl3.Location = new Point(49, 450);
             lbl3.Name = "lbl3";
-            lbl3.Size = new Size(58, 25);
+            lbl3.Size = new Size(59, 25);
             lbl3.TabIndex = 30;
-            lbl3.Text = "Email";
+            lbl3.Text = "Veld3";
             // 
-            // txtEmail
+            // txt3
             // 
-            txtEmail.Location = new Point(177, 450);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(121, 27);
-            txtEmail.TabIndex = 29;
+            txt3.Location = new Point(177, 450);
+            txt3.Name = "txt3";
+            txt3.Size = new Size(121, 27);
+            txt3.TabIndex = 29;
             // 
             // pictureBox2
             // 
@@ -185,61 +196,31 @@
             pictureBox2.TabIndex = 28;
             pictureBox2.TabStop = false;
             // 
-            // lbl4
-            // 
-            lbl4.AutoSize = true;
-            lbl4.BackColor = Color.FromArgb(196, 196, 196);
-            lbl4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl4.Location = new Point(49, 518);
-            lbl4.Name = "lbl4";
-            lbl4.Size = new Size(120, 25);
-            lbl4.TabIndex = 33;
-            lbl4.Text = "Wachtwoord";
-            // 
-            // txtWachtwoord
-            // 
-            txtWachtwoord.Location = new Point(177, 518);
-            txtWachtwoord.Name = "txtWachtwoord";
-            txtWachtwoord.Size = new Size(121, 27);
-            txtWachtwoord.TabIndex = 32;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.BackColor = Color.FromArgb(196, 196, 196);
-            pictureBox3.Location = new Point(30, 499);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(285, 62);
-            pictureBox3.TabIndex = 31;
-            pictureBox3.TabStop = false;
-            // 
-            // UserControlNewPersoneel
+            // UserControlNewObject
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lbl4);
-            Controls.Add(txtWachtwoord);
-            Controls.Add(pictureBox3);
             Controls.Add(lbl3);
-            Controls.Add(txtEmail);
+            Controls.Add(txt3);
             Controls.Add(pictureBox2);
-            Controls.Add(label3);
+            Controls.Add(lblType);
             Controls.Add(cmbType);
+            Controls.Add(chkAlcoholisch);
             Controls.Add(lbl2);
-            Controls.Add(txtAchternaam);
+            Controls.Add(txt2);
             Controls.Add(pictureBox1);
             Controls.Add(lbl1);
-            Controls.Add(txtVoornaam);
+            Controls.Add(txt1);
             Controls.Add(picName);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             Controls.Add(lblObject);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlNewPersoneel";
+            Name = "UserControlNewObject";
             Size = new Size(414, 736);
             ((System.ComponentModel.ISupportInitialize)picName).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -251,17 +232,15 @@
         private PictureBox pictureBox1;
         private PictureBox picName;
         private PictureBox pictureBox5;
-        private TextBox txtVoornaam;
+        private TextBox txt1;
         private Label lbl1;
         private Label lbl2;
-        private TextBox txtAchternaam;
+        private TextBox txt2;
+        private CheckBox chkAlcoholisch;
         private ComboBox cmbType;
-        private Label label3;
+        private Label lblType;
         private Label lbl3;
-        private TextBox txtEmail;
+        private TextBox txt3;
         private PictureBox pictureBox2;
-        private Label lbl4;
-        private TextBox txtWachtwoord;
-        private PictureBox pictureBox3;
     }
 }

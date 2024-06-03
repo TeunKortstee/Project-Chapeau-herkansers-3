@@ -42,5 +42,27 @@ namespace DAL
                 IsAlcoholisch = (bool)row["Alcoholisch"],
             };
         }
+        public void InsertMenuItem(MenuItem menuItem)
+        {
+            string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId, Voorraad) VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId, @Voorraad)";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Naam", menuItem.Naam),
+                new SqlParameter("@Prijs", menuItem.Prijs),
+                new SqlParameter("@Alcoholisch", menuItem.IsAlcoholisch),
+                new SqlParameter("@MenuId", menuItem.MenuId),
+                new SqlParameter("@Voorraad", menuItem.Voorraad)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void DeleteMenuItem(int menuItemId)
+        {
+            string query = "DELETE FROM MenuItems WHERE MenuItemId = @MenuItemId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@MenuItemId", menuItemId),
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
     }
 }

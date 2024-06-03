@@ -31,8 +31,8 @@
             lsvDatabaseItems = new ListView();
             lblOverview = new Label();
             btnAddNew = new Button();
-            btnConfirm = new Button();
-            btnCancel = new Button();
+            btnAdjust = new Button();
+            btnRemove = new Button();
             btnReturn = new Button();
             btn1 = new Button();
             btn2 = new Button();
@@ -41,8 +41,10 @@
             // 
             // lsvDatabaseItems
             // 
+            lsvDatabaseItems.FullRowSelect = true;
             lsvDatabaseItems.Location = new Point(14, 251);
             lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
+            lsvDatabaseItems.MultiSelect = false;
             lsvDatabaseItems.Name = "lsvDatabaseItems";
             lsvDatabaseItems.Size = new Size(380, 380);
             lsvDatabaseItems.TabIndex = 0;
@@ -70,30 +72,33 @@
             btnAddNew.TabIndex = 2;
             btnAddNew.Text = "Nieuw Toevoegen";
             btnAddNew.UseVisualStyleBackColor = false;
+            btnAddNew.Click += btnAddNew_Click;
             // 
-            // btnConfirm
+            // btnAdjust
             // 
-            btnConfirm.BackColor = Color.FromArgb(138, 210, 176);
-            btnConfirm.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnConfirm.Location = new Point(14, 651);
-            btnConfirm.Margin = new Padding(3, 4, 3, 4);
-            btnConfirm.Name = "btnConfirm";
-            btnConfirm.Size = new Size(111, 52);
-            btnConfirm.TabIndex = 3;
-            btnConfirm.Text = "Bevestig";
-            btnConfirm.UseVisualStyleBackColor = false;
+            btnAdjust.BackColor = Color.FromArgb(138, 210, 176);
+            btnAdjust.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAdjust.Location = new Point(14, 651);
+            btnAdjust.Margin = new Padding(3, 4, 3, 4);
+            btnAdjust.Name = "btnAdjust";
+            btnAdjust.Size = new Size(120, 52);
+            btnAdjust.TabIndex = 3;
+            btnAdjust.Text = "Aanpassen";
+            btnAdjust.UseVisualStyleBackColor = false;
+            btnAdjust.Click += btnAdjust_Click;
             // 
-            // btnCancel
+            // btnRemove
             // 
-            btnCancel.BackColor = Color.FromArgb(245, 108, 117);
-            btnCancel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancel.Location = new Point(131, 651);
-            btnCancel.Margin = new Padding(3, 4, 3, 4);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(111, 52);
-            btnCancel.TabIndex = 4;
-            btnCancel.Text = "Annuleer";
-            btnCancel.UseVisualStyleBackColor = false;
+            btnRemove.BackColor = Color.FromArgb(245, 108, 117);
+            btnRemove.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnRemove.Location = new Point(136, 651);
+            btnRemove.Margin = new Padding(3, 4, 3, 4);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(130, 52);
+            btnRemove.TabIndex = 4;
+            btnRemove.Text = "Verwijderen";
+            btnRemove.UseVisualStyleBackColor = false;
+            btnRemove.Click += btnRemove_Click;
             // 
             // btnReturn
             // 
@@ -118,6 +123,7 @@
             btn1.TabIndex = 29;
             btn1.Text = "Optie 1";
             btn1.UseVisualStyleBackColor = false;
+            btn1.EnabledChanged += btn1_EnabledChanged;
             btn1.Click += btn1_Click;
             // 
             // btn2
@@ -130,6 +136,7 @@
             btn2.TabIndex = 30;
             btn2.Text = "Optie 2";
             btn2.UseVisualStyleBackColor = false;
+            btn2.EnabledChanged += btn2_EnabledChanged;
             btn2.Click += btn2_Click;
             // 
             // btn3
@@ -142,6 +149,7 @@
             btn3.TabIndex = 31;
             btn3.Text = "Optie 3";
             btn3.UseVisualStyleBackColor = false;
+            btn3.EnabledChanged += btn3_EnabledChanged;
             btn3.Click += btn3_Click;
             // 
             // UserControlOverview
@@ -152,8 +160,8 @@
             Controls.Add(btn2);
             Controls.Add(btn1);
             Controls.Add(btnReturn);
-            Controls.Add(btnCancel);
-            Controls.Add(btnConfirm);
+            Controls.Add(btnRemove);
+            Controls.Add(btnAdjust);
             Controls.Add(btnAddNew);
             Controls.Add(lblOverview);
             Controls.Add(lsvDatabaseItems);
@@ -169,8 +177,8 @@
         private ListView lsvDatabaseItems;
         private Label lblOverview;
         private Button btnAddNew;
-        private Button btnConfirm;
-        private Button btnCancel;
+        private Button btnAdjust;
+        private Button btnRemove;
         private Button btnReturn;
         private Button btn1;
         private Button btn2;
