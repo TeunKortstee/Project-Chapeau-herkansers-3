@@ -27,11 +27,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            form1.Switchpanels(new UserControlOverview(form1));
+            form1.Switchpanels(new UserControlOverview(form1, Functie.Serveerder));
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
             form1.Switchpanels(new UserControlOverview(form1, MenuType.Drank));
+        }
+
+        private void btnSa_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -18,91 +19,119 @@ namespace Project_Chapeau_herkansers_3.UserControls
     public partial class UserControlOverview : UserControl
     {
         private Form1 form;
-        private MenuType selectedMenuType;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
-        public UserControlOverview(Form1 form1)
+        public UserControlOverview(Form1 form1, Functie functie)
         {
             InitializeComponent();
             this.form = form1;
             this.personeelService = new PersoneelService();
             this.menuItemService = null;
+            DisplayEmployeeElements(functie);
         }
         public UserControlOverview(Form1 form1, MenuType menu)
         {
             InitializeComponent();
-            this.selectedMenuType = menu;
             this.form = form1;
             this.personeelService = null;
             this.menuItemService = new MenuItemService();
-            DisplayMenuElements();
+            DisplayMenuElements(menu);
         }
-        private void DisplayUIElements()
-        {
-            if (this.personeelService == null)
-            {
-                DisplayMenuElements();
-            }
-            else
-            {
-                lblOverview.Text = "Personeel";
-                btn1.Text = Functie.Serveerder.ToString();
-                btn2.Text = Functie.Keuken.ToString();
-                btn3.Text = Functie.Bar.ToString();
-                FillEmployeeListView((Functie)1);
-            }
-        }
-        private void DisplayMenuElements()
+        #region DisplayUIElements
+
+        #region MenuItem
+        private void DisplayMenuElements(MenuType menuType)
         {
             lblOverview.Text = "Menu";
-            //btn2.Location = new Point(158, 194);
+            btnAddNew.Text = "Menu Item toevoegen";
             btn1.Text = MenuType.Lunch.ToString();
             btn2.Text = MenuType.Diner.ToString();
             btn3.Text = MenuType.Drank.ToString();
-            RenableButtons();
-            FillMenuListView(this.selectedMenuType);
+            DisplayMenuButtons(menuType);
+            FillMenuListView(menuType);
         }
-        private void btn1_Click(object sender, EventArgs e)
+        #region Buttons - MenuItem
+        private void DisplayMenuButtons(MenuType menuType)
         {
-            if (this.personeelService == null)
-            {
-                this.selectedMenuType = MenuType.Lunch;
-                FillMenuListView(this.selectedMenuType);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)3);
-            }
-            RenableButtons();
+            btn1.Tag = MenuType.Lunch;
+            btn1.Text = MenuType.Lunch.ToString();
+            btn2.Tag = MenuType.Diner;
+            btn2.Text = MenuType.Diner.ToString();
+            btn3.Tag = MenuType.Drank;
+            btn3.Text = MenuType.Drank.ToString();
+            RenableMenuButtons(menuType);
         }
+        private void RenableMenuButtons(MenuType menuType)
+        {
+            switch (menuType)
+            {
+                case MenuType.Lunch:
+                    btn1.Enabled = false;
+                    btn2.Enabled = true;
+                    btn3.Enabled = true;
+                    break;
+                case MenuType.Diner:
+                    btn1.Enabled = true;
+                    btn2.Enabled = false;
+                    btn3.Enabled = true;
+                    break;
+                case MenuType.Drank:
+                    btn1.Enabled = true;
+                    btn2.Enabled = true;
+                    btn3.Enabled = false;
+                    break;
+            }
+        }
+        #endregion
+        #endregion
 
-        private void btn2_Click(object sender, EventArgs e)
+        #region Employee
+        private void DisplayEmployeeElements(Functie functie)
         {
-            if (this.personeelService == null)
-            {
-                this.selectedMenuType = MenuType.Diner;
-                FillMenuListView(this.selectedMenuType);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)3);
-            }
-            RenableButtons();
+            lblOverview.Text = "Personeel";
+            btnAddNew.Text = "Personeel toevoegen";
+            btn1.Text = Functie.Serveerder.ToString();
+            btn2.Text = Functie.Keuken.ToString();
+            btn3.Text = Functie.Bar.ToString();
+            DisplayEmployeeButtons(functie);
+            FillEmployeeListView(functie);
         }
+        #region Buttons - Employee
+        private void DisplayEmployeeButtons(Functie functie)
+        {
+            btn1.Tag = Functie.Serveerder;
+            btn1.Text = Functie.Serveerder.ToString();
+            btn2.Tag = Functie.Keuken;
+            btn2.Text = Functie.Keuken.ToString();
+            btn3.Tag = Functie.Bar;
+            btn3.Text = Functie.Bar.ToString();
+            RenableEmployeeButtons(functie);
+        }
+        private void RenableEmployeeButtons(Functie functie)
+        {
+            switch (functie)
+            {
+                case Functie.Serveerder:
+                    btn1.Enabled = false;
+                    btn2.Enabled = true;
+                    btn3.Enabled = true;
+                    break;
+                case Functie.Keuken:
+                    btn1.Enabled = true;
+                    btn2.Enabled = false;
+                    btn3.Enabled = true;
+                    break;
+                case Functie.Bar:
+                    btn1.Enabled = true;
+                    btn2.Enabled = true;
+                    btn3.Enabled = false;
+                    break;
+            }
+        }
+        #endregion
+        #endregion
 
-        private void btn3_Click(object sender, EventArgs e)
-        {
-            if (this.personeelService == null)
-            {
-                this.selectedMenuType = MenuType.Drank;
-                FillMenuListView(this.selectedMenuType);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)3);
-            }
-            RenableButtons();
-        }
+        #region ListView
         private void FillMenuListView(MenuType menuType)
         {
             lsvDatabaseItems.Clear();
@@ -137,6 +166,73 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
 
         }
+        #endregion
+        #endregion
+
+        #region Top Buttons
+        private void btn1_Click(object sender, EventArgs e)
+        {
+            if (this.personeelService == null)
+            {
+                FillMenuListView(MenuType.Lunch);
+                RenableMenuButtons(MenuType.Lunch);
+            }
+            else
+            {
+                FillEmployeeListView((Functie)3);
+            }
+        }
+        private void btn1_EnabledChanged(object sender, EventArgs e)
+        {
+            SetEnableColor(btn1);
+        }
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            if (this.personeelService == null)
+            {
+                FillMenuListView(MenuType.Diner);
+                RenableMenuButtons(MenuType.Diner);
+            }
+            else
+            {
+                FillEmployeeListView((Functie)3);
+            }
+        }
+        private void btn2_EnabledChanged(object sender, EventArgs e)
+        {
+            SetEnableColor(btn2);
+        }
+        private void btn3_Click(object sender, EventArgs e)
+        {
+            if (this.personeelService == null)
+            {
+                FillMenuListView(MenuType.Drank);
+                RenableMenuButtons(MenuType.Drank);
+            }
+            else
+            {
+                FillEmployeeListView((Functie)3);
+            }
+        }
+        private void btn3_EnabledChanged(object sender, EventArgs e)
+        {
+            SetEnableColor(btn3);
+        }
+        private void SetEnableColor(System.Windows.Forms.Button button)
+        {
+            //button.BackColor = Color.FromArgb(255, 234, 219, 202);
+            if (button.Enabled)
+            {
+                // Enabled
+                button.BackColor = Color.FromArgb(255, 138, 210, 176);
+            }
+            else
+            {
+                // Disabled
+                button.BackColor = Color.FromArgb(114, 138, 210, 176);
+            }
+        }
+        #endregion
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -168,70 +264,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
                     MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
                     menuItemService.DeleteMenuItem(selectedMenuItem);
+                    FillMenuListView((MenuType)selectedMenuItem.MenuId);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Selecteer een item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                FillMenuListView(this.selectedMenuType);
-            }
         }
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            this.form.Switchpanels(new UserControlNewObject(form, this.selectedMenuType));
-        }
-        private void RenableButtons()
-        {
-            switch (selectedMenuType)
-            {
-                case MenuType.Lunch:
-                    btn1.Enabled = false;
-                    btn2.Enabled = true;
-                    btn3.Enabled = true;
-                    break;
-                case MenuType.Diner:
-                    btn1.Enabled = true;
-                    btn2.Enabled = false;
-                    btn3.Enabled = true;
-                    break;
-                case MenuType.Drank:
-                    btn1.Enabled = true;
-                    btn2.Enabled = true;
-                    btn3.Enabled = false;
-                    break;
-            }
-        }
-
-        private void btn1_EnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btn1);
-        }
-
-        private void btn2_EnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btn2);
-        }
-
-        private void btn3_EnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btn3);
-        }
-        private void SetEnableColor(System.Windows.Forms.Button button)
-        {
-            //button.BackColor = Color.FromArgb(255, 234, 219, 202);
-            if (button.Enabled)
-            {
-                // Enabled
-                button.BackColor = Color.FromArgb(255, 138, 210, 176);
-            }
-            else
-            {
-                // Disabled
-                button.BackColor = Color.FromArgb(114, 138, 210, 176);
-            }
+            this.form.Switchpanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
         }
     }
 }

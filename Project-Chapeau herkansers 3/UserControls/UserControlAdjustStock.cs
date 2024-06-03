@@ -78,13 +78,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 }
             }
         }
-        private void CheckUserInput(int newStock)
-        {
-            if (txtStock.Text.Length > 0)
-            {
-                CheckStockMinAndMax(newStock);
-            }
-        }
         private void CheckStockMinAndMax(int newStock)
         {
             int minimum = 0;

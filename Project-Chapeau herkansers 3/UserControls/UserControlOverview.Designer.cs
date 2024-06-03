@@ -70,7 +70,7 @@
             btnAddNew.Name = "btnAddNew";
             btnAddNew.Size = new Size(380, 48);
             btnAddNew.TabIndex = 2;
-            btnAddNew.Text = "Nieuw Toevoegen";
+            btnAddNew.Text = "... Toevoegen";
             btnAddNew.UseVisualStyleBackColor = false;
             btnAddNew.Click += btnAddNew_Click;
             // 
