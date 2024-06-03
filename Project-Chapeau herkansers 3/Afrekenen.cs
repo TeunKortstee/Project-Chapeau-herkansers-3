@@ -17,21 +17,23 @@ namespace Project_Chapeau_herkansers_3
         Menu menuItems;
         MenuItemService serviceMI;
         BesteldeItemService serviceBI;
-        public int bestellingID = 2;
         
-        public Afrekenen()
+        public Bestelling bestelling;
+        
+        public Afrekenen(Bestelling _bestelling)
         {
             InitializeComponent();
             serviceMI = new MenuItemService();
             serviceBI = new BesteldeItemService();
             menuItems = serviceMI.GetAllItems();
+            bestelling = _bestelling;           
             RefreshBillItems();
 
 
         }
 
         public void RefreshBillItems() {
-            List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestellingID);
+            List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestelling.Id);
             billListView.Items.Clear();
             decimal total = 0.00M;
             foreach (BesteldeItem b in besteldeItems)

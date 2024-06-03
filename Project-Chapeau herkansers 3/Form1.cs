@@ -1,5 +1,3 @@
-using Model;
-
 namespace Project_Chapeau_herkansers_3
 {
     public partial class Form1 : Form
@@ -17,7 +15,7 @@ namespace Project_Chapeau_herkansers_3
                 return _instance;
             }
         }
-        private Form1()
+        public Form1()
         {
             InitializeComponent();
             _instance = this;
