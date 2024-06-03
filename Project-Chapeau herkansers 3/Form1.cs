@@ -20,6 +20,14 @@ namespace Project_Chapeau_herkansers_3
         private Form1()
         {
             InitializeComponent();
+            _instance = this;
+        }
+
+        public void AddUserControl(UserControl userControl)
+        {
+            mainPanel.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
+            mainPanel.Controls.Add(userControl);
         }
     }
 }
