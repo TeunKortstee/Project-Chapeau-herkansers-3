@@ -42,7 +42,32 @@ namespace DAL
                 IsAlcoholisch = (bool)row["Alcoholisch"],
             };
         }
-        public void InsertMenuItem(MenuItem menuItem)
+        // Lucas
+        public List<MenuItem> GetAllMenuItems()
+        {
+            string query = "SELECT * FROM MenuItems";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTablesWithList(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private List<MenuItem> ReadTablesWithList(DataTable dataTable)
+        {
+            List<MenuItem> menuItems = new List<MenuItem>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                MenuItem menuItem = new MenuItem()
+                {
+                    MenuItemId = Convert.ToInt32(dr["MenuItemId"]),
+                    Voorraad = Convert.ToInt32(dr["Voorraad"]),
+                    Prijs = (decimal)dr["Prijs"],
+                    Naam = (string)dr["Naam"],
+                    MenuId = Convert.ToInt32(dr["MenuId"]),
+                    IsAlcoholisch = (bool)dr["Alcoholisch"],
+                };
+                menuItems.Add(menuItem);
+            }
+            return menuItems;
+        }
+        public void AddNewMenuItem(MenuItem menuItem)
         {
             string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId, Voorraad) VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId, @Voorraad)";
             SqlParameter[] sqlParameters = new SqlParameter[]
@@ -55,12 +80,22 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        public void DeleteMenuItem(int menuItemId)
+        public void UpdateMenuItemStock(MenuItem selectedMenuItem)
+        {
+            string query = "UPDATE MenuItems SET Voorraad = @Voorraad WHERE MenuItemId = @MenuItemId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@MenuItemId", selectedMenuItem.MenuItemId),
+                new SqlParameter("@Voorraad", selectedMenuItem.Voorraad)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void DeleteMenuItem(MenuItem selectedMenuItem)
         {
             string query = "DELETE FROM MenuItems WHERE MenuItemId = @MenuItemId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@MenuItemId", menuItemId),
+                new SqlParameter("@MenuItemId", selectedMenuItem.MenuItemId),
             };
             ExecuteEditQuery(query, sqlParameters);
         }

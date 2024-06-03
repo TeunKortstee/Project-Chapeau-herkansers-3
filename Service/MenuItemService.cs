@@ -31,17 +31,34 @@ namespace Service
         {
             return menuItemDao.GetAllItems();
         }
+        // Lucas
+        public List<MenuItem> GetAllMenuItems(MenuType menuType)
+        {
+            List<MenuItem> selectedMenu = new List<MenuItem>();
+            foreach (MenuItem menuItem in menuItemDao.GetAllMenuItems())
+            {
+                if (menuItem.MenuId == (int)menuType)
+                {
+                    selectedMenu.Add(menuItem);
+                }
+            }
+            return selectedMenu;
+        }
         public MenuItem CreateMenuItem(string name, decimal price, bool alcoholic, int menuId, int stock)
         {
             return new MenuItem(name, price, alcoholic, menuId, stock);
         }
-        public void AddMenuItem(MenuItem newMenuItem)
+        public void AddNewMenuItem(MenuItem newMenuItem)
         {
-            menuItemDao.InsertMenuItem(newMenuItem);
+            menuItemDao.AddNewMenuItem(newMenuItem);
         }
-        public void RemoveMenuItem(int menuItemId) 
+        public void UpdateMenuItemStock(MenuItem selectedMenuItem)
         {
-            menuItemDao.DeleteMenuItem(menuItemId);
+            menuItemDao.UpdateMenuItemStock(selectedMenuItem);
+        }
+        public void DeleteMenuItem(MenuItem selectedMenuItem) 
+        {
+            menuItemDao.DeleteMenuItem(selectedMenuItem);
         }
 
     }

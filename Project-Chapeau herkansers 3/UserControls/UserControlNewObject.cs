@@ -46,7 +46,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 lbl1.Text = "Voornaam";
                 lbl2.Text = "Achternaam";
                 lbl3.Text = "Email";
-                lblType.Text = "Functie";
+                lblEnum.Text = "Functie";
                 cmbType.DataSource = Enum.GetValues(typeof(Functie));
                 cmbType.SelectedIndex = 0;
             }
@@ -57,7 +57,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lbl1.Text = "Naam";
             lbl2.Text = "Prijs";
             lbl3.Text = "Voorraad";
-            lblType.Text = "Menu";
+            lblEnum.Text = "Menu";
             cmbType.DataSource = Enum.GetValues(typeof(MenuType));
             cmbType.SelectedItem = menu;
         }
@@ -67,9 +67,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 try
                 {
-                    MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, decimal.Parse(txt2.Text), chkAlcoholisch.Checked, (int)this.menu, int.Parse(txt3.Text));
-                    menuItemService.AddMenuItem(newMenuItem);
-                    form.Switchpanels(new UserControlOverview(form, this.menu));
+                    MenuItem newMenuItem = menuItemService.CreateMenuItem(txt2.Text, decimal.Parse(txt3.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
+                    menuItemService.AddNewMenuItem(newMenuItem);
+                    form.Switchpanels(new UserControlOverview(form, (MenuType)newMenuItem.MenuId));
                 }
                 catch (FormatException ex)
                 {

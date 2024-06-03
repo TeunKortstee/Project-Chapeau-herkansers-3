@@ -46,9 +46,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             else
             {
                 lblOverview.Text = "Personeel";
-                btn1.Text = "Serveerder";
-                btn2.Text = "Keuken";
-                btn3.Text = "Bar";
+                btn1.Text = Functie.Serveerder.ToString();
+                btn2.Text = Functie.Keuken.ToString();
+                btn3.Text = Functie.Bar.ToString();
                 FillEmployeeListView((Functie)1);
             }
         }
@@ -56,9 +56,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             lblOverview.Text = "Menu";
             //btn2.Location = new Point(158, 194);
-            btn1.Text = "Lunch";
-            btn2.Text = "Diner";
-            btn3.Text = "Drank";
+            btn1.Text = MenuType.Lunch.ToString();
+            btn2.Text = MenuType.Diner.ToString();
+            btn3.Text = MenuType.Drank.ToString();
             RenableButtons();
             FillMenuListView(this.selectedMenuType);
         }
@@ -112,17 +112,14 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Columns.Add("In Voorraad", 60);
 
 
-            Model.Menu menu = menuItemService.GetAllItems();
-            foreach (MenuItem menuItem in menu.MenuItems)
+            List<MenuItem> selectedMenu = menuItemService.GetAllMenuItems(menuType);
+            foreach (MenuItem menuItem in selectedMenu)
             {
-                if (menuItem.MenuId == (int)menuType)
-                {
-                    ListViewItem item = new ListViewItem(menuItem.MenuItemId.ToString());
-                    item.SubItems.Add(menuItem.Naam);
-                    item.SubItems.Add(menuItem.Voorraad.ToString());
-                    item.Tag = menuItem;
-                    lsvDatabaseItems.Items.Add(item);
-                }
+                ListViewItem item = new ListViewItem(menuItem.MenuItemId.ToString());
+                item.SubItems.Add(menuItem.Naam);
+                item.SubItems.Add(menuItem.Voorraad.ToString());
+                item.Tag = menuItem;
+                lsvDatabaseItems.Items.Add(item);
             }
         }
         private void FillEmployeeListView(Functie functie)
@@ -148,24 +145,37 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnAdjust_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (lsvDatabaseItems.SelectedItems.Count > 0)
+                {
+                    ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
+                    MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
+                    this.form.Switchpanels(new UserControlAdjustStock(form, selecteMenuItem));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Selecteer een item: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
         private void btnRemove_Click(object sender, EventArgs e)
         {
             try
             {
-                ListViewItem selectedItem = lsvDatabaseItems.SelectedItems[0];
-                int menuItemId = int.Parse(selectedItem.SubItems[0].Text);
-                menuItemService.RemoveMenuItem(menuItemId);
+                if (lsvDatabaseItems.SelectedItems.Count > 0)
+                {
+                    ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
+                    MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
+                    menuItemService.DeleteMenuItem(selectedMenuItem);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while deleting the item: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Selecteer een item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                lsvDatabaseItems.Clear();
                 FillMenuListView(this.selectedMenuType);
             }
         }
