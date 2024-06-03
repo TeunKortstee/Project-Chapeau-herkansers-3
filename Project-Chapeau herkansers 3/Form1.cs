@@ -21,7 +21,7 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             _instance = this;
-            SwitchPanels(new TafelOverzichtUserControl());
+            SwitchPanels(new LoginControl());
         }
 
         public void SwitchPanels(UserControl userControl)
