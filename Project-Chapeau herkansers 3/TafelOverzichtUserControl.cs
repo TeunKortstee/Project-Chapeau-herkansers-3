@@ -19,7 +19,7 @@ namespace Project_Chapeau_herkansers_3
             //button click naar volgende pagina om status aan te passen
             Button btn = (Button)sender;
             TafelStatusUI tafelstatusui = new TafelStatusUI((Tafel)btn.Tag);
-            form.AddUserControl(tafelstatusui);
+            form.SwitchPanels(tafelstatusui);
         }
 
         private Button CreateButton(Tafel tafel)

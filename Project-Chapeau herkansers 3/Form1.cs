@@ -21,10 +21,10 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             _instance = this;
-            AddUserControl(new TafelOverzichtUserControl());
+            SwitchPanels(new TafelOverzichtUserControl());
         }
 
-        public void AddUserControl(UserControl userControl)
+        public void SwitchPanels(UserControl userControl)
         {
             mainPanel.Controls.Clear();
             userControl.Dock = DockStyle.Fill;
