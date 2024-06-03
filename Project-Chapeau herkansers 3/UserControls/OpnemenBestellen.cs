@@ -22,7 +22,7 @@ namespace Project_Chapeau_herkansers_3
         private Tafel tafel;
         private Personeel personeel;
 
-        public OpnemenBestellen(Tafel tafel, Personeel personeel)
+        public OpnemenBestellen()
         {
             InitializeComponent();
             menuItemService = new MenuItemService();

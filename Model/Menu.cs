@@ -2,7 +2,7 @@
 {
     public class Menu
     {
-        public int menuId;
+        public int MenuId { get; set; }
         private List<MenuItem> menuItems;
         private MenuType menuType;
 
@@ -11,7 +11,7 @@
 
         public Menu()
         {
-            menuId = 1;
+            MenuId = 1;
             menuItems = new List<MenuItem>();
             menuType = MenuType.Lunch;
         }

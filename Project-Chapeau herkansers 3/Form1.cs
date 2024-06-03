@@ -1,4 +1,6 @@
 using Model;
+using Project_Chapeau_herkansers_3.UserControls;
+using System.Xml;
 
 namespace Project_Chapeau_herkansers_3
 {
@@ -17,9 +19,18 @@ namespace Project_Chapeau_herkansers_3
                 return _instance;
             }
         }
-        private Form1()
+        public Form1()
         {
             InitializeComponent();
+            LoginControl loginControl = new LoginControl();
+            mainPanel.Controls.Add(loginControl);
+            //UserControlManager managerDashboard = new UserControlManager(this);
+            //mainPanel.Controls.Add(managerDashboard);
+        }
+        public void Switchpanels(UserControl userControl)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(userControl);
         }
     }
 }
