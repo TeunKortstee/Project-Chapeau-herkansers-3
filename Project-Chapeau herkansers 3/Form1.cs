@@ -1,7 +1,3 @@
-using Model;
-using Project_Chapeau_herkansers_3.UserControls;
-using System.Xml;
-
 namespace Project_Chapeau_herkansers_3
 {
     public partial class Form1 : Form
@@ -22,14 +18,14 @@ namespace Project_Chapeau_herkansers_3
         public Form1()
         {
             InitializeComponent();
-            LoginControl loginControl = new LoginControl();
-            mainPanel.Controls.Add(loginControl);
-            //UserControlManager managerDashboard = new UserControlManager(this);
-            //mainPanel.Controls.Add(managerDashboard);
+            _instance = this;
+            SwitchPanels(new LoginControl());
         }
-        public void Switchpanels(UserControl userControl)
+
+        public void SwitchPanels(UserControl userControl)
         {
             mainPanel.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
             mainPanel.Controls.Add(userControl);
         }
     }
