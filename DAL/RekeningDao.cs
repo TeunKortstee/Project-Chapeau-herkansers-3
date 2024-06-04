@@ -13,7 +13,7 @@ namespace DAL
     {
         public Rekening GetRekening(int bestellingID)
         {
-            string query = "SELECT RekeningId, BestellingId, TotaalPrijs, Fooi, Betaald FROM Rekeningen WHERE BestellingId = @bestellingId";
+            string query = "SELECT RekeningId, BestellingId, TotaalPrijs, Datum, Fooi, Betaald FROM Rekeningen WHERE BestellingId = @bestellingId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@bestellingId", bestellingID),
@@ -34,7 +34,8 @@ namespace DAL
                     BestellingId = Convert.ToInt32(row["BestellingId"]),
                     TotaalPrijs = (float)row["TotaalPrijs"],
                     Fooi = (float)row["Fooi"],                    
-                    Betaald = (bool)row["Betaald"]
+                    Betaald = (bool)row["Betaald"],
+                    Datum = (DateTime)row["DateTime"]
                 };
                 rekeningen.Add(rekening);
             }
