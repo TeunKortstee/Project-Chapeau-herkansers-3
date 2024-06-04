@@ -8,5 +8,7 @@
         public float Fooi { get; set; }
 
         public bool Betaald { get; set; }
+
+        public DateTime Datum { get; set; }
     }
 }
