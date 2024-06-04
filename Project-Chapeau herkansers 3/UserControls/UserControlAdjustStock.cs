@@ -14,6 +14,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlAdjustStock : UserControl
     {
+        const int minimum = 0;
+        const int temporaryHardcodedMaximum = 100;
+
         private Form1 form;
         private MenuItemService menuItemService;
         private MenuItem selectedMenuItem;
@@ -56,32 +59,48 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void ReturnToOverview()
         {
-            form.Switchpanels(new UserControlOverview(form, (MenuType)this.selectedMenuItem.MenuId));
+            form.Switchpanels(new UserControlManageOverview(form, (MenuType)this.selectedMenuItem.MenuId));
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            txtStock.Text = (int.Parse(txtStock.Text) + 1).ToString();
+            if (checkInput(txtStock.Text))
+            {
+                txtStock.Text = (int.Parse(txtStock.Text) + 1).ToString();
+            }
         }
 
         private void btnSubtract_Click(object sender, EventArgs e)
         {
-            txtStock.Text = (int.Parse(txtStock.Text) - 1).ToString();
+            if (checkInput(txtStock.Text))
+            {
+                txtStock.Text = (int.Parse(txtStock.Text) - 1).ToString();
+            }
         }
         private void txtStock_TextChanged(object sender, EventArgs e)
         {
             int newStock;
             if (txtStock.Text.Length > 0)
             {
+                checkInput(txtStock.Text);
                 if (int.TryParse(txtStock.Text, out newStock))
                 {
                     CheckStockMinAndMax(newStock);
                 }
             }
         }
+        private bool checkInput(string input)
+        {
+            foreach (char c in input)
+            {
+                if (!Char.IsNumber(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         private void CheckStockMinAndMax(int newStock)
         {
-            int minimum = 0;
-            int temporaryHardcodedMaximum = 100;
             if (newStock <= minimum)
             {
                 btnSubtract.Enabled = false;

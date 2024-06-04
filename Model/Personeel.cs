@@ -14,10 +14,11 @@
         {
 
         }
-        public Personeel(string voornaam, string achternaam, string email, Functie functie)
+        public Personeel(string achternaam, string email, byte[] wachtwoord, Functie functie)
         {
-            this.VoorNaam = voornaam;
             this.AchterNaam = achternaam;
+            this.email = email;
+            this.WachtWoord = wachtwoord;
             this.Functie = functie;
         }
     }

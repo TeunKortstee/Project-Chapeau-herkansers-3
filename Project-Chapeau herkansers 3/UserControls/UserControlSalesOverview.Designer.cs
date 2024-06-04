@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlOverview
+    partial class UserControlSalesOverview
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,13 +30,11 @@
         {
             lsvDatabaseItems = new ListView();
             lblOverview = new Label();
-            btnAddNew = new Button();
-            btnAdjust = new Button();
-            btnRemove = new Button();
             btnReturn = new Button();
             btn1 = new Button();
             btn2 = new Button();
             btn3 = new Button();
+            lblTotalIncome = new Label();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -55,50 +53,11 @@
             // 
             lblOverview.AutoSize = true;
             lblOverview.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOverview.Location = new Point(119, 14);
+            lblOverview.Location = new Point(118, 14);
             lblOverview.Name = "lblOverview";
-            lblOverview.Size = new Size(172, 46);
+            lblOverview.Size = new Size(177, 46);
             lblOverview.TabIndex = 1;
-            lblOverview.Text = "Overzicht";
-            // 
-            // btnAddNew
-            // 
-            btnAddNew.BackColor = Color.FromArgb(138, 210, 176);
-            btnAddNew.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNew.Location = new Point(14, 139);
-            btnAddNew.Margin = new Padding(3, 4, 3, 4);
-            btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(380, 48);
-            btnAddNew.TabIndex = 2;
-            btnAddNew.Text = "... Toevoegen";
-            btnAddNew.UseVisualStyleBackColor = false;
-            btnAddNew.Click += btnAddNew_Click;
-            // 
-            // btnAdjust
-            // 
-            btnAdjust.BackColor = Color.FromArgb(138, 210, 176);
-            btnAdjust.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAdjust.Location = new Point(14, 651);
-            btnAdjust.Margin = new Padding(3, 4, 3, 4);
-            btnAdjust.Name = "btnAdjust";
-            btnAdjust.Size = new Size(120, 52);
-            btnAdjust.TabIndex = 3;
-            btnAdjust.Text = "Aanpassen";
-            btnAdjust.UseVisualStyleBackColor = false;
-            btnAdjust.Click += btnAdjust_Click;
-            // 
-            // btnRemove
-            // 
-            btnRemove.BackColor = Color.FromArgb(245, 108, 117);
-            btnRemove.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnRemove.Location = new Point(136, 651);
-            btnRemove.Margin = new Padding(3, 4, 3, 4);
-            btnRemove.Name = "btnRemove";
-            btnRemove.Size = new Size(130, 52);
-            btnRemove.TabIndex = 4;
-            btnRemove.Text = "Verwijderen";
-            btnRemove.UseVisualStyleBackColor = false;
-            btnRemove.Click += btnRemove_Click;
+            lblOverview.Text = "Inkomens";
             // 
             // btnReturn
             // 
@@ -117,7 +76,7 @@
             // 
             btn1.BackColor = Color.FromArgb(138, 210, 176);
             btn1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn1.Location = new Point(14, 194);
+            btn1.Location = new Point(14, 638);
             btn1.Name = "btn1";
             btn1.Size = new Size(123, 50);
             btn1.TabIndex = 29;
@@ -130,7 +89,7 @@
             // 
             btn2.BackColor = Color.FromArgb(138, 210, 176);
             btn2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn2.Location = new Point(143, 194);
+            btn2.Location = new Point(143, 638);
             btn2.Name = "btn2";
             btn2.Size = new Size(123, 50);
             btn2.TabIndex = 30;
@@ -143,7 +102,7 @@
             // 
             btn3.BackColor = Color.FromArgb(138, 210, 176);
             btn3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn3.Location = new Point(272, 194);
+            btn3.Location = new Point(271, 638);
             btn3.Name = "btn3";
             btn3.Size = new Size(123, 50);
             btn3.TabIndex = 31;
@@ -152,21 +111,29 @@
             btn3.EnabledChanged += btn3_EnabledChanged;
             btn3.Click += btn3_Click;
             // 
-            // UserControlOverview
+            // lblTotalIncome
+            // 
+            lblTotalIncome.AutoSize = true;
+            lblTotalIncome.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalIncome.Location = new Point(14, 108);
+            lblTotalIncome.Name = "lblTotalIncome";
+            lblTotalIncome.Size = new Size(126, 46);
+            lblTotalIncome.TabIndex = 32;
+            lblTotalIncome.Text = "Totaal:";
+            // 
+            // UserControlSalesOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblTotalIncome);
             Controls.Add(btn3);
             Controls.Add(btn2);
             Controls.Add(btn1);
             Controls.Add(btnReturn);
-            Controls.Add(btnRemove);
-            Controls.Add(btnAdjust);
-            Controls.Add(btnAddNew);
             Controls.Add(lblOverview);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlOverview";
+            Name = "UserControlSalesOverview";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();
@@ -176,12 +143,10 @@
 
         private ListView lsvDatabaseItems;
         private Label lblOverview;
-        private Button btnAddNew;
-        private Button btnAdjust;
-        private Button btnRemove;
         private Button btnReturn;
         private Button btn1;
         private Button btn2;
         private Button btn3;
+        private Label lblTotalIncome;
     }
 }

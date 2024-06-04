@@ -21,6 +21,17 @@ namespace DAL
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
         }
+        // Lucas
+        public List<Rekening> GetBetaaldeRekeningen(bool betaald)
+        {
+            string query = "SELECT * FROM Rekeningen WHERE Betaald = @Betaald";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Betaald", betaald),
+
+            };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
 
         private List<Rekening> ReadTables(DataTable dataTable)
         {
