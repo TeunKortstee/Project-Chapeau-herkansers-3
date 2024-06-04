@@ -31,10 +31,11 @@ namespace Project_Chapeau_herkansers_3
             btnDrankKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Drank);
             btnToevoegenBestelling.Click += (sender, e) => ToevoegenAanBestelling(bestelling, menu);
             btnOpmerking.Click += (sender, e) => ToevoegenOpmerkingAanBestelling(bestelling);
-            btnVerwijderAlles.Click += (sender, e) => VerwijderAllesUitListView(bestelling);
+            btnVerwijderAlles.Click += (sender, e) => VerwijderAllesUitListView(bestelling, menu);
             btnRijVerwijderen.Click += (sender, e) => RijVerwijderen(listViewBestelling, bestelling, menu);
             btnToevoegenEen.Click += (sender, e) => ToevoegenEenAanBestelling(listViewBestelling, bestelling, menu);
             btnVerwijderEen.Click += (sender, e) => VerwijderenEenAanBestelling(listViewBestelling, bestelling, menu);
+            btnAfrekenen.Click += (sender, e) => AfrekenenBestelling(bestelling);
         }
 
         private void btnVerwijderAlles_Click(object sender, EventArgs e) { }
@@ -47,9 +48,12 @@ namespace Project_Chapeau_herkansers_3
         private void btnToevoegenEen_Click(object sender, EventArgs e) { }
         private void btnVerwijderEen_Click(object sender, EventArgs e) { }
 
-        private void btnAfrekenen_Click(object sender, EventArgs e)
-        {
+        private void btnAfrekenen_Click(object sender, EventArgs e) { }
 
+        private void AfrekenenBestelling(Bestelling bestelling)
+        {
+            //Afrekenen form1 = new Afrekenen(bestelling);
+            //Application.Run(form1);
         }
 
         private void ToevoegenEenAanBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling, Menu menu)
@@ -133,10 +137,16 @@ namespace Project_Chapeau_herkansers_3
             }
         }
 
-        private void VerwijderAllesUitListView(Bestelling bestelling)
+        private void VerwijderAllesUitListView(Bestelling bestelling, Menu menu)
         {
+            foreach (BesteldItem besteldItem in bestelling.BestellingItems)
+            {
+                besteldItem.menuItem.Voorraad += besteldItem.Hoeveelheid;
+            }
+
             bestelling.BestellingItems.Clear();
             listViewBestelling.Items.Clear();
+            VullenListView(listViewKaart, menu, menu.MenuType);
         }
 
         private void VullenListView(System.Windows.Forms.ListView listView, Menu menu, MenuType menuType)
