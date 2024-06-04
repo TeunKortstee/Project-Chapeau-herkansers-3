@@ -22,10 +22,10 @@ namespace Project_Chapeau_herkansers_3
         public Form1()
         {
             InitializeComponent();
-            LoginControl loginControl = new LoginControl();
-            mainPanel.Controls.Add(loginControl);
-            //UserControlManager managerDashboard = new UserControlManager(this);
-            //mainPanel.Controls.Add(managerDashboard);
+            //LoginControl loginControl = new LoginControl();
+            //mainPanel.Controls.Add(loginControl);
+            UserControlManager managerDashboard = new UserControlManager(this);
+            mainPanel.Controls.Add(managerDashboard);
         }
         public void Switchpanels(UserControl userControl)
         {

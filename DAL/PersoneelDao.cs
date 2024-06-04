@@ -57,5 +57,15 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
+        // Lucas
+        public List<Personeel> GetPersoneelByFunctieId(Functie functie)
+        {
+            string query = "SELECT p.* FROM Personeel p JOIN Personeel_Functie f ON p.FunctieId = f.FunctieId WHERE p.FunctieId = @FunctieId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+                {
+                    new SqlParameter("@FunctieId", (int)functie),
+                };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
     }
 }

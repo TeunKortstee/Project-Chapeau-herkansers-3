@@ -16,12 +16,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlMenuOverview : UserControl
+    public partial class UserControlManageOverview : UserControl
     {
         private Form1 form;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
-        public UserControlMenuOverview(Form1 form1, Functie functie)
+        public UserControlManageOverview(Form1 form1, Functie functie)
         {
             InitializeComponent();
             this.form = form1;
@@ -29,7 +29,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.menuItemService = null;
             DisplayEmployeeElements(functie);
         }
-        public UserControlMenuOverview(Form1 form1, MenuType menu)
+        public UserControlManageOverview(Form1 form1, MenuType menu)
         {
             InitializeComponent();
             this.form = form1;
@@ -141,7 +141,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Columns.Add("In Voorraad", 60);
 
 
-            List<MenuItem> selectedMenu = menuItemService.GetAllMenuItems(menuType);
+            List<MenuItem> selectedMenu = menuItemService.GetMenuItemsByMenu(menuType);
             foreach (MenuItem menuItem in selectedMenu)
             {
                 ListViewItem item = new ListViewItem(menuItem.MenuItemId.ToString());
@@ -153,20 +153,24 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void FillEmployeeListView(Functie functie)
         {
+            lsvDatabaseItems.Clear();
+
+            lsvDatabaseItems.Columns.Add("Id", 60);
             lsvDatabaseItems.Columns.Add("Naam", 100);
             lsvDatabaseItems.Columns.Add("Functie", 150);
 
-            List<Personeel> personeel = personeelService.GetAllPersoneel();
+            List<Personeel> personeel = personeelService.GetPersoneelByFunctie(functie);
             foreach (Personeel werknemer in personeel)
             {
-                ListViewItem item = new ListViewItem(werknemer.VoorNaam);
+                ListViewItem item = new ListViewItem(werknemer.Id.ToString());
+                item.SubItems.Add(werknemer.AchterNaam);
                 item.SubItems.Add(werknemer.Functie.ToString());
                 item.Tag = werknemer;
                 lsvDatabaseItems.Items.Add(item);
             }
-
         }
         #endregion
+
         #endregion
 
         #region Top Buttons
@@ -275,6 +279,14 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void btnAddNew_Click(object sender, EventArgs e)
         {
             this.form.Switchpanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
+        }
+        private bool CheckItemSelected()
+        {
+            if (lsvDatabaseItems.SelectedItems.Count == 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

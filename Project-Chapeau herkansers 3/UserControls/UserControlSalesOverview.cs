@@ -18,32 +18,33 @@ namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlSalesOverview : UserControl
     {
+        const bool betaald = true;
+
         private Form1 form;
-        private MenuItemService? menuItemService;
+        private RekeningService rekeningService;
         private PersoneelService? personeelService;
 
-        public UserControlSalesOverview(Form1 form1, MenuType menu)
+        public UserControlSalesOverview(Form1 form1)
         {
             InitializeComponent();
             this.form = form1;
             this.personeelService = null;
-            this.menuItemService = new MenuItemService();
-            DisplayMenuElements(menu);
+            this.rekeningService = new RekeningService();
+            DisplayMenuElements();
         }
         #region DisplayUIElements
 
-        #region MenuItem
-        private void DisplayMenuElements(MenuType menuType)
+        #region Rekeningen
+        private void DisplayMenuElements()
         {
-            lblOverview.Text = "Menu";
-            btnAddNew.Text = "Menu Item toevoegen";
+            lblTotalIncome.Text = "Totaal: "
             btn1.Text = MenuType.Lunch.ToString();
             btn2.Text = MenuType.Diner.ToString();
             btn3.Text = MenuType.Drank.ToString();
-            DisplayMenuButtons(menuType);
-            FillMenuListView(menuType);
+            DisplayMenuButtons(MenuType.Lunch);
+            FillMenuListView(MenuType.Lunch);
         }
-        #region Buttons - MenuItem
+        #region Buttons - Rekeningen
         private void DisplayMenuButtons(MenuType menuType)
         {
             btn1.Tag = MenuType.Lunch;
@@ -78,50 +79,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
         #endregion
 
-        #region Employee
-        private void DisplayEmployeeElements(Functie functie)
-        {
-            lblOverview.Text = "Personeel";
-            btnAddNew.Text = "Personeel toevoegen";
-            btn1.Text = Functie.Serveerder.ToString();
-            btn2.Text = Functie.Keuken.ToString();
-            btn3.Text = Functie.Bar.ToString();
-            DisplayEmployeeButtons(functie);
-            FillEmployeeListView(functie);
-        }
-        #region Buttons - Employee
-        private void DisplayEmployeeButtons(Functie functie)
-        {
-            btn1.Tag = Functie.Serveerder;
-            btn1.Text = Functie.Serveerder.ToString();
-            btn2.Tag = Functie.Keuken;
-            btn2.Text = Functie.Keuken.ToString();
-            btn3.Tag = Functie.Bar;
-            btn3.Text = Functie.Bar.ToString();
-            RenableEmployeeButtons(functie);
-        }
-        private void RenableEmployeeButtons(Functie functie)
-        {
-            switch (functie)
-            {
-                case Functie.Serveerder:
-                    btn1.Enabled = false;
-                    btn2.Enabled = true;
-                    btn3.Enabled = true;
-                    break;
-                case Functie.Keuken:
-                    btn1.Enabled = true;
-                    btn2.Enabled = false;
-                    btn3.Enabled = true;
-                    break;
-                case Functie.Bar:
-                    btn1.Enabled = true;
-                    btn2.Enabled = true;
-                    btn3.Enabled = false;
-                    break;
-            }
-        }
-        #endregion
+
         #endregion
 
         #region ListView
@@ -134,14 +92,14 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Columns.Add("In Voorraad", 60);
 
 
-            List<MenuItem> selectedMenu = menuItemService.GetAllMenuItems(menuType);
-            foreach (MenuItem menuItem in selectedMenu)
+            List<Rekening> betaaldeRekeningen = rekeningService.GetBetaaldeRekeningen(betaald);
+            foreach (Rekening rekening in betaaldeRekeningen)
             {
-                ListViewItem item = new ListViewItem(menuItem.MenuItemId.ToString());
-                item.SubItems.Add(menuItem.Naam);
-                item.SubItems.Add(menuItem.Voorraad.ToString());
-                item.Tag = menuItem;
-                lsvDatabaseItems.Items.Add(item);
+                //ListViewItem item = new ListViewItem(rekening.RekeningId.ToString());
+                //item.SubItems.Add(menuItem.Naam);
+                //item.SubItems.Add(menuItem.Voorraad.ToString());
+                //item.Tag = menuItem;
+                //lsvDatabaseItems.Items.Add(item);
             }
         }
         private void FillEmployeeListView(Functie functie)
@@ -159,7 +117,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
 
         }
-        #endregion
         #endregion
 
         #region Top Buttons
@@ -265,10 +222,5 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 MessageBox.Show($"Selecteer een item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnAddNew_Click(object sender, EventArgs e)
-        {
-            this.form.Switchpanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
-        }
-
     }
 }

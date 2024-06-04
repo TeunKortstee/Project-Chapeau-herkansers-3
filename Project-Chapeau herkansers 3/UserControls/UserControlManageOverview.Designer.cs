@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlMenuOverview
+    partial class UserControlManageOverview
     {
         /// <summary> 
         /// Required designer variable.
@@ -42,7 +42,7 @@
             // lsvDatabaseItems
             // 
             lsvDatabaseItems.FullRowSelect = true;
-            lsvDatabaseItems.Location = new Point(14, 251);
+            lsvDatabaseItems.Location = new Point(14, 233);
             lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
             lsvDatabaseItems.MultiSelect = false;
             lsvDatabaseItems.Name = "lsvDatabaseItems";
@@ -55,17 +55,17 @@
             // 
             lblOverview.AutoSize = true;
             lblOverview.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOverview.Location = new Point(153, 14);
+            lblOverview.Location = new Point(119, 14);
             lblOverview.Name = "lblOverview";
-            lblOverview.Size = new Size(113, 46);
+            lblOverview.Size = new Size(172, 46);
             lblOverview.TabIndex = 1;
-            lblOverview.Text = "Menu";
+            lblOverview.Text = "Overzicht";
             // 
             // btnAddNew
             // 
             btnAddNew.BackColor = Color.FromArgb(138, 210, 176);
             btnAddNew.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNew.Location = new Point(14, 139);
+            btnAddNew.Location = new Point(14, 121);
             btnAddNew.Margin = new Padding(3, 4, 3, 4);
             btnAddNew.Name = "btnAddNew";
             btnAddNew.Size = new Size(380, 48);
@@ -117,7 +117,7 @@
             // 
             btn1.BackColor = Color.FromArgb(138, 210, 176);
             btn1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn1.Location = new Point(14, 194);
+            btn1.Location = new Point(14, 176);
             btn1.Name = "btn1";
             btn1.Size = new Size(123, 50);
             btn1.TabIndex = 29;
@@ -130,7 +130,7 @@
             // 
             btn2.BackColor = Color.FromArgb(138, 210, 176);
             btn2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn2.Location = new Point(143, 194);
+            btn2.Location = new Point(143, 176);
             btn2.Name = "btn2";
             btn2.Size = new Size(123, 50);
             btn2.TabIndex = 30;
@@ -143,7 +143,7 @@
             // 
             btn3.BackColor = Color.FromArgb(138, 210, 176);
             btn3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn3.Location = new Point(272, 194);
+            btn3.Location = new Point(272, 176);
             btn3.Name = "btn3";
             btn3.Size = new Size(123, 50);
             btn3.TabIndex = 31;
@@ -152,7 +152,7 @@
             btn3.EnabledChanged += btn3_EnabledChanged;
             btn3.Click += btn3_Click;
             // 
-            // UserControlOverview
+            // UserControlManageOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -166,7 +166,7 @@
             Controls.Add(lblOverview);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlOverview";
+            Name = "UserControlManageOverview";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();

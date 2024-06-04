@@ -34,7 +34,7 @@
             btn1 = new Button();
             btn2 = new Button();
             btn3 = new Button();
-            lblObject = new Label();
+            lblTotalIncome = new Label();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -111,21 +111,21 @@
             btn3.EnabledChanged += btn3_EnabledChanged;
             btn3.Click += btn3_Click;
             // 
-            // lblObject
+            // lblTotalIncome
             // 
-            lblObject.AutoSize = true;
-            lblObject.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblObject.Location = new Point(14, 108);
-            lblObject.Name = "lblObject";
-            lblObject.Size = new Size(126, 46);
-            lblObject.TabIndex = 32;
-            lblObject.Text = "Totaal:";
+            lblTotalIncome.AutoSize = true;
+            lblTotalIncome.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalIncome.Location = new Point(14, 108);
+            lblTotalIncome.Name = "lblTotalIncome";
+            lblTotalIncome.Size = new Size(126, 46);
+            lblTotalIncome.TabIndex = 32;
+            lblTotalIncome.Text = "Totaal:";
             // 
             // UserControlSalesOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lblObject);
+            Controls.Add(lblTotalIncome);
             Controls.Add(btn3);
             Controls.Add(btn2);
             Controls.Add(btn1);
@@ -147,6 +147,6 @@
         private Button btn1;
         private Button btn2;
         private Button btn3;
-        private Label lblObject;
+        private Label lblTotalIncome;
     }
 }
