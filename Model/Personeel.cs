@@ -16,6 +16,7 @@
         }
         public Personeel(string voornaam, string achternaam, string email, Functie functie)
         {
+            this.email = email;
             this.VoorNaam = voornaam;
             this.AchterNaam = achternaam;
             this.Functie = functie;

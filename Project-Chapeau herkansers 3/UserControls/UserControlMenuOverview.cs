@@ -16,12 +16,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlOverview : UserControl
+    public partial class UserControlMenuOverview : UserControl
     {
         private Form1 form;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
-        public UserControlOverview(Form1 form1, Functie functie)
+        public UserControlMenuOverview(Form1 form1, Functie functie)
         {
             InitializeComponent();
             this.form = form1;
@@ -29,7 +29,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.menuItemService = null;
             DisplayEmployeeElements(functie);
         }
-        public UserControlOverview(Form1 form1, MenuType menu)
+        public UserControlMenuOverview(Form1 form1, MenuType menu)
         {
             InitializeComponent();
             this.form = form1;

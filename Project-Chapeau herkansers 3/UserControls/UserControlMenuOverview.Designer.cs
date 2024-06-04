@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlOverview
+    partial class UserControlMenuOverview
     {
         /// <summary> 
         /// Required designer variable.
@@ -55,11 +55,11 @@
             // 
             lblOverview.AutoSize = true;
             lblOverview.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOverview.Location = new Point(119, 14);
+            lblOverview.Location = new Point(153, 14);
             lblOverview.Name = "lblOverview";
-            lblOverview.Size = new Size(172, 46);
+            lblOverview.Size = new Size(113, 46);
             lblOverview.TabIndex = 1;
-            lblOverview.Text = "Overzicht";
+            lblOverview.Text = "Menu";
             // 
             // btnAddNew
             // 

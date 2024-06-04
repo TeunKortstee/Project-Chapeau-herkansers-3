@@ -18,7 +18,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private MenuType menu;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
-        public UserControlNewObject(Form1 form1)
+        public UserControlNewObject(Form1 form1, Functie functie)
         {
             InitializeComponent();
             this.form = form1;
@@ -61,6 +61,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
             cmbType.DataSource = Enum.GetValues(typeof(MenuType));
             cmbType.SelectedItem = menu;
         }
+        private void DisplayEmployeeElements(Functie functie)
+        {
+            lblObject.Text = "Nieuw MenuItem";
+            lbl1.Text = "Naam";
+            lbl2.Text = "Prijs";
+            lbl3.Text = "Voorraad";
+            lblEnum.Text = "Menu";
+            cmbType.DataSource = Enum.GetValues(typeof(MenuType));
+            cmbType.SelectedItem = menu;
+        }
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             if (this.personeelService == null)
@@ -69,7 +79,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     MenuItem newMenuItem = menuItemService.CreateMenuItem(txt2.Text, decimal.Parse(txt3.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
                     menuItemService.AddNewMenuItem(newMenuItem);
-                    form.Switchpanels(new UserControlOverview(form, (MenuType)newMenuItem.MenuId));
+                    form.Switchpanels(new UserControlMenuOverview(form, (MenuType)newMenuItem.MenuId));
                 }
                 catch (FormatException ex)
                 {
@@ -90,7 +100,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            form.Switchpanels(new UserControlOverview(form, this.menu));
+            form.Switchpanels(new UserControlMenuOverview(form, this.menu));
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
