@@ -52,6 +52,7 @@ namespace Project_Chapeau_herkansers_3
 
         private void AfrekenenBestelling(Bestelling bestelling)
         {
+
             //Afrekenen form1 = new Afrekenen(bestelling);
             //Application.Run(form1);
         }
@@ -79,8 +80,18 @@ namespace Project_Chapeau_herkansers_3
             if (listView.SelectedItems.Count > 0)
             {
                 BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
-                besteldItem.Hoeveelheid--;
-                besteldItem.menuItem.Voorraad++;
+
+                if (besteldItem.Hoeveelheid == 1)
+                {
+                    besteldItem.menuItem.Voorraad++;
+                    bestelling.BestellingItems.Remove(besteldItem);
+                } else if (besteldItem.Hoeveelheid > 0) {
+                    besteldItem.Hoeveelheid--;
+                    besteldItem.menuItem.Voorraad++;
+                }
+                else { 
+                    bestelling.BestellingItems.Remove(besteldItem);
+                }
                 VulListViewBestelling(listViewBestelling, bestelling);
                 VullenListView(listViewKaart, menu, menu.MenuType);
             }
