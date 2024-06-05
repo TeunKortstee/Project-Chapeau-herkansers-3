@@ -1,11 +1,6 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace DAL
 {
@@ -47,13 +42,15 @@ namespace DAL
         }
         public void InsertPersoneel(Personeel personeel)
         {
-            string query = "INSERT INTO Personeel (Voornaam, Achternaam, Wachtwoord, Functie) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @Functie)";
+            string query = "INSERT INTO Personeel(Achternaam, Email, Wachtwoord, Salt, FunctieId) VALUES (@Email, @Achternaam, @Wachtwoord, @Salt, @Functie)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", personeel.VoorNaam),
+                new SqlParameter("@Email", personeel.email),
                 new SqlParameter("@Achternaam", personeel.AchterNaam),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord),
+                new SqlParameter("@Salt", personeel.Salt),
                 new SqlParameter("@Functie", personeel.Functie),
+
             };
             ExecuteEditQuery(query, sqlParameters);
         }

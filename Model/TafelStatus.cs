@@ -2,6 +2,6 @@
 {
     public enum TafelStatus
     {
-        Vrij, Bezet
+        Vrij = 1, Bezet
     }
 }
