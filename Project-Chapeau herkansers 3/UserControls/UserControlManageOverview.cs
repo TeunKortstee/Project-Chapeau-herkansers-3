@@ -43,10 +43,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void DisplayMenuElements(MenuType menuType)
         {
             lblOverview.Text = "Menu";
-            btnAddNew.Text = "Menu Item toevoegen";
             btn1.Text = MenuType.Lunch.ToString();
             btn2.Text = MenuType.Diner.ToString();
             btn3.Text = MenuType.Drank.ToString();
+            SetObjectText("Menu Item");
             DisplayMenuButtons(menuType);
             FillMenuListView(menuType);
         }
@@ -59,6 +59,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             btn2.Text = MenuType.Diner.ToString();
             btn3.Tag = MenuType.Drank;
             btn3.Text = MenuType.Drank.ToString();
+            btnAdjust.Tag = menuType;
             RenableMenuButtons(menuType);
         }
         private void RenableMenuButtons(MenuType menuType)
@@ -89,10 +90,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void DisplayEmployeeElements(Functie functie)
         {
             lblOverview.Text = "Personeel";
-            btnAddNew.Text = "Personeel toevoegen";
             btn1.Text = Functie.Serveerder.ToString();
             btn2.Text = Functie.Keuken.ToString();
             btn3.Text = Functie.Bar.ToString();
+            SetObjectText("Werknemer");
             DisplayEmployeeButtons(functie);
             FillEmployeeListView(functie);
         }
@@ -105,6 +106,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             btn2.Text = Functie.Keuken.ToString();
             btn3.Tag = Functie.Bar;
             btn3.Text = Functie.Bar.ToString();
+            btnAdjust.Tag = functie;
             RenableEmployeeButtons(functie);
         }
         private void RenableEmployeeButtons(Functie functie)
@@ -129,6 +131,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
         }
         #endregion
+        private void SetObjectText(string objectType)
+        {
+            btnAddNew.Text = $"{objectType} toevoegen";
+        }
         #endregion
 
         #region ListView
@@ -240,7 +246,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            this.form.Switchpanels(new UserControlManager(form));
+            this.form.SwitchPanels(new UserControlManager(form));
         }
 
         private void btnAdjust_Click(object sender, EventArgs e)
@@ -251,7 +257,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
                     MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                    this.form.Switchpanels(new UserControlAdjustStock(form, selecteMenuItem));
+                    this.form.SwitchPanels(new UserControlAdjustStock(form, selecteMenuItem));
                 }
             }
             catch (Exception ex)
@@ -278,7 +284,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            this.form.Switchpanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
+            this.form.SwitchPanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
         }
         private bool CheckItemSelected()
         {

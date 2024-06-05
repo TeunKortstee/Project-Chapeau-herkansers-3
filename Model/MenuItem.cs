@@ -4,7 +4,7 @@
     {
         public int MenuItemId { get; set; }
         public string Naam { get; set; }
-        public decimal Prijs { get; set; }
+        public float Prijs { get; set; }
         public bool IsAlcoholisch { get; set; }
         public int MenuId { get; set; }
         public int Voorraad { get; set; }
@@ -14,7 +14,7 @@
 
         }
 
-        public MenuItem(string naam, decimal prijs, bool isAlcoholisch, int menuId, int voorraad)
+        public MenuItem(string naam, float prijs, bool isAlcoholisch, int menuId, int voorraad)
         {
             Naam = naam;
             Prijs = prijs;

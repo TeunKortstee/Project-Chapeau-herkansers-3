@@ -59,7 +59,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void ReturnToOverview()
         {
-            form.Switchpanels(new UserControlManageOverview(form, (MenuType)this.selectedMenuItem.MenuId));
+            form.SwitchPanels(new UserControlManageOverview(form, (MenuType)this.selectedMenuItem.MenuId));
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {

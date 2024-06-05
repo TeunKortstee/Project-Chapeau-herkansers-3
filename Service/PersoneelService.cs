@@ -30,9 +30,9 @@ namespace Service
             personeelDao.InsertPersoneel(personeel);
         }
         // Lucas
-        public Personeel CreatePersoneel(string name, string email, byte[] password,  Functie function)
+        public Personeel CreatePersoneel(string surname, string email, byte[] password,  Functie function)
         {
-            return new Personeel(name, email, password, function);
+            return new Personeel(surname, email, password, function);
         }
     }
 }

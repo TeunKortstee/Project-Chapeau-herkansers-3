@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlNewObject : UserControl
     {
         private Form1 form;
-        private MenuType menu;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
         public UserControlNewObject(Form1 form1, Functie functie)
@@ -34,36 +34,50 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.menuItemService = new MenuItemService();
             DisplayMenuElements(menu);
         }
+        #region DisplayUIElements
+
+        #region Menu Item
         private void DisplayMenuElements(MenuType menu)
         {
-            lblObject.Text = "Nieuw MenuItem";
-            lbl1.Text = "Naam";
-            lbl2.Text = "Prijs";
-            txt2.PlaceholderText = "0,00";
-            lbl3.Text = "Voorraad";
-            lblEnum.Text = "Menu";
+            SetObjectText("MenuItem", "Naam", "Prijs", "0,00", "Voorraad", "10", "Menu");
             cmbType.DataSource = Enum.GetValues(typeof(MenuType));
             cmbType.SelectedItem = menu;
+            btnCancel.Tag = menu;
         }
-        private void DisplayEmployeeElements(Functie functie)
+        #endregion
+
+        #region Employee
+        private void DisplayEmployeeElements(Functie function)
         {
-            lblObject.Text = "Nieuw Werknemer";
-            lbl1.Text = "Achternaam";
-            lbl2.Text = "Email";
-            lbl3.Text = "Wachtwoord";
-            lblEnum.Text = "Functie";
+            SetObjectText("Werknemer", "Achternaam", "Email", "@", "Wachtwoord", "0000", "Functie");
             cmbType.DataSource = Enum.GetValues(typeof(Functie));
-            cmbType.SelectedItem = functie;
+            cmbType.SelectedItem = function;
+            btnCancel.Tag = function;
         }
+        #endregion
+
+        private void SetObjectText(string objectType, string name, string emailOrPrice, string placeholder1, string numbers, string placeholder2, string enumType)
+        {
+            lblObject.Text = $"Nieuw {objectType}";
+            lbl1.Text = name;
+            lbl2.Text = emailOrPrice;
+            txt2.PlaceholderText = placeholder1;
+            lbl3.Text = numbers;
+            txt3.PlaceholderText = placeholder2;
+            lblEnum.Text = enumType;
+        }
+        #endregion
+
+        #region Functionalities
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             if (this.personeelService == null)
             {
                 try
                 {
-                    MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, decimal.Parse(txt2.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
+                    MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, float.Parse(txt2.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
                     menuItemService.AddNewMenuItem(newMenuItem);
-                    form.Switchpanels(new UserControlManageOverview(form, (MenuType)newMenuItem.MenuId));
+                    form.SwitchPanels(new UserControlManageOverview(form, (MenuType)newMenuItem.MenuId));
                 }
                 catch (FormatException ex)
                 {
@@ -75,9 +89,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 try
                 {
-                    // Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, chkAlcoholisch.Checked, (Functie)cmbType.SelectedIndex);
-                    // personeelService.InsertPersoneel(newEmployee);
-                    // form.Switchpanels(new UserControlManageOverview(form, (MenuType)newEmployee.Functie));
+                    //Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, , (Functie)cmbType.SelectedIndex);
+                    //personeelService.InsertPersoneel(newEmployee);
+                    //form.SwitchPanels(new UserControlManageOverview(form, (MenuType)newEmployee.Functie));
                 }
                 catch (FormatException ex)
                 {
@@ -89,7 +103,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            form.Switchpanels(new UserControlManageOverview(form, this.menu));
+            form.SwitchPanels(new UserControlManageOverview(form, (MenuType)btnCancel.Tag));
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
@@ -107,5 +121,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 chkAlcoholisch.Visible = false;
             }
         }
+        #endregion
     }
 }
