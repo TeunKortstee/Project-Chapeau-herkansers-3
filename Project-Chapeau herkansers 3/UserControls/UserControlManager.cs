@@ -33,7 +33,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             this.form1.SwitchPanels(new UserControlOverview(form1, MenuType.Drank));
         }
-
+         
         private void btnSa_Click(object sender, EventArgs e)
         {
 
