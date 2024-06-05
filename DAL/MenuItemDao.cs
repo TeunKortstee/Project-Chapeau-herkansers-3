@@ -67,7 +67,7 @@ namespace DAL
                 {
                     MenuItemId = Convert.ToInt32(dr["MenuItemId"]),
                     Voorraad = Convert.ToInt32(dr["Voorraad"]),
-                    Prijs = (float)dr["Prijs"],
+                    Prijs = (double)dr["Prijs"],
                     Naam = (string)dr["Naam"],
                     MenuId = Convert.ToInt32(dr["MenuId"]),
                     IsAlcoholisch = (bool)dr["Alcoholisch"],

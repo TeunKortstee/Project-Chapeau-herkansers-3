@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lsvDatabaseItems = new ListView();
+            lsvPaidBills = new ListView();
             lblOverview = new Label();
             btnReturn = new Button();
             btn1 = new Button();
@@ -37,17 +37,17 @@
             lblTotalIncome = new Label();
             SuspendLayout();
             // 
-            // lsvDatabaseItems
+            // lsvPaidBills
             // 
-            lsvDatabaseItems.FullRowSelect = true;
-            lsvDatabaseItems.Location = new Point(14, 251);
-            lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
-            lsvDatabaseItems.MultiSelect = false;
-            lsvDatabaseItems.Name = "lsvDatabaseItems";
-            lsvDatabaseItems.Size = new Size(380, 380);
-            lsvDatabaseItems.TabIndex = 0;
-            lsvDatabaseItems.UseCompatibleStateImageBehavior = false;
-            lsvDatabaseItems.View = View.Details;
+            lsvPaidBills.FullRowSelect = true;
+            lsvPaidBills.Location = new Point(14, 251);
+            lsvPaidBills.Margin = new Padding(3, 4, 3, 4);
+            lsvPaidBills.MultiSelect = false;
+            lsvPaidBills.Name = "lsvPaidBills";
+            lsvPaidBills.Size = new Size(380, 380);
+            lsvPaidBills.TabIndex = 0;
+            lsvPaidBills.UseCompatibleStateImageBehavior = false;
+            lsvPaidBills.View = View.Details;
             // 
             // lblOverview
             // 
@@ -131,7 +131,7 @@
             Controls.Add(btn1);
             Controls.Add(btnReturn);
             Controls.Add(lblOverview);
-            Controls.Add(lsvDatabaseItems);
+            Controls.Add(lsvPaidBills);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlSalesOverview";
             Size = new Size(414, 736);
@@ -141,7 +141,7 @@
 
         #endregion
 
-        private ListView lsvDatabaseItems;
+        private ListView lsvPaidBills;
         private Label lblOverview;
         private Button btnReturn;
         private Button btn1;

@@ -10,6 +10,7 @@ using BCrypt.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlTypes;
+using Isopoh.Cryptography.SecureArray;
 
 namespace Service
 {
@@ -35,6 +36,10 @@ namespace Service
         {
             personeelDao.InsertPersoneel(personeel);
         }
+        public void RemovePersoneel(Personeel personeel)
+        {
+            personeelDao.RemovePersoneel(personeel);
+        }
         // Lucas
         public Personeel CreatePersoneel(string surname, string email, string password,  Functie function)
         {
@@ -49,13 +54,24 @@ namespace Service
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, Encoding.UTF8.GetString(salt), enhancedEntropy, HashType.SHA512);
             return Encoding.UTF8.GetBytes(hashedPassword);
         }
-        public byte[] GenerateSalt()
+        private byte[] GenerateSalt()
         {
             string saltString = BCrypt.Net.BCrypt.GenerateSalt(workFactor);
             return Encoding.UTF8.GetBytes(saltString);
         }
-        //private byte[] HashPasswordWithArgon2(string password, byte[] salt, int iterations, int memorySize, int parallelism)
+        private bool VerifyPassword(string password, string hashedPassword)
+        {
+            return BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword, HashType.SHA512);
+
+        }
+
+        //private string HashPasswordWithArgon2(string password, int iterations, int memorySize, int parallelism)
         //{
+        //    byte[] salt = new byte[32];
+        //    using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+        //    {
+        //        rng.GetBytes(salt);
+        //    }
 
         //    // Generate a salt
         //    Argon2Config config = new Argon2Config
@@ -69,10 +85,9 @@ namespace Service
         //        Password = Encoding.UTF8.GetBytes(password),
         //        Salt = salt,
         //    };
-        //    using (var argon2 = new Argon2(config))
-        //    {
-        //        return argon2.GetBytes(16);
-        //    }
+        //    Argon2 argon2 = new Argon2(config);
+        //    SecureArray<byte> hash = argon2.Hash();
+        //    return config.EncodeString(hash.Buffer);
         //}
     }
 }

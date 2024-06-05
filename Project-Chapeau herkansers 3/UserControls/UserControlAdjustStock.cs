@@ -49,7 +49,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Vul een getal in.");
+                MessageBox.Show("Vul een geheel getal in.");
             }
         }
 

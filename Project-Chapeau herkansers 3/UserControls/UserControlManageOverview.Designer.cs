@@ -37,6 +37,7 @@
             btn1 = new Button();
             btn2 = new Button();
             btn3 = new Button();
+            chkManagers = new CheckBox();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -152,10 +153,23 @@
             btn3.EnabledChanged += btn3_EnabledChanged;
             btn3.Click += btn3_Click;
             // 
+            // chkManagers
+            // 
+            chkManagers.AutoSize = true;
+            chkManagers.Location = new Point(14, 620);
+            chkManagers.Name = "chkManagers";
+            chkManagers.Size = new Size(172, 24);
+            chkManagers.TabIndex = 32;
+            chkManagers.Text = "Managers weergeven";
+            chkManagers.UseVisualStyleBackColor = true;
+            chkManagers.Visible = false;
+            chkManagers.Click += chkManagers_Click;
+            // 
             // UserControlManageOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(chkManagers);
             Controls.Add(btn3);
             Controls.Add(btn2);
             Controls.Add(btn1);
@@ -183,5 +197,6 @@
         private Button btn1;
         private Button btn2;
         private Button btn3;
+        private CheckBox chkManagers;
     }
 }

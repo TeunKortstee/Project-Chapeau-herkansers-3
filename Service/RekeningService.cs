@@ -23,7 +23,7 @@ namespace Service
         }
         public List<Rekening> GetBetaaldeRekeningen(bool betaald) 
         {
-            rekeningDao.GetBetaaldeRekeningen(betaald);
+            return rekeningDao.GetBetaaldeRekeningen(betaald);
         }
     }
 }

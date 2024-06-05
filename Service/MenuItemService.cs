@@ -36,7 +36,7 @@ namespace Service
         {
             return menuItemDao.GetMenuItemsByMenuId(menuType);
         }
-        public MenuItem CreateMenuItem(string name, float price, bool alcoholic, int menuId, int stock)
+        public MenuItem CreateMenuItem(string name, double price, bool alcoholic, MenuType menuId, int stock)
         {
             return new MenuItem(name, price, alcoholic, menuId, stock);
         }

@@ -29,9 +29,9 @@ namespace Project_Chapeau_herkansers_3
             menu = menuItemService.GetAllItems();
             this.tafel = tafel;
             this.personeel = personeel;
-            if(personeel.VoorNaam != null)
+            if(personeel.AchterNaam != null)
             {
-                btnGebruiker.Text = personeel.VoorNaam.ToString();
+                btnGebruiker.Text = personeel.AchterNaam.ToString();
             }
         }
 

@@ -91,7 +91,7 @@
             picName.BackColor = Color.FromArgb(196, 196, 196);
             picName.Location = new Point(30, 295);
             picName.Name = "picName";
-            picName.Size = new Size(285, 62);
+            picName.Size = new Size(352, 62);
             picName.TabIndex = 6;
             picName.TabStop = false;
             // 
@@ -99,7 +99,7 @@
             // 
             txt2.Location = new Point(177, 312);
             txt2.Name = "txt2";
-            txt2.Size = new Size(121, 27);
+            txt2.Size = new Size(187, 27);
             txt2.TabIndex = 10;
             // 
             // lbl2
@@ -118,7 +118,7 @@
             pictureBox1.BackColor = Color.FromArgb(196, 196, 196);
             pictureBox1.Location = new Point(30, 363);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(285, 62);
+            pictureBox1.Size = new Size(352, 62);
             pictureBox1.TabIndex = 14;
             pictureBox1.TabStop = false;
             // 
@@ -137,7 +137,7 @@
             // 
             txt3.Location = new Point(177, 380);
             txt3.Name = "txt3";
-            txt3.Size = new Size(121, 27);
+            txt3.Size = new Size(187, 27);
             txt3.TabIndex = 16;
             // 
             // chkAlcoholisch
@@ -167,7 +167,7 @@
             pictureBox2.BackColor = Color.FromArgb(196, 196, 196);
             pictureBox2.Location = new Point(30, 431);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(285, 62);
+            pictureBox2.Size = new Size(352, 62);
             pictureBox2.TabIndex = 28;
             pictureBox2.TabStop = false;
             // 
@@ -186,7 +186,7 @@
             // 
             txt1.Location = new Point(177, 244);
             txt1.Name = "txt1";
-            txt1.Size = new Size(121, 27);
+            txt1.Size = new Size(187, 27);
             txt1.TabIndex = 33;
             // 
             // pictureBox3
@@ -194,7 +194,7 @@
             pictureBox3.BackColor = Color.FromArgb(196, 196, 196);
             pictureBox3.Location = new Point(30, 227);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(285, 62);
+            pictureBox3.Size = new Size(352, 62);
             pictureBox3.TabIndex = 32;
             pictureBox3.TabStop = false;
             // 
@@ -203,7 +203,7 @@
             cmbType.FormattingEnabled = true;
             cmbType.Location = new Point(177, 451);
             cmbType.Name = "cmbType";
-            cmbType.Size = new Size(121, 28);
+            cmbType.Size = new Size(187, 28);
             cmbType.TabIndex = 35;
             cmbType.SelectedIndexChanged += cmbType_SelectedIndexChanged;
             // 

@@ -30,22 +30,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.form = Form1.Instance;
             this.personeelService = null;
             this.rekeningService = new RekeningService();
-            DisplayMenuElements();
+            //DisplaySalesElements(menuType);
         }
         #region DisplayUIElements
 
         #region Rekeningen
-        private void DisplayMenuElements()
+        private void DisplaySalesElements(MenuType menuType)
         {
-            lblTotalIncome.Text = "Totaal: ";
-            btn1.Text = MenuType.Lunch.ToString();
-            btn2.Text = MenuType.Diner.ToString();
-            btn3.Text = MenuType.Drank.ToString();
-            DisplayMenuButtons(MenuType.Lunch);
-            FillMenuListView(MenuType.Lunch);
+            lblOverview.Text = "Menu";
+            DisplaySalesButtons(menuType);
+            FillSalesListView(menuType);
         }
         #region Buttons - Rekeningen
-        private void DisplayMenuButtons(MenuType menuType)
+        private void DisplaySalesButtons(MenuType menuType)
         {
             btn1.Tag = MenuType.Lunch;
             btn1.Text = MenuType.Lunch.ToString();
@@ -83,13 +80,13 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
 
         #region ListView
-        private void FillMenuListView(MenuType menuType)
+        private void FillSalesListView(MenuType menuType)
         {
-            lsvDatabaseItems.Clear();
+            lsvPaidBills.Clear();
 
-            lsvDatabaseItems.Columns.Add("Id", 60);
-            lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("In Voorraad", 60);
+            lsvPaidBills.Columns.Add("Id", 60);
+            lsvPaidBills.Columns.Add("Item", 250);
+            lsvPaidBills.Columns.Add("In Voorraad", 60);
 
 
             List<Rekening> betaaldeRekeningen = rekeningService.GetBetaaldeRekeningen(betaald);
@@ -109,8 +106,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (this.personeelService == null)
             {
-                FillMenuListView(MenuType.Lunch);
-                RenableMenuButtons(MenuType.Lunch);
+                FillSalesListView((MenuType)btn1.Tag);
+                RenableMenuButtons((MenuType)btn1.Tag);
             }
         }
         private void btn1_EnabledChanged(object sender, EventArgs e)
@@ -121,8 +118,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (this.personeelService == null)
             {
-                FillMenuListView(MenuType.Diner);
-                RenableMenuButtons(MenuType.Diner);
+                FillSalesListView((MenuType)btn2.Tag);
+                RenableMenuButtons((MenuType)btn2.Tag);
             }
         }
         private void btn2_EnabledChanged(object sender, EventArgs e)
@@ -133,8 +130,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (this.personeelService == null)
             {
-                FillMenuListView(MenuType.Drank);
-                RenableMenuButtons(MenuType.Drank);
+                FillSalesListView((MenuType)btn3.Tag);
+                RenableMenuButtons((MenuType)btn3.Tag);
             }
         }
         private void btn3_EnabledChanged(object sender, EventArgs e)
@@ -160,23 +157,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.form.SwitchPanels(new UserControlManager());
-        }
-
-        private void btnAdjust_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (lsvDatabaseItems.SelectedItems.Count > 0)
-                {
-                    ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
-                    MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                    this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Selecteer een item: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }
