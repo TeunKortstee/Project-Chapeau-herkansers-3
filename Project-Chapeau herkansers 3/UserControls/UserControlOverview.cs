@@ -236,7 +236,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            this.form.SwitchPanels(new UserControlManager());
+            this.form.Switchpanels(new UserControlManager(form));
         }
 
         private void btnAdjust_Click(object sender, EventArgs e)
