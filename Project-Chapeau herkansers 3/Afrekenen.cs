@@ -1,21 +1,12 @@
 ﻿using Model;
 using Service;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3
 {
     public partial class Afrekenen : UserControl
     {
-      
-      
+
+
         BesteldeItemService serviceBI;
         const double vatNormal = 0.06;
         const double vatAlcohol = 0.21;
@@ -24,9 +15,9 @@ namespace Project_Chapeau_herkansers_3
         public Afrekenen(Bestelling _bestelling)
         {
             InitializeComponent();
-           
+
             serviceBI = new BesteldeItemService();
-           
+
             bestelling = _bestelling;
             RefreshBillItems();
 
@@ -35,7 +26,7 @@ namespace Project_Chapeau_herkansers_3
 
         public void RefreshBillItems()
         {
-            List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestelling.Id);
+            List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestelling.bestellingId);
             billListView.Items.Clear();
             double total = 0.00;
             double vat = 0.00;
