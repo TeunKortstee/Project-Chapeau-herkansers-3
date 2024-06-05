@@ -30,8 +30,7 @@ namespace DAL
 
                 Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
                     Convert.ToInt32(row["BestellingId"]), 
-                    (double)row["TotaalPrijs"], 
-                    (double)row["Fooi"], 
+                    (double)row["TotaalPrijs"],
                     (bool)row["Betaald"], 
                     (DateTime)row["DateTime"]);
                 
@@ -42,12 +41,11 @@ namespace DAL
 
         public void InsertRekening(Rekening rekening)
         {
-            string query = "INSERT INTO Rekening(BestellingId,TotaalPrijs,Fooi,Betaald,Datum) VALUES (@BestellingId,@TotaalPrijs,@Fooi,@Betaald,@Datum)";
+            string query = "INSERT INTO Rekening(BestellingId,TotaalPrijs,Betaald,Datum) VALUES (@BestellingId,@TotaalPrijs,@Betaald,@Datum)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@BestellingId", rekening.BestellingId),
-                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),
-                new SqlParameter("@Fooi", rekening.Fooi),
+                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
                 new SqlParameter("@Betaald", rekening.Betaald),
 
             };

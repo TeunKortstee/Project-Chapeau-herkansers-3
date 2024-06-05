@@ -14,8 +14,8 @@ namespace Project_Chapeau_herkansers_3
 {
     public partial class Afrekenen : UserControl
     {
-        Menu menuItems;
-        MenuItemService serviceMI;
+      
+      
         BesteldeItemService serviceBI;
         const double vatNormal = 0.06;
         const double vatAlcohol = 0.21;
@@ -24,9 +24,9 @@ namespace Project_Chapeau_herkansers_3
         public Afrekenen(Bestelling _bestelling)
         {
             InitializeComponent();
-            serviceMI = new MenuItemService();
+           
             serviceBI = new BesteldeItemService();
-            menuItems = serviceMI.GetAllItems();
+           
             bestelling = _bestelling;
             RefreshBillItems();
 
@@ -44,8 +44,8 @@ namespace Project_Chapeau_herkansers_3
 
                 ListViewItem item = new ListViewItem(b.Hoeveelheid + "x");
 
-                item.SubItems.Add(menuItems.MenuItems[b.MenuItemID].Naam);
-                item.SubItems.Add("€ " + (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid));
+                item.SubItems.Add(b.menuItem.Naam);
+                item.SubItems.Add("€ " + (b.menuItem.Prijs * b.Hoeveelheid));
                 billListView.Items.Add(item);
                 if (b.Opmerking != null && b.Opmerking != "")
                 {
@@ -59,9 +59,9 @@ namespace Project_Chapeau_herkansers_3
 
                 }
 
-                double itemTotal = (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid);
+                double itemTotal = (b.menuItem.Prijs * b.Hoeveelheid);
                 total += itemTotal;
-                if (menuItems.MenuItems[b.MenuItemID].IsAlcoholisch)
+                if (b.menuItem.IsAlcoholisch)
                 {
                     vat += itemTotal * vatAlcohol;
 
@@ -78,5 +78,9 @@ namespace Project_Chapeau_herkansers_3
             totalVatPriceLabel.Text = "€ " + vat;
         }
 
+        private void btnProceedToPayment_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
