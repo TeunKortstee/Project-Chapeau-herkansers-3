@@ -28,20 +28,32 @@ namespace DAL
             foreach (DataRow row in dataTable.Rows)
             {
 
-                Rekening rekening = new Rekening()
-                {
-                    RekeningId = Convert.ToInt32(row["RekeningId"]),
-                    BestellingId = Convert.ToInt32(row["BestellingId"]),
-                    TotaalPrijs = (double)row["TotaalPrijs"],
-                    Fooi = (double)row["Fooi"],                    
-                    Betaald = (bool)row["Betaald"],
-                    Datum = (DateTime)row["DateTime"]
-                };
+                Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
+                    Convert.ToInt32(row["BestellingId"]), 
+                    (double)row["TotaalPrijs"], 
+                    (double)row["Fooi"], 
+                    (bool)row["Betaald"], 
+                    (DateTime)row["DateTime"]);
+                
                 rekeningen.Add(rekening);
             }
             return rekeningen;
         }
 
-       
+        public void InsertRekening(Rekening rekening)
+        {
+            string query = "INSERT INTO Rekening(BestellingId,TotaalPrijs,Fooi,Betaald,Datum) VALUES (@BestellingId,@TotaalPrijs,@Fooi,@Betaald,@Datum)";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@BestellingId", rekening.BestellingId),
+                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),
+                new SqlParameter("@Fooi", rekening.Fooi),
+                new SqlParameter("@Betaald", rekening.Betaald),
+
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+
     }
 }

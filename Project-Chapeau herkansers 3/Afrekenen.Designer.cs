@@ -38,6 +38,8 @@
             billTotalText = new Label();
             pictureBox2 = new PictureBox();
             panel1 = new Panel();
+            totalVatPriceLabel = new Label();
+            vatPriceLabel = new Label();
             billTotalAmountText = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -105,15 +107,17 @@
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.FromArgb(255, 179, 1);
-            pictureBox2.Location = new Point(9, 415);
+            pictureBox2.Location = new Point(9, 418);
             pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(368, 13);
+            pictureBox2.Size = new Size(368, 10);
             pictureBox2.TabIndex = 4;
             pictureBox2.TabStop = false;
             // 
             // panel1
             // 
+            panel1.Controls.Add(totalVatPriceLabel);
+            panel1.Controls.Add(vatPriceLabel);
             panel1.Controls.Add(billTotalAmountText);
             panel1.Controls.Add(billTitleText);
             panel1.Controls.Add(pictureBox2);
@@ -122,15 +126,35 @@
             panel1.Location = new Point(5, 79);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(387, 480);
+            panel1.Size = new Size(387, 504);
             panel1.TabIndex = 5;
+            // 
+            // totalVatPriceLabel
+            // 
+            totalVatPriceLabel.AutoSize = true;
+            totalVatPriceLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            totalVatPriceLabel.Location = new Point(260, 464);
+            totalVatPriceLabel.Name = "totalVatPriceLabel";
+            totalVatPriceLabel.Size = new Size(60, 28);
+            totalVatPriceLabel.TabIndex = 7;
+            totalVatPriceLabel.Text = "€0.00";
+            // 
+            // vatPriceLabel
+            // 
+            vatPriceLabel.AutoSize = true;
+            vatPriceLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            vatPriceLabel.Location = new Point(13, 465);
+            vatPriceLabel.Name = "vatPriceLabel";
+            vatPriceLabel.Size = new Size(49, 28);
+            vatPriceLabel.TabIndex = 6;
+            vatPriceLabel.Text = "VAT:";
             // 
             // billTotalAmountText
             // 
             billTotalAmountText.Anchor = AnchorStyles.Right;
             billTotalAmountText.AutoSize = true;
             billTotalAmountText.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            billTotalAmountText.Location = new Point(273, 432);
+            billTotalAmountText.Location = new Point(256, 431);
             billTotalAmountText.Name = "billTotalAmountText";
             billTotalAmountText.Size = new Size(120, 37);
             billTotalAmountText.TabIndex = 5;
@@ -168,5 +192,7 @@
         private PictureBox pictureBox2;
         private Panel panel1;
         private Label billTotalAmountText;
+        private Label vatPriceLabel;
+        private Label totalVatPriceLabel;
     }
 }
