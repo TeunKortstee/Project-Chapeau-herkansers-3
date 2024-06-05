@@ -20,10 +20,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private Form1 form;
         private MenuItemService menuItemService;
         private MenuItem selectedMenuItem;
-        public UserControlAdjustStock(Form1 form, MenuItem selectedMenuItem)
+        public UserControlAdjustStock(MenuItem selectedMenuItem)
         {
             InitializeComponent();
-            this.form = form;
+            this.form = Form1.Instance;
             this.menuItemService = new MenuItemService();
             this.selectedMenuItem = selectedMenuItem;
             DisplayUIElements(this.selectedMenuItem);
@@ -59,7 +59,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void ReturnToOverview()
         {
-            form.SwitchPanels(new UserControlManageOverview(form, (MenuType)this.selectedMenuItem.MenuId));
+            form.SwitchPanels(new UserControlManageOverview((MenuType)this.selectedMenuItem.MenuId));
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {

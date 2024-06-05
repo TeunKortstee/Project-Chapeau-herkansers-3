@@ -21,18 +21,18 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private Form1 form;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
-        public UserControlManageOverview(Form1 form1, Functie functie)
+        public UserControlManageOverview(Functie functie)
         {
             InitializeComponent();
-            this.form = form1;
+            this.form = Form1.Instance;
             this.personeelService = new PersoneelService();
             this.menuItemService = null;
             DisplayEmployeeElements(functie);
         }
-        public UserControlManageOverview(Form1 form1, MenuType menu)
+        public UserControlManageOverview(MenuType menu)
         {
             InitializeComponent();
-            this.form = form1;
+            this.form = Form1.Instance;
             this.personeelService = null;
             this.menuItemService = new MenuItemService();
             DisplayMenuElements(menu);
@@ -246,7 +246,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            this.form.SwitchPanels(new UserControlManager(form));
+            this.form.SwitchPanels(new UserControlManager());
         }
 
         private void btnAdjust_Click(object sender, EventArgs e)
@@ -257,7 +257,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
                     MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                    this.form.SwitchPanels(new UserControlAdjustStock(form, selecteMenuItem));
+                    this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
                 }
             }
             catch (Exception ex)
@@ -284,7 +284,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            this.form.SwitchPanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
+            this.form.SwitchPanels(new UserControlNewObject((MenuType)btnAddNew.Tag));
         }
         private bool CheckItemSelected()
         {

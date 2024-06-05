@@ -18,18 +18,18 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private Form1 form;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
-        public UserControlNewObject(Form1 form1, Functie functie)
+        public UserControlNewObject(Functie functie)
         {
             InitializeComponent();
-            this.form = form1;
+            this.form = Form1.Instance;
             this.personeelService = new PersoneelService();
             this.menuItemService = null;
             DisplayEmployeeElements(functie);
         }
-        public UserControlNewObject(Form1 form1, MenuType menu)
+        public UserControlNewObject(MenuType menu)
         {
             InitializeComponent();
-            this.form = form1;
+            this.form = Form1.Instance;
             this.personeelService = null;
             this.menuItemService = new MenuItemService();
             DisplayMenuElements(menu);
@@ -77,7 +77,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, float.Parse(txt2.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
                     menuItemService.AddNewMenuItem(newMenuItem);
-                    form.SwitchPanels(new UserControlManageOverview(form, (MenuType)newMenuItem.MenuId));
+                    form.SwitchPanels(new UserControlManageOverview((MenuType)newMenuItem.MenuId));
                 }
                 catch (FormatException ex)
                 {
@@ -91,7 +91,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     //Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, , (Functie)cmbType.SelectedIndex);
                     //personeelService.InsertPersoneel(newEmployee);
-                    //form.SwitchPanels(new UserControlManageOverview(form, (MenuType)newEmployee.Functie));
+                    //form.SwitchPanels(new UserControlManageOverview((MenuType)newEmployee.Functie));
                 }
                 catch (FormatException ex)
                 {
@@ -103,7 +103,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlManageOverview(form, (MenuType)btnCancel.Tag));
+            form.SwitchPanels(new UserControlManageOverview((MenuType)btnCancel.Tag));
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)

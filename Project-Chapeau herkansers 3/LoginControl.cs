@@ -53,7 +53,7 @@ namespace Project_Chapeau_herkansers_3
                         if (IsPersoneel(personeel))
                         {
                             //return user to mainform
-                            form1.User =
+                            // form1.User =
                             //Open volgende UserControl
 
                         }

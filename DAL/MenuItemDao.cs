@@ -36,7 +36,7 @@ namespace DAL
             {
                 MenuItemId = Convert.ToInt32(row["MenuItemId"]),
                 Voorraad = Convert.ToInt32(row["Voorraad"]),
-                Prijs = (decimal)row["Prijs"],
+                Prijs = (float)row["Prijs"],
                 Naam = (string)row["Naam"],
                 MenuId = Convert.ToInt32(row["MenuId"]),
                 IsAlcoholisch = (bool)row["Alcoholisch"],
@@ -67,7 +67,7 @@ namespace DAL
                 {
                     MenuItemId = Convert.ToInt32(dr["MenuItemId"]),
                     Voorraad = Convert.ToInt32(dr["Voorraad"]),
-                    Prijs = (decimal)dr["Prijs"],
+                    Prijs = (float)dr["Prijs"],
                     Naam = (string)dr["Naam"],
                     MenuId = Convert.ToInt32(dr["MenuId"]),
                     IsAlcoholisch = (bool)dr["Alcoholisch"],

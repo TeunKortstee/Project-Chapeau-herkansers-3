@@ -24,10 +24,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private RekeningService rekeningService;
         private PersoneelService? personeelService;
 
-        public UserControlSalesOverview(Form1 form1)
+        public UserControlSalesOverview()
         {
             InitializeComponent();
-            this.form = form1;
+            this.form = Form1.Instance;
             this.personeelService = null;
             this.rekeningService = new RekeningService();
             DisplayMenuElements();
@@ -37,7 +37,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Rekeningen
         private void DisplayMenuElements()
         {
-            lblTotalIncome.Text = "Totaal: "
+            lblTotalIncome.Text = "Totaal: ";
             btn1.Text = MenuType.Lunch.ToString();
             btn2.Text = MenuType.Diner.ToString();
             btn3.Text = MenuType.Drank.ToString();
@@ -102,21 +102,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 //lsvDatabaseItems.Items.Add(item);
             }
         }
-        private void FillEmployeeListView(Functie functie)
-        {
-            lsvDatabaseItems.Columns.Add("Naam", 100);
-            lsvDatabaseItems.Columns.Add("Functie", 150);
-
-            List<Personeel> personeel = personeelService.GetAllPersoneel();
-            foreach (Personeel werknemer in personeel)
-            {
-                ListViewItem item = new ListViewItem(werknemer.VoorNaam);
-                item.SubItems.Add(werknemer.Functie.ToString());
-                item.Tag = werknemer;
-                lsvDatabaseItems.Items.Add(item);
-            }
-
-        }
         #endregion
 
         #region Top Buttons
@@ -126,10 +111,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 FillMenuListView(MenuType.Lunch);
                 RenableMenuButtons(MenuType.Lunch);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)3);
             }
         }
         private void btn1_EnabledChanged(object sender, EventArgs e)
@@ -143,10 +124,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 FillMenuListView(MenuType.Diner);
                 RenableMenuButtons(MenuType.Diner);
             }
-            else
-            {
-                FillEmployeeListView((Functie)3);
-            }
         }
         private void btn2_EnabledChanged(object sender, EventArgs e)
         {
@@ -158,10 +135,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 FillMenuListView(MenuType.Drank);
                 RenableMenuButtons(MenuType.Drank);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)3);
             }
         }
         private void btn3_EnabledChanged(object sender, EventArgs e)
@@ -186,7 +159,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            this.form.Switchpanels(new UserControlManager(form));
+            this.form.SwitchPanels(new UserControlManager());
         }
 
         private void btnAdjust_Click(object sender, EventArgs e)
@@ -197,29 +170,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
                     MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                    this.form.Switchpanels(new UserControlAdjustStock(form, selecteMenuItem));
+                    this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Selecteer een item: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (lsvDatabaseItems.SelectedItems.Count > 0)
-                {
-                    ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
-                    MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
-                    menuItemService.DeleteMenuItem(selectedMenuItem);
-                    FillMenuListView((MenuType)selectedMenuItem.MenuId);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Selecteer een item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
