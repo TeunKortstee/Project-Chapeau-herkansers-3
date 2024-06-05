@@ -78,5 +78,9 @@ namespace Project_Chapeau_herkansers_3
             totalVatPriceLabel.Text = "€ " + vat;
         }
 
+        private void btnProceedToPayment_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
