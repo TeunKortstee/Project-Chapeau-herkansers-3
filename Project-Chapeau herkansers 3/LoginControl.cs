@@ -1,5 +1,6 @@
 ﻿using Model;
 using Service;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Project_Chapeau_herkansers_3
@@ -7,7 +8,6 @@ namespace Project_Chapeau_herkansers_3
     public partial class LoginControl : UserControl
     {
         private Form1 _form1;
-        private LoginService loginService;
         public LoginControl()
         {
             InitializeComponent();
@@ -15,12 +15,13 @@ namespace Project_Chapeau_herkansers_3
         private bool IsPersoneel(Personeel p)
         {
             //get user from db
-            Personeel personeel = loginService.GetPersoneel(p);
+            LoginService service = new LoginService();
+            Personeel personeel = service.GetPersoneel(p);
             if (personeel == null)
             {
                 return false;
             }
-            if (!loginService.VerifyPassword(PasswordTxt.Text, personeel.Salt, personeel.WachtWoord))
+            if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
             {
                 return false;
             }
@@ -43,20 +44,23 @@ namespace Project_Chapeau_herkansers_3
                     if (CreateUserCheck.Checked)
                     {
                         //Send user to database
+                        personeel.email = EmailTxt.Text;
+                        personeel.WachtWoord = Encoding.ASCII.GetBytes(PasswordTxt.Text);
+
                     }
                     else
                     {
-                        //if (IsPersoneel(personeel))
-                        //{
-                        //    //return user to mainform
+                        if (IsPersoneel(personeel))
+                        {
+                            //return user to mainform
+                            // form1.User =
+                            //Open volgende UserControl
 
-                        //    //Open volgende UserControl
-
-                        //}
-                        //else
-                        //{
-                        //    throw new LoginException();
-                        //}
+                        }
+                        else
+                        {
+                            throw new LoginException();
+                        }
                     }
                 }
                 else

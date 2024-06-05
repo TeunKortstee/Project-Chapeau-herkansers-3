@@ -14,12 +14,12 @@
 
         }
 
-        public MenuItem(string naam, double prijs, bool isAlcoholisch, int menuId, int voorraad)
+        public MenuItem(string naam, double prijs, bool isAlcoholisch, MenuType menuId, int voorraad)
         {
             Naam = naam;
             Prijs = prijs;
             IsAlcoholisch = isAlcoholisch;
-            MenuId = menuId;
+            MenuId = (int)menuId;
             Voorraad = voorraad;
         }
     }

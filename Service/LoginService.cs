@@ -1,6 +1,8 @@
-﻿using DAL;
+﻿using BCrypt.Net;
+using DAL;
 using Model;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Service
 {
@@ -25,12 +27,6 @@ namespace Service
             personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
             loginDao.ChangePassword(personeel);
         }
-        public void InsertPersoneel(Personeel personeel, string wachtwoord)
-        {
-            personeel.Salt = GenerateSalt();
-            personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
-            loginDao.InsertPersoneel(personeel);
-        }
         public static byte[] GenerateSalt()
         {
             byte[] salt = new byte[32];
@@ -47,10 +43,15 @@ namespace Service
                 return pbkdf2.GetBytes(32); // 256-bit hash
             }
         }
-        public bool VerifyPassword(string enteredPassword, byte[] storedSalt, byte[] storedHash)
+        public bool VerifyPassword(string password, byte[] hashedPassword)
         {
-            byte[] hash = GenerateSaltedHash(enteredPassword, storedSalt);
-            return hash.SequenceEqual(storedHash);
+            return BCrypt.Net.BCrypt.EnhancedVerify(password, Encoding.UTF8.GetString(hashedPassword), HashType.SHA512);
+
         }
+        //public bool VerifyPassword(string enteredPassword, byte[] storedSalt, byte[] storedHash)
+        //{
+        //    byte[] hash = GenerateSaltedHash(enteredPassword, storedSalt);
+        //    return hash.SequenceEqual(storedHash);
+        //}
     }
 }
