@@ -24,18 +24,33 @@ namespace DAL
         //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         //}
 
-        public void BestellingAanmaken(Bestelling bestelling)
+        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
         {
-            string query = "INSERT INTO BesteldeItems (Opmerking, InstuurTijd, MenuItemId, BestellingsId, Hoeveelheid) " +
-                "VALUES (@Opmerking, InstuurTijd, @BestellingsId, @MenuItemId, @Hoeveelheid)";
+            string query = "INSERT INTO Bestellingen (Personeelsid) VALUES (0); SELECT @@IDENTITY AS BestellingsId;";
+            SqlParameter[] sqlParameters = new SqlParameter[] {
+                new SqlParameter("@PersoneelsId", personeel.Id)
+            };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters), bestelling);
+        }
+
+        private Bestelling ReadTables(DataTable dataTable, Bestelling bestelling)
+        {
+            bestelling.bestellingId = Convert.ToInt32(dataTable.Rows[0]["BestellingsId"]);
+            return bestelling;
+        }
+
+        public void BestellingItemsAanmaken(Bestelling bestelling)
+        {
+            string query = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, BestellingsId, Hoeveelheid) " +
+                "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @BestellingsId, @Hoeveelheid)";
 
             foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
             {
                 SqlParameter[] sqlParameters = new SqlParameter[] {
                     new SqlParameter("@Opmerking", besteldeItem.Opmerking),
                     new SqlParameter("@InstuurTijd", besteldeItem.InstuurTijd),
-                    new SqlParameter("@BestellingsId", bestelling.bestellingId),
                     new SqlParameter("@MenuItemId", besteldeItem.menuItem.MenuItemId),
+                    new SqlParameter("@BestellingsId", bestelling.bestellingId),
                     new SqlParameter("@Hoeveelheid", besteldeItem.Hoeveelheid)
                 };
                 ExecuteEditQuery(query, sqlParameters);

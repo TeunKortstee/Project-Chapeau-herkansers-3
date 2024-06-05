@@ -22,9 +22,14 @@ namespace Service
 
         //}
 
-        public void BestellingAanmaken(Bestelling bestelling)
+        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
         {
-            besteldeItemDao.BestellingAanmaken(bestelling);
+            return besteldeItemDao.BestellingAanmaken(bestelling, personeel);
+        }
+
+        public void BestellingItemsAanmaken(Bestelling bestelling)
+        {
+            besteldeItemDao.BestellingItemsAanmaken(bestelling);
         }
     }
 }

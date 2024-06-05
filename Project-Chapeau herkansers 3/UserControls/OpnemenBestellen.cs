@@ -35,7 +35,7 @@ namespace Project_Chapeau_herkansers_3
             btnRijVerwijderen.Click += (sender, e) => RijVerwijderen(listViewBestelling, bestelling, menu);
             btnToevoegenEen.Click += (sender, e) => ToevoegenEenAanBestelling(listViewBestelling, bestelling, menu);
             btnVerwijderEen.Click += (sender, e) => VerwijderenEenAanBestelling(listViewBestelling, bestelling, menu);
-            btnAfrekenen.Click += (sender, e) => AfrekenenBestelling(bestelling);
+            btnAfrekenen.Click += (sender, e) => AfrekenenBestelling(bestelling, new Personeel());
         }
 
         private void btnVerwijderAlles_Click(object sender, EventArgs e) { }
@@ -50,16 +50,15 @@ namespace Project_Chapeau_herkansers_3
 
         private void btnAfrekenen_Click(object sender, EventArgs e) { }
 
-        private void AfrekenenBestelling(Bestelling bestelling)
+        private void AfrekenenBestelling(Bestelling bestelling, Personeel personeel)
         {
-            if(listViewBestelling.SelectedItems.Count > 0)
-            {
-                BesteldeItemService besteldeItemService = new BesteldeItemService();
-                besteldeItemService.BestellingAanmaken(bestelling);
-                MessageBox.Show("bestelling aangemaakt gelukt");
+            personeel.Id = 0;
+            BesteldeItemService besteldeItemService = new BesteldeItemService();
+            besteldeItemService.BestellingAanmaken(bestelling, personeel);
+            besteldeItemService.BestellingItemsAanmaken(bestelling);
+            MessageBox.Show("bestelling aangemaakt gelukt");
                 //Afrekenen form1 = new Afrekenen(bestelling);
                 //Application.Run(form1);
-            }
         }
 
         private void ToevoegenEenAanBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling, Menu menu)
