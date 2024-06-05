@@ -9,11 +9,11 @@
 
         public DateTime Datum { get; set; }
 
-        public Rekening(int _RekeningId, int _BestellingId, double _TotaalPrijs, double _Fooi, bool _Betaald, DateTime _Datum) { 
+        public Rekening(int _RekeningId, int _BestellingId, double _TotaalPrijs, bool _Betaald, DateTime _Datum) { 
             RekeningId = _RekeningId;
             BestellingId = _BestellingId;
             TotaalPrijs = _TotaalPrijs;
-            Fooi = _Fooi;
+            
             Betaald = _Betaald;
             Datum = _Datum;
         
