@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3
 {
-    public partial class Afrekenen : Form
+    public partial class Afrekenen : UserControl
     {
         Menu menuItems;
         MenuItemService serviceMI;
