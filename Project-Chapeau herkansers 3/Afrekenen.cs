@@ -45,6 +45,18 @@ namespace Project_Chapeau_herkansers_3
                 item.SubItems.Add(menuItems.MenuItems[b.MenuItemID].Naam);
                 item.SubItems.Add("€ " + (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid));
                 billListView.Items.Add(item);
+                if (b.Opmerking != null && b.Opmerking != "") {
+                    ListViewItem comment = new ListViewItem("");
+                    comment.SubItems.Add(b.Opmerking+"");
+                    comment.ForeColor = Color.Gray;
+                    Font commentFont = new Font(comment.Font,FontStyle.Italic);
+                   
+                    comment.Font = commentFont;
+                    billListView.Items.Add(comment);
+
+                }
+
+
                 total += (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid);
 
 
