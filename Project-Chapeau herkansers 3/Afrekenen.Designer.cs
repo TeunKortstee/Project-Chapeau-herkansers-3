@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem2 = new ListViewItem(new string[] { "2x", "Veal Tartare", "8,50" }, -1);
+            ListViewItem listViewItem1 = new ListViewItem(new string[] { "2x", "Veal Tartare", "8,50" }, -1);
             pictureBox1 = new PictureBox();
             billTitleText = new Label();
             billListView = new ListView();
@@ -71,7 +71,7 @@
             // 
             billListView.Columns.AddRange(new ColumnHeader[] { billColumnAmount, billColumnName, billColumnPrice });
             billListView.FullRowSelect = true;
-            billListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
+            billListView.Items.AddRange(new ListViewItem[] { listViewItem1 });
             billListView.Location = new Point(9, 85);
             billListView.Margin = new Padding(3, 4, 3, 4);
             billListView.Name = "billListView";
@@ -165,6 +165,7 @@
             // btnProceedToPayment
             // 
             btnProceedToPayment.BackColor = Color.Lime;
+            btnProceedToPayment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnProceedToPayment.Location = new Point(29, 604);
             btnProceedToPayment.Name = "btnProceedToPayment";
             btnProceedToPayment.Size = new Size(331, 56);
