@@ -67,7 +67,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 try
                 {
-                    MenuItem newMenuItem = menuItemService.CreateMenuItem(txt2.Text, decimal.Parse(txt3.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
+                    MenuItem newMenuItem = menuItemService.CreateMenuItem(txt2.Text, double.Parse(txt3.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
                     menuItemService.AddNewMenuItem(newMenuItem);
                     form.SwitchPanels(new UserControlOverview(form, (MenuType)newMenuItem.MenuId));
                 }

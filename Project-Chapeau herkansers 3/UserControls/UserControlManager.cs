@@ -15,10 +15,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private Form1 form1;
 
-        public UserControlManager(Form1 form1)
+        public UserControlManager()
         {
             InitializeComponent();
-            this.form1 = form1;
+            this.form1 = Form1.Instance;
         }
 
         private void btnTableView_Click(object sender, EventArgs e)
@@ -27,11 +27,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            form1.Switchpanels(new UserControlOverview(form1, Functie.Serveerder));
+            this.form1.SwitchPanels(new UserControlOverview(form1, Functie.Serveerder));
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            form1.Switchpanels(new UserControlOverview(form1, MenuType.Drank));
+            this.form1.SwitchPanels(new UserControlOverview(form1, MenuType.Drank));
         }
 
         private void btnSa_Click(object sender, EventArgs e)

@@ -11,11 +11,11 @@ namespace Service
         {
             besteldeItemDao = new BesteldeItemDao();
         }
-        //public List<BesteldItem> GetItemsFromBestelling(int bestellingID)
-        //{
-        //    return besteldeItemDao.GetItemsFromBestelling(bestellingID);
+        public List<BesteldeItem> GetItemsFromBestelling(int bestellingID)
+        {
+            return besteldeItemDao.GetItemsFromBestelling(bestellingID);
 
-        //}
+        }
 
         public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
         {

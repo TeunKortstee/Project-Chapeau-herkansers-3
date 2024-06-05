@@ -41,7 +41,7 @@
             totalVatPriceLabel = new Label();
             vatPriceLabel = new Label();
             billTotalAmountText = new Label();
-            button1 = new Button();
+            btnProceedToPayment = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
@@ -162,28 +162,28 @@
             billTotalAmountText.Text = "€113.00";
             billTotalAmountText.TextAlign = ContentAlignment.TopRight;
             // 
-            // button1
+            // btnProceedToPayment
             // 
-            button1.BackColor = Color.Lime;
-            button1.Location = new Point(29, 604);
-            button1.Name = "button1";
-            button1.Size = new Size(331, 56);
-            button1.TabIndex = 6;
-            button1.Text = "btnProceedToPayment";
-            button1.UseVisualStyleBackColor = false;
+            btnProceedToPayment.BackColor = Color.Lime;
+            btnProceedToPayment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnProceedToPayment.Location = new Point(29, 604);
+            btnProceedToPayment.Name = "btnProceedToPayment";
+            btnProceedToPayment.Size = new Size(331, 56);
+            btnProceedToPayment.TabIndex = 6;
+            btnProceedToPayment.Text = "PROCEED TO PAYMENT";
+            btnProceedToPayment.UseVisualStyleBackColor = false;
+            btnProceedToPayment.Click += btnProceedToPayment_Click;
             // 
             // Afrekenen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(395, 689);
-            Controls.Add(button1);
+            Controls.Add(btnProceedToPayment);
             Controls.Add(panel1);
             Controls.Add(pictureBox1);
-            
             Name = "Afrekenen";
-            Text = "Afrekenen";
+            Size = new Size(395, 689);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
@@ -205,6 +205,6 @@
         private Label billTotalAmountText;
         private Label vatPriceLabel;
         private Label totalVatPriceLabel;
-        private Button button1;
+        private Button btnProceedToPayment;
     }
 }

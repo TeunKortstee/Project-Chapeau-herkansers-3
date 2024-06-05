@@ -17,7 +17,7 @@ namespace Project_Chapeau_herkansers_3
                 return _instance;
             }
         }
-        public Form1()
+        private Form1()
         {
             InitializeComponent();
             _instance = this;

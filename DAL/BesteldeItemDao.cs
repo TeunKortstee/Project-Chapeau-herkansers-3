@@ -1,29 +1,21 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Collections;
 
 namespace DAL
 {
     public class BesteldeItemDao : BaseDao
     {
-        //public List<BesteldItem> GetItemsFromBestelling(int bestellingID)
-        //{
-        //    string query = "SELECT BesteldItemId, Opmerking, Instuurtijd, MenuItemId, BestellingsId, Hoeveelheid FROM BesteldeItems WHERE BestellingsId = @bestellingId";
-        //    SqlParameter[] sqlParameters = new SqlParameter[]
-        //    {
-        //        new SqlParameter("@bestellingId", bestellingID),
+        public List<BesteldeItem> GetItemsFromBestelling(int bestellingID)
+        {
+            string query = "SELECT BesteldeItems.BesteldItemId, BesteldeItems.Opmerking, BesteldeItems.Instuurtijd, BesteldeItems.BestellingsId, BesteldeItems.Hoeveelheid, MenuItems.MenuItemId, MenuItems.Naam, MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.MenuId, MenuItems.Voorraad FROM BesteldeItems JOIN MenuItems ON MenuItems.MenuItemId=BesteldeItems.MenuItemId WHERE BestellingsId = @bestellingId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@bestellingId", bestellingID),
 
-        //    };
-        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
-
+            };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
         public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
         {
             string query = "INSERT INTO Bestellingen (Personeelsid) VALUES (0); SELECT @@IDENTITY AS BestellingsId;";
@@ -56,5 +48,35 @@ namespace DAL
                 ExecuteEditQuery(query, sqlParameters);
             }
         }
+        private List<BesteldeItem> ReadTables(DataTable dataTable)
+        {
+            List<BesteldeItem> items = new List<BesteldeItem>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                MenuItem _menuItem = new MenuItem()
+                {
+                    MenuItemId = Convert.ToInt32(row["MenuItemId"]),
+                    Voorraad = Convert.ToInt32(row["Voorraad"]),
+                    Prijs = (double)row["Prijs"],
+                    Naam = (string)row["Naam"],
+                    MenuId = Convert.ToInt32(row["MenuId"]),
+                    IsAlcoholisch = (bool)row["Alcoholisch"]
+
+                };
+
+                BesteldeItem item = new BesteldeItem(_menuItem)
+                {
+                    BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
+                    Opmerking = row["Opmerking"].ToString(),
+                    InstuurTijd = (DateTime)row["Instuurtijd"],
+                    BestellingsID = Convert.ToInt32(row["BestellingsID"]),
+                    Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"])
+                };
+                items.Add(item);
+            }
+            return items;
+        }
+
+
     }
 }
