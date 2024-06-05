@@ -12,12 +12,13 @@ using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3
 {
-    public partial class Afrekenen : Form
+    public partial class Afrekenen : UserControl
     {
         Menu menuItems;
         MenuItemService serviceMI;
         BesteldeItemService serviceBI;
-
+        const double vatNormal = 0.06;
+        const double vatAlcohol = 0.21;
         public Bestelling bestelling;
 
         public Afrekenen(Bestelling _bestelling)
@@ -37,6 +38,7 @@ namespace Project_Chapeau_herkansers_3
             List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestelling.Id);
             billListView.Items.Clear();
             double total = 0.00;
+            double vat = 0.00;
             foreach (BesteldeItem b in besteldeItems)
             {
 
@@ -45,24 +47,35 @@ namespace Project_Chapeau_herkansers_3
                 item.SubItems.Add(menuItems.MenuItems[b.MenuItemID].Naam);
                 item.SubItems.Add("€ " + (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid));
                 billListView.Items.Add(item);
-                if (b.Opmerking != null && b.Opmerking != "") {
+                if (b.Opmerking != null && b.Opmerking != "")
+                {
                     ListViewItem comment = new ListViewItem("");
-                    comment.SubItems.Add(b.Opmerking+"");
+                    comment.SubItems.Add(b.Opmerking + "");
                     comment.ForeColor = Color.Gray;
-                    Font commentFont = new Font(comment.Font,FontStyle.Italic);
-                   
+                    Font commentFont = new Font(comment.Font, FontStyle.Italic);
+
                     comment.Font = commentFont;
                     billListView.Items.Add(comment);
 
                 }
 
+                double itemTotal = (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid);
+                total += itemTotal;
+                if (menuItems.MenuItems[b.MenuItemID].IsAlcoholisch)
+                {
+                    vat += itemTotal * vatAlcohol;
 
-                total += (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid);
+                }
+                else
+                {
+                    vat += itemTotal * vatNormal;
+                }
+
 
 
             }
             billTotalAmountText.Text = "€ " + total;
-
+            totalVatPriceLabel.Text = "€ " + vat;
         }
 
     }
