@@ -21,9 +21,7 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             _instance = this;
-            Bestelling b = new Bestelling();
-            b.Id = 2;
-            SwitchPanels(new Afrekenen(b));
+            SwitchPanels(new LoginControl());
         }
 
         public void SwitchPanels(UserControl userControl)
