@@ -44,7 +44,7 @@ namespace Project_Chapeau_herkansers_3
 
                 ListViewItem item = new ListViewItem(b.Hoeveelheid + "x");
 
-                item.SubItems.Add(menuItems.MenuItems[b.MenuItemID].Naam);
+                item.SubItems.Add(menuItems.MenuItems[b.menuItem.MenuItemId].Naam);
                 item.SubItems.Add("€ " + (menuItems.MenuItems[b.MenuItemID].Prijs * b.Hoeveelheid));
                 billListView.Items.Add(item);
                 if (b.Opmerking != null && b.Opmerking != "")
