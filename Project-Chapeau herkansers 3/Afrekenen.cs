@@ -19,7 +19,7 @@ namespace Project_Chapeau_herkansers_3
         BesteldeItemService serviceBI;
         const double vatNormal = 0.06;
         const double vatAlcohol = 0.21;
-        public Bestelling bestelling;
+       
 
         public Afrekenen(Bestelling _bestelling)
         {
@@ -27,13 +27,13 @@ namespace Project_Chapeau_herkansers_3
            
             serviceBI = new BesteldeItemService();
            
-            bestelling = _bestelling;
-            RefreshBillItems();
+           
+            RefreshBillItems(_bestelling);
 
 
         }
 
-        public void RefreshBillItems()
+        public void RefreshBillItems(Bestelling bestelling)
         {
             List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestelling.Id);
             billListView.Items.Clear();

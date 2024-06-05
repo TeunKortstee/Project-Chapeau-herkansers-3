@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class BetalingDao : BaseDao
+    public class RekeningDao : BaseDao
     {
         public Rekening GetRekening(int bestellingID)
         {
