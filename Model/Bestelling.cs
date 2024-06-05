@@ -2,14 +2,14 @@
 {
     public class Bestelling
     {
-        private List<BesteldItem> besteldItems;
+        private List<BesteldeItem> besteldeItems;
         public int bestellingId { get; set; }
-        public List<BesteldItem> BestellingItems { get { return besteldItems; } set { besteldItems = value; } }
+        public List<BesteldeItem> BestellingItems { get { return besteldeItems; } set { besteldeItems = value; } }
         public Personeel personeel { get; set; }
 
         public Bestelling()
         {
-            besteldItems = new List<BesteldItem>();
+            besteldeItems = new List<BesteldeItem>();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public class BesteldItem
+    public class BesteldeItem
     {
         public int BesteldItemId { get; set; }
         public string Opmerking { get; set; }
@@ -8,7 +8,7 @@
         public MenuItem menuItem { get; set; }
         public int Hoeveelheid { get; set; }
 
-        public BesteldItem(MenuItem menuItem)
+        public BesteldeItem(MenuItem menuItem)
         {
             Opmerking = "";
             InstuurTijd = DateTime.Now;

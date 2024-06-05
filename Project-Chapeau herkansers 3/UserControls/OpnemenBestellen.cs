@@ -52,20 +52,25 @@ namespace Project_Chapeau_herkansers_3
 
         private void AfrekenenBestelling(Bestelling bestelling)
         {
-
-            //Afrekenen form1 = new Afrekenen(bestelling);
-            //Application.Run(form1);
+            if(listViewBestelling.SelectedItems.Count > 0)
+            {
+                BesteldeItemService besteldeItemService = new BesteldeItemService();
+                besteldeItemService.BestellingAanmaken(bestelling);
+                MessageBox.Show("bestelling aangemaakt gelukt");
+                //Afrekenen form1 = new Afrekenen(bestelling);
+                //Application.Run(form1);
+            }
         }
 
         private void ToevoegenEenAanBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling, Menu menu)
         {
             if(listView.SelectedItems.Count > 0)
             {
-                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
-                if(besteldItem.menuItem.Voorraad > 0)
+                BesteldeItem besteldeItem = (BesteldeItem)listViewBestelling.SelectedItems[0].Tag;
+                if(besteldeItem.menuItem.Voorraad > 0)
                 {
-                    besteldItem.Hoeveelheid++;
-                    besteldItem.menuItem.Voorraad--;
+                    besteldeItem.Hoeveelheid++;
+                    besteldeItem.menuItem.Voorraad--;
                     VulListViewBestelling(listViewBestelling, bestelling);
                     VullenListView(listViewKaart, menu, menu.MenuType);
                 } else
@@ -79,18 +84,18 @@ namespace Project_Chapeau_herkansers_3
         {
             if (listView.SelectedItems.Count > 0)
             {
-                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
+                BesteldeItem besteldeItem = (BesteldeItem)listViewBestelling.SelectedItems[0].Tag;
 
-                if (besteldItem.Hoeveelheid == 1)
+                if (besteldeItem.Hoeveelheid == 1)
                 {
-                    besteldItem.menuItem.Voorraad++;
-                    bestelling.BestellingItems.Remove(besteldItem);
-                } else if (besteldItem.Hoeveelheid > 0) {
-                    besteldItem.Hoeveelheid--;
-                    besteldItem.menuItem.Voorraad++;
+                    besteldeItem.menuItem.Voorraad++;
+                    bestelling.BestellingItems.Remove(besteldeItem);
+                } else if (besteldeItem.Hoeveelheid > 0) {
+                    besteldeItem.Hoeveelheid--;
+                    besteldeItem.menuItem.Voorraad++;
                 }
                 else { 
-                    bestelling.BestellingItems.Remove(besteldItem);
+                    bestelling.BestellingItems.Remove(besteldeItem);
                 }
                 VulListViewBestelling(listViewBestelling, bestelling);
                 VullenListView(listViewKaart, menu, menu.MenuType);
@@ -101,9 +106,9 @@ namespace Project_Chapeau_herkansers_3
         {
             if (listView.SelectedItems.Count > 0)
             {
-                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
-                besteldItem.menuItem.Voorraad += besteldItem.Hoeveelheid;
-                bestelling.BestellingItems.Remove(besteldItem);
+                BesteldeItem besteldeItem = (BesteldeItem)listViewBestelling.SelectedItems[0].Tag;
+                besteldeItem.menuItem.Voorraad += besteldeItem.Hoeveelheid;
+                bestelling.BestellingItems.Remove(besteldeItem);
                 listView.Items.Remove(listView.SelectedItems[0]);
                 VullenListView(listViewKaart, menu, menu.MenuType);
             }
@@ -117,7 +122,7 @@ namespace Project_Chapeau_herkansers_3
                 if(menuItem.Voorraad > 0)
                 {
                     menuItem.Voorraad--;
-                    BesteldItem bestaandItem = bestelling.BestellingItems.FirstOrDefault(bi => bi.menuItem.Naam == menuItem.Naam);
+                    BesteldeItem bestaandItem = bestelling.BestellingItems.FirstOrDefault(bi => bi.menuItem.Naam == menuItem.Naam);
 
                     if (bestaandItem != null)
                     {
@@ -125,7 +130,7 @@ namespace Project_Chapeau_herkansers_3
                     }
                     else
                     {
-                        BesteldItem nieuwBesteldItem = new BesteldItem(menuItem);
+                        BesteldeItem nieuwBesteldItem = new BesteldeItem(menuItem);
                         bestelling.BestellingItems.Add(nieuwBesteldItem);
                     }
 
@@ -142,17 +147,17 @@ namespace Project_Chapeau_herkansers_3
         {
             if (listViewBestelling.SelectedItems.Count > 0)
             {
-                BesteldItem besteldItem = (BesteldItem)listViewBestelling.SelectedItems[0].Tag;
-                besteldItem.Opmerking = txtOpmerking.Text;
+                BesteldeItem besteldeItem = (BesteldeItem)listViewBestelling.SelectedItems[0].Tag;
+                besteldeItem.Opmerking = txtOpmerking.Text;
                 VulListViewBestelling(listViewBestelling, bestelling);
             }
         }
 
         private void VerwijderAllesUitListView(Bestelling bestelling, Menu menu)
         {
-            foreach (BesteldItem besteldItem in bestelling.BestellingItems)
+            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
             {
-                besteldItem.menuItem.Voorraad += besteldItem.Hoeveelheid;
+                besteldeItem.menuItem.Voorraad += besteldeItem.Hoeveelheid;
             }
 
             bestelling.BestellingItems.Clear();
@@ -182,13 +187,13 @@ namespace Project_Chapeau_herkansers_3
         {
             listView.Items.Clear();
 
-            foreach (BesteldItem besteldItem in bestelling.BestellingItems)
+            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
             {
-                ListViewItem item = new ListViewItem(besteldItem.menuItem.Naam);
-                item.SubItems.Add(besteldItem.menuItem.Prijs.ToString());
-                item.SubItems.Add(besteldItem.Hoeveelheid.ToString());
-                item.SubItems.Add(besteldItem.Opmerking);
-                item.Tag = besteldItem;
+                ListViewItem item = new ListViewItem(besteldeItem.menuItem.Naam);
+                item.SubItems.Add(besteldeItem.menuItem.Prijs.ToString());
+                item.SubItems.Add(besteldeItem.Hoeveelheid.ToString());
+                item.SubItems.Add(besteldeItem.Opmerking);
+                item.Tag = besteldeItem;
                 listView.Items.Add(item);
             }
         }

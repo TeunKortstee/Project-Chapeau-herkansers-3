@@ -235,7 +235,7 @@
             this.btnAfrekenen.Name = "btnAfrekenen";
             this.btnAfrekenen.Size = new System.Drawing.Size(374, 50);
             this.btnAfrekenen.TabIndex = 16;
-            this.btnAfrekenen.Text = "Afrekenen";
+            this.btnAfrekenen.Text = "Bestelling afronden";
             this.btnAfrekenen.UseVisualStyleBackColor = false;
             this.btnAfrekenen.Click += new System.EventHandler(this.btnAfrekenen_Click);
             // 
