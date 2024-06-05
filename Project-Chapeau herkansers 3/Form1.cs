@@ -1,3 +1,5 @@
+using Model;
+
 namespace Project_Chapeau_herkansers_3
 {
     public partial class Form1 : Form

@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service;
 
 namespace Project_Chapeau_herkansers_3
 {
@@ -9,7 +10,7 @@ namespace Project_Chapeau_herkansers_3
         public TafelStatusUI(Tafel tafel)
         {
             InitializeComponent();
-            //form1 = Form1.Instance;
+            this.form1 = Form1.Instance;
             this.tafel = tafel;
             SetLabels();
             FillComboBox();
@@ -33,6 +34,7 @@ namespace Project_Chapeau_herkansers_3
 
         private void MaakBestellingBtn_Click(object sender, EventArgs e)
         {
+            SaveTafel();
             //Open naar bestelling Ui
             /*OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
             opnemenBestellen.Tag = this;
@@ -42,16 +44,15 @@ namespace Project_Chapeau_herkansers_3
         private void TerugBtn_Click(object sender, EventArgs e)
         {
             //sla tafel op in db
-
+            SaveTafel();
             //ga terug naar tafeloverzicht
-            AddUserControl(new TafelOverzichtUserControl());
-        }
-        private void AddUserControl(UserControl userControl)
-        {
+            form1.SwitchPanels(new TafelOverzichtUserControl());
         }
         private void SaveTafel()
         {
             //Sla tafel op in database
+            TafelService service = new TafelService();
+            service.ChangeTafel(this.tafel);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
