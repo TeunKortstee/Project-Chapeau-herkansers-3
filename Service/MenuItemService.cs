@@ -44,7 +44,7 @@ namespace Service
             }
             return selectedMenu;
         }
-        public MenuItem CreateMenuItem(string name, decimal price, bool alcoholic, int menuId, int stock)
+        public MenuItem CreateMenuItem(string name, double price, bool alcoholic, int menuId, int stock)
         {
             return new MenuItem(name, price, alcoholic, menuId, stock);
         }
