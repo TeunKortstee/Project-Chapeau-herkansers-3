@@ -32,8 +32,8 @@ namespace DAL
                 {
                     RekeningId = Convert.ToInt32(row["RekeningId"]),
                     BestellingId = Convert.ToInt32(row["BestellingId"]),
-                    TotaalPrijs = (float)row["TotaalPrijs"],
-                    Fooi = (float)row["Fooi"],                    
+                    TotaalPrijs = (double)row["TotaalPrijs"],
+                    Fooi = (double)row["Fooi"],                    
                     Betaald = (bool)row["Betaald"],
                     Datum = (DateTime)row["DateTime"]
                 };

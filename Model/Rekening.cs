@@ -4,8 +4,8 @@
     {
         public int RekeningId { get; set; }
         public int BestellingId { get; set; }
-        public float TotaalPrijs { get; set; }
-        public float Fooi { get; set; }
+        public double TotaalPrijs { get; set; }
+        public double Fooi { get; set; }
 
         public bool Betaald { get; set; }
 

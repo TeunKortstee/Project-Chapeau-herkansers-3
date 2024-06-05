@@ -36,7 +36,7 @@ namespace Project_Chapeau_herkansers_3
         {
             List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestelling.Id);
             billListView.Items.Clear();
-            decimal total = 0.00M;
+            double total = 0.00;
             foreach (BesteldeItem b in besteldeItems)
             {
 
