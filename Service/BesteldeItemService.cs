@@ -1,4 +1,7 @@
-﻿namespace Service
+﻿using DAL;
+using Model;
+
+namespace Service
 {
     public class BesteldeItemService
     {
@@ -16,10 +19,11 @@
 
         public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
         {
-
-            public void BestellingItemsAanmaken(Bestelling bestelling)
-            {
-                besteldeItemDao.BestellingItemsAanmaken(bestelling);
-            }
+            return besteldeItemDao.BestellingAanmaken(bestelling, personeel);
+        }
+        public void BestellingItemsAanmaken(Bestelling bestelling)
+        {
+            besteldeItemDao.BestellingItemsAanmaken(bestelling);
         }
     }
+}
