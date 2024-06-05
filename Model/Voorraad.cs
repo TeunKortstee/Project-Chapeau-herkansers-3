@@ -8,8 +8,8 @@ namespace Model
 {
     public class Voorraad
     {
-        private int VoorraadId;
-        private int inVoorraad;
-        private int menuItemId;
+        public int VoorraadId { get; set; }
+        public int InVoorraad { get; set; }
+        public int MenuItemId { get; set; }
     }
 }

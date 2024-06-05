@@ -9,5 +9,18 @@
         public int MenuId { get; set; }
         public int Voorraad { get; set; }
         public GerechtsType GerechtsType { get; set; }
+        public MenuItem()
+        {
+
+        }
+
+        public MenuItem(string naam, decimal prijs, bool isAlcoholisch, int menuId, int voorraad)
+        {
+            Naam = naam;
+            Prijs = prijs;
+            IsAlcoholisch = isAlcoholisch;
+            MenuId = menuId;
+            Voorraad = voorraad;
+        }
     }
 }

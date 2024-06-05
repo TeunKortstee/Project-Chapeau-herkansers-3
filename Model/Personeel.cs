@@ -8,9 +8,17 @@
         public string AchterNaam { get; set; }
         public byte[] WachtWoord { get; set; }
         public byte[] Salt { get; set; }
-        public Functie Functie { get; set; }
-        public float Fooi { get; set; }
+        public Functie Functie { get; set; }       
 
+        public Personeel()
+        {
 
+        }
+        public Personeel(string voornaam, string achternaam, string email, Functie functie)
+        {
+            this.VoorNaam = voornaam;
+            this.AchterNaam = achternaam;
+            this.Functie = functie;
+        }
     }
 }

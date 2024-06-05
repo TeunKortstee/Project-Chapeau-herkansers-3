@@ -2,6 +2,6 @@
 {
     public enum TafelStatus
     {
-        Free, Occupied
+        Vrij, Bezet
     }
 }
