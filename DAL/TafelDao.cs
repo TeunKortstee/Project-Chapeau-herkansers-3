@@ -11,7 +11,7 @@ namespace DAL
             string query = "SELECT TableNr, Capaciteit, StatusId FROM Tafels;";
             return ReadTables(ExecuteSelectQuery(query));
         }
-        public void ChangeTableStatus(Tafel tafel)
+        public void ChangeTafelStatus(Tafel tafel)
         {
             string query = "UPDATE Tafels SET StatusId = @StatusId WHERE TableNr = @tafelNummer;";
             SqlParameter[] sqlParameters = new SqlParameter[2]
