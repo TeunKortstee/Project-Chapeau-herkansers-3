@@ -1,6 +1,5 @@
 ﻿using Model;
 using Service;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Project_Chapeau_herkansers_3
@@ -21,7 +20,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 return false;
             }
-            if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
+            if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord.ToString()))
             {
                 return false;
             }
@@ -44,9 +43,11 @@ namespace Project_Chapeau_herkansers_3
                     if (CreateUserCheck.Checked)
                     {
                         //Send user to database
-                        personeel.email = EmailTxt.Text;
-                        personeel.WachtWoord = Encoding.ASCII.GetBytes(PasswordTxt.Text);
 
+                        personeel.email = EmailTxt.Text;
+                        LoginService service = new LoginService();
+                        personeel = service.GetPersoneel(personeel);
+                        service.ChangePassword(personeel, PasswordTxt.Text);
                     }
                     else
                     {

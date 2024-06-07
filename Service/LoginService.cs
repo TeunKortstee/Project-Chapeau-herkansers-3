@@ -1,7 +1,6 @@
 ﻿using BCrypt.Net;
 using DAL;
 using Model;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Service
@@ -9,6 +8,8 @@ namespace Service
     public class LoginService
     {
         private LoginDao loginDao;
+        const int workFactor = 11;
+        const bool enhancedEntropy = true;
         public LoginService()
         {
             loginDao = new LoginDao();
@@ -24,28 +25,22 @@ namespace Service
         public void ChangePassword(Personeel personeel, string wachtwoord)
         {
             personeel.Salt = GenerateSalt();
-            personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
+            personeel.WachtWoord = HashPasswordWithBCrypt(wachtwoord, personeel.Salt);
             loginDao.ChangePassword(personeel);
         }
-        public static byte[] GenerateSalt()
+        private byte[] HashPasswordWithBCrypt(string password, byte[] salt)
         {
-            byte[] salt = new byte[32];
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(salt);
-            }
-            return salt;
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, Encoding.UTF8.GetString(salt), enhancedEntropy, HashType.SHA512);
+            return Encoding.UTF8.GetBytes(hashedPassword);
         }
-        public static byte[] GenerateSaltedHash(string plainText, byte[] salt, int iterations = 10000)
+        private byte[] GenerateSalt()
         {
-            using (var pbkdf2 = new Rfc2898DeriveBytes(plainText, salt, iterations))
-            {
-                return pbkdf2.GetBytes(32); // 256-bit hash
-            }
+            string saltString = BCrypt.Net.BCrypt.GenerateSalt(workFactor);
+            return Encoding.UTF8.GetBytes(saltString);
         }
-        public bool VerifyPassword(string password, byte[] hashedPassword)
+        public bool VerifyPassword(string password, string hashedPassword)
         {
-            return BCrypt.Net.BCrypt.EnhancedVerify(password, Encoding.UTF8.GetString(hashedPassword), HashType.SHA512);
+            return BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword, HashType.SHA512);
 
         }
         //public bool VerifyPassword(string enteredPassword, byte[] storedSalt, byte[] storedHash)
