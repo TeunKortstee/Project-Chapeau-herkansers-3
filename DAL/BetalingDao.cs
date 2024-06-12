@@ -9,42 +9,42 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class RekeningDao : BaseDao
+    public class BetalingDao : BaseDao
     {
-        public Rekening GetRekening(int bestellingID)
+        public Betaling GetBetaling(int rekeningID)
         {
-            string query = "SELECT RekeningId, BestellingId, TotaalPrijs, Datum, Fooi, Betaald FROM Rekeningen WHERE BestellingId = @bestellingId";
+            string query = "SELECT BetalingID, Methode, Bedrag, RekeningID, Fooi FROM Betalingen WHERE RekeningID = @rekeningId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@bestellingId", bestellingID),
+                new SqlParameter("@rekeningId", rekeningID),
              
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
         }
 
-        private List<Rekening> ReadTables(DataTable dataTable)
+        private List<Betaling> ReadTables(DataTable dataTable)
         {
-            List<Rekening> rekeningen = new List<Rekening>();
+            List<Betaling> betalingen = new List<Betaling>();
             foreach (DataRow row in dataTable.Rows)
             {
 
-                Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
-                    Convert.ToInt32(row["BestellingId"]), 
-                    (double)row["TotaalPrijs"],
-                    (bool)row["Betaald"], 
-                    (DateTime)row["DateTime"]);
-                
-                rekeningen.Add(rekening);
+                Betaling betaling = new Betaling(Convert.ToInt32(row["BetalingId"]),
+                    Convert.ToInt32(row["MethodeId"]),
+                    (double)row["Bedrag"],
+                    Convert.ToInt32(row["RekeningId"]),
+                    (double)row["Fooi"]);
+
+                betalingen.Add(betaling);
             }
-            return rekeningen;
+            return betalingen;
         }
 
-        public void InsertRekening(Rekening rekening)
+        public void InsertBetaling(Betaling betaling)
         {
-            string query = "INSERT INTO Rekening(BestellingId,TotaalPrijs,Betaald,Datum) VALUES (@BestellingId,@TotaalPrijs,@Betaald,@Datum)";
+            string query = "INSERT INTO Betaling(Methode,Bedrag,RekeningID,Fooi) VALUES (@Methode,@Bedrag,@RekeningID,@Fooi)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@BestellingId", rekening.BestellingId),
+                new SqlParameter("@Methode", betaling.Methode),
                 new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
                 new SqlParameter("@Betaald", rekening.Betaald),
 
