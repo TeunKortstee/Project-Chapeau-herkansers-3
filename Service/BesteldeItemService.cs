@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
+﻿using DAL;
 using Model;
 
 namespace Service
@@ -20,6 +15,15 @@ namespace Service
         {
             return besteldeItemDao.GetItemsFromBestelling(bestellingID);
 
+        }
+
+        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
+        {
+            return besteldeItemDao.BestellingAanmaken(bestelling, personeel);
+        }
+        public void BestellingItemsAanmaken(Bestelling bestelling)
+        {
+            besteldeItemDao.BestellingItemsAanmaken(bestelling);
         }
     }
 }

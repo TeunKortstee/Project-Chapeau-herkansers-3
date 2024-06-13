@@ -49,6 +49,15 @@ namespace DAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesWithList(ExecuteSelectQuery(query, sqlParameters));
         }
+        public List<MenuItem> GetMenuItemsByMenuId(MenuType menu)
+        {
+            string query = "SELECT mi.* FROM MenuItems mi JOIN Menu m ON mi.MenuId = m.MenuId WHERE mi.MenuId = @MenuId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+                {
+                    new SqlParameter("@MenuId", (int)menu),
+                };
+            return ReadTablesWithList(ExecuteSelectQuery(query, sqlParameters));
+        }
         private List<MenuItem> ReadTablesWithList(DataTable dataTable)
         {
             List<MenuItem> menuItems = new List<MenuItem>();

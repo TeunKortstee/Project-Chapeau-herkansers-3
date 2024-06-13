@@ -1,11 +1,6 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace DAL
 {
@@ -26,10 +21,9 @@ namespace DAL
             {
                 Personeel werknemer = new Personeel()
                 {
-                    Id = (int)dr["PersoneelsId"],
-                    VoorNaam = dr["Voornaam"].ToString(),
+                    Id = Convert.ToInt32(dr["PersoneelsId"]),
                     AchterNaam = dr["Achternaam"].ToString(),
-                    Functie = (Functie)dr["FunctieId"]
+                    Functie = (Functie)Convert.ToInt32(dr["FunctieId"])
                 };
                 personeel.Add(werknemer);
             }
@@ -37,25 +31,47 @@ namespace DAL
         }
         public Personeel GetPersoneel(Personeel personeel)
         {
-            string query = "SELECT PersoneelsId, Voornaam, Achternaam, Wachtwoord, FunctieId, Fooi FROM Personeel WHERE Voornaam=@Voornaam AND Wachtwoord=@Wachtwoord";
+            string query = "SELECT PersoneelsId, Voornaam, Achternaam, Wachtwoord, FunctieId, Fooi FROM Personeel WHERE Email=@Email AND Wachtwoord=@Wachtwoord";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", personeel.VoorNaam),
+                new SqlParameter("@Email", personeel.email),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord)
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
         }
         public void InsertPersoneel(Personeel personeel)
         {
-            string query = "INSERT INTO Personeel (Voornaam, Achternaam, Wachtwoord, Functie) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @Functie)";
+            string query = "INSERT INTO Personeel (Voornaam, Achternaam, Wachtwoord, FunctieId, Email, Salt) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @FunctieId, @Email, @Salt)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", personeel.VoorNaam),
+                new SqlParameter("@Voornaam", "Niet Relevant"),
                 new SqlParameter("@Achternaam", personeel.AchterNaam),
+                new SqlParameter("@Email", personeel.email),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord),
-                new SqlParameter("@Functie", personeel.Functie),
+                new SqlParameter("@Salt", personeel.Salt),
+                new SqlParameter("@FunctieId", (int)personeel.Functie)
+
             };
             ExecuteEditQuery(query, sqlParameters);
+        }
+        public void RemovePersoneel(Personeel selectedEmployee)
+        {
+            string query = "DELETE FROM Personeel WHERE PersoneelsId = @PersoneelsId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@PersoneelsId", selectedEmployee.Id),
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        // Lucas
+        public List<Personeel> GetPersoneelByFunctieId(Functie functie)
+        {
+            string query = "SELECT p.* FROM Personeel p JOIN Personeel_Functie f ON p.FunctieId = f.FunctieId WHERE p.FunctieId = @FunctieId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+                {
+                    new SqlParameter("@FunctieId", (int)functie),
+                };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
     }
 }
