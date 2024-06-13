@@ -22,6 +22,6 @@ namespace Model
         public GerechtsStatus Status { get; set; }
 
 
-        //dit model hoeft niet eprse, gebruik bestaande models zoals besteldeitem
+        //dit model hoeft niet perse, gebruik bestaande models zoals besteldeitem
     }
 }
