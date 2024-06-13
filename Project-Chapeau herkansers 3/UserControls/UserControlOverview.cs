@@ -236,7 +236,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            this.form.Switchpanels(new UserControlManager(form));
+            this.form.SwitchPanels(new UserControlManager(form));
         }
 
         private void btnAdjust_Click(object sender, EventArgs e)
@@ -247,7 +247,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
                     MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                    this.form.Switchpanels(new UserControlAdjustStock(form, selecteMenuItem));
+                    this.form.SwitchPanels(new UserControlAdjustStock(form, selecteMenuItem));
                 }
             }
             catch (Exception ex)
@@ -274,7 +274,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            this.form.Switchpanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
+            this.form.SwitchPanels(new UserControlNewObject(form, (MenuType)btnAddNew.Tag));
         }
     }
 }

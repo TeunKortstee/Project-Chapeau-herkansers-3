@@ -1,3 +1,6 @@
+using Model;
+using Project_Chapeau_herkansers_3.UserControls;
+
 namespace Project_Chapeau_herkansers_3
 {
     public partial class Form1 : Form
@@ -19,7 +22,7 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             _instance = this;
-            SwitchPanels(new LoginControl());
+            SwitchPanels(new ItemBereiderUserControl());
         }
 
         public void SwitchPanels(UserControl userControl)

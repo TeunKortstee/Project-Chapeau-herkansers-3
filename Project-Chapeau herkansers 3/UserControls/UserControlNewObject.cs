@@ -69,7 +69,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     MenuItem newMenuItem = menuItemService.CreateMenuItem(txt2.Text, decimal.Parse(txt3.Text), chkAlcoholisch.Checked, cmbType.SelectedIndex, int.Parse(txt3.Text));
                     menuItemService.AddNewMenuItem(newMenuItem);
-                    form.Switchpanels(new UserControlOverview(form, (MenuType)newMenuItem.MenuId));
+                    form.SwitchPanels(new UserControlOverview(form, (MenuType)newMenuItem.MenuId));
                 }
                 catch (FormatException ex)
                 {
@@ -90,7 +90,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            form.Switchpanels(new UserControlOverview(form, this.menu));
+            form.SwitchPanels(new UserControlOverview(form, this.menu));
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)

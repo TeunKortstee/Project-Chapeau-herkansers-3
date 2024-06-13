@@ -9,5 +9,6 @@
 
         public int BestellingsID { get; set; }
         public int Hoeveelheid { get; set; }
+        public int Count { get; set; }
     }
 }
