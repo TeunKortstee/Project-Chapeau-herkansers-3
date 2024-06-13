@@ -20,7 +20,7 @@ namespace Project_Chapeau_herkansers_3
             InitializeComponent();
             MenuItemService menuItemService = new MenuItemService();
             Menu menu = menuItemService.GetAllItems();
-            Bestelling bestelling = new Bestelling();
+            Bestelling bestelling = new Bestelling(0, new Personeel(), false, 0);
             Form1 form1 = Form1.Instance;
             buttonsVullen(menu, bestelling, form1, tafel);
             VulTekstTafel(tafel);

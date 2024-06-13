@@ -28,12 +28,16 @@ namespace Service
         }
 
 
-        //public Rekening CreateRekening() {
-            //Rekening r = new Rekening();
+       public Rekening CreateRekening(int tafelID) {
 
-           // return r;
+
+
+
+            Rekening r = new Rekening(0,tafelID,);
+
+            return r;
         
-        //}
+        }
 
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {

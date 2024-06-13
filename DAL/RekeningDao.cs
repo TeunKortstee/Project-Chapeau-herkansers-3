@@ -40,7 +40,7 @@ namespace DAL
             {
 
                 Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
-                    Convert.ToInt32(row["BestellingId"]), 
+                    Convert.ToInt32(row["TafelId"]), 
                     (double)row["TotaalPrijs"],
                     (bool)row["Betaald"], 
                     (DateTime)row["DateTime"]);
@@ -52,10 +52,10 @@ namespace DAL
 
         public int InsertRekening(Rekening rekening)
         {
-            string query = "INSERT INTO Rekening(BestellingId,TotaalPrijs,Betaald,Datum) VALUES (@BestellingId,@TotaalPrijs,@Betaald,@Datum) SELECT CAST(scope_identity() AS int)";
+            string query = "INSERT INTO Rekening(TafelId,TotaalPrijs,Betaald,Datum) VALUES (@TafelId,@TotaalPrijs,@Betaald,@Datum) SELECT CAST(scope_identity() AS int)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@BestellingId", rekening.BestellingId),
+                new SqlParameter("@TafelId", rekening.TafelId),
                 new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
                 new SqlParameter("@Betaald", rekening.Betaald),
 
