@@ -14,21 +14,21 @@ namespace DAL
         }
         public Personeel GetPersoneel(Personeel personeel)
         {
-            string query = "SELECT PersoneelsId, Achternaam, Wachtwoord, Salt, Email, FunctieId FROM Personeel WHERE Email=@Email AND Wachtwoord=@Wachtwoord";
+            string query = "SELECT PersoneelsId, Achternaam, Wachtwoord, Salt, Email, FunctieId FROM Personeel WHERE Email=@Email";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Email", personeel.email),
-                new SqlParameter("@Wachtwoord", personeel.WachtWoord)
+                new SqlParameter("@Email", personeel.email)
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
         }
         public void ChangePassword(Personeel personeel)
         {
-            string query = "UPDATE Personeel SET Wachtwoord = @Wachtwoord WHERE PersoneelsId = @PersoneelsId;";
+            string query = "UPDATE Personeel SET Wachtwoord = @Wachtwoord, Salt=@Salt WHERE PersoneelsId = @PersoneelsId;";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@PersoneelsId", personeel.Id),
-                new SqlParameter("@Wachtwoord", personeel.WachtWoord)
+                new SqlParameter("@Wachtwoord", personeel.WachtWoord),
+                new SqlParameter("@Salt", personeel.Salt)
             };
             ExecuteEditQuery(query, sqlParameters);
         }
@@ -55,12 +55,12 @@ namespace DAL
             {
                 Personeel student = new Personeel()
                 {
-                    Id = (int)dr["PersoneelId"],
+                    Id = Convert.ToInt32(dr["PersoneelsId"]),
                     email = dr["Email"].ToString(),
                     AchterNaam = dr["Achternaam"].ToString(),
-                    WachtWoord = (byte[])dr["Wachtwoord"],
-                    Salt = (byte[])dr["Salt"],
-                    Functie = (Functie)dr["Functie"]
+                    WachtWoord = dr["Wachtwoord"].ToString(),
+                    Salt = dr["Salt"].ToString(),
+                    Functie = (Functie)Convert.ToInt32(dr["FunctieId"])
                 };
                 personeel.Add(student);
             }

@@ -29,9 +29,9 @@ namespace DAL
             {
                 Tafel tafel = new Tafel()
                 {
-                    Id = (int)dr["TableNr"],
-                    Capaciteit = (int)dr["Capaciteit"],
-                    status = (TafelStatus)dr["StatusId"]
+                    Id = Convert.ToInt32(dr["TableNr"]),
+                    Capaciteit = Convert.ToInt32(dr["Capaciteit"]),
+                    status = (TafelStatus)Convert.ToInt32(dr["StatusId"])
                 };
                 tafels.Add(tafel);
             }
