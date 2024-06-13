@@ -59,7 +59,7 @@ namespace Project_Chapeau_herkansers_3
 
         private void AfrekenenBestelling(Bestelling bestelling, Form1 form1, Tafel tafel)
         {
-            if (listViewBestelling.Items.Count > 0)
+            if(listViewBestelling.Items.Count > 0)
             {
                 BesteldeItemService besteldeItemService = new BesteldeItemService();
                 besteldeItemService.BestellingAanmaken(bestelling, form1.personeel);
