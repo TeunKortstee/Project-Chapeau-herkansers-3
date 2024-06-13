@@ -44,6 +44,7 @@ namespace Service
             string salt = GenerateSalt();
             string slowSaltedHashedPassword = HashPasswordWithBCrypt(password, salt);
             return new Personeel(surname, email, slowSaltedHashedPassword, salt, function);
+
             // Had geprobeerd om een slow saltedhash te maken met Argon2
             // HashPasswordWithArgon2(password, salt, 4, 65536, 2);
         }
