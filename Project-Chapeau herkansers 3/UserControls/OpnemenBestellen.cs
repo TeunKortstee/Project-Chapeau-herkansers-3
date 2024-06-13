@@ -20,11 +20,12 @@ namespace Project_Chapeau_herkansers_3
             MenuItemService menuItemService = new MenuItemService();
             Menu menu = menuItemService.GetAllItems();
             Bestelling bestelling = new Bestelling();
-            buttonsVullen(menu, bestelling);
+            Form1 form1 = Form1.Instance;
+            buttonsVullen(menu, bestelling, form1.personeel);
             VulListMetColumns();
         }
 
-        private void buttonsVullen(Menu menu, Bestelling bestelling)
+        private void buttonsVullen(Menu menu, Bestelling bestelling, Personeel personeel)
         {
             btnLunchKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Lunch);
             btnDinerKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Diner);
@@ -47,18 +48,19 @@ namespace Project_Chapeau_herkansers_3
         private void btnRijVerwijderen_Click(object sender, EventArgs e) { }
         private void btnToevoegenEen_Click(object sender, EventArgs e) { }
         private void btnVerwijderEen_Click(object sender, EventArgs e) { }
-
         private void btnAfrekenen_Click(object sender, EventArgs e) { }
 
         private void AfrekenenBestelling(Bestelling bestelling, Personeel personeel)
         {
-            personeel.Id = 0;
-            BesteldeItemService besteldeItemService = new BesteldeItemService();
-            besteldeItemService.BestellingAanmaken(bestelling, personeel);
-            besteldeItemService.BestellingItemsAanmaken(bestelling);
-            MessageBox.Show("bestelling aangemaakt gelukt");
+            if(listViewBestelling.SelectedItems.Count > 0)
+            {
+                BesteldeItemService besteldeItemService = new BesteldeItemService();
+                besteldeItemService.BestellingAanmaken(bestelling, personeel);
+                besteldeItemService.BestellingItemsAanmaken(bestelling);
+                MessageBox.Show("bestelling aangemaakt gelukt");
                 //Afrekenen form1 = new Afrekenen(bestelling);
                 //Application.Run(form1);
+            }
         }
 
         private void ToevoegenEenAanBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling, Menu menu)
