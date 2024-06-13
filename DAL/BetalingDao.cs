@@ -44,9 +44,10 @@ namespace DAL
             string query = "INSERT INTO Betaling(Methode,Bedrag,RekeningID,Fooi) VALUES (@Methode,@Bedrag,@RekeningID,@Fooi)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Methode", betaling.Methode),
-                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
-                new SqlParameter("@Betaald", rekening.Betaald),
+                new SqlParameter("@Methode", (int)betaling.Methode),
+                new SqlParameter("@Bedrag", betaling.Bedrag),
+                new SqlParameter("@RekeningID", betaling.RekeningId),
+                new SqlParameter("@Fooi", betaling.Fooi)
 
             };
             ExecuteEditQuery(query, sqlParameters);

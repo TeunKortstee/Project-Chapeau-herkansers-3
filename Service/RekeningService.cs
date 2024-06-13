@@ -21,10 +21,20 @@ namespace Service
             return rekeningDao.GetRekening(bestellingID);
 
         }
-        public void InsertRekening(Rekening rekening)
+        public int InsertRekening(Rekening rekening)
         {
 
-             rekeningDao.InsertRekening(rekening);
+            return rekeningDao.InsertRekening(rekening);
         }
+
+        public Rekening CreateRekening() {
+            Rekening r = new Rekening();
+
+            return r;
+        
         }
+
+
+    }
+
 }

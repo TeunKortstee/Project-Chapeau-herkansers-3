@@ -39,9 +39,9 @@ namespace DAL
             return rekeningen;
         }
 
-        public void InsertRekening(Rekening rekening)
+        public int InsertRekening(Rekening rekening)
         {
-            string query = "INSERT INTO Rekening(BestellingId,TotaalPrijs,Betaald,Datum) VALUES (@BestellingId,@TotaalPrijs,@Betaald,@Datum)";
+            string query = "INSERT INTO Rekening(BestellingId,TotaalPrijs,Betaald,Datum) VALUES (@BestellingId,@TotaalPrijs,@Betaald,@Datum) SELECT CAST(scope_identity() AS int)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@BestellingId", rekening.BestellingId),
@@ -49,7 +49,7 @@ namespace DAL
                 new SqlParameter("@Betaald", rekening.Betaald),
 
             };
-            ExecuteEditQuery(query, sqlParameters);
+            return ExecuteEditQueryReturnID(query, sqlParameters);
         }
 
 
