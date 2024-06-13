@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OpnemenBestellen));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelSelectedTable = new System.Windows.Forms.Label();
+            this.labelSelectedTafel = new System.Windows.Forms.Label();
             this.btnLunchKaart = new System.Windows.Forms.Button();
             this.btnDinerKaart = new System.Windows.Forms.Button();
             this.btnDrankKaart = new System.Windows.Forms.Button();
@@ -64,17 +64,17 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // labelSelectedTable
+            // labelSelectedTafel
             // 
-            this.labelSelectedTable.AutoSize = true;
-            this.labelSelectedTable.BackColor = System.Drawing.Color.Transparent;
-            this.labelSelectedTable.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelSelectedTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
-            this.labelSelectedTable.Location = new System.Drawing.Point(139, 14);
-            this.labelSelectedTable.Name = "labelSelectedTable";
-            this.labelSelectedTable.Size = new System.Drawing.Size(142, 45);
-            this.labelSelectedTable.TabIndex = 1;
-            this.labelSelectedTable.Text = "Tafel #1";
+            this.labelSelectedTafel.AutoSize = true;
+            this.labelSelectedTafel.BackColor = System.Drawing.Color.Transparent;
+            this.labelSelectedTafel.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelSelectedTafel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
+            this.labelSelectedTafel.Location = new System.Drawing.Point(139, 14);
+            this.labelSelectedTafel.Name = "labelSelectedTafel";
+            this.labelSelectedTafel.Size = new System.Drawing.Size(142, 45);
+            this.labelSelectedTafel.TabIndex = 1;
+            this.labelSelectedTafel.Text = "Tafel #1";
             // 
             // btnLunchKaart
             // 
@@ -116,7 +116,7 @@
             this.columnHeaderPrijs,
             this.columnHeaderVoorraad});
             this.listViewKaart.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.listViewKaart.Location = new System.Drawing.Point(16, 153);
             this.listViewKaart.Name = "listViewKaart";
             this.listViewKaart.Size = new System.Drawing.Size(374, 309);
@@ -275,7 +275,7 @@
             this.Controls.Add(this.btnDrankKaart);
             this.Controls.Add(this.btnDinerKaart);
             this.Controls.Add(this.btnLunchKaart);
-            this.Controls.Add(this.labelSelectedTable);
+            this.Controls.Add(this.labelSelectedTafel);
             this.Controls.Add(this.pictureBox1);
             this.Name = "OpnemenBestellen";
             this.Size = new System.Drawing.Size(414, 1060);
@@ -288,7 +288,7 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Label labelSelectedTable;
+        private Label labelSelectedTafel;
         private Button btnLunchKaart;
         private Button btnDinerKaart;
         private Button btnDrankKaart;

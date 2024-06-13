@@ -37,6 +37,7 @@ namespace Project_Chapeau_herkansers_3
             /*OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
             opnemenBestellen.Tag = this;
             AddUserControl(opnemenBestellen);*/
+            form1.SwitchPanels(new OpnemenBestellen(tafel));
         }
 
         private void TerugBtn_Click(object sender, EventArgs e)
