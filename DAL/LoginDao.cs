@@ -58,8 +58,8 @@ namespace DAL
                     Id = (int)dr["PersoneelId"],
                     email = dr["Email"].ToString(),
                     AchterNaam = dr["Achternaam"].ToString(),
-                    WachtWoord = (byte[])dr["Wachtwoord"],
-                    Salt = (byte[])dr["Salt"],
+                    WachtWoord = dr["Wachtwoord"].ToString(),
+                    Salt = dr["Salt"].ToString(),
                     Functie = (Functie)dr["Functie"]
                 };
                 personeel.Add(student);

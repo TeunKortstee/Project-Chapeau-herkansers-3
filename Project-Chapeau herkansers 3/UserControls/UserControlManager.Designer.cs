@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlManager));
-            btnTableView = new Button();
             btnEmployee = new Button();
             btnMenu = new Button();
             txtManager = new TextBox();
@@ -38,23 +37,11 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // btnTableView
-            // 
-            btnTableView.BackColor = Color.FromArgb(138, 210, 176);
-            btnTableView.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnTableView.Location = new Point(38, 223);
-            btnTableView.Name = "btnTableView";
-            btnTableView.Size = new Size(335, 67);
-            btnTableView.TabIndex = 0;
-            btnTableView.Text = "Tafeloverzicht";
-            btnTableView.UseVisualStyleBackColor = false;
-            btnTableView.Click += btnTableView_Click;
-            // 
             // btnEmployee
             // 
             btnEmployee.BackColor = Color.FromArgb(138, 210, 176);
             btnEmployee.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEmployee.Location = new Point(38, 339);
+            btnEmployee.Location = new Point(37, 219);
             btnEmployee.Name = "btnEmployee";
             btnEmployee.Size = new Size(335, 67);
             btnEmployee.TabIndex = 3;
@@ -66,7 +53,7 @@
             // 
             btnMenu.BackColor = Color.FromArgb(138, 210, 176);
             btnMenu.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnMenu.Location = new Point(38, 460);
+            btnMenu.Location = new Point(37, 340);
             btnMenu.Name = "btnMenu";
             btnMenu.Size = new Size(335, 67);
             btnMenu.TabIndex = 4;
@@ -91,7 +78,7 @@
             // 
             btnSales.BackColor = Color.FromArgb(138, 210, 176);
             btnSales.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSales.Location = new Point(38, 579);
+            btnSales.Location = new Point(37, 459);
             btnSales.Name = "btnSales";
             btnSales.Size = new Size(335, 67);
             btnSales.TabIndex = 6;
@@ -118,7 +105,6 @@
             Controls.Add(txtManager);
             Controls.Add(btnMenu);
             Controls.Add(btnEmployee);
-            Controls.Add(btnTableView);
             Name = "UserControlManager";
             Size = new Size(414, 736);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -127,8 +113,6 @@
         }
 
         #endregion
-
-        private Button btnTableView;
         private Button btnEmployee;
         private Button btnMenu;
         private TextBox txtManager;
