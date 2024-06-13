@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service;
 
 namespace Project_Chapeau_herkansers_3
 
@@ -9,7 +10,7 @@ namespace Project_Chapeau_herkansers_3
         public Form1 form;
         public TafelOverzichtUserControl()
         {
-            //this.form = Form1.Instance;
+            this.form = Form1.Instance;
             InitializeComponent();
             tafels = GetTafels();
             FillTableLayoutPanel();
@@ -75,12 +76,8 @@ namespace Project_Chapeau_herkansers_3
         private List<Tafel> GetTafels()
         {
             //Get alle tafels van db
-            List<Tafel> tafelen = new List<Tafel>();
-            for (int i = 1; i < 10; i++)
-            {
-                tafelen.Add(new Tafel(i, TafelStatus.Bezet));
-            }
-            return tafelen;
+            TafelService service = new TafelService();
+            return service.GetAllTafels();
         }
     }
 }
