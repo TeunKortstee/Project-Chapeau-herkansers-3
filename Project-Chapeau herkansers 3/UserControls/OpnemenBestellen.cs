@@ -70,16 +70,17 @@ namespace Project_Chapeau_herkansers_3
 
         private void ToevoegenEenAanBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling, Menu menu)
         {
-            if(listView.SelectedItems.Count > 0)
+            if (listView.SelectedItems.Count > 0)
             {
                 BesteldeItem besteldeItem = (BesteldeItem)listViewBestelling.SelectedItems[0].Tag;
-                if(besteldeItem.menuItem.Voorraad > 0)
+                if (besteldeItem.menuItem.Voorraad > 0)
                 {
                     besteldeItem.Hoeveelheid++;
                     besteldeItem.menuItem.Voorraad--;
                     VulListViewBestelling(listViewBestelling, bestelling);
                     VullenListView(listViewKaart, menu, menu.MenuType);
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Er is geen voorraad voor dit menu item.");
                 }
@@ -96,11 +97,14 @@ namespace Project_Chapeau_herkansers_3
                 {
                     besteldeItem.menuItem.Voorraad++;
                     bestelling.BestellingItems.Remove(besteldeItem);
-                } else if (besteldeItem.Hoeveelheid > 0) {
+                }
+                else if (besteldeItem.Hoeveelheid > 0)
+                {
                     besteldeItem.Hoeveelheid--;
                     besteldeItem.menuItem.Voorraad++;
                 }
-                else { 
+                else
+                {
                     bestelling.BestellingItems.Remove(besteldeItem);
                 }
                 VulListViewBestelling(listViewBestelling, bestelling);
@@ -125,7 +129,7 @@ namespace Project_Chapeau_herkansers_3
             if (listViewKaart.SelectedItems.Count > 0)
             {
                 MenuItem menuItem = (MenuItem)listViewKaart.SelectedItems[0].Tag;
-                if(menuItem.Voorraad > 0)
+                if (menuItem.Voorraad > 0)
                 {
                     menuItem.Voorraad--;
                     BesteldeItem bestaandItem = bestelling.BestellingItems.FirstOrDefault(bi => bi.menuItem.Naam == menuItem.Naam);
@@ -142,7 +146,8 @@ namespace Project_Chapeau_herkansers_3
 
                     VulListViewBestelling(listViewBestelling, bestelling);
                     VullenListView(listViewKaart, menu, menu.MenuType);
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Er is geen voorraad voor dit menu item.");
                 }
@@ -178,7 +183,7 @@ namespace Project_Chapeau_herkansers_3
 
             foreach (MenuItem menuItem in menu.MenuItems)
             {
-                if((MenuType)menuItem.MenuId == menu.MenuType)
+                if ((MenuType)menuItem.MenuId == menu.MenuType)
                 {
                     ListViewItem item = new ListViewItem(menuItem.Naam);
                     item.SubItems.Add(menuItem.Prijs.ToString());
@@ -188,7 +193,7 @@ namespace Project_Chapeau_herkansers_3
                 }
             }
         }
-        
+
         private void VulListViewBestelling(System.Windows.Forms.ListView listView, Bestelling bestelling)
         {
             listView.Items.Clear();
