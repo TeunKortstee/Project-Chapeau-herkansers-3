@@ -1,7 +1,15 @@
 ﻿using BCrypt.Net;
 using DAL;
 using Model;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Security.Cryptography;
+using BCrypt.Net;
 using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlTypes;
 
 namespace Service
 {
@@ -32,23 +40,23 @@ namespace Service
             personeelDao.RemovePersoneel(personeel);
         }
         // Lucas
-        //public Personeel CreatePersoneel(string surname, string email, string password,  Functie function)
-        //{
-        //    byte[] salt = GenerateSalt();
-        //    byte[] slowSaltedHashedPassword = HashPasswordWithBCrypt(password, salt);
-        //    return new Personeel(surname, email, slowSaltedHashedPassword, salt, function);
-        //    // Had geprobeerd om een slow saltedhash te maken met Argon2
-        //    // HashPasswordWithArgon2(password, salt, 4, 65536, 2);
-        //}
-        private byte[] HashPasswordWithBCrypt(string password, byte[] salt)
+        public Personeel CreatePersoneel(string surname, string email, string password, Functie function)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, Encoding.UTF8.GetString(salt), enhancedEntropy, HashType.SHA512);
-            return Encoding.UTF8.GetBytes(hashedPassword);
+            string salt = GenerateSalt();
+            string slowSaltedHashedPassword = HashPasswordWithBCrypt(password, salt);
+            return new Personeel(surname, email, slowSaltedHashedPassword, salt, function);
+
+            // Had geprobeerd om een slow saltedhash te maken met Argon2
+            // HashPasswordWithArgon2(password, salt, 4, 65536, 2);
         }
-        private byte[] GenerateSalt()
+        private string HashPasswordWithBCrypt(string password, string salt)
         {
-            string saltString = BCrypt.Net.BCrypt.GenerateSalt(workFactor);
-            return Encoding.UTF8.GetBytes(saltString);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt, enhancedEntropy, HashType.SHA512);
+            return hashedPassword;
+        }
+        private string GenerateSalt()
+        {
+            return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
         }
         private bool VerifyPassword(string password, string hashedPassword)
         {

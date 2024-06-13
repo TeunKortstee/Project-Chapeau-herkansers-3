@@ -22,13 +22,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private Form1 form;
         private RekeningService rekeningService;
-        private PersoneelService? personeelService;
 
         public UserControlSalesOverview()
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.personeelService = null;
             this.rekeningService = new RekeningService();
             //DisplaySalesElements(menuType);
         }
@@ -104,11 +102,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Top Buttons
         private void btn1_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
-            {
-                FillSalesListView((MenuType)btn1.Tag);
-                RenableMenuButtons((MenuType)btn1.Tag);
-            }
+            FillSalesListView((MenuType)btn1.Tag);
+            RenableMenuButtons((MenuType)btn1.Tag);
         }
         private void btn1_EnabledChanged(object sender, EventArgs e)
         {
@@ -116,11 +111,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btn2_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
-            {
-                FillSalesListView((MenuType)btn2.Tag);
-                RenableMenuButtons((MenuType)btn2.Tag);
-            }
+            FillSalesListView((MenuType)btn2.Tag);
+            RenableMenuButtons((MenuType)btn2.Tag);
         }
         private void btn2_EnabledChanged(object sender, EventArgs e)
         {
@@ -128,11 +120,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btn3_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
-            {
-                FillSalesListView((MenuType)btn3.Tag);
-                RenableMenuButtons((MenuType)btn3.Tag);
-            }
+            FillSalesListView((MenuType)btn3.Tag);
+            RenableMenuButtons((MenuType)btn3.Tag);
         }
         private void btn3_EnabledChanged(object sender, EventArgs e)
         {
