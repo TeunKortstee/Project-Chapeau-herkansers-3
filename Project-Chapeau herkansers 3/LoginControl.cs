@@ -1,4 +1,5 @@
 ﻿using Model;
+using Project_Chapeau_herkansers_3.UserControls;
 using Service;
 using System.Text.RegularExpressions;
 
@@ -10,30 +11,30 @@ namespace Project_Chapeau_herkansers_3
         public LoginControl()
         {
             InitializeComponent();
+            _form1 = Form1.Instance;
         }
-        private bool IsPersoneel(Personeel p)
+        private Personeel IsPersoneel(Personeel p)
         {
             //get user from db
             LoginService service = new LoginService();
             Personeel personeel = service.GetPersoneel(p);
             if (personeel == null)
             {
-                return false;
+                return null;
             }
-            if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord.ToString()))
+            if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
             {
-                return false;
+                return null;
             }
             else
             {
-                return true;
+                return personeel;
             }
 
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            //write method that checks regex
             Personeel personeel = new Personeel();
             try
             {
@@ -51,12 +52,20 @@ namespace Project_Chapeau_herkansers_3
                     }
                     else
                     {
-                        if (IsPersoneel(personeel))
+                        personeel = IsPersoneel(personeel);
+                        if (personeel != null)
                         {
                             //return user to mainform
-                            // form1.User =
-                            //Open volgende UserControl
-
+                            _form1.personeel = personeel;
+                            switch (personeel.Functie)
+                            {
+                                case Functie.Serveerder:
+                                    _form1.SwitchPanels(new TafelOverzichtUserControl());
+                                    break;
+                                case Functie.Manager:
+                                    _form1.SwitchPanels(new UserControlManager());
+                                    break;
+                            }
                         }
                         else
                         {

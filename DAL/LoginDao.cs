@@ -1,7 +1,6 @@
 ﻿using Model;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace DAL
 {
@@ -59,8 +58,8 @@ namespace DAL
                     Id = Convert.ToInt32(dr["PersoneelsId"]),
                     email = dr["Email"].ToString(),
                     AchterNaam = dr["Achternaam"].ToString(),
-                    WachtWoord = Encoding.ASCII.GetBytes(dr["Wachtwoord"].ToString()),
-                    Salt = Encoding.ASCII.GetBytes(dr["Salt"].ToString()),
+                    WachtWoord = dr["Wachtwoord"].ToString(),
+                    Salt = dr["Salt"].ToString(),
                     Functie = (Functie)Convert.ToInt32(dr["FunctieId"])
                 };
                 personeel.Add(student);

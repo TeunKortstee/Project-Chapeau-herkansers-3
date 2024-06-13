@@ -1,16 +1,7 @@
-﻿using DAL;
+﻿using BCrypt.Net;
+using DAL;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Cryptography;
-using Isopoh.Cryptography.Argon2;
-using BCrypt.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlTypes;
-using Isopoh.Cryptography.SecureArray;
 
 namespace Service
 {
@@ -41,14 +32,14 @@ namespace Service
             personeelDao.RemovePersoneel(personeel);
         }
         // Lucas
-        public Personeel CreatePersoneel(string surname, string email, string password,  Functie function)
-        {
-            byte[] salt = GenerateSalt();
-            byte[] slowSaltedHashedPassword = HashPasswordWithBCrypt(password, salt);
-            return new Personeel(surname, email, slowSaltedHashedPassword, salt, function);
-            // Had geprobeerd om een slow saltedhash te maken met Argon2
-            // HashPasswordWithArgon2(password, salt, 4, 65536, 2);
-        }
+        //public Personeel CreatePersoneel(string surname, string email, string password,  Functie function)
+        //{
+        //    byte[] salt = GenerateSalt();
+        //    byte[] slowSaltedHashedPassword = HashPasswordWithBCrypt(password, salt);
+        //    return new Personeel(surname, email, slowSaltedHashedPassword, salt, function);
+        //    // Had geprobeerd om een slow saltedhash te maken met Argon2
+        //    // HashPasswordWithArgon2(password, salt, 4, 65536, 2);
+        //}
         private byte[] HashPasswordWithBCrypt(string password, byte[] salt)
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, Encoding.UTF8.GetString(salt), enhancedEntropy, HashType.SHA512);

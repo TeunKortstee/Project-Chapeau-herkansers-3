@@ -5,15 +5,15 @@
         public int Id { get; set; }
         public string email { get; set; }
         public string AchterNaam { get; set; }
-        public byte[] WachtWoord { get; set; }
-        public byte[] Salt { get; set; }
-        public Functie Functie { get; set; }       
+        public string WachtWoord { get; set; }
+        public string Salt { get; set; }
+        public Functie Functie { get; set; }
 
         public Personeel()
         {
 
         }
-        public Personeel(string achternaam, string email, byte[] wachtwoord, byte[] salt, Functie functie)
+        public Personeel(string achternaam, string email, string wachtwoord, string salt, Functie functie)
         {
             this.AchterNaam = achternaam;
             this.email = email;

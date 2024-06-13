@@ -1,7 +1,6 @@
 ﻿using BCrypt.Net;
 using DAL;
 using Model;
-using System.Text;
 
 namespace Service
 {
@@ -28,25 +27,20 @@ namespace Service
             personeel.WachtWoord = HashPasswordWithBCrypt(wachtwoord, personeel.Salt);
             loginDao.ChangePassword(personeel);
         }
-        private byte[] HashPasswordWithBCrypt(string password, byte[] salt)
+        private string HashPasswordWithBCrypt(string password, string salt)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, Encoding.UTF8.GetString(salt), enhancedEntropy, HashType.SHA512);
-            return Encoding.UTF8.GetBytes(hashedPassword);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt, enhancedEntropy, HashType.SHA512);
+            return hashedPassword;
         }
-        private byte[] GenerateSalt()
+        private string GenerateSalt()
         {
             string saltString = BCrypt.Net.BCrypt.GenerateSalt(workFactor);
-            return Encoding.UTF8.GetBytes(saltString);
+            return saltString;
         }
         public bool VerifyPassword(string password, string hashedPassword)
         {
             return BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword, HashType.SHA512);
 
         }
-        //public bool VerifyPassword(string enteredPassword, byte[] storedSalt, byte[] storedHash)
-        //{
-        //    byte[] hash = GenerateSaltedHash(enteredPassword, storedSalt);
-        //    return hash.SequenceEqual(storedHash);
-        //}
     }
 }

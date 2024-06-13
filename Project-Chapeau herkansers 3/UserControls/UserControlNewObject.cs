@@ -1,17 +1,6 @@
 ﻿using Model;
 using Service;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
@@ -94,8 +83,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 try
                 {
-                    Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, requiredPasswordChange, (Functie)cmbType.SelectedItem);
-                    personeelService.InsertPersoneel(newEmployee);
+                    //Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, requiredPasswordChange, (Functie)cmbType.SelectedItem);
+                    //personeelService.InsertPersoneel(newEmployee);
                     form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
                 }
                 catch (FormatException ex)
