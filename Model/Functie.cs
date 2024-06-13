@@ -2,6 +2,6 @@
 {
     public enum Functie
     {
-        Serveerder, Keuken, Bar, Manager
+        Serveerder = 1, Keuken, Bar, Manager
     }
 }

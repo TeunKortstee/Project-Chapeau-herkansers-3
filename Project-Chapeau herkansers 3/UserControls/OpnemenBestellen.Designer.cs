@@ -32,7 +32,6 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelSelectedTable = new System.Windows.Forms.Label();
-            this.btnGebruiker = new System.Windows.Forms.Button();
             this.btnLunchKaart = new System.Windows.Forms.Button();
             this.btnDinerKaart = new System.Windows.Forms.Button();
             this.btnDrankKaart = new System.Windows.Forms.Button();
@@ -49,8 +48,10 @@
             this.btnVerwijderEen = new System.Windows.Forms.Button();
             this.btnVerwijderAlles = new System.Windows.Forms.Button();
             this.btnRijVerwijderen = new System.Windows.Forms.Button();
-            this.btnComment = new System.Windows.Forms.Button();
+            this.btnOpmerking = new System.Windows.Forms.Button();
             this.btnAfrekenen = new System.Windows.Forms.Button();
+            this.txtOpmerking = new System.Windows.Forms.TextBox();
+            this.btnToevoegenEen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,18 +75,6 @@
             this.labelSelectedTable.Size = new System.Drawing.Size(142, 45);
             this.labelSelectedTable.TabIndex = 1;
             this.labelSelectedTable.Text = "Tafel #1";
-            // 
-            // btnGebruiker
-            // 
-            this.btnGebruiker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(179)))), ((int)(((byte)(71)))));
-            this.btnGebruiker.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnGebruiker.Location = new System.Drawing.Point(310, 12);
-            this.btnGebruiker.Name = "btnGebruiker";
-            this.btnGebruiker.Size = new System.Drawing.Size(86, 40);
-            this.btnGebruiker.TabIndex = 2;
-            this.btnGebruiker.Text = "Marlene";
-            this.btnGebruiker.UseVisualStyleBackColor = false;
-            this.btnGebruiker.Click += new System.EventHandler(this.btnGebruiker_Click);
             // 
             // btnLunchKaart
             // 
@@ -200,7 +189,7 @@
             // 
             // btnVerwijderEen
             // 
-            this.btnVerwijderEen.Location = new System.Drawing.Point(16, 918);
+            this.btnVerwijderEen.Location = new System.Drawing.Point(16, 899);
             this.btnVerwijderEen.Name = "btnVerwijderEen";
             this.btnVerwijderEen.Size = new System.Drawing.Size(100, 50);
             this.btnVerwijderEen.TabIndex = 12;
@@ -210,9 +199,9 @@
             // 
             // btnVerwijderAlles
             // 
-            this.btnVerwijderAlles.Location = new System.Drawing.Point(122, 918);
+            this.btnVerwijderAlles.Location = new System.Drawing.Point(246, 541);
             this.btnVerwijderAlles.Name = "btnVerwijderAlles";
-            this.btnVerwijderAlles.Size = new System.Drawing.Size(144, 50);
+            this.btnVerwijderAlles.Size = new System.Drawing.Size(144, 38);
             this.btnVerwijderAlles.TabIndex = 13;
             this.btnVerwijderAlles.Text = "Alles verwijderen";
             this.btnVerwijderAlles.UseVisualStyleBackColor = true;
@@ -220,7 +209,7 @@
             // 
             // btnRijVerwijderen
             // 
-            this.btnRijVerwijderen.Location = new System.Drawing.Point(271, 918);
+            this.btnRijVerwijderen.Location = new System.Drawing.Point(271, 899);
             this.btnRijVerwijderen.Name = "btnRijVerwijderen";
             this.btnRijVerwijderen.Size = new System.Drawing.Size(119, 50);
             this.btnRijVerwijderen.TabIndex = 14;
@@ -228,35 +217,54 @@
             this.btnRijVerwijderen.UseVisualStyleBackColor = true;
             this.btnRijVerwijderen.Click += new System.EventHandler(this.btnRijVerwijderen_Click);
             // 
-            // btnComment
+            // btnOpmerking
             // 
-            this.btnComment.Location = new System.Drawing.Point(281, 543);
-            this.btnComment.Name = "btnComment";
-            this.btnComment.Size = new System.Drawing.Size(109, 35);
-            this.btnComment.TabIndex = 15;
-            this.btnComment.Text = "Comment";
-            this.btnComment.UseVisualStyleBackColor = true;
-            this.btnComment.Click += new System.EventHandler(this.btnComment_Click);
+            this.btnOpmerking.Location = new System.Drawing.Point(16, 955);
+            this.btnOpmerking.Name = "btnOpmerking";
+            this.btnOpmerking.Size = new System.Drawing.Size(109, 35);
+            this.btnOpmerking.TabIndex = 15;
+            this.btnOpmerking.Text = "Opmerking";
+            this.btnOpmerking.UseVisualStyleBackColor = true;
+            this.btnOpmerking.Click += new System.EventHandler(this.btnComment_Click);
             // 
             // btnAfrekenen
             // 
             this.btnAfrekenen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(179)))), ((int)(((byte)(71)))));
             this.btnAfrekenen.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAfrekenen.Location = new System.Drawing.Point(16, 984);
+            this.btnAfrekenen.Location = new System.Drawing.Point(16, 996);
             this.btnAfrekenen.Name = "btnAfrekenen";
             this.btnAfrekenen.Size = new System.Drawing.Size(374, 50);
             this.btnAfrekenen.TabIndex = 16;
-            this.btnAfrekenen.Text = "Afrekenen";
+            this.btnAfrekenen.Text = "Bestelling afronden";
             this.btnAfrekenen.UseVisualStyleBackColor = false;
             this.btnAfrekenen.Click += new System.EventHandler(this.btnAfrekenen_Click);
+            // 
+            // txtOpmerking
+            // 
+            this.txtOpmerking.Location = new System.Drawing.Point(131, 959);
+            this.txtOpmerking.Name = "txtOpmerking";
+            this.txtOpmerking.Size = new System.Drawing.Size(259, 27);
+            this.txtOpmerking.TabIndex = 17;
+            // 
+            // btnToevoegenEen
+            // 
+            this.btnToevoegenEen.Location = new System.Drawing.Point(139, 899);
+            this.btnToevoegenEen.Name = "btnToevoegenEen";
+            this.btnToevoegenEen.Size = new System.Drawing.Size(119, 50);
+            this.btnToevoegenEen.TabIndex = 18;
+            this.btnToevoegenEen.Text = "Toevoegen 1";
+            this.btnToevoegenEen.UseVisualStyleBackColor = true;
+            this.btnToevoegenEen.Click += new System.EventHandler(this.btnToevoegenEen_Click);
             // 
             // OpnemenBestellen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnToevoegenEen);
+            this.Controls.Add(this.txtOpmerking);
             this.Controls.Add(this.btnAfrekenen);
-            this.Controls.Add(this.btnComment);
+            this.Controls.Add(this.btnOpmerking);
             this.Controls.Add(this.btnRijVerwijderen);
             this.Controls.Add(this.btnVerwijderAlles);
             this.Controls.Add(this.btnVerwijderEen);
@@ -267,7 +275,6 @@
             this.Controls.Add(this.btnDrankKaart);
             this.Controls.Add(this.btnDinerKaart);
             this.Controls.Add(this.btnLunchKaart);
-            this.Controls.Add(this.btnGebruiker);
             this.Controls.Add(this.labelSelectedTable);
             this.Controls.Add(this.pictureBox1);
             this.Name = "OpnemenBestellen";
@@ -282,7 +289,6 @@
 
         private PictureBox pictureBox1;
         private Label labelSelectedTable;
-        private Button btnGebruiker;
         private Button btnLunchKaart;
         private Button btnDinerKaart;
         private Button btnDrankKaart;
@@ -299,7 +305,9 @@
         private Button btnVerwijderEen;
         private Button btnVerwijderAlles;
         private Button btnRijVerwijderen;
-        private Button btnComment;
+        private Button btnOpmerking;
         private Button btnAfrekenen;
+        private TextBox txtOpmerking;
+        private Button btnToevoegenEen;
     }
 }
