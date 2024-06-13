@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,11 +22,12 @@ namespace Project_Chapeau_herkansers_3
             Menu menu = menuItemService.GetAllItems();
             Bestelling bestelling = new Bestelling();
             Form1 form1 = Form1.Instance;
-            buttonsVullen(menu, bestelling, form1.personeel);
+            buttonsVullen(menu, bestelling, form1, tafel);
+            VulTekstTafel(tafel);
             VulListMetColumns();
         }
 
-        private void buttonsVullen(Menu menu, Bestelling bestelling, Personeel personeel)
+        private void buttonsVullen(Menu menu, Bestelling bestelling, Form1 form1, Tafel tafel)
         {
             btnLunchKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Lunch);
             btnDinerKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Diner);
@@ -36,7 +38,12 @@ namespace Project_Chapeau_herkansers_3
             btnRijVerwijderen.Click += (sender, e) => RijVerwijderen(listViewBestelling, bestelling, menu);
             btnToevoegenEen.Click += (sender, e) => ToevoegenEenAanBestelling(listViewBestelling, bestelling, menu);
             btnVerwijderEen.Click += (sender, e) => VerwijderenEenAanBestelling(listViewBestelling, bestelling, menu);
-            btnAfrekenen.Click += (sender, e) => AfrekenenBestelling(bestelling, new Personeel());
+            btnAfrekenen.Click += (sender, e) => AfrekenenBestelling(bestelling, form1, tafel);
+        }
+
+        private void VulTekstTafel(Tafel tafel)
+        {
+            labelSelectedTafel.Text = $"Tafel #{tafel.Id}";
         }
 
         private void btnVerwijderAlles_Click(object sender, EventArgs e) { }
@@ -50,16 +57,14 @@ namespace Project_Chapeau_herkansers_3
         private void btnVerwijderEen_Click(object sender, EventArgs e) { }
         private void btnAfrekenen_Click(object sender, EventArgs e) { }
 
-        private void AfrekenenBestelling(Bestelling bestelling, Personeel personeel)
+        private void AfrekenenBestelling(Bestelling bestelling, Form1 form1, Tafel tafel)
         {
-            if(listViewBestelling.SelectedItems.Count > 0)
+            if(listViewBestelling.Items.Count > 0)
             {
                 BesteldeItemService besteldeItemService = new BesteldeItemService();
-                besteldeItemService.BestellingAanmaken(bestelling, personeel);
+                besteldeItemService.BestellingAanmaken(bestelling, form1.personeel);
                 besteldeItemService.BestellingItemsAanmaken(bestelling);
-                MessageBox.Show("bestelling aangemaakt gelukt");
-                //Afrekenen form1 = new Afrekenen(bestelling);
-                //Application.Run(form1);
+                form1.SwitchPanels(new TafelStatusUI(tafel));
             }
         }
 
