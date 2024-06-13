@@ -189,42 +189,46 @@
             // 
             // btnVerwijderEen
             // 
+            this.btnVerwijderEen.BackColor = System.Drawing.Color.LightGray;
             this.btnVerwijderEen.Location = new System.Drawing.Point(16, 899);
             this.btnVerwijderEen.Name = "btnVerwijderEen";
             this.btnVerwijderEen.Size = new System.Drawing.Size(100, 50);
             this.btnVerwijderEen.TabIndex = 12;
             this.btnVerwijderEen.Text = "Verwijder 1";
-            this.btnVerwijderEen.UseVisualStyleBackColor = true;
+            this.btnVerwijderEen.UseVisualStyleBackColor = false;
             this.btnVerwijderEen.Click += new System.EventHandler(this.btnVerwijderEen_Click);
             // 
             // btnVerwijderAlles
             // 
+            this.btnVerwijderAlles.BackColor = System.Drawing.Color.LightGray;
             this.btnVerwijderAlles.Location = new System.Drawing.Point(246, 541);
             this.btnVerwijderAlles.Name = "btnVerwijderAlles";
             this.btnVerwijderAlles.Size = new System.Drawing.Size(144, 38);
             this.btnVerwijderAlles.TabIndex = 13;
             this.btnVerwijderAlles.Text = "Alles verwijderen";
-            this.btnVerwijderAlles.UseVisualStyleBackColor = true;
+            this.btnVerwijderAlles.UseVisualStyleBackColor = false;
             this.btnVerwijderAlles.Click += new System.EventHandler(this.btnVerwijderAlles_Click);
             // 
             // btnRijVerwijderen
             // 
+            this.btnRijVerwijderen.BackColor = System.Drawing.Color.LightGray;
             this.btnRijVerwijderen.Location = new System.Drawing.Point(271, 899);
             this.btnRijVerwijderen.Name = "btnRijVerwijderen";
             this.btnRijVerwijderen.Size = new System.Drawing.Size(119, 50);
             this.btnRijVerwijderen.TabIndex = 14;
             this.btnRijVerwijderen.Text = "Rij Verwijderen";
-            this.btnRijVerwijderen.UseVisualStyleBackColor = true;
+            this.btnRijVerwijderen.UseVisualStyleBackColor = false;
             this.btnRijVerwijderen.Click += new System.EventHandler(this.btnRijVerwijderen_Click);
             // 
             // btnOpmerking
             // 
+            this.btnOpmerking.BackColor = System.Drawing.Color.LightGray;
             this.btnOpmerking.Location = new System.Drawing.Point(16, 955);
             this.btnOpmerking.Name = "btnOpmerking";
             this.btnOpmerking.Size = new System.Drawing.Size(109, 35);
             this.btnOpmerking.TabIndex = 15;
             this.btnOpmerking.Text = "Opmerking";
-            this.btnOpmerking.UseVisualStyleBackColor = true;
+            this.btnOpmerking.UseVisualStyleBackColor = false;
             this.btnOpmerking.Click += new System.EventHandler(this.btnComment_Click);
             // 
             // btnAfrekenen
@@ -248,12 +252,13 @@
             // 
             // btnToevoegenEen
             // 
+            this.btnToevoegenEen.BackColor = System.Drawing.Color.LightGray;
             this.btnToevoegenEen.Location = new System.Drawing.Point(139, 899);
             this.btnToevoegenEen.Name = "btnToevoegenEen";
             this.btnToevoegenEen.Size = new System.Drawing.Size(119, 50);
             this.btnToevoegenEen.TabIndex = 18;
             this.btnToevoegenEen.Text = "Toevoegen 1";
-            this.btnToevoegenEen.UseVisualStyleBackColor = true;
+            this.btnToevoegenEen.UseVisualStyleBackColor = false;
             this.btnToevoegenEen.Click += new System.EventHandler(this.btnToevoegenEen_Click);
             // 
             // OpnemenBestellen

@@ -26,5 +26,9 @@ namespace Service
 
              rekeningDao.InsertRekening(rekening);
         }
+        public List<Rekening> GetBetaaldeRekeningen(bool betaald) 
+        {
+            return rekeningDao.GetBetaaldeRekeningen(betaald);
         }
+    }
 }
