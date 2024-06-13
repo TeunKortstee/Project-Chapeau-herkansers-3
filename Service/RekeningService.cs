@@ -28,21 +28,21 @@ namespace Service
         }
 
 
-        public Rekening CreateRekening() {
-            Rekening r = new Rekening();
+        //public Rekening CreateRekening() {
+            //Rekening r = new Rekening();
 
-            return r;
+           // return r;
         
-        }
+        //}
 
-
-    }
-
-
-        public List<Rekening> GetBetaaldeRekeningen(bool betaald) 
+        public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
             return rekeningDao.GetBetaaldeRekeningen(betaald);
         }
     }
+
+
+        
+    
 
 }
