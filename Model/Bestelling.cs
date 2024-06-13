@@ -7,9 +7,13 @@
         public List<BesteldeItem> BestellingItems { get { return besteldeItems; } set { besteldeItems = value; } }
         public Personeel personeel { get; set; }
 
+
+        public int TafelId { get; set; }
+
         public Bestelling()
         {
             besteldeItems = new List<BesteldeItem>();
         }
+
     }
 }
