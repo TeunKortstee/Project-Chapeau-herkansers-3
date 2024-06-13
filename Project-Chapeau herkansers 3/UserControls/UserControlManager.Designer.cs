@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlManager));
             btnTableView = new Button();
             btnEmployee = new Button();
             btnMenu = new Button();
             txtManager = new TextBox();
             btnSales = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnTableView
@@ -76,12 +79,13 @@
             txtManager.BackColor = Color.FromArgb(255, 179, 71);
             txtManager.Enabled = false;
             txtManager.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtManager.Location = new Point(279, 21);
+            txtManager.Location = new Point(275, 14);
             txtManager.Margin = new Padding(3, 4, 3, 4);
             txtManager.Name = "txtManager";
-            txtManager.Size = new Size(103, 42);
+            txtManager.Size = new Size(124, 42);
             txtManager.TabIndex = 5;
             txtManager.Text = "Manager";
+            txtManager.TextAlign = HorizontalAlignment.Center;
             // 
             // btnSales
             // 
@@ -95,10 +99,21 @@
             btnSales.UseVisualStyleBackColor = false;
             btnSales.Click += btnSa_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(177, 93);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
             // UserControlManager
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pictureBox1);
             Controls.Add(btnSales);
             Controls.Add(txtManager);
             Controls.Add(btnMenu);
@@ -106,6 +121,7 @@
             Controls.Add(btnTableView);
             Name = "UserControlManager";
             Size = new Size(414, 736);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -117,6 +133,7 @@
         private Button btnMenu;
         private TextBox txtManager;
         private Button btnSales;
+        private PictureBox pictureBox1;
     }
 
 }
