@@ -84,7 +84,7 @@
             btnSales.TabIndex = 6;
             btnSales.Text = "Inkomens";
             btnSales.UseVisualStyleBackColor = false;
-            btnSales.Click += btnSa_Click;
+            btnSales.Click += btnSales_Click;
             // 
             // pictureBox1
             // 

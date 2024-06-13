@@ -270,12 +270,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 if (CheckItemSelected())
                 {
-                    if (this.personeelService == null)
-                    {
-                        ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
-                        MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                        this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
-                    }
+                    ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
+                    MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
+                    this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
                 }
             }
             catch (Exception ex)
