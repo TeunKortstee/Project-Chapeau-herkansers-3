@@ -45,7 +45,7 @@ namespace Project_Chapeau_herkansers_3
                     {
                         //Send user to database
                         personeel.email = EmailTxt.Text;
-                        personeel.WachtWoord = Encoding.ASCII.GetBytes(PasswordTxt.Text);
+                        personeel.WachtWoord = PasswordTxt.Text;
 
                     }
                     else

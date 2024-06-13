@@ -23,8 +23,6 @@ namespace Service
         }
         public void ChangePassword(Personeel personeel, string wachtwoord)
         {
-            personeel.Salt = GenerateSalt();
-            personeel.WachtWoord = GenerateSaltedHash(wachtwoord, personeel.Salt);
             loginDao.ChangePassword(personeel);
         }
         public static byte[] GenerateSalt()
@@ -36,18 +34,18 @@ namespace Service
             }
             return salt;
         }
-        public static byte[] GenerateSaltedHash(string plainText, byte[] salt, int iterations = 10000)
+        public bool VerifyPassword(string password, string hashedPassword)
         {
-            using (var pbkdf2 = new Rfc2898DeriveBytes(plainText, salt, iterations))
-            {
-                return pbkdf2.GetBytes(32); // 256-bit hash
-            }
-        }
-        public bool VerifyPassword(string password, byte[] hashedPassword)
-        {
-            return BCrypt.Net.BCrypt.EnhancedVerify(password, Encoding.UTF8.GetString(hashedPassword), HashType.SHA512);
+            return BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword, HashType.SHA512);
 
         }
+        //public static byte[] GenerateSaltedHash(string plainText, byte[] salt, int iterations = 10000)
+        //{
+        //    using (var pbkdf2 = new Rfc2898DeriveBytes(plainText, salt, iterations))
+        //    {
+        //        return pbkdf2.GetBytes(32); // 256-bit hash
+        //    }
+        //}
         //public bool VerifyPassword(string enteredPassword, byte[] storedSalt, byte[] storedHash)
         //{
         //    byte[] hash = GenerateSaltedHash(enteredPassword, storedSalt);
