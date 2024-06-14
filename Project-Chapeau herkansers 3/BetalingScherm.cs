@@ -14,10 +14,50 @@ namespace Project_Chapeau_herkansers_3
 {
     public partial class BetalingScherm : UserControl
     {
+
+        private List<SplitBillItem> splitBillItems;
+
+        public List<SplitBillItem> SplitBillItems { get { return splitBillItems; } set {
+
+                splitBillItems = value;
+                RefreshView();
+                    
+                    } }
+
         public BetalingScherm()
         {
             InitializeComponent();
-            payementsPanel.Controls.Add(new SplitBillItem(BetaalMethode.Debit,50.00,3.00));
+            splitBillItems = new List<SplitBillItem>();
+
+            
+        }
+        public void RefreshView() {
+
+            payementsPanel.Controls.Clear();
+         
+            foreach (SplitBillItem splitBillItem in SplitBillItems) {
+               
+                payementsPanel.Controls.Add(splitBillItem);
+
+
+            }
+
+
+
+        }
+
+        private void btnConfirmSplit_Click(object sender, EventArgs e)
+        {
+            SplitBillItems.Clear();
+            int splitAmount = int.Parse(inputSplitAmount.Text);
+            for (int i = 0; i < splitAmount; i++) {
+               
+                SplitBillItems.Add(new SplitBillItem(BetaalMethode.Debit,0.00,0.00));
+
+
+            }
+
+
         }
     }
 

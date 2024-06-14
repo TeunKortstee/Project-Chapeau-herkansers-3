@@ -66,6 +66,7 @@
             this.btnConfirmSplit.TabIndex = 3;
             this.btnConfirmSplit.Text = "OK";
             this.btnConfirmSplit.UseVisualStyleBackColor = true;
+            this.btnConfirmSplit.Click += new System.EventHandler(this.btnConfirmSplit_Click);
             // 
             // BetalingScherm
             // 
