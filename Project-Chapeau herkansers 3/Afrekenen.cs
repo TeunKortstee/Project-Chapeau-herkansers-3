@@ -1,5 +1,6 @@
 ﻿using Model;
 using Service;
+using System.Xml.Linq;
 
 namespace Project_Chapeau_herkansers_3
 {
@@ -12,34 +13,38 @@ namespace Project_Chapeau_herkansers_3
         const double vatAlcohol = 0.21;
        
 
-        public Afrekenen(List<Bestelling> _bestellingen)
+        public Afrekenen(Rekening rekening)
         {
             InitializeComponent();
 
             serviceBI = new BesteldeItemService();
-            RefreshBillItems(_bestellingen);
+            RefreshBillItems(rekening);
 
 
 
 
         }
 
-        public void RefreshBillItems(List<Bestelling> bestellingen)
+       
+
+        public void RefreshBillItems(Rekening rekening)
         {
-            double total = 0.00;
+            double total = rekening.TotaalPrijs;
             billListView.Items.Clear();
             double vat = 0.00;
             
 
-            foreach (Bestelling bestelling in bestellingen) {
-                List<BesteldeItem> besteldeItems = serviceBI.GetItemsFromBestelling(bestelling.bestellingId);
+            foreach (Bestelling bestelling in rekening.Bestellingen) {
+                List<BesteldeItem> besteldeItems = bestelling.BestellingItems;
                 foreach (BesteldeItem b in besteldeItems)
                 {
 
                     ListViewItem item = new ListViewItem(b.Hoeveelheid + "x");
+                    item.SubItems.Add(b.menuItem.Naam);
+                    item.SubItems.Add("€ " + (b.menuItem.Prijs * b.Hoeveelheid));
+                     
 
-                    //item.SubItems.Add(b.MenuItems[b.menuItem.MenuItemId].Naam);
-                    //item.SubItems.Add("€ " + (menuItems.MenuItems[b.menuItem.MenuItemId].Prijs * b.Hoeveelheid));
+
                     billListView.Items.Add(item);
                     if (b.Opmerking != null && b.Opmerking != "")
                     {
@@ -54,7 +59,7 @@ namespace Project_Chapeau_herkansers_3
                     }
 
                     double itemTotal = (b.menuItem.Prijs * b.Hoeveelheid);
-                    total += itemTotal;
+                   
                     if (b.menuItem.IsAlcoholisch)
                     {
                         vat += itemTotal * vatAlcohol;

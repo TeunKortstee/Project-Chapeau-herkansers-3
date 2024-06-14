@@ -1,4 +1,6 @@
-﻿namespace Model
+﻿using System.Runtime.InteropServices;
+
+namespace Model
 {
     public class Rekening
     {
@@ -7,7 +9,11 @@
         public double TotaalPrijs { get; set; }
         public bool Betaald { get; set; }
 
+        public double VAT { get; set; }
+
         public DateTime Datum { get; set; }
+
+        public List<Bestelling> Bestellingen { get; set; }
 
         public Rekening(int _RekeningId, int _TafelId, double _TotaalPrijs, bool _Betaald, DateTime _Datum) { 
             RekeningId = _RekeningId;

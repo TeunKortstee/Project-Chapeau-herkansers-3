@@ -11,10 +11,14 @@ namespace Service
     public class RekeningService
     {
         private RekeningDao rekeningDao;
+        private BestellingDao bestellingDao;
+        private BesteldeItemDao besteldeItemDao;
 
         public RekeningService()
         {
             rekeningDao = new RekeningDao();
+            bestellingDao = new BestellingDao();
+            besteldeItemDao = new BesteldeItemDao();
         }
         public Rekening GetRekening(int bestellingID)
         {
@@ -30,11 +34,33 @@ namespace Service
 
        public Rekening CreateRekening(int tafelID) {
 
+            Rekening? r = rekeningDao.GetRekening(tafelID);
+            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafelID);
+            if (r == null) {
+                
+                double totaalPrijs = 0.00;
+
+                
 
 
 
-            Rekening r = new Rekening(0,tafelID,);
 
+                foreach (Bestelling bestelling in bestellingen) {
+
+                    foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
+
+                        totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
+
+
+
+                    }
+                }
+
+                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now);
+               
+                InsertRekening(r);
+            }
+            r.Bestellingen = bestellingen;
             return r;
         
         }
