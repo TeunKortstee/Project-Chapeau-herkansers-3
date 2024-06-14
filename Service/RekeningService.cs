@@ -13,6 +13,9 @@ namespace Service
         private RekeningDao rekeningDao;
         private BestellingDao bestellingDao;
         private BesteldeItemDao besteldeItemDao;
+        private const double vatNormal = 0.06;
+        private const double vatAlcohol = 0.21;
+
 
         public RekeningService()
         {
@@ -32,6 +35,22 @@ namespace Service
         }
 
 
+        public static double BerekenBelasting(BesteldeItem b) {
+
+            double itemTotal = (b.menuItem.Prijs * b.Hoeveelheid);
+
+            if (b.menuItem.IsAlcoholisch)
+            {
+                return itemTotal * vatAlcohol;
+
+            }
+            return itemTotal * vatNormal;
+            
+
+
+
+        }
+
        public Rekening CreateRekening(int tafelID) {
 
             Rekening? r = rekeningDao.GetRekening(tafelID);
@@ -39,8 +58,8 @@ namespace Service
             if (r == null) {
                 
                 double totaalPrijs = 0.00;
+                double belasting = 0.00;
 
-                
 
 
 
@@ -50,13 +69,15 @@ namespace Service
                     foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
 
                         totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
+                        belasting += BerekenBelasting(besteldeItem);
+
 
 
 
                     }
                 }
 
-                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now);
+                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now,belasting);
                
                 InsertRekening(r);
             }

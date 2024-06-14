@@ -9,8 +9,6 @@ namespace Project_Chapeau_herkansers_3
 
 
         BesteldeItemService serviceBI;
-        const double vatNormal = 0.06;
-        const double vatAlcohol = 0.21;
        
 
         public Afrekenen(Rekening rekening)
@@ -31,7 +29,7 @@ namespace Project_Chapeau_herkansers_3
         {
             double total = rekening.TotaalPrijs;
             billListView.Items.Clear();
-            double vat = 0.00;
+            double belasting = rekening.Belasting;
             
 
             foreach (Bestelling bestelling in rekening.Bestellingen) {
@@ -41,7 +39,7 @@ namespace Project_Chapeau_herkansers_3
 
                     ListViewItem item = new ListViewItem(b.Hoeveelheid + "x");
                     item.SubItems.Add(b.menuItem.Naam);
-                    item.SubItems.Add("€ " + (b.menuItem.Prijs * b.Hoeveelheid));
+                    item.SubItems.Add($"€ {(b.menuItem.Prijs * b.Hoeveelheid):0.00}");
                      
 
 
@@ -58,29 +56,20 @@ namespace Project_Chapeau_herkansers_3
 
                     }
 
-                    double itemTotal = (b.menuItem.Prijs * b.Hoeveelheid);
                    
-                    if (b.menuItem.IsAlcoholisch)
-                    {
-                        vat += itemTotal * vatAlcohol;
-
-                    }
-                    else
-                    {
-                        vat += itemTotal * vatNormal;
-                    }
 
 
 
                 }
             }
-            billTotalAmountText.Text = "€ " + total;
-            totalVatPriceLabel.Text = "€ " + vat;
+            billTotalAmountText.Text = $"€ {(total):0.00}";
+            totalVatPriceLabel.Text = $"€ {(belasting):0.00}";
         }
 
         private void btnProceedToPayment_Click(object sender, EventArgs e)
         {
-
+           
+            Form1.Instance.SwitchPanels(new BetalingScherm());
         }
     }
 }

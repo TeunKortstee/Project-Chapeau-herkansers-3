@@ -13,7 +13,7 @@ namespace DAL
     {
         public Rekening? GetRekening(int tafelID)
         {
-            string query = "SELECT RekeningId, TafelId, TotaalPrijs, Datum, Betaald FROM Rekeningen WHERE TafelID = @tafelId AND Betaald = 0";
+            string query = "SELECT RekeningId, TafelId, Belasting, TotaalPrijs, Datum, Betaald FROM Rekeningen WHERE TafelID = @tafelId AND Betaald = 0";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@tafelId", tafelID),
@@ -50,7 +50,8 @@ namespace DAL
                     Convert.ToInt32(row["TafelId"]), 
                     (double)row["TotaalPrijs"],
                     (bool)row["Betaald"], 
-                    (DateTime)row["Datum"]);
+                    (DateTime)row["Datum"],
+                    (double)row["Belasting"]);
                 
                 rekeningen.Add(rekening);
             }
@@ -59,12 +60,13 @@ namespace DAL
 
         public int InsertRekening(Rekening rekening)
         {
-            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,Betaald) VALUES (@TafelId,@TotaalPrijs,@Betaald) SELECT CAST(scope_identity() AS int)";
+            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,Betaald,Belasting) VALUES (@TafelId,@TotaalPrijs,@Betaald,@Belasting) SELECT CAST(scope_identity() AS int)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@TafelId", rekening.TafelId),
                 new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
                 new SqlParameter("@Betaald", rekening.Betaald),
+                new SqlParameter("@Belasting", rekening.Belasting)
 
             };
             return ExecuteEditQueryReturnID(query, sqlParameters);
