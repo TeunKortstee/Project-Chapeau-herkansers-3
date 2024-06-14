@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Model;
+using Project_Chapeau_herkansers_3.UserControls;
 
 namespace Project_Chapeau_herkansers_3
 {
@@ -15,6 +17,11 @@ namespace Project_Chapeau_herkansers_3
         public BetalingScherm()
         {
             InitializeComponent();
+            payementsPanel.Controls.Add(new SplitBillItem(BetaalMethode.Debit,50.00,3.00));
         }
     }
+
+    
+
+
 }

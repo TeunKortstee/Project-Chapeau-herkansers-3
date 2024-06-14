@@ -11,10 +11,17 @@ namespace Service
     public class RekeningService
     {
         private RekeningDao rekeningDao;
+        private BestellingDao bestellingDao;
+        private BesteldeItemDao besteldeItemDao;
+        private const double vatNormal = 0.06;
+        private const double vatAlcohol = 0.21;
+
 
         public RekeningService()
         {
             rekeningDao = new RekeningDao();
+            bestellingDao = new BestellingDao();
+            besteldeItemDao = new BesteldeItemDao();
         }
         public Rekening GetRekening(int bestellingID)
         {
@@ -28,12 +35,56 @@ namespace Service
         }
 
 
-        //public Rekening CreateRekening() {
-            //Rekening r = new Rekening();
+        public static double BerekenBelasting(BesteldeItem b) {
 
-           // return r;
+            double itemTotal = (b.menuItem.Prijs * b.Hoeveelheid);
+
+            if (b.menuItem.IsAlcoholisch)
+            {
+                return itemTotal * vatAlcohol;
+
+            }
+            return itemTotal * vatNormal;
+            
+
+
+
+        }
+
+       public Rekening CreateRekening(int tafelID) {
+
+            Rekening? r = rekeningDao.GetRekening(tafelID);
+            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafelID);
+            if (r == null) {
+                
+                double totaalPrijs = 0.00;
+                double belasting = 0.00;
+
+
+
+
+
+                foreach (Bestelling bestelling in bestellingen) {
+
+                    foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
+
+                        totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
+                        belasting += BerekenBelasting(besteldeItem);
+
+
+
+
+                    }
+                }
+
+                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now,belasting);
+               
+                InsertRekening(r);
+            }
+            r.Bestellingen = bestellingen;
+            return r;
         
-        //}
+        }
 
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
