@@ -17,7 +17,8 @@ namespace Model
 
         public List<Bestelling> Bestellingen { get; set; }
 
-        public Rekening(int _RekeningId, int _TafelId, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting) { 
+        public Rekening(int _RekeningId, int _TafelId, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting) {
+            Bestellingen = new List<Bestelling>();
             RekeningId = _RekeningId;
             TafelId = _TafelId;
             TotaalPrijs = _TotaalPrijs;

@@ -65,6 +65,7 @@
             this.inputPayAmount.Size = new System.Drawing.Size(81, 23);
             this.inputPayAmount.TabIndex = 2;
             this.inputPayAmount.Text = "0.00";
+            this.inputPayAmount.TextChanged += new System.EventHandler(this.inputPayAmount_TextChanged);
             // 
             // lblPaymentAmount
             // 
@@ -91,6 +92,7 @@
             this.inputTipAmount.Size = new System.Drawing.Size(81, 23);
             this.inputTipAmount.TabIndex = 4;
             this.inputTipAmount.Text = "0.00";
+            this.inputTipAmount.TextChanged += new System.EventHandler(this.inputTipAmount_TextChanged);
             // 
             // SplitBillItem
             // 

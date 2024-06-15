@@ -8,15 +8,16 @@ namespace Project_Chapeau_herkansers_3
     {
 
 
-        BesteldeItemService serviceBI;
-       
+        private BesteldeItemService serviceBI;
+        private Rekening rekening;
 
-        public Afrekenen(Rekening rekening)
+        public Afrekenen(Rekening r)
         {
             InitializeComponent();
 
             serviceBI = new BesteldeItemService();
-            RefreshBillItems(rekening);
+            rekening = r;
+            RefreshBillItems();
 
 
 
@@ -25,7 +26,7 @@ namespace Project_Chapeau_herkansers_3
 
        
 
-        public void RefreshBillItems(Rekening rekening)
+        public void RefreshBillItems()
         {
             double total = rekening.TotaalPrijs;
             billListView.Items.Clear();
@@ -69,7 +70,7 @@ namespace Project_Chapeau_herkansers_3
         private void btnProceedToPayment_Click(object sender, EventArgs e)
         {
            
-            Form1.Instance.SwitchPanels(new BetalingScherm());
+            Form1.Instance.SwitchPanels(new BetalingScherm(rekening));
         }
     }
 }

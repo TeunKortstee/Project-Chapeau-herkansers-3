@@ -45,18 +45,18 @@ namespace Service
 
             }
             return itemTotal * vatNormal;
-            
+
 
 
 
         }
 
-       public Rekening CreateRekening(int tafelID) {
+        public Rekening CreateRekening(int tafelID) {
 
             Rekening? r = rekeningDao.GetRekening(tafelID);
             List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafelID);
             if (r == null) {
-                
+
                 double totaalPrijs = 0.00;
                 double belasting = 0.00;
 
@@ -77,19 +77,47 @@ namespace Service
                     }
                 }
 
-                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now,belasting);
-               
+                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now, belasting);
+
                 InsertRekening(r);
             }
             r.Bestellingen = bestellingen;
             return r;
-        
+
         }
 
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
             return rekeningDao.GetBetaaldeRekeningen(betaald);
         }
+        public double[] GetPaymentPerPerson(double price, int people)
+        {
+
+            double[] payments = new double[people];
+            double division = Math.Round(price / people, 2, MidpointRounding.ToZero);
+            for (int i = 0; i < people; i++)
+            {
+                payments[i] = division;
+
+
+            }
+
+            // Voor als er door een oneven getal word gedeeld
+            if (division * people < price)
+            {
+                double remainder = price - division;
+                payments[0] += remainder;
+            }
+
+
+
+
+            return payments;
+
+        }
+
+
+
     }
 
 
