@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL;
 using Model;
 
+
 namespace Service
 {
     public class BetalingService
@@ -30,8 +31,27 @@ namespace Service
             }
             return result;
         }
-           
-      
+        public double[] GetTipPerPerson(int people)
+        {
+            double[] tips = new double[people];
+            for (int i = 0; i < people; i++)
+            {
+                tips[i] = 0.00;
+
+
+            }
+            return tips;
+        }
+
+        public double CalculateChange(double toPay, double amountPaid) {
+
+
+
+            return amountPaid - toPay;
+        
+        
+        }
+
         public double[] GetPaymentPerPerson(double price, int people)
         {
 
@@ -57,6 +77,44 @@ namespace Service
 
             return payments;
 
+        }
+
+        
+
+
+        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) {
+
+
+            double totalAmountPaid = 0.00;
+            
+            foreach (SplitBillItemObj payment in payments) {
+
+                if (payment.payment > 0 && payment.tip >= 0) {
+                    totalAmountPaid += payment.payment;
+                    
+                } else {
+                    return 1;
+
+                }
+            }
+
+
+
+            if (totalAmountPaid >= bill.TotaalPrijs) {
+
+                foreach (SplitBillItemObj payment in payments)
+                {
+                    betalingDao.InsertBetaling(new Betaling(0,(int)payment.method,payment.payment,bill.RekeningId,payment.tip));
+                
+                }
+
+
+            }
+
+
+            return 0;
+        
+        
         }
 
 

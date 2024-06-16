@@ -20,9 +20,10 @@ namespace Project_Chapeau_herkansers_3
         private BetalingService betalingService;
         private Rekening rekening;
         private double[] payments;
+        private double[] tips;
 
 
-       
+
 
         public BetalingScherm(Rekening rekening)
         {
@@ -33,8 +34,8 @@ namespace Project_Chapeau_herkansers_3
             this.rekening = rekening;
             payments = new double[1];
 
+            tips = new double[1];
 
-            
         }
         public void RefreshView() {
 
@@ -62,27 +63,96 @@ namespace Project_Chapeau_herkansers_3
         
         }
 
+        public void UpdateTipAmount(int ID, double tip)
+        {
+
+            if (tips.Length > ID)
+            {
+
+                tips[ID] = tip;
+
+            }
+
+            UpdateAmountPaidText();
+
+        }
+
+
+
         public void UpdateAmountPaidText() {
             lblAmountPaid.Text = $"€ {betalingService.AddDoubleArray(payments):0.00}";
+            lblTip.Text = $"€ {betalingService.AddDoubleArray(tips):0.00}";
+            lblChange.Text = $"€ {Math.Clamp( betalingService.CalculateChange(rekening.TotaalPrijs, betalingService.AddDoubleArray(payments)),0,double.MaxValue):0.00}";
         }
+        
+
 
         private void btnConfirmSplit_Click(object sender, EventArgs e)
         {
-            splitBillItems.Clear();
-            int splitAmount = int.Parse(inputSplitAmount.Text);
-            payments = betalingService.GetPaymentPerPerson(rekening.TotaalPrijs,splitAmount);
-            
-         
-            for (int i = 0; i < splitAmount; i++) {
 
-               
-                splitBillItems.Add(new SplitBillItem(BetaalMethode.Debit, payments[i],0.00,this,i));
+            if (int.TryParse(inputSplitAmount.Text, out int splitAmount) && splitAmount > 0)
+            {
+                splitBillItems.Clear();
+
+                payments = betalingService.GetPaymentPerPerson(rekening.TotaalPrijs, splitAmount);
+                tips = betalingService.GetTipPerPerson(splitAmount);
+
+                for (int i = 0; i < splitAmount; i++)
+                {
+
+
+                    splitBillItems.Add(new SplitBillItem(BetaalMethode.Debit, payments[i], tips[i], this, i));
+
+
+                }
+                UpdateAmountPaidText();
+                RefreshView();
+            }
+            else {
+
+                lblSplitAmountErrorText.Text = "Please enter a valid amount!";
+            
+            }
+
+        }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+
+
+            List<SplitBillItemObj> paymentObjs = new List<SplitBillItemObj>();
+
+            foreach (SplitBillItem item in splitBillItems) {
+
+                if (!double.TryParse(item.getPaymentInput, out double result) || !double.TryParse(item.getTipInput, out double result2)) {
+
+                    lblPaymentErrorText.Text = "Please enter valid values!";
+                    return;
                 
+                }
+                paymentObjs.Add(item.toObj());
+            }
+
+            int code = betalingService.ConfirmPayments(rekening,paymentObjs);
+
+            if (code == 0) {
+
+                lblPaymentErrorText.Text = "Insufficient payment.";
+
+            } else if (code == 1)
+            {
+
+                lblPaymentErrorText.Text = "Please enter valid values!";
 
             }
-            UpdateAmountPaidText();
-            RefreshView();
 
+
+
+        }
+
+        private void inputSplitAmount_TextChanged(object sender, EventArgs e)
+        {
+            lblSplitAmountErrorText.Text = "";
         }
     }
 
