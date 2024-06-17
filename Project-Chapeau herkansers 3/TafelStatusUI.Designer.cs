@@ -34,6 +34,7 @@
             TerugBtn = new Button();
             StatusBox = new ComboBox();
             AfrekenenBtn = new Button();
+            BestellingDisplayBtn = new Button();
             SuspendLayout();
             // 
             // TafelTitelTag
@@ -92,10 +93,21 @@
             AfrekenenBtn.Text = "Afrekenen";
             AfrekenenBtn.UseVisualStyleBackColor = true;
             // 
+            // BestellingDisplayBtn
+            // 
+            BestellingDisplayBtn.Location = new Point(318, 55);
+            BestellingDisplayBtn.Name = "BestellingDisplayBtn";
+            BestellingDisplayBtn.Size = new Size(136, 34);
+            BestellingDisplayBtn.TabIndex = 8;
+            BestellingDisplayBtn.Text = "Zie Bestelling";
+            BestellingDisplayBtn.UseVisualStyleBackColor = true;
+            BestellingDisplayBtn.Click += BestellingDisplayBtn_Click;
+            // 
             // TafelStatusUI
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(BestellingDisplayBtn);
             Controls.Add(AfrekenenBtn);
             Controls.Add(StatusBox);
             Controls.Add(TerugBtn);
@@ -116,5 +128,6 @@
         private Button TerugBtn;
         private ComboBox StatusBox;
         private Button AfrekenenBtn;
+        private Button BestellingDisplayBtn;
     }
 }

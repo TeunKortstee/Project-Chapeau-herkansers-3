@@ -34,19 +34,17 @@ namespace Project_Chapeau_herkansers_3
 
         private void MaakBestellingBtn_Click(object sender, EventArgs e)
         {
-            SaveTafel();
-            //Open naar bestelling Ui
-            /*OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
-            opnemenBestellen.Tag = this;
-            AddUserControl(opnemenBestellen);*/
+            Exit(new OpnemenBestellen(this.tafel));
         }
 
         private void TerugBtn_Click(object sender, EventArgs e)
         {
-            //sla tafel op in db
+            Exit(new TafelOverzichtUserControl());
+        }
+        private void Exit(UserControl control)
+        {
             SaveTafel();
-            //ga terug naar tafeloverzicht
-            form1.SwitchPanels(new TafelOverzichtUserControl());
+            form1.SwitchPanels(control);
         }
         private void SaveTafel()
         {
@@ -59,6 +57,11 @@ namespace Project_Chapeau_herkansers_3
         {
             tafel.status = (TafelStatus)StatusBox.SelectedIndex;
             SetLabels();
+        }
+
+        private void BestellingDisplayBtn_Click(object sender, EventArgs e)
+        {
+            Exit(new TafelBestellingUserControl());
         }
     }
 }

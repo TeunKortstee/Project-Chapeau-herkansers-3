@@ -15,22 +15,13 @@ namespace Project_Chapeau_herkansers_3
         }
         private Personeel IsPersoneel(Personeel p)
         {
-            //get user from db
             LoginService service = new LoginService();
             Personeel personeel = service.GetPersoneel(p);
             if (personeel == null)
-            {
                 return null;
-            }
             if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
-            {
                 return null;
-            }
-            else
-            {
-                return personeel;
-            }
-
+            return personeel;
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
@@ -40,50 +31,50 @@ namespace Project_Chapeau_herkansers_3
             {
                 if (CheckPassword() && IsValidEmail())
                 {
-                    personeel.email = EmailTxt.Text;
                     if (CreateUserCheck.Checked)
                     {
-                        //Send user to database
-
-                        personeel.email = EmailTxt.Text;
-                        LoginService service = new LoginService();
-                        personeel = service.GetPersoneel(personeel);
-                        service.ChangePassword(personeel, PasswordTxt.Text);
+                        changePassword(personeel);
                     }
                     else
                     {
                         personeel = IsPersoneel(personeel);
                         if (personeel != null)
                         {
-                            //return user to mainform
                             _form1.personeel = personeel;
-                            switch (personeel.Functie)
-                            {
-                                case Functie.Serveerder:
-                                    _form1.SwitchPanels(new TafelOverzichtUserControl());
-                                    break;
-                                case Functie.Manager:
-                                    _form1.SwitchPanels(new UserControlManager());
-                                    break;
-                            }
+                            openNextView(personeel);
                         }
                         else
-                        {
                             throw new LoginException();
-                        }
                     }
                 }
                 else
-                {
                     throw new LoginException();
-                }
             }
             catch (LoginException ex)
             {
                 SomethingWentWrong(ex.Message);
+            }
+        }
+
+        private void changePassword(Personeel personeel)
+        {
+            personeel.email = EmailTxt.Text;
+            LoginService service = new LoginService();
+            personeel = service.GetPersoneel(personeel);
+            service.ChangePassword(personeel, PasswordTxt.Text);
+        }
+        private void openNextView(Personeel personeel)
+        {
+            switch (personeel.Functie)
+            {
+                case Functie.Serveerder:
+                    _form1.SwitchPanels(new TafelOverzichtUserControl());
+                    break;
+                case Functie.Manager:
+                    _form1.SwitchPanels(new UserControlManager());
+                    break;
 
             }
-
         }
         private bool CheckPassword()
         {
@@ -97,8 +88,6 @@ namespace Project_Chapeau_herkansers_3
         }
         private void SomethingWentWrong(string message)
         {
-            //display errors
-
             PasswordTxt.Clear();
             ErrorLbl.Text = message;
         }
