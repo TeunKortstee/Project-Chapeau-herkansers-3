@@ -21,8 +21,7 @@ namespace DAL
 
             };
             List<Rekening> rekeningen = ReadTables(ExecuteSelectQuery(query, sqlParameters));
-            if (rekeningen.Count > 0)
-            {
+            if (rekeningen.Count > 0) {
 
                 return rekeningen[0];
             }
