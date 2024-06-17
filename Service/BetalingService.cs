@@ -86,8 +86,7 @@ namespace Service
 
             List<Betaling> betalingen = new List<Betaling>();
 
-            foreach (SplitBillItemObj payment in payments)
-            {
+            foreach (SplitBillItemObj payment in payments) {
 
                 if (payment.payment > 0 && payment.tip >= 0)
                 {
