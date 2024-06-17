@@ -7,9 +7,18 @@
         public List<BesteldeItem> BestellingItems { get { return besteldeItems; } set { besteldeItems = value; } }
         public Personeel personeel { get; set; }
 
-        public Bestelling()
+        public bool betaald { get; set; }
+
+        public int tafelId { get; set; }
+
+        public Bestelling(int _bestellingId, Personeel _personeel, bool _betaald, int _tafelId)
         {
             besteldeItems = new List<BesteldeItem>();
+            bestellingId = _bestellingId;
+            personeel = _personeel;
+            betaald = _betaald;
+            tafelId = _tafelId;
         }
+
     }
 }

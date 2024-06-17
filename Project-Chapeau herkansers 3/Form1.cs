@@ -30,7 +30,18 @@ namespace Project_Chapeau_herkansers_3
         {
             mainPanel.Controls.Clear();
             userControl.Dock = DockStyle.Fill;
+            Size userControlSize = userControl.Size;
+
+            mainPanel.Size = userControlSize;
+
+            userControlSize.Width += 30;
+            userControlSize.Height += 60;
+
+            _instance.Size = userControlSize;
+
             mainPanel.Controls.Add(userControl);
+
+
         }
     }
 }
