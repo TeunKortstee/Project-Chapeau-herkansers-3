@@ -26,13 +26,13 @@
             RekeningId = _RekeningId;
             TafelId = _TafelId;
             TotaalPrijs = _TotaalPrijs;
-            
+
             Betaald = _Betaald;
             Datum = _Datum;
             Belasting = _Belasting;
             Opmerkingen = _Opmerkingen;
 
-        
+
         }
     }
 }
