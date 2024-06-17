@@ -18,6 +18,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlManageOverview : UserControl
     {
+        const int weinigInVoorraad = 3;
+        
         private Form1 form;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
@@ -161,7 +163,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 item.SubItems.Add(menuItem.Naam);
                 item.SubItems.Add(menuItem.Voorraad.ToString());
                 item.Tag = menuItem;
-                lsvDatabaseItems.Items.Add(item);
+                CheckLowStock(item);
             }
         }
         private void FillEmployeeListView(Functie functie)
@@ -259,6 +261,18 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
+        private void CheckLowStock(ListViewItem item)
+        {
+            if (int.Parse(item.SubItems[2].Text) <= weinigInVoorraad)
+            {
+                item.BackColor = Color.FromArgb(0, 245, 108, 117);
+                lsvDatabaseItems.Items.Insert(0, item);
+            }
+            else
+            {
+                lsvDatabaseItems.Items.Add(item);
+            }
+        }
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.form.SwitchPanels(new UserControlManager());

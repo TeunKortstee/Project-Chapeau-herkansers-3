@@ -31,7 +31,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Menu Item
         private void DisplayMenuElements(MenuType menu)
         {
-            SetObjectText("MenuItem", "Naam", "Prijs", "0,00", "Voorraad", "Menu");
+            SetObjectText("MenuItem", "Naam", "Prijs", "€ 0,00", "Voorraad", "Menu");
             cmbType.DataSource = Enum.GetValues(typeof(MenuType));
             cmbType.SelectedItem = menu;
             btnCancel.Tag = menu;
@@ -75,7 +75,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 }
                 catch (FormatException ex)
                 {
-                    MessageBox.Show("Fout: Probleem met velden");
+                    MessageBox.Show(ex.Message);
                     return;
                 }
             }
