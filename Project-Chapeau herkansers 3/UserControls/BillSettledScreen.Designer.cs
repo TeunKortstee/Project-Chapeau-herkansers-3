@@ -37,6 +37,7 @@
             this.lblTipAmount = new System.Windows.Forms.Label();
             this.lblAmountPaid = new System.Windows.Forms.Label();
             this.lblOrderPrice = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblBillSettled
@@ -122,11 +123,23 @@
             this.lblOrderPrice.Text = "€ 0";
             this.lblOrderPrice.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // btnBack
+            // 
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBack.Location = new System.Drawing.Point(156, 496);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(99, 44);
+            this.btnBack.TabIndex = 9;
+            this.btnBack.Text = "BACK";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // BillSettledScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblVat);
             this.Controls.Add(this.lblTipAmount);
             this.Controls.Add(this.lblAmountPaid);
@@ -154,5 +167,6 @@
         private Label lblTipAmount;
         private Label lblAmountPaid;
         private Label lblOrderPrice;
+        private Button btnBack;
     }
 }
