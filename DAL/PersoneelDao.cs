@@ -72,5 +72,18 @@ namespace DAL
                 };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
+        public bool IsUniqueEmail(string email)
+        {
+            string query = "SELECT Email FROM Personeel WHERE Email = @Email";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Email", email),
+            };
+
+            List<Personeel> personeel = ReadTables(ExecuteSelectQuery(query, sqlParameters));
+
+            // If no records are found, the email is unique
+            return personeel.Count == 0;
+        }
     }
 }

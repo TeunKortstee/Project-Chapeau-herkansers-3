@@ -42,6 +42,10 @@ namespace Service
         // Lucas
         public Personeel CreatePersoneel(string surname, string email, string password, Functie function)
         {
+            if (!IsUniqueEmail(email)) 
+            {
+                throw new FormatException("Email bestaat al");
+            }
             string salt = GenerateSalt();
             string slowSaltedHashedPassword = HashPasswordWithBCrypt(password, salt);
             return new Personeel(surname, email, slowSaltedHashedPassword, salt, function);
@@ -58,10 +62,9 @@ namespace Service
         {
             return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
         }
-        private bool VerifyPassword(string password, string hashedPassword)
+        private bool IsUniqueEmail(string email)
         {
-            return BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword, HashType.SHA512);
-
+            return personeelDao.IsUniqueEmail(email);
         }
 
         //private string HashPasswordWithArgon2(string password, int iterations, int memorySize, int parallelism)

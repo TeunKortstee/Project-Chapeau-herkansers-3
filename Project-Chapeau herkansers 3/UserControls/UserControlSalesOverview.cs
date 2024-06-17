@@ -36,42 +36,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void DisplaySalesElements(MenuType menuType)
         {
             lblOverview.Text = "Menu";
-            DisplaySalesButtons(menuType);
             FillSalesListView(menuType);
         }
-        #region Buttons - Rekeningen
-        private void DisplaySalesButtons(MenuType menuType)
-        {
-            btn1.Tag = MenuType.Lunch;
-            btn1.Text = MenuType.Lunch.ToString();
-            btn2.Tag = MenuType.Diner;
-            btn2.Text = MenuType.Diner.ToString();
-            btn3.Tag = MenuType.Drank;
-            btn3.Text = MenuType.Drank.ToString();
-            RenableMenuButtons(menuType);
-        }
-        private void RenableMenuButtons(MenuType menuType)
-        {
-            switch (menuType)
-            {
-                case MenuType.Lunch:
-                    btn1.Enabled = false;
-                    btn2.Enabled = true;
-                    btn3.Enabled = true;
-                    break;
-                case MenuType.Diner:
-                    btn1.Enabled = true;
-                    btn2.Enabled = false;
-                    btn3.Enabled = true;
-                    break;
-                case MenuType.Drank:
-                    btn1.Enabled = true;
-                    btn2.Enabled = true;
-                    btn3.Enabled = false;
-                    break;
-            }
-        }
-        #endregion
         #endregion
 
 
@@ -83,8 +49,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvPaidBills.Clear();
 
             lsvPaidBills.Columns.Add("Id", 60);
-            lsvPaidBills.Columns.Add("Item", 250);
-            lsvPaidBills.Columns.Add("In Voorraad", 60);
+            lsvPaidBills.Columns.Add("Methode", 250);
+            lsvPaidBills.Columns.Add("Bedrag", 60);
+            lsvPaidBills.Columns.Add("Fooi", 60);
 
 
             List<Rekening> betaaldeRekeningen = rekeningService.GetBetaaldeRekeningen(betaald);
