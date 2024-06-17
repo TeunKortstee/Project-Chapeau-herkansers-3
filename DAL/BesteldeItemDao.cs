@@ -16,11 +16,12 @@ namespace DAL
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
+        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel, Tafel tafel)
         {
-            string query = "INSERT INTO Bestellingen (Personeelsid) VALUES (0); SELECT @@IDENTITY AS BestellingsId;";
+            string query = "INSERT INTO Bestellingen (Personeelsid, TableNr) VALUES (@PersoneelsId, @TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
             SqlParameter[] sqlParameters = new SqlParameter[] {
-                new SqlParameter("@PersoneelsId", personeel.Id)
+                new SqlParameter("@PersoneelsId", personeel.Id),
+                new SqlParameter("@TafelNummer", tafel.Id)
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters), bestelling);
         }
