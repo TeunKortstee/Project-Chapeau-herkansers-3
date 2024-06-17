@@ -8,7 +8,7 @@ namespace DAL
     {
         public List<Personeel> GetAllPersoneel()
         {
-            string query = "SELECT PersoneelsId, Voornaam, Achternaam, Wachtwoord, FunctieId FROM Personeel"; ;
+            string query = "SELECT PersoneelsId, Achternaam, Wachtwoord, FunctieId FROM Personeel"; ;
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -31,7 +31,7 @@ namespace DAL
         }
         public Personeel GetPersoneel(Personeel personeel)
         {
-            string query = "SELECT PersoneelsId, Voornaam, Achternaam, Wachtwoord, FunctieId, Fooi FROM Personeel WHERE Email=@Email AND Wachtwoord=@Wachtwoord";
+            string query = "SELECT PersoneelsId, Achternaam, Wachtwoord, FunctieId, Fooi FROM Personeel WHERE Email=@Email AND Wachtwoord=@Wachtwoord";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Email", personeel.email),
@@ -41,10 +41,9 @@ namespace DAL
         }
         public void InsertPersoneel(Personeel personeel)
         {
-            string query = "INSERT INTO Personeel (Voornaam, Achternaam, Wachtwoord, FunctieId, Email, Salt) VALUES (@Voornaam, @Achternaam, @Wachtwoord, @FunctieId, @Email, @Salt)";
+            string query = "INSERT INTO Personeel (Achternaam, Wachtwoord, FunctieId, Email, Salt) VALUES (@Achternaam, @Wachtwoord, @FunctieId, @Email, @Salt)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Voornaam", "Niet Relevant"),
                 new SqlParameter("@Achternaam", personeel.AchterNaam),
                 new SqlParameter("@Email", personeel.email),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord),
@@ -72,6 +71,19 @@ namespace DAL
                     new SqlParameter("@FunctieId", (int)functie),
                 };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public bool IsUniqueEmail(string email)
+        {
+            string query = "SELECT Email FROM Personeel WHERE Email = @Email";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Email", email),
+            };
+
+            List<Personeel> personeel = ReadTables(ExecuteSelectQuery(query, sqlParameters));
+
+            // If no records are found, the email is unique
+            return personeel.Count == 0;
         }
     }
 }
