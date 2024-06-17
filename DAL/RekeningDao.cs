@@ -62,8 +62,7 @@ namespace DAL
             return rekeningen;
         }
 
-        public void RekeningBetaald(Rekening rekening)
-        {
+        public void RekeningBetaald(Rekening rekening) {
             string query = "UPDATE Rekeningen SET Betaald = 1, Datum = GETDATE() WHERE RekeningId = @ID; UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TableNr AND Betaald = 0";
 
 
