@@ -97,16 +97,14 @@
             this.AfrekenenBtn.TabIndex = 7;
             this.AfrekenenBtn.Text = "Afrekenen";
             this.AfrekenenBtn.UseVisualStyleBackColor = true;
-
             // 
             // labelBestellingAangemaakt
             // 
             this.labelBestellingAangemaakt.AutoSize = true;
-            this.labelBestellingAangemaakt.Location = new System.Drawing.Point(166, 187);
+            this.labelBestellingAangemaakt.Location = new System.Drawing.Point(90, 186);
             this.labelBestellingAangemaakt.Name = "labelBestellingAangemaakt";
-            this.labelBestellingAangemaakt.Size = new System.Drawing.Size(50, 20);
+            this.labelBestellingAangemaakt.Size = new System.Drawing.Size(0, 20);
             this.labelBestellingAangemaakt.TabIndex = 8;
-            this.labelBestellingAangemaakt.Text = "label1";
             // 
             // TafelStatusUI
             // 

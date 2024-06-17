@@ -21,10 +21,6 @@ namespace Project_Chapeau_herkansers_3
             StatusLbl.Text = "Deze tafel is nu ";
             TafelTitelTag.Text += tafel.Id.ToString();
             StatusLbl.Text += tafel.status.ToString();
-            if(labelBestellingAangemaakt.Tag != null)
-            {
-                labelBestellingAangemaakt.Text = labelBestellingAangemaakt.Tag.ToString();
-            }
         }
 
         private void FillComboBox()
@@ -38,7 +34,6 @@ namespace Project_Chapeau_herkansers_3
 
         private void MaakBestellingBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("test");
             SaveTafel();
             //Open naar bestelling Ui
             /*OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
@@ -65,6 +60,11 @@ namespace Project_Chapeau_herkansers_3
         {
             tafel.status = (TafelStatus)StatusBox.SelectedIndex;
             SetLabels();
+        }
+
+        public void SetStringName(string message)
+        {
+            labelBestellingAangemaakt.Text = message;
         }
     }
 }
