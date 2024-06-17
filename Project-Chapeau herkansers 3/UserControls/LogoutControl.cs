@@ -1,4 +1,5 @@
 ﻿using Model;
+using Project_Chapeau_herkansers_3.UserControls;
 
 namespace Project_Chapeau_herkansers_3
 {
@@ -23,6 +24,23 @@ namespace Project_Chapeau_herkansers_3
             form.personeel = new Personeel();
             form.ChangeButtonText("Gebruiker");
             form.SwitchPanels(new LoginControl());
+        }
+
+        private void TerugBtn_Click(object sender, EventArgs e)
+        {
+            Form1 form = Form1.Instance;
+            switch (form.personeel.Functie)
+            {
+                case Functie.Serveerder:
+                    form.SwitchPanels(new TafelOverzichtUserControl());
+                    break;
+                case Functie.Manager:
+                    form.SwitchPanels(new UserControlManager());
+                    break;
+                default:
+                    form.SwitchPanels(new ItemBereiderUserControl(0));
+                    break;
+            }
         }
     }
 }
