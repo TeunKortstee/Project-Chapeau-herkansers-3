@@ -80,11 +80,7 @@ namespace Service
 
         }
 
-
-
-
-        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments)
-        {
+        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) {
 
 
             double totalAmountPaid = 0.00;
@@ -107,33 +103,24 @@ namespace Service
                 }
             }
 
-
-
             if (totalAmountPaid >= bill.TotaalPrijs)
             {
                 // Succes!
                 foreach (Betaling betaling in betalingen)
                 {
                     betalingDao.InsertBetaling(betaling);
-
-
-
                 }
-
                 rekeningDao.RekeningBetaald(bill);
 
                 return 2;
 
             }
-
-
             return 0;
-
-
         }
-
-
-
+        public List<Betaling> GetBetalingen(bool betaald)
+        {
+            return betalingDao.GetBetalingen(betaald);
+        }
     }
 
 
