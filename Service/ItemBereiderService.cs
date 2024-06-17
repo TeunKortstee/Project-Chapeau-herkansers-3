@@ -16,7 +16,7 @@ namespace Service
         {
             itemBereiderDao = new ItemBereiderDao();
         }
-        public List<ItemBereider> GetAllItems(int personelId)
+        public List<BesteldeItem> GetAllItems(int personelId)
         {
             return itemBereiderDao.GetAllItems(personelId);
         }

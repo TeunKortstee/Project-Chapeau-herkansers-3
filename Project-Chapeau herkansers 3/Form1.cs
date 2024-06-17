@@ -27,7 +27,7 @@ namespace Project_Chapeau_herkansers_3
             SwitchPanels(new ItemBereiderUserControl());
 
             personeel = new Personeel();
-            SwitchPanels(new LoginControl());
+            //SwitchPanels(new LoginControl());
             //SwitchPanels(new UserControlManager());
         }
 
