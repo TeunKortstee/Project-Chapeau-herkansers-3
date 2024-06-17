@@ -16,13 +16,22 @@ namespace Project_Chapeau_herkansers_3
         }
         private Personeel IsPersoneel(Personeel p)
         {
-            LoginService service = new LoginService();
-            p.email = EmailTxt.Text;
-            Personeel personeel = service.GetPersoneel(p);
-            if (personeel == null || !service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
-                throw new LoginException();
+            try
+            {
+                LoginService service = new LoginService();
+                p.email = EmailTxt.Text;
+                Personeel personeel = service.GetPersoneel(p);
+                if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
+                    throw new LoginException();
 
-            return personeel;
+                return personeel;
+            }
+            catch (Exception ex)
+            {
+                throw new LoginException();
+            }
+
+
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
