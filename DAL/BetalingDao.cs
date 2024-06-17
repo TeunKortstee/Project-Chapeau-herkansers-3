@@ -29,7 +29,7 @@ namespace DAL
             {
 
                 Betaling betaling = new Betaling(Convert.ToInt32(row["BetalingId"]),
-                    Convert.ToInt32(row["MethodeId"]),
+                    Convert.ToInt32(row["Methode"]),
                     (double)row["Bedrag"],
                     Convert.ToInt32(row["RekeningId"]),
                     (double)row["Fooi"]);
@@ -39,7 +39,7 @@ namespace DAL
             return betalingen;
         }
 
-        public void InsertBetaling(Betaling betaling, Rekening rekening)
+        public void InsertBetaling(Betaling betaling)
         {
             string query = "INSERT INTO Betalingen(Methode,Bedrag,RekeningID,Fooi) VALUES (@Methode,@Bedrag,@RekeningID,@Fooi)";
             SqlParameter[] sqlParameters = new SqlParameter[]
@@ -52,6 +52,18 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
+        // Lucas
+        public List<Betaling> GetBetalingen(bool betaald)
+        {
+            string query = "SELECT b.* FROM Betalingen b JOIN Rekeningen r ON b.RekeningID = r.RekeningID WHERE r.Betaald = @betaald";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@betaald", betaald),
+
+            };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
 
 
     }

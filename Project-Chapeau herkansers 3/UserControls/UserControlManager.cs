@@ -34,7 +34,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
          
         private void btnSales_Click(object sender, EventArgs e)
         {
-
+            form.SwitchPanels(new UserControlSalesOverview());
         }
     }
 }

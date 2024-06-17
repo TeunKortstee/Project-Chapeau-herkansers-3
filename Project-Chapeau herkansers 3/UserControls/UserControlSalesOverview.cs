@@ -21,31 +21,20 @@ namespace Project_Chapeau_herkansers_3.UserControls
         const bool betaald = true;
 
         private Form1 form;
-        private RekeningService rekeningService;
+        private BetalingService betalingService;
 
         public UserControlSalesOverview()
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.rekeningService = new RekeningService();
-            //DisplaySalesElements(menuType);
+            this.betalingService = new BetalingService();
+            FillSalesListView();
         }
-        #region DisplayUIElements
-
-        #region Rekeningen
-        private void DisplaySalesElements(MenuType menuType)
-        {
-            lblOverview.Text = "Menu";
-            FillSalesListView(menuType);
-        }
-        #endregion
-
-
-        #endregion
 
         #region ListView
-        private void FillSalesListView(MenuType menuType)
+        private void FillSalesListView()
         {
+            double totaleInkomens = 0;
             lsvPaidBills.Clear();
 
             lsvPaidBills.Columns.Add("Id", 60);
@@ -54,59 +43,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvPaidBills.Columns.Add("Fooi", 60);
 
 
-            List<Rekening> betaaldeRekeningen = rekeningService.GetBetaaldeRekeningen(betaald);
-            foreach (Rekening rekening in betaaldeRekeningen)
+            List<Betaling> betaaldeRekeningen = betalingService.GetBetalingen(betaald);
+            foreach (Betaling betaling in betaaldeRekeningen)
             {
-                //ListViewItem item = new ListViewItem(rekening.RekeningId.ToString());
-                //item.SubItems.Add(menuItem.Naam);
-                //item.SubItems.Add(menuItem.Voorraad.ToString());
-                //item.Tag = menuItem;
-                //lsvDatabaseItems.Items.Add(item);
+                ListViewItem item = new ListViewItem(betaling.BetalingId.ToString());
+                item.SubItems.Add(betaling.Methode.ToString());
+                item.SubItems.Add(betaling.Bedrag.ToString());
+                item.SubItems.Add(betaling.Fooi.ToString());
+                lsvPaidBills.Items.Add(item);
+                totaleInkomens += betaling.Bedrag;
             }
-        }
-        #endregion
-
-        #region Top Buttons
-        private void btn1_Click(object sender, EventArgs e)
-        {
-            FillSalesListView((MenuType)btn1.Tag);
-            RenableMenuButtons((MenuType)btn1.Tag);
-        }
-        private void btn1_EnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btn1);
-        }
-        private void btn2_Click(object sender, EventArgs e)
-        {
-            FillSalesListView((MenuType)btn2.Tag);
-            RenableMenuButtons((MenuType)btn2.Tag);
-        }
-        private void btn2_EnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btn2);
-        }
-        private void btn3_Click(object sender, EventArgs e)
-        {
-            FillSalesListView((MenuType)btn3.Tag);
-            RenableMenuButtons((MenuType)btn3.Tag);
-        }
-        private void btn3_EnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btn3);
-        }
-        private void SetEnableColor(System.Windows.Forms.Button button)
-        {
-            //button.BackColor = Color.FromArgb(255, 234, 219, 202);
-            if (button.Enabled)
-            {
-                // Enabled
-                button.BackColor = Color.FromArgb(255, 138, 210, 176);
-            }
-            else
-            {
-                // Disabled
-                button.BackColor = Color.FromArgb(114, 138, 210, 176);
-            }
+            lblTotalIncome.Text += $"{Math.Round(totaleInkomens, 2):00.00}";
         }
         #endregion
 

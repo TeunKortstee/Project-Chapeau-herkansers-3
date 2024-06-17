@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             lsvPaidBills = new ListView();
-            lblOverview = new Label();
+            lblSales = new Label();
             btnReturn = new Button();
             lblTotalIncome = new Label();
             SuspendLayout();
@@ -46,15 +46,15 @@
             lsvPaidBills.UseCompatibleStateImageBehavior = false;
             lsvPaidBills.View = View.Details;
             // 
-            // lblOverview
+            // lblSales
             // 
-            lblOverview.AutoSize = true;
-            lblOverview.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOverview.Location = new Point(118, 14);
-            lblOverview.Name = "lblOverview";
-            lblOverview.Size = new Size(177, 46);
-            lblOverview.TabIndex = 1;
-            lblOverview.Text = "Inkomens";
+            lblSales.AutoSize = true;
+            lblSales.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSales.Location = new Point(118, 14);
+            lblSales.Name = "lblSales";
+            lblSales.Size = new Size(177, 46);
+            lblSales.TabIndex = 1;
+            lblSales.Text = "Inkomens";
             // 
             // btnReturn
             // 
@@ -75,9 +75,9 @@
             lblTotalIncome.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
             lblTotalIncome.Location = new Point(14, 108);
             lblTotalIncome.Name = "lblTotalIncome";
-            lblTotalIncome.Size = new Size(126, 46);
+            lblTotalIncome.Size = new Size(135, 46);
             lblTotalIncome.TabIndex = 32;
-            lblTotalIncome.Text = "Totaal:";
+            lblTotalIncome.Text = "Totaal: ";
             // 
             // UserControlSalesOverview
             // 
@@ -85,7 +85,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lblTotalIncome);
             Controls.Add(btnReturn);
-            Controls.Add(lblOverview);
+            Controls.Add(lblSales);
             Controls.Add(lsvPaidBills);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlSalesOverview";
@@ -97,7 +97,7 @@
         #endregion
 
         private ListView lsvPaidBills;
-        private Label lblOverview;
+        private Label lblSales;
         private Button btnReturn;
         private Label lblTotalIncome;
     }

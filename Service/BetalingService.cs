@@ -53,7 +53,6 @@ namespace Service
         
         
         }
-
         public double[] GetPaymentPerPerson(double price, int people)
         {
 
@@ -80,10 +79,6 @@ namespace Service
             return payments;
 
         }
-
-        
-
-
         public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) {
 
 
@@ -103,32 +98,23 @@ namespace Service
                 }
             }
 
-
-
             if (totalAmountPaid >= bill.TotaalPrijs) {
                 // Succes!
                 foreach (Betaling betaling in betalingen)
                 {
                     betalingDao.InsertBetaling(betaling);
-                    
-                    
-                
                 }
-
                 rekeningDao.RekeningBetaald(bill);
 
                 return 2;
 
             }
-
-
             return 0;
-        
-        
         }
-
-
-
+        public List<Betaling> GetBetalingen(bool betaald)
+        {
+            return betalingDao.GetBetalingen(betaald);
+        }
     }
 
 
