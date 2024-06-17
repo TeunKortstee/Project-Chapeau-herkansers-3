@@ -84,6 +84,32 @@ namespace DAL
             }
         }
 
+        /* For Insert/Update/Delete Queries Return ID */
+        protected int ExecuteEditQueryReturnID(string query, SqlParameter[] sqlParameters)
+        {
+            SqlCommand command = new SqlCommand();
+
+            try
+            {
+                command.Connection = OpenConnection();
+                command.CommandText = query;
+                command.Parameters.AddRange(sqlParameters);
+                adapter.InsertCommand = command;
+                int ID = (Int32)command.ExecuteScalar();
+                return ID;
+            }
+            catch (SqlException e)
+            {
+                // Print.ErrorLog(e);
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+        }
+
         /* For Select Queries */
         protected DataTable ExecuteSelectQuery(string query, params SqlParameter[] sqlParameters)
         {
