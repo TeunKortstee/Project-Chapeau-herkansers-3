@@ -28,30 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            mainPanel = new Panel();
-            SuspendLayout();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
             // 
             // mainPanel
             // 
-            mainPanel.AutoScroll = true;
-            mainPanel.Dock = DockStyle.Fill;
-            mainPanel.Location = new Point(0, 0);
-            mainPanel.Margin = new Padding(3, 2, 3, 2);
-            mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(920, 415);
-            mainPanel.TabIndex = 0;
+            this.mainPanel.AutoScroll = true;
+            this.mainPanel.Location = new System.Drawing.Point(1, 2);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(362, 795);
+            this.mainPanel.TabIndex = 0;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
-            ClientSize = new Size(920, 415);
-            Controls.Add(mainPanel);
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "Form1";
-            Text = "Form1";
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(413, 791);
+            this.Controls.Add(this.mainPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

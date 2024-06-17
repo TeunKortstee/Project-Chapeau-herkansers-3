@@ -60,7 +60,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void ReturnToOverview()
         {
 
-
             form.SwitchPanels(new UserControlManageOverview((MenuType)this.selectedMenuItem.MenuId));
 
         }

@@ -1,5 +1,8 @@
 using Model;
+<<<<<<<<< Temporary merge branch 1
+=========
 using Project_Chapeau_herkansers_3.UserControls;
+>>>>>>>>> Temporary merge branch 2
 
 
 namespace Project_Chapeau_herkansers_3
@@ -20,12 +23,9 @@ namespace Project_Chapeau_herkansers_3
             }
         }
         private Form1()
-        {
             InitializeComponent();
-            _instance = this;
-
-            SwitchPanels(new ItemBereiderUserControl());
-
+            SwitchPanels(new LoginControl());
+<<<<<<<<< Temporary merge branch 1
             personeel = new Personeel();
             //SwitchPanels(new LoginControl());
             //SwitchPanels(new UserControlManager());
@@ -35,7 +35,18 @@ namespace Project_Chapeau_herkansers_3
         {
             mainPanel.Controls.Clear();
             userControl.Dock = DockStyle.Fill;
+            Size userControlSize = userControl.Size;
+
+            mainPanel.Size = userControlSize;
+
+            userControlSize.Width += 30;
+            userControlSize.Height += 60;
+
+            _instance.Size = userControlSize;
+
             mainPanel.Controls.Add(userControl);
+
+
         }
     }
 }
