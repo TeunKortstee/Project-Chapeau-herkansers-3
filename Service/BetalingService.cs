@@ -79,7 +79,6 @@ namespace Service
             return payments;
 
         }
-
         public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) {
 
 
