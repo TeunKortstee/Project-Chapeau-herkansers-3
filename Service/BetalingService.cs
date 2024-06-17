@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +24,8 @@ namespace Service
 
         }
 
-        public double AddDoubleArray(double[] array) {
+        public double AddDoubleArray(double[] array) 
+        {
 
             double result = 0.00;
             foreach (double d in array) {
@@ -45,7 +46,8 @@ namespace Service
             return tips;
         }
 
-        public double CalculateChange(double toPay, double amountPaid) {
+        public double CalculateChange(double toPay, double amountPaid) 
+        {
 
 
 
@@ -53,7 +55,6 @@ namespace Service
         
         
         }
-
         public double[] GetPaymentPerPerson(double price, int people)
         {
 
@@ -80,11 +81,8 @@ namespace Service
             return payments;
 
         }
-
-        
-
-
-        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) {
+        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) 
+        {
 
 
             double totalAmountPaid = 0.00;
@@ -103,32 +101,23 @@ namespace Service
                 }
             }
 
-
-
             if (totalAmountPaid >= bill.TotaalPrijs) {
                 // Succes!
                 foreach (Betaling betaling in betalingen)
                 {
                     betalingDao.InsertBetaling(betaling);
-                    
-                    
-                
                 }
-
                 rekeningDao.RekeningBetaald(bill);
 
                 return 2;
 
             }
-
-
             return 0;
-        
-        
         }
-
-
-
+        public List<Betaling> GetBetalingen(bool betaald)
+        {
+            return betalingDao.GetBetalingen(betaald);
+        }
     }
 
 

@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace Model
 {
@@ -19,15 +19,15 @@ namespace Model
 
         public List<Bestelling> Bestellingen { get; set; }
 
-        
+
 
         public Rekening(int _RekeningId, int _TafelId, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting, string _Opmerkingen) {
             Bestellingen = new List<Bestelling>();
-            
+
             RekeningId = _RekeningId;
             TafelId = _TafelId;
             TotaalPrijs = _TotaalPrijs;
-            
+
             Betaald = _Betaald;
             Datum = _Datum;
             Belasting = _Belasting;

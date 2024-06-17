@@ -43,7 +43,10 @@ namespace Project_Chapeau_herkansers_3
 
         private void VulTekstTafel(Tafel tafel)
         {
-            labelSelectedTafel.Text = $"Tafel #{tafel.Id}";
+            if(tafel != null)
+            {
+                labelSelectedTafel.Text = $"Tafel #{tafel.Id}";
+            }
         }
 
         private void btnVerwijderAlles_Click(object sender, EventArgs e) { }
@@ -62,9 +65,11 @@ namespace Project_Chapeau_herkansers_3
             if(listViewBestelling.Items.Count > 0)
             {
                 BesteldeItemService besteldeItemService = new BesteldeItemService();
-                besteldeItemService.BestellingAanmaken(bestelling, form1.personeel);
+                besteldeItemService.BestellingAanmaken(bestelling, form1.personeel, tafel);
                 besteldeItemService.BestellingItemsAanmaken(bestelling);
-                form1.SwitchPanels(new TafelStatusUI(tafel));
+                TafelStatusUI tafelStatusUI = new TafelStatusUI(tafel);
+                tafelStatusUI.SetStringName("Bestelling succesvol aangemaakt");
+                form1.SwitchPanels(tafelStatusUI);
             }
         }
 

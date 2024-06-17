@@ -61,5 +61,10 @@ namespace Project_Chapeau_herkansers_3
             tafel.status = (TafelStatus)StatusBox.SelectedIndex;
             SetLabels();
         }
+
+        public void SetStringName(string message)
+        {
+            labelBestellingAangemaakt.Text = message;
+        }
     }
 }

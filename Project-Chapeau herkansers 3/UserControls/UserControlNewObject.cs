@@ -31,7 +31,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Menu Item
         private void DisplayMenuElements(MenuType menu)
         {
-            SetObjectText("MenuItem", "Naam", "Prijs", "0,00", "Voorraad", "Menu");
+            SetObjectText("MenuItem", "Naam", "Prijs", "€ 0,00", "Voorraad", "Menu");
             cmbType.DataSource = Enum.GetValues(typeof(MenuType));
             cmbType.SelectedItem = menu;
             btnCancel.Tag = menu;
@@ -75,7 +75,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 }
                 catch (FormatException ex)
                 {
-                    MessageBox.Show("Fout: Probleem met velden");
+                    MessageBox.Show(ex.Message);
                     return;
                 }
             }
@@ -83,13 +83,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 try
                 {
-                    //Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, requiredPasswordChange, (Functie)cmbType.SelectedItem);
-                    //personeelService.InsertPersoneel(newEmployee);
+                    if (!IsValidEmail(txt2.Text)) 
+                    {
+                        throw new FormatException("Email is ongeldig");
+                    }
+                    Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, requiredPasswordChange, (Functie)cmbType.SelectedItem);
+                    personeelService.InsertPersoneel(newEmployee);
                     form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
                 }
                 catch (FormatException ex)
                 {
-                    MessageBox.Show("Fout: Probleem met velden");
+                    MessageBox.Show(ex.Message);
                     return;
                 }
             }
@@ -118,10 +122,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 chkAlcoholisch.Visible = false;
             }
         }
-        public bool IsValidEmail()
+        public bool IsValidEmail(string emailInput)
         {
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-            return Regex.IsMatch(txt3.Text, pattern);
+            return Regex.IsMatch(emailInput, pattern);
         }
         #endregion
     }

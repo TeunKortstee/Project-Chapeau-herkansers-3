@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +9,12 @@ namespace Model
 {
     public class SplitBillItemObj
     {
-        
+
 
         public BetaalMethode method { get; set; }
 
         public double payment { get; set; }
-        
+
         public double tip { get; set; }
 
         public SplitBillItemObj(BetaalMethode method, double payment, double tip)
