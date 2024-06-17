@@ -37,6 +37,7 @@ namespace Project_Chapeau_herkansers_3
                     }
                     else
                     {
+                        personeel.email = EmailTxt.Text;
                         personeel = IsPersoneel(personeel);
                         if (personeel != null)
                         {

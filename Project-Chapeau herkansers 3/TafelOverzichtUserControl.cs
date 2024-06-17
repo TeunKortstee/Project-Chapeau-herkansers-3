@@ -32,10 +32,10 @@ namespace Project_Chapeau_herkansers_3
             btn.Tag = tafel;
             switch (tafel.status)
             {
-                case (TafelStatus)0:
+                case (TafelStatus)1:
                     btn.BackColor = Color.MediumAquamarine;
                     break;
-                case (TafelStatus)1:
+                case (TafelStatus)2:
                     btn.BackColor = Color.SandyBrown;
                     break;
             }

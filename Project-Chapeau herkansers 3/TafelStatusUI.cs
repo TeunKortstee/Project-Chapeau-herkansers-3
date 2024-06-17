@@ -29,7 +29,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 StatusBox.Items.Add(status);
             }
-            StatusBox.SelectedIndex = (int)tafel.status;
+            StatusBox.SelectedIndex = (int)tafel.status - 1;
         }
 
         private void MaakBestellingBtn_Click(object sender, EventArgs e)
@@ -39,7 +39,8 @@ namespace Project_Chapeau_herkansers_3
 
         private void TerugBtn_Click(object sender, EventArgs e)
         {
-            Exit(new TafelOverzichtUserControl());
+            SaveTafel();
+            form1.SwitchPanels(new TafelOverzichtUserControl());
         }
         private void Exit(UserControl control)
         {
@@ -55,7 +56,7 @@ namespace Project_Chapeau_herkansers_3
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tafel.status = (TafelStatus)StatusBox.SelectedIndex;
+            tafel.status = (TafelStatus)StatusBox.SelectedIndex + 1;
             SetLabels();
         }
 
