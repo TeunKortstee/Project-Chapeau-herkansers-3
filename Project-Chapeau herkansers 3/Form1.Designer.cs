@@ -47,7 +47,9 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(413, 791);
             this.Controls.Add(this.mainPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "Form1";
