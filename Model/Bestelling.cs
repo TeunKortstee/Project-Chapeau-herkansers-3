@@ -12,7 +12,6 @@
         public int tafelId { get; set; }
         public GerechtsStatus status { get; set; }
 
-
         public Bestelling()
         {
             BestellingItems = new List<BesteldeItem>();
