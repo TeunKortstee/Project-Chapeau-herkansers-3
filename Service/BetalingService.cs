@@ -88,8 +88,7 @@ namespace Service
 
             foreach (SplitBillItemObj payment in payments) {
 
-                if (payment.payment > 0 && payment.tip >= 0)
-                {
+                if (payment.payment > 0 && payment.tip >= 0) {
                     totalAmountPaid += payment.payment;
                     betalingen.Add(new Betaling(0, (int)payment.method, payment.payment, bill.RekeningId, payment.tip));
 
@@ -99,8 +98,7 @@ namespace Service
                 }
             }
 
-            if (totalAmountPaid >= bill.TotaalPrijs)
-            {
+            if (totalAmountPaid >= bill.TotaalPrijs) {
                 // Succes!
                 foreach (Betaling betaling in betalingen)
                 {
