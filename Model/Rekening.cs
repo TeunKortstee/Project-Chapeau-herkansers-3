@@ -1,4 +1,6 @@
-﻿namespace Model
+﻿using System.Runtime.InteropServices;
+
+namespace Model
 {
     public class Rekening
     {
