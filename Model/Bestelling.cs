@@ -11,13 +11,11 @@
 
         public int tafelId { get; set; }
         public GerechtsStatus status { get; set; }
-       
 
         public Bestelling()
         {
             BestellingItems = new List<BesteldeItem>();
             betaald = false;
-
         }
 
         public Bestelling(int _bestellingId, Personeel _personeel, bool _betaald, int _tafelId)

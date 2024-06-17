@@ -35,32 +35,32 @@
             // mainPanel
             // 
             mainPanel.AutoScroll = true;
-            mainPanel.Location = new Point(1, 60);
-            mainPanel.Margin = new Padding(4, 3, 4, 3);
+            mainPanel.Location = new Point(1, 75);
+            mainPanel.Margin = new Padding(5, 4, 5, 4);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(517, 1268);
+            mainPanel.Size = new Size(646, 1585);
             mainPanel.TabIndex = 0;
             // 
             // GebruikerBtn
             // 
-            GebruikerBtn.Location = new Point(12, 12);
+            GebruikerBtn.Location = new Point(15, 15);
+            GebruikerBtn.Margin = new Padding(4, 4, 4, 4);
             GebruikerBtn.Name = "GebruikerBtn";
-            GebruikerBtn.Size = new Size(169, 34);
+            GebruikerBtn.Size = new Size(211, 42);
             GebruikerBtn.TabIndex = 1;
             GebruikerBtn.Text = "Gebruiker";
             GebruikerBtn.UseVisualStyleBackColor = true;
-            GebruikerBtn.Click += GebruikerBtn_Click;
+            GebruikerBtn.Click += GebruikerBtn_Click_1;
             // 
             // Form1
             // 
-
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(590, 1318);
+            ClientSize = new Size(738, 1319);
             Controls.Add(GebruikerBtn);
             Controls.Add(mainPanel);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             MaximizeBox = false;
             Name = "Form1";
             Text = "Form1";
