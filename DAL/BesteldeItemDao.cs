@@ -8,7 +8,7 @@ namespace DAL
     {
         public List<BesteldeItem> GetItemsFromBestelling(int bestellingID)
         {
-            string query = "SELECT BesteldeItems.BesteldItemId, BesteldeItems.Opmerking, BesteldeItems.Instuurtijd, BesteldeItems.BestellingsId, BesteldeItems.Hoeveelheid, MenuItems.MenuItemId, MenuItems.Naam, MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.MenuId, MenuItems.Voorraad FROM BesteldeItems JOIN MenuItems ON MenuItems.MenuItemId=BesteldeItems.MenuItemId WHERE BestellingsId = @bestellingId";
+            string query = "SELECT BesteldeItems.BesteldItemId, BesteldeItems.Opmerking, BesteldeItems.Instuurtijd, BesteldeItems.BestellingsId, BesteldeItems.GerechtsStatus, BesteldeItems.Hoeveelheid, MenuItems.MenuItemId, MenuItems.Naam, MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.MenuId, MenuItems.Voorraad FROM BesteldeItems JOIN MenuItems ON MenuItems.MenuItemId=BesteldeItems.MenuItemId WHERE BestellingsId = @bestellingId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@bestellingId", bestellingID),
@@ -34,7 +34,7 @@ namespace DAL
 
         public void BestellingItemsAanmaken(Bestelling bestelling)
         {
-            string query = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, BestellingsId, Hoeveelheid) " +
+            string query = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
                 "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @BestellingsId, @Hoeveelheid)";
 
             foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
@@ -44,7 +44,8 @@ namespace DAL
                     new SqlParameter("@InstuurTijd", besteldeItem.InstuurTijd),
                     new SqlParameter("@MenuItemId", besteldeItem.menuItem.MenuItemId),
                     new SqlParameter("@BestellingsId", bestelling.bestellingId),
-                    new SqlParameter("@Hoeveelheid", besteldeItem.Hoeveelheid)
+                    new SqlParameter("@Hoeveelheid", besteldeItem.Hoeveelheid),
+                    new SqlParameter("@GerechtsStatus", (int)besteldeItem.status)
                 };
                 ExecuteEditQuery(query, sqlParameters);
             }
