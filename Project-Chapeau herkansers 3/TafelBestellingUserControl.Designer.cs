@@ -28,86 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
-            richTextBox1 = new RichTextBox();
-            label2 = new Label();
-            button3 = new Button();
-            listView1 = new ListView();
+            BereiderBox = new ComboBox();
+            StuurTerugBtn = new Button();
+            AfrondBtn = new Button();
+            TerugBtn = new Button();
+            BesteldeItemsListView = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
+            ErrorLbl = new Label();
             SuspendLayout();
             // 
-            // comboBox1
+            // BereiderBox
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(90, 104);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(182, 33);
-            comboBox1.TabIndex = 0;
+            BereiderBox.FormattingEnabled = true;
+            BereiderBox.Location = new Point(90, 104);
+            BereiderBox.Name = "BereiderBox";
+            BereiderBox.Size = new Size(182, 33);
+            BereiderBox.TabIndex = 0;
+            BereiderBox.SelectedIndexChanged += BereiderBox_SelectedIndexChanged;
             // 
-            // button1
+            // StuurTerugBtn
             // 
-            button1.Location = new Point(41, 336);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            StuurTerugBtn.Location = new Point(41, 336);
+            StuurTerugBtn.Name = "StuurTerugBtn";
+            StuurTerugBtn.Size = new Size(112, 34);
+            StuurTerugBtn.TabIndex = 1;
+            StuurTerugBtn.Text = "Stuur terug";
+            StuurTerugBtn.UseVisualStyleBackColor = true;
+            StuurTerugBtn.Click += StuurTerugBtn_Click;
             // 
-            // button2
+            // AfrondBtn
             // 
-            button2.Location = new Point(214, 336);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 34);
-            button2.TabIndex = 2;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            AfrondBtn.Location = new Point(214, 336);
+            AfrondBtn.Name = "AfrondBtn";
+            AfrondBtn.Size = new Size(112, 34);
+            AfrondBtn.TabIndex = 2;
+            AfrondBtn.Text = "Afronden";
+            AfrondBtn.UseVisualStyleBackColor = true;
+            AfrondBtn.Click += AfrondBtn_Click;
             // 
-            // richTextBox1
+            // TerugBtn
             // 
-            richTextBox1.Location = new Point(41, 425);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(285, 168);
-            richTextBox1.TabIndex = 4;
-            richTextBox1.Text = "";
+            TerugBtn.Location = new Point(25, 50);
+            TerugBtn.Name = "TerugBtn";
+            TerugBtn.Size = new Size(112, 34);
+            TerugBtn.TabIndex = 6;
+            TerugBtn.Text = "Terug";
+            TerugBtn.UseVisualStyleBackColor = true;
+            TerugBtn.Click += TerugBtn_Click;
             // 
-            // label2
+            // BesteldeItemsListView
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(41, 397);
-            label2.Name = "label2";
-            label2.Size = new Size(59, 25);
-            label2.TabIndex = 5;
-            label2.Text = "label2";
+            BesteldeItemsListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            BesteldeItemsListView.FullRowSelect = true;
+            BesteldeItemsListView.GridLines = true;
+            BesteldeItemsListView.Location = new Point(25, 158);
+            BesteldeItemsListView.Name = "BesteldeItemsListView";
+            BesteldeItemsListView.Size = new Size(334, 162);
+            BesteldeItemsListView.TabIndex = 7;
+            BesteldeItemsListView.UseCompatibleStateImageBehavior = false;
+            BesteldeItemsListView.View = View.Details;
             // 
-            // button3
+            // columnHeader1
             // 
-            button3.Location = new Point(25, 50);
-            button3.Name = "button3";
-            button3.Size = new Size(112, 34);
-            button3.TabIndex = 6;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            columnHeader1.Text = "Naam";
             // 
-            // listView1
+            // columnHeader2
             // 
-            listView1.Location = new Point(25, 159);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(334, 162);
-            listView1.TabIndex = 7;
-            listView1.UseCompatibleStateImageBehavior = false;
+            columnHeader2.Text = "Wachttijd";
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Status";
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Id";
+            // 
+            // ErrorLbl
+            // 
+            ErrorLbl.AutoSize = true;
+            ErrorLbl.ForeColor = Color.Red;
+            ErrorLbl.Location = new Point(37, 405);
+            ErrorLbl.Name = "ErrorLbl";
+            ErrorLbl.Size = new Size(0, 25);
+            ErrorLbl.TabIndex = 8;
             // 
             // TafelBestellingUserControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(listView1);
-            Controls.Add(button3);
-            Controls.Add(label2);
-            Controls.Add(richTextBox1);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(comboBox1);
+            Controls.Add(ErrorLbl);
+            Controls.Add(BesteldeItemsListView);
+            Controls.Add(TerugBtn);
+            Controls.Add(AfrondBtn);
+            Controls.Add(StuurTerugBtn);
+            Controls.Add(BereiderBox);
             Name = "TafelBestellingUserControl";
             Size = new Size(373, 722);
             ResumeLayout(false);
@@ -116,12 +134,15 @@
 
         #endregion
 
-        private ComboBox comboBox1;
-        private Button button1;
-        private Button button2;
-        private RichTextBox richTextBox1;
-        private Label label2;
-        private Button button3;
-        private ListView listView1;
+        private ComboBox BereiderBox;
+        private Button StuurTerugBtn;
+        private Button AfrondBtn;
+        private Button TerugBtn;
+        private ListView BesteldeItemsListView;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private Label ErrorLbl;
     }
 }

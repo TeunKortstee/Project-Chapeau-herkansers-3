@@ -10,6 +10,11 @@
         public bool betaald { get; set; }
 
         public int tafelId { get; set; }
+        public GerechtsStatus status { get; set; }
+        public Bestelling()
+        {
+            besteldeItems = new List<BesteldeItem>();
+        }
 
         public Bestelling(int _bestellingId, Personeel _personeel, bool _betaald, int _tafelId)
         {

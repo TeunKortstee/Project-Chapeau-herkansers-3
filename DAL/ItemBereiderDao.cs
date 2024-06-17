@@ -1,11 +1,6 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -31,19 +26,69 @@ namespace DAL
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@personeelsId", personeelsId),
-             
+
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
             // kan dit query makkelijker?
             // wat doet de personeelsId en moet ik zoveel innerjoins hebben?
         }
+        public void ChangeStatus(Bestelling bestelling, string ItemBereider)
+        {
+            string query = $"UPDATE {ItemBereider} SET Status=@Status WHERE BestellingId = @BestellingId;";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Status", bestelling.status),
+                new SqlParameter("@BestellingId", bestelling.bestellingId)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
 
+        public List<Bestelling> GetTafelBestelling(Tafel tafel, string ItemBereider)
+        {
+            string query = $"SELECT Naam, Bestellingen.BestellingsId, Status, Opmerking, Instuurtijd FROM {ItemBereider} \r\nJOIN Bestellingen ON {ItemBereider}.BestellingId = Bestellingen.BestellingsId\r\nJOIN BesteldeItems ON BesteldeItems.BestellingsId = Bestellingen.BestellingsId\r\nJOIN MenuItems ON MenuItems.MenuItemId = Besteldeitems.MenuItemId WHERE TableNr=@TableNr";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@TableNr", tafel.Id),
+            };
+            return ReadBestelling(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private List<Bestelling> ReadBestelling(DataTable dataTable)
+        {
+            List<Bestelling> bestellingen = new List<Bestelling>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                int bestellingId = Convert.ToInt32(row["BestellingsId"]);
+                Bestelling bestelling = bestellingen.Find(b => b.bestellingId == bestellingId);
+
+                if (bestelling == null)
+                {
+                    bestelling = new Bestelling
+                    {
+                        bestellingId = bestellingId,
+                        status = (GerechtsStatus)Convert.ToInt32(row["Status"])
+                    };
+                    bestellingen.Add(bestelling);
+                }
+
+                BesteldeItem besteldeItem = new BesteldeItem(new MenuItem
+                {
+                    Naam = row["Naam"].ToString(),
+                })
+                {
+                    Opmerking = row["Opmerking"].ToString(),
+                    InstuurTijd = Convert.ToDateTime(row["Instuurtijd"]),
+                };
+
+                bestelling.BestellingItems.Add(besteldeItem);
+            }
+            return bestellingen;
+        }
         private List<ItemBereider> ReadTables(DataTable dataTable)
         {
             List<ItemBereider> items = new List<ItemBereider>();
             foreach (DataRow row in dataTable.Rows)
             {
-                
+
                 int? gerechtsStatus = null;
                 // Als Status kolom uitgelezen wordt als DBNull.Value betekent dat dit kolom geen waarde heeft in tabel.
                 // DataTable gebruikt DBNull.Value waarde, dit is niet hetzelfde als C# null.
@@ -75,6 +120,6 @@ namespace DAL
             return items;
         }
 
-       
+
     }
 }

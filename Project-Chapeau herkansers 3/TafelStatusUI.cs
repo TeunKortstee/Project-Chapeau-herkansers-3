@@ -62,7 +62,24 @@ namespace Project_Chapeau_herkansers_3
 
         private void BestellingDisplayBtn_Click(object sender, EventArgs e)
         {
-            Exit(new TafelBestellingUserControl());
+            Exit(new TafelBestellingUserControl(tafel));
+        }
+
+        private void AfrekenenBtn_Click(object sender, EventArgs e)
+        {
+            RekeningService rekeningService = new RekeningService();
+            BestellingService bestellingService = new BestellingService();
+
+            if (bestellingService.GetBestellingen(tafel.Id).Count > 0)
+            {
+                Rekening r = rekeningService.CreateRekening(tafel.Id);
+                Afrekenen a = new Afrekenen(r);
+                Exit(a);
+            }
+            else
+            {
+                MessageBox.Show("There are no items to check out!");
+            }
         }
     }
 }

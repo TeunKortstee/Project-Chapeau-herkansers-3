@@ -7,11 +7,9 @@ namespace Project_Chapeau_herkansers_3
 {
     public partial class LoginControl : UserControl
     {
-        private Form1 _form1;
         public LoginControl()
         {
             InitializeComponent();
-            _form1 = Form1.Instance;
             ChangePasswordHide();
         }
         private Personeel IsPersoneel(Personeel p)
@@ -26,14 +24,11 @@ namespace Project_Chapeau_herkansers_3
 
                 return personeel;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new LoginException();
             }
-
-
         }
-
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             Personeel personeel = new Personeel();
@@ -44,7 +39,6 @@ namespace Project_Chapeau_herkansers_3
                     personeel = IsPersoneel(personeel);
                     if (personeel != null)
                     {
-                        _form1.personeel = personeel;
                         openNextView(personeel);
                     }
                     else
@@ -67,6 +61,8 @@ namespace Project_Chapeau_herkansers_3
         }
         private void openNextView(Personeel personeel)
         {
+            Form1 _form1 = Form1.Instance;
+            _form1.personeel = personeel;
             switch (personeel.Functie)
             {
                 case Functie.Serveerder:
@@ -75,7 +71,9 @@ namespace Project_Chapeau_herkansers_3
                 case Functie.Manager:
                     _form1.SwitchPanels(new UserControlManager());
                     break;
-
+                default:
+                    _form1.SwitchPanels(new ItemBereiderUserControl());
+                    break;
             }
         }
         private bool CheckPassword(string password)
@@ -137,7 +135,6 @@ namespace Project_Chapeau_herkansers_3
             {
                 SomethingWentWrong(ex.Message, ChangePasswordErrorlbl);
             }
-
         }
     }
 }
