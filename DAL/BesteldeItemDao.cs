@@ -71,7 +71,9 @@ namespace DAL
                     Opmerking = row["Opmerking"].ToString(),
                     InstuurTijd = (DateTime)row["Instuurtijd"],
                     BestellingsID = Convert.ToInt32(row["BestellingsID"]),
-                    Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"])
+                    Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
+                    Naam = row["Naam"].ToString()
+
                 };
                 items.Add(item);
             }

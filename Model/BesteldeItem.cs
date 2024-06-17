@@ -1,4 +1,6 @@
-﻿namespace Model
+﻿using System.Runtime.InteropServices;
+
+namespace Model
 {
     public class BesteldeItem
     {
@@ -8,6 +10,8 @@
         public MenuItem menuItem { get; set; }
         public int BestellingsID { get; set; }
         public int Hoeveelheid { get; set; }
+        public GerechtsStatus status { get; set; }
+        public string? Naam { get; set; }
 
         public BesteldeItem(MenuItem menuItem)
         {
@@ -15,6 +19,11 @@
             InstuurTijd = DateTime.Now;
             Hoeveelheid = 1;
             this.menuItem = menuItem;
+        }
+
+        public BesteldeItem()
+        {
+            
         }
     }
 }
