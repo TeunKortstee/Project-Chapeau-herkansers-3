@@ -31,16 +31,16 @@
             comboBox1 = new ComboBox();
             button1 = new Button();
             button2 = new Button();
-            label1 = new Label();
             richTextBox1 = new RichTextBox();
             label2 = new Label();
             button3 = new Button();
+            listView1 = new ListView();
             SuspendLayout();
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(94, 120);
+            comboBox1.Location = new Point(90, 104);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(182, 33);
             comboBox1.TabIndex = 0;
@@ -62,15 +62,6 @@
             button2.TabIndex = 2;
             button2.Text = "button2";
             button2.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(57, 180);
-            label1.Name = "label1";
-            label1.Size = new Size(59, 25);
-            label1.TabIndex = 3;
-            label1.Text = "label1";
             // 
             // richTextBox1
             // 
@@ -98,14 +89,22 @@
             button3.Text = "button3";
             button3.UseVisualStyleBackColor = true;
             // 
+            // listView1
+            // 
+            listView1.Location = new Point(25, 159);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(334, 162);
+            listView1.TabIndex = 7;
+            listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // TafelBestellingUserControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(listView1);
             Controls.Add(button3);
             Controls.Add(label2);
             Controls.Add(richTextBox1);
-            Controls.Add(label1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(comboBox1);
@@ -120,9 +119,9 @@
         private ComboBox comboBox1;
         private Button button1;
         private Button button2;
-        private Label label1;
         private RichTextBox richTextBox1;
         private Label label2;
         private Button button3;
+        private ListView listView1;
     }
 }
