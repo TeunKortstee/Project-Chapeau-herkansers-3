@@ -41,5 +41,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
 
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Form1.Instance.SwitchPanels(new TafelOverzichtUserControl());
+        }
     }
 }

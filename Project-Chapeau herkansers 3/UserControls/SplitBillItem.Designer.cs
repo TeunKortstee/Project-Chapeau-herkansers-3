@@ -41,9 +41,9 @@
             this.comboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboPaymentMethod.FormattingEnabled = true;
             this.comboPaymentMethod.Items.AddRange(new object[] {
-            "Debit Card",
+            "Debitkaart",
             "VISA/AMEX",
-            "Cash"});
+            "Contant"});
             this.comboPaymentMethod.Location = new System.Drawing.Point(18, 31);
             this.comboPaymentMethod.Name = "comboPaymentMethod";
             this.comboPaymentMethod.Size = new System.Drawing.Size(97, 23);
@@ -55,9 +55,9 @@
             this.lblMethod.AutoSize = true;
             this.lblMethod.Location = new System.Drawing.Point(16, 13);
             this.lblMethod.Name = "lblMethod";
-            this.lblMethod.Size = new System.Drawing.Size(99, 15);
+            this.lblMethod.Size = new System.Drawing.Size(55, 15);
             this.lblMethod.TabIndex = 1;
-            this.lblMethod.Text = "Payment Method";
+            this.lblMethod.Text = "Methode";
             // 
             // inputPayAmount
             // 
@@ -73,18 +73,18 @@
             this.lblPaymentAmount.AutoSize = true;
             this.lblPaymentAmount.Location = new System.Drawing.Point(130, 13);
             this.lblPaymentAmount.Name = "lblPaymentAmount";
-            this.lblPaymentAmount.Size = new System.Drawing.Size(81, 15);
+            this.lblPaymentAmount.Size = new System.Drawing.Size(76, 15);
             this.lblPaymentAmount.TabIndex = 3;
-            this.lblPaymentAmount.Text = "Amount (in €)";
+            this.lblPaymentAmount.Text = "Betaald (in €)";
             // 
             // lblTipAmount
             // 
             this.lblTipAmount.AutoSize = true;
             this.lblTipAmount.Location = new System.Drawing.Point(225, 13);
             this.lblTipAmount.Name = "lblTipAmount";
-            this.lblTipAmount.Size = new System.Drawing.Size(53, 15);
+            this.lblTipAmount.Size = new System.Drawing.Size(60, 15);
             this.lblTipAmount.TabIndex = 5;
-            this.lblTipAmount.Text = "Tip (in €)";
+            this.lblTipAmount.Text = "Fooi (in €)";
             // 
             // inputTipAmount
             // 

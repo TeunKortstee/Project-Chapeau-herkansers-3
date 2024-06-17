@@ -6,15 +6,12 @@ namespace Project_Chapeau_herkansers_3
     public partial class TafelBestellingUserControl : UserControl
     {
         private Tafel tafel;
-        List<Bestelling> bestellingen;
         public TafelBestellingUserControl(Tafel tafel)
         {
             this.tafel = tafel;
             InitializeComponent();
             LaadComboBox();
-            bestellingen = LaadBestelling(checkComboBox());
-            LaadListView(bestellingen);
-
+            LaadListView(LaadBestelling(checkComboBox()));
         }
         private void LaadListView(List<Bestelling> bestellingen)
         {
@@ -77,8 +74,7 @@ namespace Project_Chapeau_herkansers_3
 
         private void BereiderBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bestellingen = LaadBestelling(checkComboBox());
-            LaadListView(bestellingen);
+            LaadListView(LaadBestelling(checkComboBox()));
         }
         private string checkComboBox()
         {

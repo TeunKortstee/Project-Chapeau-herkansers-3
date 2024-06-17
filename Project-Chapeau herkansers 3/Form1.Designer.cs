@@ -28,42 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.GebruikerBtn = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            mainPanel = new Panel();
+            GebruikerBtn = new Button();
+            SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.AutoScroll = true;
-            this.mainPanel.Location = new System.Drawing.Point(1, 60);
-            this.mainPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(517, 1268);
-            this.mainPanel.TabIndex = 0;
+            mainPanel.AutoScroll = true;
+            mainPanel.Location = new Point(1, 75);
+            mainPanel.Margin = new Padding(5, 4, 5, 4);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new Size(646, 1585);
+            mainPanel.TabIndex = 0;
             // 
             // GebruikerBtn
             // 
-            this.GebruikerBtn.Location = new System.Drawing.Point(12, 12);
-            this.GebruikerBtn.Name = "GebruikerBtn";
-            this.GebruikerBtn.Size = new System.Drawing.Size(169, 34);
-            this.GebruikerBtn.TabIndex = 1;
-            this.GebruikerBtn.Text = "Gebruiker";
-            this.GebruikerBtn.UseVisualStyleBackColor = true;
+            GebruikerBtn.Location = new Point(15, 15);
+            GebruikerBtn.Margin = new Padding(4, 4, 4, 4);
+            GebruikerBtn.Name = "GebruikerBtn";
+            GebruikerBtn.Size = new Size(211, 42);
+            GebruikerBtn.TabIndex = 1;
+            GebruikerBtn.Text = "Gebruiker";
+            GebruikerBtn.UseVisualStyleBackColor = true;
+            GebruikerBtn.Click += GebruikerBtn_Click_1;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(590, 1055);
-            this.Controls.Add(this.GebruikerBtn);
-            this.Controls.Add(this.mainPanel);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            ClientSize = new Size(738, 1319);
+            Controls.Add(GebruikerBtn);
+            Controls.Add(mainPanel);
+            Margin = new Padding(5, 4, 5, 4);
+            MaximizeBox = false;
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
