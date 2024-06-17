@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Model
 {
     public class SplitBillItemObj
     {
+
+
         public BetaalMethode method { get; set; }
 
         public double payment { get; set; }
@@ -20,5 +23,8 @@ namespace Model
             this.payment = payment;
             this.tip = tip;
         }
+
+
+
     }
 }
