@@ -51,6 +51,8 @@ namespace Service
 
         }
 
+
+
         public Rekening CreateRekening(int tafelID) {
 
             Rekening? r = rekeningDao.GetRekening(tafelID);
@@ -77,10 +79,13 @@ namespace Service
                     }
                 }
 
-                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now, belasting);
+                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now, belasting,"");
 
-                InsertRekening(r);
+                int ID = InsertRekening(r);
+
+                r.RekeningId = ID;
             }
+
             r.Bestellingen = bestellingen;
             return r;
 
@@ -115,7 +120,11 @@ namespace Service
             return payments;
 
         }
+        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
+        {
+            rekeningDao.VoegOpmerkingenToe(rekening, opmerkingen);
 
+        }
 
 
     }

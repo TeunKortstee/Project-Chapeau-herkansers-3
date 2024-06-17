@@ -11,7 +11,8 @@ namespace Service
 {
     public class BetalingService
     {
-        private BetalingDao betalingDao;        
+        private BetalingDao betalingDao;
+        private RekeningDao rekeningDao;
         private const double vatNormal = 0.06;
         private const double vatAlcohol = 0.21;
 
@@ -19,6 +20,7 @@ namespace Service
         public BetalingService()
         {
             betalingDao = new BetalingDao();
+            rekeningDao = new RekeningDao();
 
         }
 
@@ -86,11 +88,14 @@ namespace Service
 
 
             double totalAmountPaid = 0.00;
+
+            List<Betaling> betalingen = new List<Betaling>();
             
             foreach (SplitBillItemObj payment in payments) {
 
                 if (payment.payment > 0 && payment.tip >= 0) {
                     totalAmountPaid += payment.payment;
+                    betalingen.Add(new Betaling(0, (int)payment.method, payment.payment, bill.RekeningId, payment.tip));
                     
                 } else {
                     return 1;
@@ -101,13 +106,18 @@ namespace Service
 
 
             if (totalAmountPaid >= bill.TotaalPrijs) {
-
-                foreach (SplitBillItemObj payment in payments)
+                // Succes!
+                foreach (Betaling betaling in betalingen)
                 {
-                    betalingDao.InsertBetaling(new Betaling(0,(int)payment.method,payment.payment,bill.RekeningId,payment.tip));
+                    betalingDao.InsertBetaling(betaling);
+                    
+                    
                 
                 }
 
+                rekeningDao.RekeningBetaald(bill);
+
+                return 2;
 
             }
 

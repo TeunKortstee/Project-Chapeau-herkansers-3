@@ -134,6 +134,7 @@ namespace Project_Chapeau_herkansers_3
             }
 
             int code = betalingService.ConfirmPayments(rekening,paymentObjs);
+            
 
             if (code == 0) {
 
@@ -143,6 +144,12 @@ namespace Project_Chapeau_herkansers_3
             {
 
                 lblPaymentErrorText.Text = "Please enter valid values!";
+
+            }
+            else if (code == 2)
+            {
+
+                Form1.Instance.SwitchPanels(new CommentScreen(rekening, paymentObjs));
 
             }
 

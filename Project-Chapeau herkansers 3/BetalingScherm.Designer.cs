@@ -148,13 +148,14 @@
             // 
             // btnPay
             // 
+            this.btnPay.BackColor = System.Drawing.Color.SandyBrown;
             this.btnPay.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnPay.Location = new System.Drawing.Point(178, 544);
+            this.btnPay.Location = new System.Drawing.Point(25, 544);
             this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(205, 49);
+            this.btnPay.Size = new System.Drawing.Size(358, 49);
             this.btnPay.TabIndex = 10;
-            this.btnPay.Text = "Confirm Payment";
-            this.btnPay.UseVisualStyleBackColor = true;
+            this.btnPay.Text = "Pay";
+            this.btnPay.UseVisualStyleBackColor = false;
             this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // lblTipTitle
@@ -192,7 +193,7 @@
             this.lblPaymentErrorText.AutoSize = true;
             this.lblPaymentErrorText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblPaymentErrorText.ForeColor = System.Drawing.Color.Red;
-            this.lblPaymentErrorText.Location = new System.Drawing.Point(178, 596);
+            this.lblPaymentErrorText.Location = new System.Drawing.Point(28, 597);
             this.lblPaymentErrorText.Name = "lblPaymentErrorText";
             this.lblPaymentErrorText.Size = new System.Drawing.Size(0, 15);
             this.lblPaymentErrorText.TabIndex = 14;

@@ -72,5 +72,7 @@ namespace Project_Chapeau_herkansers_3
            
             Form1.Instance.SwitchPanels(new BetalingScherm(rekening));
         }
+
+       
     }
 }
