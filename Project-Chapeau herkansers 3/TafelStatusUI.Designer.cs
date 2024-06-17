@@ -34,6 +34,7 @@
             this.TerugBtn = new System.Windows.Forms.Button();
             this.StatusBox = new System.Windows.Forms.ComboBox();
             this.AfrekenenBtn = new System.Windows.Forms.Button();
+            this.labelBestellingAangemaakt = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TafelTitelTag
@@ -59,7 +60,7 @@
             // MaakBestellingBtn
             // 
             this.MaakBestellingBtn.Location = new System.Drawing.Point(127, 322);
-            this.MaakBestellingBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaakBestellingBtn.Margin = new System.Windows.Forms.Padding(2);
             this.MaakBestellingBtn.Name = "MaakBestellingBtn";
             this.MaakBestellingBtn.Size = new System.Drawing.Size(138, 27);
             this.MaakBestellingBtn.TabIndex = 4;
@@ -69,7 +70,7 @@
             // TerugBtn
             // 
             this.TerugBtn.Location = new System.Drawing.Point(36, 408);
-            this.TerugBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TerugBtn.Margin = new System.Windows.Forms.Padding(2);
             this.TerugBtn.Name = "TerugBtn";
             this.TerugBtn.Size = new System.Drawing.Size(90, 27);
             this.TerugBtn.TabIndex = 5;
@@ -80,7 +81,7 @@
             // 
             this.StatusBox.FormattingEnabled = true;
             this.StatusBox.Location = new System.Drawing.Point(119, 243);
-            this.StatusBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.StatusBox.Margin = new System.Windows.Forms.Padding(2);
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.Size = new System.Drawing.Size(146, 28);
             this.StatusBox.TabIndex = 6;
@@ -88,24 +89,34 @@
             // AfrekenenBtn
             // 
             this.AfrekenenBtn.Location = new System.Drawing.Point(254, 408);
-            this.AfrekenenBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AfrekenenBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AfrekenenBtn.Name = "AfrekenenBtn";
             this.AfrekenenBtn.Size = new System.Drawing.Size(90, 27);
             this.AfrekenenBtn.TabIndex = 7;
             this.AfrekenenBtn.Text = "Afrekenen";
             this.AfrekenenBtn.UseVisualStyleBackColor = true;
             // 
+            // labelBestellingAangemaakt
+            // 
+            this.labelBestellingAangemaakt.AutoSize = true;
+            this.labelBestellingAangemaakt.Location = new System.Drawing.Point(166, 187);
+            this.labelBestellingAangemaakt.Name = "labelBestellingAangemaakt";
+            this.labelBestellingAangemaakt.Size = new System.Drawing.Size(50, 20);
+            this.labelBestellingAangemaakt.TabIndex = 8;
+            this.labelBestellingAangemaakt.Text = "label1";
+            // 
             // TafelStatusUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelBestellingAangemaakt);
             this.Controls.Add(this.AfrekenenBtn);
             this.Controls.Add(this.StatusBox);
             this.Controls.Add(this.TerugBtn);
             this.Controls.Add(this.MaakBestellingBtn);
             this.Controls.Add(this.StatusLbl);
             this.Controls.Add(this.TafelTitelTag);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TafelStatusUI";
             this.Size = new System.Drawing.Size(386, 478);
             this.ResumeLayout(false);
@@ -121,5 +132,6 @@
         private Button TerugBtn;
         private ComboBox StatusBox;
         private Button AfrekenenBtn;
+        private Label labelBestellingAangemaakt;
     }
 }
