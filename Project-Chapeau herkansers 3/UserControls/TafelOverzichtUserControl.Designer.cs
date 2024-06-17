@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             tableLayoutPanelTafels = new TableLayoutPanel();
+            RefreshBtn = new Button();
             SuspendLayout();
             // 
             // tableLayoutPanelTafels
@@ -36,7 +37,7 @@
             tableLayoutPanelTafels.ColumnCount = 2;
             tableLayoutPanelTafels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanelTafels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanelTafels.Location = new Point(0, 0);
+            tableLayoutPanelTafels.Location = new Point(0, 84);
             tableLayoutPanelTafels.Name = "tableLayoutPanelTafels";
             tableLayoutPanelTafels.RowCount = 2;
             tableLayoutPanelTafels.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -44,10 +45,21 @@
             tableLayoutPanelTafels.Size = new Size(459, 302);
             tableLayoutPanelTafels.TabIndex = 0;
             // 
+            // RefreshBtn
+            // 
+            RefreshBtn.Location = new Point(17, 30);
+            RefreshBtn.Name = "RefreshBtn";
+            RefreshBtn.Size = new Size(112, 34);
+            RefreshBtn.TabIndex = 1;
+            RefreshBtn.Text = "Refresh";
+            RefreshBtn.UseVisualStyleBackColor = true;
+            RefreshBtn.Click += RefreshBtn_Click;
+            // 
             // TafelOverzichtUserControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(RefreshBtn);
             Controls.Add(tableLayoutPanelTafels);
             Name = "TafelOverzichtUserControl";
             Size = new Size(459, 1032);
@@ -57,5 +69,6 @@
         #endregion
 
         private TableLayoutPanel tableLayoutPanelTafels;
+        private Button RefreshBtn;
     }
 }
