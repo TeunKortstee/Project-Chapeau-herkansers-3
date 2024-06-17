@@ -12,15 +12,16 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             _form1 = Form1.Instance;
+            ChangePasswordHide();
         }
         private Personeel IsPersoneel(Personeel p)
         {
             LoginService service = new LoginService();
+            p.email = EmailTxt.Text;
             Personeel personeel = service.GetPersoneel(p);
-            if (personeel == null)
-                return null;
-            if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
-                return null;
+            if (personeel == null || !service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
+                throw new LoginException();
+
             return personeel;
         }
 
@@ -29,40 +30,31 @@ namespace Project_Chapeau_herkansers_3
             Personeel personeel = new Personeel();
             try
             {
-                if (CheckPassword() && IsValidEmail())
+                if (CheckPassword(PasswordTxt.Text) && IsValidEmail())
                 {
-                    if (CreateUserCheck.Checked)
+                    personeel = IsPersoneel(personeel);
+                    if (personeel != null)
                     {
-                        changePassword(personeel);
+                        _form1.personeel = personeel;
+                        openNextView(personeel);
                     }
                     else
-                    {
-                        personeel.email = EmailTxt.Text;
-                        personeel = IsPersoneel(personeel);
-                        if (personeel != null)
-                        {
-                            _form1.personeel = personeel;
-                            openNextView(personeel);
-                        }
-                        else
-                            throw new LoginException();
-                    }
+                        throw new LoginException();
+
                 }
                 else
                     throw new LoginException();
             }
             catch (LoginException ex)
             {
-                SomethingWentWrong(ex.Message);
+                SomethingWentWrong(ex.Message, ErrorLbl);
             }
         }
 
-        private void changePassword(Personeel personeel)
+        private void ChangePassword(Personeel personeel)
         {
-            personeel.email = EmailTxt.Text;
             LoginService service = new LoginService();
-            personeel = service.GetPersoneel(personeel);
-            service.ChangePassword(personeel, PasswordTxt.Text);
+            service.ChangePassword(personeel, ChangePasswordTxt.Text);
         }
         private void openNextView(Personeel personeel)
         {
@@ -77,20 +69,66 @@ namespace Project_Chapeau_herkansers_3
 
             }
         }
-        private bool CheckPassword()
+        private bool CheckPassword(string password)
         {
             string pattern = "^[0-9]{4}$";
-            return Regex.IsMatch(PasswordTxt.Text, pattern);
+            return Regex.IsMatch(password, pattern);
         }
         public bool IsValidEmail()
         {
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             return Regex.IsMatch(EmailTxt.Text, pattern);
         }
-        private void SomethingWentWrong(string message)
+        private void SomethingWentWrong(string message, Label label)
         {
             PasswordTxt.Clear();
-            ErrorLbl.Text = message;
+            ChangePasswordTxt.Clear();
+            label.Text = message;
+        }
+
+        private void ChangePasswordCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChangePasswordCheck.Checked)
+            {
+                ChangePasswordShow();
+            }
+            else
+            {
+                ChangePasswordHide();
+            }
+        }
+        private void ChangePasswordHide()
+        {
+            ChangePasswordTxt.Hide();
+            Changepasswordbtn.Hide();
+            LoginBtn.Show();
+        }
+        private void ChangePasswordShow()
+        {
+            ChangePasswordTxt.Show();
+            Changepasswordbtn.Show();
+            LoginBtn.Hide();
+        }
+
+        private void Changepasswordbtn_Click(object sender, EventArgs e)
+        {
+            Personeel personeel = new Personeel();
+            try
+            {
+                if (CheckPassword(ChangePasswordTxt.Text) && CheckPassword(PasswordTxt.Text) && IsValidEmail())
+                {
+                    personeel = IsPersoneel(personeel);
+                    ChangePassword(personeel);
+                }
+                else
+                    throw new LoginException();
+                Succeslbl.Text = "Wachtwoord succesvol verandert";
+            }
+            catch (LoginException ex)
+            {
+                SomethingWentWrong(ex.Message, ChangePasswordErrorlbl);
+            }
+
         }
     }
 }
