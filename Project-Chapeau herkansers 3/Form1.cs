@@ -49,7 +49,11 @@ namespace Project_Chapeau_herkansers_3
         }
         private void GebruikerBtn_Click_1(object sender, EventArgs e)
         {
-            SwitchPanels(new LogoutControl());
+            if (personeel.AchterNaam != "")
+            {
+                SwitchPanels(new LogoutControl());
+            }
+
         }
     }
 }

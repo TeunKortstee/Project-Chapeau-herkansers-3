@@ -15,9 +15,9 @@ namespace DAL
             
             return ReadTables(ExecuteSelectQuery(query));
         }
-        public void ChangeStatus(Bestelling bestelling, string ItemBereider)
+        public void ChangeKeukenStatus(Bestelling bestelling)
         {
-            string query = $"UPDATE {ItemBereider} SET Status=@Status WHERE BestellingId = @BestellingId;";
+            string query = $"UPDATE Keuken SET Status=@Status WHERE BestellingId = @BestellingId;";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Status", bestelling.status),
@@ -25,10 +25,29 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-
-        public List<Bestelling> GetTafelBestelling(Tafel tafel, string ItemBereider)
+        public void ChangeBarStatus(Bestelling bestelling)
         {
-            string query = $"SELECT Naam, Bestellingen.BestellingsId, Status, Opmerking, Instuurtijd FROM {ItemBereider} \r\nJOIN Bestellingen ON {ItemBereider}.BestellingId = Bestellingen.BestellingsId\r\nJOIN BesteldeItems ON BesteldeItems.BestellingsId = Bestellingen.BestellingsId\r\nJOIN MenuItems ON MenuItems.MenuItemId = Besteldeitems.MenuItemId WHERE TableNr=@TableNr";
+            string query = $"UPDATE Bar SET Status=@Status WHERE BestellingId = @BestellingId;";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Status", bestelling.status),
+                new SqlParameter("@BestellingId", bestelling.bestellingId)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public List<Bestelling> GetTafelBestellingKeuken(Tafel tafel)
+        {
+            string query = $"SELECT Naam, Bestellingen.BestellingsId, Status, Opmerking, Instuurtijd FROM Bestellingen \r\nJOIN Keuken ON Keuken.BestellingId = Bestellingen.BestellingsId\r\nJOIN BesteldeItems ON BesteldeItems.BestellingsId = Bestellingen.BestellingsId\r\nJOIN MenuItems ON MenuItems.MenuItemId = Besteldeitems.MenuItemId WHERE TableNr=@TableNr";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@TableNr", tafel.Id),
+            };
+            return ReadBestelling(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Bestelling> GetTafelBestellingBar(Tafel tafel)
+        {
+            string query = $"SELECT Naam, Bestellingen.BestellingsId, Status, Opmerking, Instuurtijd FROM Bestellingen \r\nJOIN Bar ON Bar.BestellingId = Bestellingen.BestellingsId\r\nJOIN BesteldeItems ON BesteldeItems.BestellingsId = Bestellingen.BestellingsId\r\nJOIN MenuItems ON MenuItems.MenuItemId = Besteldeitems.MenuItemId WHERE TableNr=@TableNr";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@TableNr", tafel.Id),

@@ -35,6 +35,7 @@
             label5 = new Label();
             FunctieLbl = new Label();
             UitlogBtn = new Button();
+            TerugBtn = new Button();
             SuspendLayout();
             // 
             // label1
@@ -90,7 +91,7 @@
             // 
             // UitlogBtn
             // 
-            UitlogBtn.Location = new Point(153, 379);
+            UitlogBtn.Location = new Point(73, 378);
             UitlogBtn.Name = "UitlogBtn";
             UitlogBtn.Size = new Size(112, 34);
             UitlogBtn.TabIndex = 6;
@@ -98,10 +99,21 @@
             UitlogBtn.UseVisualStyleBackColor = true;
             UitlogBtn.Click += UitlogBtn_Click;
             // 
+            // TerugBtn
+            // 
+            TerugBtn.Location = new Point(238, 378);
+            TerugBtn.Name = "TerugBtn";
+            TerugBtn.Size = new Size(112, 34);
+            TerugBtn.TabIndex = 7;
+            TerugBtn.Text = "Terug";
+            TerugBtn.UseVisualStyleBackColor = true;
+            TerugBtn.Click += TerugBtn_Click;
+            // 
             // LogoutControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(TerugBtn);
             Controls.Add(UitlogBtn);
             Controls.Add(FunctieLbl);
             Controls.Add(label5);
@@ -124,5 +136,6 @@
         private Label label5;
         private Label FunctieLbl;
         private Button UitlogBtn;
+        private Button TerugBtn;
     }
 }
