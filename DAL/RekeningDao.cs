@@ -1,5 +1,6 @@
 ﻿using Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,15 +12,34 @@ namespace DAL
 {
     public class RekeningDao : BaseDao
     {
-        public Rekening GetRekening(int bestellingID)
+        public Rekening? GetRekening(int tafelID)
         {
-            string query = "SELECT RekeningId, BestellingId, TotaalPrijs, Fooi, Betaald FROM Rekeningen WHERE BestellingId = @bestellingId";
+            string query = "SELECT RekeningId, TafelId, Belasting, TotaalPrijs, Datum, Betaald, Opmerkingen FROM Rekeningen WHERE TafelID = @tafelId AND Betaald = 0";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@bestellingId", bestellingID),
+                new SqlParameter("@tafelId", tafelID),
              
             };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
+            List<Rekening> rekeningen = ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            if (rekeningen.Count > 0) {
+              
+                return rekeningen[0];
+            }
+
+            // Als er geen rekening gevonden kan worden
+            return null;
+            
+        }
+        // Lucas
+        public List<Rekening> GetBetaaldeRekeningen(bool betaald)
+        {
+            string query = "SELECT * FROM Rekeningen WHERE Betaald = @Betaald";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Betaald", betaald),
+
+            };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         private List<Rekening> ReadTables(DataTable dataTable)
@@ -28,19 +48,63 @@ namespace DAL
             foreach (DataRow row in dataTable.Rows)
             {
 
-                Rekening rekening = new Rekening()
-                {
-                    RekeningId = Convert.ToInt32(row["RekeningId"]),
-                    BestellingId = Convert.ToInt32(row["BestellingId"]),
-                    TotaalPrijs = (float)row["TotaalPrijs"],
-                    Fooi = (float)row["Fooi"],                    
-                    Betaald = (bool)row["Betaald"]
-                };
+                Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
+                    Convert.ToInt32(row["TafelId"]), 
+                    (double)row["TotaalPrijs"],
+                    (bool)row["Betaald"], 
+                    (DateTime)row["Datum"],
+                    (double)row["Belasting"],
+                    (string)row["Opmerkingen"]
+                    );
+                
                 rekeningen.Add(rekening);
             }
-            return rekeningen;
+            return rekeningen;      
         }
 
-       
+        public void RekeningBetaald(Rekening rekening) {
+            string query = "UPDATE Rekeningen SET Betaald = 1, Datum = GETDATE() WHERE RekeningId = @ID; UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TableNr AND Betaald = 0";
+           
+            
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@ID", rekening.RekeningId),
+                new SqlParameter("@TableNr", rekening.TafelId),
+                
+
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
+        {
+            string query = "UPDATE Rekeningen SET Opmerkingen = @Opmerkingen WHERE RekeningId = @ID;";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@ID", rekening.RekeningId),
+                new SqlParameter("@Opmerkingen",opmerkingen)
+
+
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public int InsertRekening(Rekening rekening)
+        {
+            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,Betaald,Belasting) VALUES (@TafelId,@TotaalPrijs,@Betaald,@Belasting) SELECT CAST(scope_identity() AS int)";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@TafelId", rekening.TafelId),
+                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
+                new SqlParameter("@Betaald", rekening.Betaald),
+                new SqlParameter("@Belasting", rekening.Belasting)
+
+            };
+            return ExecuteEditQueryReturnID(query, sqlParameters);
+        }
+
+
     }
 }

@@ -12,7 +12,7 @@ namespace Project_Chapeau_herkansers_3
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Form1 form1 = Form1.Instance;
-            //form1.Size = new Size(490, 1000);
+            
             Application.Run(form1);
         }
     }

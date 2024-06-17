@@ -32,19 +32,11 @@ namespace Service
             return menuItemDao.GetAllItems();
         }
         // Lucas
-        public List<MenuItem> GetAllMenuItems(MenuType menuType)
+        public List<MenuItem> GetMenuItemsByMenu(MenuType menuType)
         {
-            List<MenuItem> selectedMenu = new List<MenuItem>();
-            foreach (MenuItem menuItem in menuItemDao.GetAllMenuItems())
-            {
-                if (menuItem.MenuId == (int)menuType)
-                {
-                    selectedMenu.Add(menuItem);
-                }
-            }
-            return selectedMenu;
+            return menuItemDao.GetMenuItemsByMenuId(menuType);
         }
-        public MenuItem CreateMenuItem(string name, decimal price, bool alcoholic, int menuId, int stock)
+        public MenuItem CreateMenuItem(string name, double price, bool alcoholic, MenuType menuId, int stock)
         {
             return new MenuItem(name, price, alcoholic, menuId, stock);
         }
@@ -60,6 +52,17 @@ namespace Service
         {
             menuItemDao.DeleteMenuItem(selectedMenuItem);
         }
-
+        //public List<MenuItem> GetAllMenuItems(MenuType menuType)
+        //{
+        //    List<MenuItem> selectedMenu = new List<MenuItem>();
+        //    foreach (MenuItem menuItem in menuItemDao.GetAllMenuItems())
+        //    {
+        //        if (menuItem.MenuId == (int)menuType)
+        //        {
+        //            selectedMenu.Add(menuItem);
+        //        }
+        //    }
+        //    return selectedMenu;
+        //}
     }
 }

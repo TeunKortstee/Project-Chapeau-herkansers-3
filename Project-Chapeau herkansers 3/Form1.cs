@@ -1,5 +1,4 @@
 using Model;
-using Project_Chapeau_herkansers_3.UserControls;
 
 namespace Project_Chapeau_herkansers_3
 {
@@ -18,18 +17,31 @@ namespace Project_Chapeau_herkansers_3
                 return _instance;
             }
         }
-        public Form1()
+        private Form1()
         {
             InitializeComponent();
             _instance = this;
-            SwitchPanels(new ItemBereiderUserControl());
+            personeel = new Personeel();
+            SwitchPanels(new LoginControl());
+            //SwitchPanels(new UserControlManager());
         }
 
         public void SwitchPanels(UserControl userControl)
         {
             mainPanel.Controls.Clear();
             userControl.Dock = DockStyle.Fill;
+            Size userControlSize = userControl.Size;
+
+            mainPanel.Size = userControlSize;
+
+            userControlSize.Width += 30;
+            userControlSize.Height += 60;
+
+            _instance.Size = userControlSize;
+
             mainPanel.Controls.Add(userControl);
+
+
         }
     }
 }

@@ -41,7 +41,10 @@
             this.billTotalText = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.totalVatPriceLabel = new System.Windows.Forms.Label();
+            this.vatPriceLabel = new System.Windows.Forms.Label();
             this.billTotalAmountText = new System.Windows.Forms.Label();
+            this.btnProceedToPayment = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -97,7 +100,7 @@
             // billColumnPrice
             // 
             this.billColumnPrice.Text = "Price";
-            this.billColumnPrice.Width = 48;
+            this.billColumnPrice.Width = 70;
             // 
             // billTotalText
             // 
@@ -112,14 +115,16 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(179)))), ((int)(((byte)(1)))));
-            this.pictureBox2.Location = new System.Drawing.Point(8, 311);
+            this.pictureBox2.Location = new System.Drawing.Point(8, 314);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(322, 10);
+            this.pictureBox2.Size = new System.Drawing.Size(322, 8);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.totalVatPriceLabel);
+            this.panel1.Controls.Add(this.vatPriceLabel);
             this.panel1.Controls.Add(this.billTotalAmountText);
             this.panel1.Controls.Add(this.billTitleText);
             this.panel1.Controls.Add(this.pictureBox2);
@@ -127,34 +132,65 @@
             this.panel1.Controls.Add(this.billTotalText);
             this.panel1.Location = new System.Drawing.Point(4, 59);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(339, 360);
+            this.panel1.Size = new System.Drawing.Size(339, 378);
             this.panel1.TabIndex = 5;
+            // 
+            // totalVatPriceLabel
+            // 
+            this.totalVatPriceLabel.AutoSize = true;
+            this.totalVatPriceLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.totalVatPriceLabel.Location = new System.Drawing.Point(228, 348);
+            this.totalVatPriceLabel.Name = "totalVatPriceLabel";
+            this.totalVatPriceLabel.Size = new System.Drawing.Size(49, 21);
+            this.totalVatPriceLabel.TabIndex = 7;
+            this.totalVatPriceLabel.Text = "€0.00";
+            // 
+            // vatPriceLabel
+            // 
+            this.vatPriceLabel.AutoSize = true;
+            this.vatPriceLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.vatPriceLabel.Location = new System.Drawing.Point(11, 349);
+            this.vatPriceLabel.Name = "vatPriceLabel";
+            this.vatPriceLabel.Size = new System.Drawing.Size(39, 21);
+            this.vatPriceLabel.TabIndex = 6;
+            this.vatPriceLabel.Text = "VAT:";
             // 
             // billTotalAmountText
             // 
             this.billTotalAmountText.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.billTotalAmountText.AutoSize = true;
             this.billTotalAmountText.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.billTotalAmountText.Location = new System.Drawing.Point(239, 324);
+            this.billTotalAmountText.Location = new System.Drawing.Point(224, 323);
             this.billTotalAmountText.Name = "billTotalAmountText";
             this.billTotalAmountText.Size = new System.Drawing.Size(91, 30);
             this.billTotalAmountText.TabIndex = 5;
             this.billTotalAmountText.Text = "€113.00";
             this.billTotalAmountText.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // btnProceedToPayment
+            // 
+            this.btnProceedToPayment.BackColor = System.Drawing.Color.Lime;
+            this.btnProceedToPayment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnProceedToPayment.Location = new System.Drawing.Point(25, 453);
+            this.btnProceedToPayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnProceedToPayment.Name = "btnProceedToPayment";
+            this.btnProceedToPayment.Size = new System.Drawing.Size(290, 42);
+            this.btnProceedToPayment.TabIndex = 6;
+            this.btnProceedToPayment.Text = "PROCEED TO PAYMENT";
+            this.btnProceedToPayment.UseVisualStyleBackColor = false;
+            this.btnProceedToPayment.Click += new System.EventHandler(this.btnProceedToPayment_Click);
+            // 
             // Afrekenen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(346, 517);
+            this.Controls.Add(this.btnProceedToPayment);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
             this.Name = "Afrekenen";
-            this.Text = "Afrekenen";
+            this.Size = new System.Drawing.Size(346, 517);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -175,5 +211,8 @@
         private PictureBox pictureBox2;
         private Panel panel1;
         private Label billTotalAmountText;
+        private Label vatPriceLabel;
+        private Label totalVatPriceLabel;
+        private Button btnProceedToPayment;
     }
 }
