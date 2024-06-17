@@ -21,7 +21,7 @@ namespace Project_Chapeau_herkansers_3
                 return _instance;
             }
         }
-        private Form1()
+        private Form1(){
             InitializeComponent();
             SwitchPanels(new LoginControl());
 
