@@ -129,6 +129,7 @@
             Size = new Size(483, 598);
             ResumeLayout(false);
             PerformLayout();
+
         }
 
         #endregion

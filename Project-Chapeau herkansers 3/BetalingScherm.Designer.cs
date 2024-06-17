@@ -69,9 +69,9 @@
             this.lblSplitAmount.AutoSize = true;
             this.lblSplitAmount.Location = new System.Drawing.Point(21, 43);
             this.lblSplitAmount.Name = "lblSplitAmount";
-            this.lblSplitAmount.Size = new System.Drawing.Size(167, 15);
+            this.lblSplitAmount.Size = new System.Drawing.Size(155, 15);
             this.lblSplitAmount.TabIndex = 2;
-            this.lblSplitAmount.Text = "How many people are paying?";
+            this.lblSplitAmount.Text = "Hoeveel mensen betalen er?";
             // 
             // btnConfirmSplit
             // 
@@ -86,17 +86,17 @@
             // lblAmountTitle
             // 
             this.lblAmountTitle.AutoSize = true;
-            this.lblAmountTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAmountTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblAmountTitle.Location = new System.Drawing.Point(25, 450);
             this.lblAmountTitle.Name = "lblAmountTitle";
-            this.lblAmountTitle.Size = new System.Drawing.Size(190, 25);
+            this.lblAmountTitle.Size = new System.Drawing.Size(198, 15);
             this.lblAmountTitle.TabIndex = 4;
-            this.lblAmountTitle.Text = "Amount to be paid: ";
+            this.lblAmountTitle.Text = "Hoeveel er betaald moet worden: ";
             // 
             // lblAmountToBePaid
             // 
             this.lblAmountToBePaid.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAmountToBePaid.Location = new System.Drawing.Point(221, 450);
+            this.lblAmountToBePaid.Location = new System.Drawing.Point(221, 446);
             this.lblAmountToBePaid.Name = "lblAmountToBePaid";
             this.lblAmountToBePaid.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblAmountToBePaid.Size = new System.Drawing.Size(159, 25);
@@ -107,7 +107,7 @@
             // lblAmountPaid
             // 
             this.lblAmountPaid.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAmountPaid.Location = new System.Drawing.Point(221, 425);
+            this.lblAmountPaid.Location = new System.Drawing.Point(221, 421);
             this.lblAmountPaid.Name = "lblAmountPaid";
             this.lblAmountPaid.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblAmountPaid.Size = new System.Drawing.Size(159, 25);
@@ -118,17 +118,17 @@
             // lblAmountTitle2
             // 
             this.lblAmountTitle2.AutoSize = true;
-            this.lblAmountTitle2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAmountTitle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblAmountTitle2.Location = new System.Drawing.Point(25, 425);
             this.lblAmountTitle2.Name = "lblAmountTitle2";
-            this.lblAmountTitle2.Size = new System.Drawing.Size(139, 25);
+            this.lblAmountTitle2.Size = new System.Drawing.Size(55, 15);
             this.lblAmountTitle2.TabIndex = 6;
-            this.lblAmountTitle2.Text = "Amount paid: ";
+            this.lblAmountTitle2.Text = "Betaald: ";
             // 
             // lblChange
             // 
             this.lblChange.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblChange.Location = new System.Drawing.Point(221, 475);
+            this.lblChange.Location = new System.Drawing.Point(221, 471);
             this.lblChange.Name = "lblChange";
             this.lblChange.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblChange.Size = new System.Drawing.Size(159, 25);
@@ -139,12 +139,12 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(25, 475);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 25);
+            this.label2.Size = new System.Drawing.Size(69, 15);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Change: ";
+            this.label2.Text = "Wisselgeld: ";
             // 
             // btnPay
             // 
@@ -154,24 +154,24 @@
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(358, 49);
             this.btnPay.TabIndex = 10;
-            this.btnPay.Text = "Pay";
+            this.btnPay.Text = "Betaal";
             this.btnPay.UseVisualStyleBackColor = false;
             this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // lblTipTitle
             // 
             this.lblTipTitle.AutoSize = true;
-            this.lblTipTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblTipTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.lblTipTitle.Location = new System.Drawing.Point(25, 500);
             this.lblTipTitle.Name = "lblTipTitle";
-            this.lblTipTitle.Size = new System.Drawing.Size(41, 25);
+            this.lblTipTitle.Size = new System.Drawing.Size(31, 15);
             this.lblTipTitle.TabIndex = 11;
-            this.lblTipTitle.Text = "Tip:";
+            this.lblTipTitle.Text = "Fooi:";
             // 
             // lblTip
             // 
             this.lblTip.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTip.Location = new System.Drawing.Point(221, 500);
+            this.lblTip.Location = new System.Drawing.Point(221, 496);
             this.lblTip.Name = "lblTip";
             this.lblTip.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblTip.Size = new System.Drawing.Size(159, 25);

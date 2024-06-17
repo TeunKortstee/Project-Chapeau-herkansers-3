@@ -45,47 +45,47 @@
             this.lblBillSettled.AutoSize = true;
             this.lblBillSettled.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblBillSettled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lblBillSettled.Location = new System.Drawing.Point(33, 149);
+            this.lblBillSettled.Location = new System.Drawing.Point(61, 149);
             this.lblBillSettled.Name = "lblBillSettled";
-            this.lblBillSettled.Size = new System.Drawing.Size(347, 32);
+            this.lblBillSettled.Size = new System.Drawing.Size(282, 32);
             this.lblBillSettled.TabIndex = 0;
-            this.lblBillSettled.Text = "THE BILL HAS BEEN SETTLED!";
+            this.lblBillSettled.Text = "REKENING IS BETAALD!";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(85, 245);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 15);
+            this.label1.Size = new System.Drawing.Size(80, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "ORDER PRICE:";
+            this.label1.Text = "TOTAAL PRIJS:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(85, 291);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 15);
+            this.label2.Size = new System.Drawing.Size(136, 15);
             this.label2.TabIndex = 2;
-            this.label2.Text = "AMOUNT PAID:";
+            this.label2.Text = "HOEVEELHEID BETAALD:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(85, 343);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 15);
+            this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 3;
-            this.label3.Text = "TIP AMOUNT:";
+            this.label3.Text = "FOOI:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(85, 390);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 15);
+            this.label4.Size = new System.Drawing.Size(33, 15);
             this.label4.TabIndex = 4;
-            this.label4.Text = "VAT:";
+            this.label4.Text = "BTW:";
             // 
             // lblVat
             // 
@@ -107,9 +107,9 @@
             // 
             // lblAmountPaid
             // 
-            this.lblAmountPaid.Location = new System.Drawing.Point(199, 291);
+            this.lblAmountPaid.Location = new System.Drawing.Point(220, 291);
             this.lblAmountPaid.Name = "lblAmountPaid";
-            this.lblAmountPaid.Size = new System.Drawing.Size(119, 15);
+            this.lblAmountPaid.Size = new System.Drawing.Size(98, 15);
             this.lblAmountPaid.TabIndex = 6;
             this.lblAmountPaid.Text = "€ 0";
             this.lblAmountPaid.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -130,7 +130,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(99, 44);
             this.btnBack.TabIndex = 9;
-            this.btnBack.Text = "BACK";
+            this.btnBack.Text = "TERUG";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
