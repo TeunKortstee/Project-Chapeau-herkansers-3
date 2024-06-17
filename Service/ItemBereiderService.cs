@@ -21,11 +21,26 @@ namespace Service
         }
         public List<Bestelling> GetTafelBestelling(Tafel tafel, string ItemBereider)
         {
-            return itemBereiderDao.GetTafelBestelling(tafel, ItemBereider);
+            if (ItemBereider == "Keuken")
+            {
+                return itemBereiderDao.GetTafelBestellingKeuken(tafel);
+            }
+            else if (ItemBereider == "Bar")
+            {
+                return itemBereiderDao.GetTafelBestellingBar(tafel);
+            }
+            return null;
         }
         public void ChangeStatus(Bestelling bestelling, string ItemBereider)
         {
-            itemBereiderDao.ChangeStatus(bestelling, ItemBereider);
+            if (ItemBereider == "Keuken")
+            {
+                itemBereiderDao.ChangeKeukenStatus(bestelling);
+            }
+            else if (ItemBereider == "Bar")
+            {
+                itemBereiderDao.ChangeBarStatus(bestelling);
+            }
         }
     }
 }
