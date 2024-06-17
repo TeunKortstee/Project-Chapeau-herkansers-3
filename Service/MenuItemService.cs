@@ -57,6 +57,14 @@ namespace Service
         {
             menuItemDao.DeleteMenuItem(selectedMenuItem);
         }
+
+        public void UpdateAllMenuItemsStock(Bestelling bestelling)
+        {
+            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+            {
+                menuItemDao.UpdateMenuItemStock(besteldeItem.menuItem);
+            }
+        }
         //public List<MenuItem> GetAllMenuItems(MenuType menuType)
         //{
         //    List<MenuItem> selectedMenu = new List<MenuItem>();
