@@ -47,7 +47,7 @@ namespace Project_Chapeau_herkansers_3
         {
             GebruikerBtn.Text = text;
         }
-        private void GebruikerBtn_Click(object sender, EventArgs e)
+        private void GebruikerBtn_Click_1(object sender, EventArgs e)
         {
             SwitchPanels(new LogoutControl());
         }
