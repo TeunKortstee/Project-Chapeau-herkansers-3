@@ -21,6 +21,10 @@ namespace Project_Chapeau_herkansers_3
             StatusLbl.Text = "Deze tafel is nu ";
             TafelTitelTag.Text += tafel.Id.ToString();
             StatusLbl.Text += tafel.status.ToString();
+            if(labelBestellingAangemaakt.Tag != null)
+            {
+                labelBestellingAangemaakt.Text = labelBestellingAangemaakt.Tag.ToString();
+            }
         }
 
         private void FillComboBox()
