@@ -93,9 +93,7 @@ namespace Service
                     totalAmountPaid += payment.payment;
                     betalingen.Add(new Betaling(0, (int)payment.method, payment.payment, bill.RekeningId, payment.tip));
 
-                }
-                else
-                {
+                } else {
                     return 1;
 
                 }
