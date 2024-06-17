@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,12 +24,13 @@ namespace Service
 
         }
 
-        public double AddDoubleArray(double[] array) {
+        public double AddDoubleArray(double[] array) 
+        {
 
             double result = 0.00;
             foreach (double d in array) {
                 result += d;
-
+            
             }
             return result;
         }
@@ -45,13 +46,14 @@ namespace Service
             return tips;
         }
 
-        public double CalculateChange(double toPay, double amountPaid) {
+        public double CalculateChange(double toPay, double amountPaid) 
+        {
 
 
 
             return amountPaid - toPay;
-
-
+        
+        
         }
         public double[] GetPaymentPerPerson(double price, int people)
         {
@@ -69,8 +71,8 @@ namespace Service
             double remainder = price - (division * people);
             if (remainder > 0)
             {
-
-                payments[0] = Math.Round(division + remainder, 2, MidpointRounding.ToEven);
+                
+                payments[0] = Math.Round(division+remainder,2,MidpointRounding.ToEven);
             }
 
 
@@ -79,19 +81,20 @@ namespace Service
             return payments;
 
         }
-        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) {
+        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) 
+        {
 
 
             double totalAmountPaid = 0.00;
 
             List<Betaling> betalingen = new List<Betaling>();
-
+            
             foreach (SplitBillItemObj payment in payments) {
 
                 if (payment.payment > 0 && payment.tip >= 0) {
                     totalAmountPaid += payment.payment;
                     betalingen.Add(new Betaling(0, (int)payment.method, payment.payment, bill.RekeningId, payment.tip));
-
+                    
                 } else {
                     return 1;
 
@@ -118,7 +121,7 @@ namespace Service
     }
 
 
-
-
+        
+    
 
 }

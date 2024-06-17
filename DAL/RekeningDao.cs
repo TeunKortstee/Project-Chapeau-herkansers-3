@@ -1,4 +1,4 @@
-﻿using Model;
+using Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,17 +18,17 @@ namespace DAL
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@tafelId", tafelID),
-
+             
             };
             List<Rekening> rekeningen = ReadTables(ExecuteSelectQuery(query, sqlParameters));
             if (rekeningen.Count > 0) {
-
+              
                 return rekeningen[0];
             }
 
             // Als er geen rekening gevonden kan worden
             return null;
-
+            
         }
         // Lucas
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
@@ -48,29 +48,29 @@ namespace DAL
             foreach (DataRow row in dataTable.Rows)
             {
 
-                Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]),
-                    Convert.ToInt32(row["TafelId"]),
+                Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
+                    Convert.ToInt32(row["TafelId"]), 
                     (double)row["TotaalPrijs"],
-                    (bool)row["Betaald"],
+                    (bool)row["Betaald"], 
                     (DateTime)row["Datum"],
                     (double)row["Belasting"],
                     (string)row["Opmerkingen"]
                     );
-
+                
                 rekeningen.Add(rekening);
             }
-            return rekeningen;
+            return rekeningen;      
         }
 
         public void RekeningBetaald(Rekening rekening) {
             string query = "UPDATE Rekeningen SET Betaald = 1, Datum = GETDATE() WHERE RekeningId = @ID; UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TableNr AND Betaald = 0";
-
-
+           
+            
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@ID", rekening.RekeningId),
                 new SqlParameter("@TableNr", rekening.TafelId),
-
+                
 
             };
 
@@ -97,7 +97,7 @@ namespace DAL
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@TafelId", rekening.TafelId),
-                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),
+                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
                 new SqlParameter("@Betaald", rekening.Betaald),
                 new SqlParameter("@Belasting", rekening.Belasting)
 
