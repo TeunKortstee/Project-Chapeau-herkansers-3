@@ -17,10 +17,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private int _personId = 0;
         ItemBereiderService _itemBereiderService;
-        public ItemBereiderUserControl()
+        public ItemBereiderUserControl(int personId)
         {
             InitializeComponent();
             _itemBereiderService = new ItemBereiderService();
+            _personId = personId;
         }
 
         private void OrdersListView()
@@ -43,13 +44,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
             foreach (ListViewItem item in orderListView.SelectedItems)
             {
                 BesteldeItem items = (BesteldeItem)item.Tag;
-                items.status = status;  // Stel de status in op de meegegeven status
+                items.status = status;
+                _itemBereiderService.UpdateStatus(status, items.BesteldItemId);
             }
         }
 
         private void InPreparationBtn_Click_1(object sender, EventArgs e)
         {
             UpdateOrderStatus(GerechtsStatus.InPreparation);
+
         }
 
         private void PreparedBtn_Click(object sender, EventArgs e)

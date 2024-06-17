@@ -20,5 +20,9 @@ namespace Service
         {
             return itemBereiderDao.GetAllItems(personelId);
         }
+        public void UpdateStatus(GerechtsStatus status, int besteldeItemId)
+        {
+            itemBereiderDao.UpdateStatus(status, besteldeItemId);
+        }
     }
 }
