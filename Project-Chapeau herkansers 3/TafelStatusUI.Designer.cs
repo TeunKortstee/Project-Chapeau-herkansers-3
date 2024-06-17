@@ -35,6 +35,7 @@
             StatusBox = new ComboBox();
             AfrekenenBtn = new Button();
             BestellingDisplayBtn = new Button();
+            labelBestellingAangemaakt = new Label();
             SuspendLayout();
             // 
             // TafelTitelTag
@@ -104,10 +105,19 @@
             BestellingDisplayBtn.UseVisualStyleBackColor = true;
             BestellingDisplayBtn.Click += BestellingDisplayBtn_Click;
             // 
+            // labelBestellingAangemaakt
+            // 
+            labelBestellingAangemaakt.AutoSize = true;
+            labelBestellingAangemaakt.Location = new Point(159, 452);
+            labelBestellingAangemaakt.Name = "labelBestellingAangemaakt";
+            labelBestellingAangemaakt.Size = new Size(0, 25);
+            labelBestellingAangemaakt.TabIndex = 9;
+            // 
             // TafelStatusUI
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(labelBestellingAangemaakt);
             Controls.Add(BestellingDisplayBtn);
             Controls.Add(AfrekenenBtn);
             Controls.Add(StatusBox);
@@ -130,5 +140,6 @@
         private ComboBox StatusBox;
         private Button AfrekenenBtn;
         private Button BestellingDisplayBtn;
+        private Label labelBestellingAangemaakt;
     }
 }

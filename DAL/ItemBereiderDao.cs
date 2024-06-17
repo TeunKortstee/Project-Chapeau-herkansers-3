@@ -6,31 +6,19 @@ namespace DAL
 {
     public class ItemBereiderDao : BaseDao
     {
-        public List<ItemBereider> GetAllItems(int personeelsId)
+        public List<BesteldeItem> GetAllItems(int personeelsId)
         {
-            string query = @"SELECT
-                                    [BesteldItemId]
-                                  , [Opmerking]
-                                  , [Instuurtijd]
-                                  , OrderedItem.[MenuItemId]
-                                  , OrderedItem.BestellingsId
-                                  , [Hoeveelheid]
-                                  , Orders.PersoneelsId
-                                  
-                                  , Keuken.[Status]
-                            FROM [dbo].[BesteldeItems] AS OrderedItem
-                                INNER JOIN Bestellingen AS Orders ON Orders.BestellingsId = OrderedItem.BesteldItemId
-                                
-                                FULL OUTER JOIN Keuken on Keuken.BestellingId = Orders.BestellingsId
-                            WHERE Orders.PersoneelsId = 0";
+            string query = @"SELECT BesteldItemId, Opmerking, Instuurtijd,  BesteldeItems.MenuItemId, MenuItems.Naam, BesteldeItems.BestellingsId, Hoeveelheid, 
+                            Bestellingen.PersoneelsId,  BesteldeItems.GerechtsStatus FROM BesteldeItems JOIN MenuItems ON (MenuItems.MenuItemId=BesteldeItems.MenuItemId) 
+                            INNER JOIN Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId FULL OUTER JOIN Keuken on Keuken.BestellingId = Bestellingen.BestellingsId 
+                            WHERE Bestellingen.PersoneelsId = @personeelsId;";
+
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@personeelsId", personeelsId),
 
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-            // kan dit query makkelijker?
-            // wat doet de personeelsId en moet ik zoveel innerjoins hebben?
         }
         public void ChangeStatus(Bestelling bestelling, string ItemBereider)
         {
@@ -83,43 +71,38 @@ namespace DAL
             }
             return bestellingen;
         }
-        private List<ItemBereider> ReadTables(DataTable dataTable)
+        private List<BesteldeItem> ReadTables(DataTable dataTable)
         {
-            List<ItemBereider> items = new List<ItemBereider>();
+            List<BesteldeItem> items = new List<BesteldeItem>();
             foreach (DataRow row in dataTable.Rows)
             {
 
-                int? gerechtsStatus = null;
-                // Als Status kolom uitgelezen wordt als DBNull.Value betekent dat dit kolom geen waarde heeft in tabel.
-                // DataTable gebruikt DBNull.Value waarde, dit is niet hetzelfde als C# null.
-                if (row["Status"] != System.DBNull.Value)
-                {
-                    // Status waarde is niet null in database dus niet "DBNull.Value" we kunnen nu gerechtsStatus zetten naar database waarde.
-                    gerechtsStatus = Convert.ToInt32(row["Status"]);
-                }
 
-                ItemBereider item = new ItemBereider()
+                BesteldeItem item = new BesteldeItem()
                 {
                     BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
                     Opmerking = row["Opmerking"].ToString(),
-                    Instuurtijd = (DateTime)row["Instuurtijd"],
-                    //MenuItemId = Convert.ToInt32(row["MenuItemID"]),
-                    BestellingsId = Convert.ToInt32(row["BestellingsID"]),
+                    InstuurTijd = (DateTime)row["Instuurtijd"],
+                    BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
-                    PersoneelsId = Convert.ToInt32(row["PersoneelsId"]),
-                    //Voorraad = Convert.ToInt32(row["Voorraad"]),
-                    //Alcoholisch = row["Alcoholisch"].ToString(),
-                    //Naam = row["Naam"].ToString(),
-                    // Als gerechtsStatus niet is gezet naar database waarde gebruiken we GerechtsStatus.NotStarted als standaard.
-                    // Als gerechtsStatus wel is gezet naar database waarde omdat die beschikbaar is Casten we het integer waarde naar GerechtStatus enum
-                    Status = gerechtsStatus != null ? (GerechtsStatus)gerechtsStatus : GerechtsStatus.NotStarted
+                    Naam = row["Naam"].ToString(),
+                    status = (GerechtsStatus)row["GerechtsStatus"]
 
                 };
                 items.Add(item);
             }
             return items;
         }
-
+        public void UpdateStatus(GerechtsStatus status, int besteldeItemId)
+        {
+            string query = "UPDATE BesteldeItems SET GerechtsStatus = @status WHERE BesteldItemId = @id";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@status", (int)status),
+                new SqlParameter("@id", besteldeItemId)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
 
     }
 }

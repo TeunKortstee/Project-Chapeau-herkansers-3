@@ -81,5 +81,10 @@ namespace Project_Chapeau_herkansers_3
                 MessageBox.Show("There are no items to check out!");
             }
         }
+        public void SetStringName(string message)
+        {
+            labelBestellingAangemaakt.Text = message;
+        }
     }
+
 }

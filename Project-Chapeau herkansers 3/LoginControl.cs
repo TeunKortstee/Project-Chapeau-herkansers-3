@@ -73,7 +73,7 @@ namespace Project_Chapeau_herkansers_3
                     _form1.SwitchPanels(new UserControlManager());
                     break;
                 default:
-                    _form1.SwitchPanels(new ItemBereiderUserControl());
+                    _form1.SwitchPanels(new ItemBereiderUserControl(personeel.Id));
                     break;
             }
         }
