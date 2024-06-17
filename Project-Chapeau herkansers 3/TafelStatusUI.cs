@@ -29,25 +29,23 @@ namespace Project_Chapeau_herkansers_3
             {
                 StatusBox.Items.Add(status);
             }
-            StatusBox.SelectedIndex = (int)tafel.status;
+            StatusBox.SelectedIndex = (int)tafel.status - 1;
         }
 
         private void MaakBestellingBtn_Click(object sender, EventArgs e)
         {
-            SaveTafel();
-            //Open naar bestelling Ui
-            /*OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
-            opnemenBestellen.Tag = this;
-            AddUserControl(opnemenBestellen);*/
-            form1.SwitchPanels(new OpnemenBestellen(tafel));
+            Exit(new OpnemenBestellen(this.tafel));
         }
 
         private void TerugBtn_Click(object sender, EventArgs e)
         {
-            //sla tafel op in db
             SaveTafel();
-            //ga terug naar tafeloverzicht
             form1.SwitchPanels(new TafelOverzichtUserControl());
+        }
+        private void Exit(UserControl control)
+        {
+            SaveTafel();
+            form1.SwitchPanels(control);
         }
         private void SaveTafel()
         {
@@ -58,13 +56,35 @@ namespace Project_Chapeau_herkansers_3
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tafel.status = (TafelStatus)StatusBox.SelectedIndex;
+            tafel.status = (TafelStatus)StatusBox.SelectedIndex + 1;
             SetLabels();
         }
 
+        private void BestellingDisplayBtn_Click(object sender, EventArgs e)
+        {
+            Exit(new TafelBestellingUserControl(tafel));
+        }
+
+        private void AfrekenenBtn_Click(object sender, EventArgs e)
+        {
+            RekeningService rekeningService = new RekeningService();
+            BestellingService bestellingService = new BestellingService();
+
+            if (bestellingService.GetBestellingen(tafel.Id).Count > 0)
+            {
+                Rekening r = rekeningService.CreateRekening(tafel.Id);
+                Afrekenen a = new Afrekenen(r);
+                Exit(a);
+            }
+            else
+            {
+                MessageBox.Show("There are no items to check out!");
+            }
+        }
         public void SetStringName(string message)
         {
             labelBestellingAangemaakt.Text = message;
         }
     }
+
 }

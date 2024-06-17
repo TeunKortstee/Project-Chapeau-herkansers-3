@@ -14,12 +14,15 @@ namespace DAL
         }
         public Personeel GetPersoneel(Personeel personeel)
         {
+
             string query = "SELECT PersoneelsId, Achternaam, Wachtwoord, Salt, Email, FunctieId FROM Personeel WHERE Email=@Email";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Email", personeel.email)
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
+
+
         }
         public void ChangePassword(Personeel personeel)
         {

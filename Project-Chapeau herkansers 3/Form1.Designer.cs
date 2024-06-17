@@ -28,38 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.SuspendLayout();
+            mainPanel = new Panel();
+            GebruikerBtn = new Button();
+            SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.AutoScroll = true;
-            this.mainPanel.Location = new System.Drawing.Point(1, 2);
-            this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(362, 795);
-            this.mainPanel.TabIndex = 0;
+            mainPanel.AutoScroll = true;
+            mainPanel.Location = new Point(1, 60);
+            mainPanel.Margin = new Padding(4, 3, 4, 3);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new Size(517, 1268);
+            mainPanel.TabIndex = 0;
+            // 
+            // GebruikerBtn
+            // 
+            GebruikerBtn.Location = new Point(12, 12);
+            GebruikerBtn.Name = "GebruikerBtn";
+            GebruikerBtn.Size = new Size(169, 34);
+            GebruikerBtn.TabIndex = 1;
+            GebruikerBtn.Text = "Gebruiker";
+            GebruikerBtn.UseVisualStyleBackColor = true;
+            GebruikerBtn.Click += GebruikerBtn_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(413, 791);
-            this.Controls.Add(this.mainPanel);
 
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            ClientSize = new Size(590, 1318);
+            Controls.Add(GebruikerBtn);
+            Controls.Add(mainPanel);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
 
         private Panel mainPanel;
+        private Button GebruikerBtn;
     }
 }
