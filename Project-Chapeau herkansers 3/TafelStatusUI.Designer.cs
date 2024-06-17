@@ -66,6 +66,7 @@
             this.MaakBestellingBtn.TabIndex = 4;
             this.MaakBestellingBtn.Text = "Maak Bestelling";
             this.MaakBestellingBtn.UseVisualStyleBackColor = true;
+            this.MaakBestellingBtn.Click += new System.EventHandler(this.MaakBestellingBtn_Click);
             // 
             // TerugBtn
             // 
@@ -76,6 +77,7 @@
             this.TerugBtn.TabIndex = 5;
             this.TerugBtn.Text = "Terug";
             this.TerugBtn.UseVisualStyleBackColor = true;
+            this.TerugBtn.Click += new System.EventHandler(this.TerugBtn_Click);
             // 
             // StatusBox
             // 
@@ -99,11 +101,10 @@
             // labelBestellingAangemaakt
             // 
             this.labelBestellingAangemaakt.AutoSize = true;
-            this.labelBestellingAangemaakt.Location = new System.Drawing.Point(166, 187);
+            this.labelBestellingAangemaakt.Location = new System.Drawing.Point(90, 186);
             this.labelBestellingAangemaakt.Name = "labelBestellingAangemaakt";
-            this.labelBestellingAangemaakt.Size = new System.Drawing.Size(50, 20);
+            this.labelBestellingAangemaakt.Size = new System.Drawing.Size(0, 20);
             this.labelBestellingAangemaakt.TabIndex = 8;
-            this.labelBestellingAangemaakt.Text = "label1";
             // 
             // TafelStatusUI
             // 
