@@ -22,12 +22,12 @@ namespace Project_Chapeau_herkansers_3
             Menu menu = menuItemService.GetAllItems();
             Bestelling bestelling = new Bestelling();
             Form1 form1 = Form1.Instance;
-            buttonsVullen(menu, bestelling, form1, tafel);
+            buttonsVullen(menu, bestelling, form1, tafel, menuItemService);
             VulTekstTafel(tafel);
             VulListMetColumns();
         }
 
-        private void buttonsVullen(Menu menu, Bestelling bestelling, Form1 form1, Tafel tafel)
+        private void buttonsVullen(Menu menu, Bestelling bestelling, Form1 form1, Tafel tafel, MenuItemService menuItemService)
         {
             btnLunchKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Lunch);
             btnDinerKaart.Click += (sender, e) => VullenListView(listViewKaart, menu, MenuType.Diner);
@@ -38,7 +38,7 @@ namespace Project_Chapeau_herkansers_3
             btnRijVerwijderen.Click += (sender, e) => RijVerwijderen(listViewBestelling, bestelling, menu);
             btnToevoegenEen.Click += (sender, e) => ToevoegenEenAanBestelling(listViewBestelling, bestelling, menu);
             btnVerwijderEen.Click += (sender, e) => VerwijderenEenAanBestelling(listViewBestelling, bestelling, menu);
-            btnAfrekenen.Click += (sender, e) => AfrekenenBestelling(bestelling, form1, tafel);
+            btnAfrekenen.Click += (sender, e) => AfrekenenBestelling(bestelling, form1, tafel, menuItemService);
         }
 
         private void VulTekstTafel(Tafel tafel)
@@ -60,13 +60,14 @@ namespace Project_Chapeau_herkansers_3
         private void btnVerwijderEen_Click(object sender, EventArgs e) { }
         private void btnAfrekenen_Click(object sender, EventArgs e) { }
 
-        private void AfrekenenBestelling(Bestelling bestelling, Form1 form1, Tafel tafel)
+        private void AfrekenenBestelling(Bestelling bestelling, Form1 form1, Tafel tafel, MenuItemService menuItemService)
         {
             if(listViewBestelling.Items.Count > 0)
             {
                 BesteldeItemService besteldeItemService = new BesteldeItemService();
                 besteldeItemService.BestellingAanmaken(bestelling, form1.personeel, tafel);
                 besteldeItemService.BestellingItemsAanmaken(bestelling);
+                menuItemService.UpdateAllMenuItemsStock(bestelling);
                 TafelStatusUI tafelStatusUI = new TafelStatusUI(tafel);
                 tafelStatusUI.SetStringName("Bestelling succesvol aangemaakt");
                 form1.SwitchPanels(tafelStatusUI);
