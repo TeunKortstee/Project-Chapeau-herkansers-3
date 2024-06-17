@@ -10,15 +10,10 @@ namespace DAL
         {
             string query = @"SELECT BesteldItemId, Opmerking, Instuurtijd,  BesteldeItems.MenuItemId, MenuItems.Naam, BesteldeItems.BestellingsId, Hoeveelheid, 
                             Bestellingen.PersoneelsId,  BesteldeItems.GerechtsStatus FROM BesteldeItems JOIN MenuItems ON (MenuItems.MenuItemId=BesteldeItems.MenuItemId) 
-                            INNER JOIN Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId FULL OUTER JOIN Keuken on Keuken.BestellingId = Bestellingen.BestellingsId 
-                            WHERE Bestellingen.PersoneelsId = @personeelsId;";
+                            JOIN Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId;";
 
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@personeelsId", personeelsId),
-
-            };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            
+            return ReadTables(ExecuteSelectQuery(query));
         }
         public void ChangeStatus(Bestelling bestelling, string ItemBereider)
         {
