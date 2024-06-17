@@ -67,9 +67,9 @@
             this.billTitleText.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.billTitleText.Location = new System.Drawing.Point(8, 11);
             this.billTitleText.Name = "billTitleText";
-            this.billTitleText.Size = new System.Drawing.Size(96, 50);
+            this.billTitleText.Size = new System.Drawing.Size(206, 50);
             this.billTitleText.TabIndex = 1;
-            this.billTitleText.Text = "BILL";
+            this.billTitleText.Text = "REKENING";
             // 
             // billListView
             // 
@@ -89,17 +89,17 @@
             // 
             // billColumnAmount
             // 
-            this.billColumnAmount.Text = "Amount";
+            this.billColumnAmount.Text = "Quantiteit";
             this.billColumnAmount.Width = 70;
             // 
             // billColumnName
             // 
-            this.billColumnName.Text = "Name";
+            this.billColumnName.Text = "Naam";
             this.billColumnName.Width = 200;
             // 
             // billColumnPrice
             // 
-            this.billColumnPrice.Text = "Price";
+            this.billColumnPrice.Text = "Prijs";
             this.billColumnPrice.Width = 70;
             // 
             // billTotalText
@@ -108,9 +108,9 @@
             this.billTotalText.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.billTotalText.Location = new System.Drawing.Point(8, 324);
             this.billTotalText.Name = "billTotalText";
-            this.billTotalText.Size = new System.Drawing.Size(82, 30);
+            this.billTotalText.Size = new System.Drawing.Size(97, 30);
             this.billTotalText.TabIndex = 3;
-            this.billTotalText.Text = "TOTAL:";
+            this.billTotalText.Text = "TOTAAL:";
             // 
             // pictureBox2
             // 
@@ -151,9 +151,9 @@
             this.vatPriceLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.vatPriceLabel.Location = new System.Drawing.Point(11, 349);
             this.vatPriceLabel.Name = "vatPriceLabel";
-            this.vatPriceLabel.Size = new System.Drawing.Size(39, 21);
+            this.vatPriceLabel.Size = new System.Drawing.Size(44, 21);
             this.vatPriceLabel.TabIndex = 6;
-            this.vatPriceLabel.Text = "VAT:";
+            this.vatPriceLabel.Text = "BTW:";
             // 
             // billTotalAmountText
             // 
@@ -176,7 +176,7 @@
             this.btnProceedToPayment.Name = "btnProceedToPayment";
             this.btnProceedToPayment.Size = new System.Drawing.Size(290, 42);
             this.btnProceedToPayment.TabIndex = 6;
-            this.btnProceedToPayment.Text = "PROCEED TO PAYMENT";
+            this.btnProceedToPayment.Text = "VERDER NAAR BETALING";
             this.btnProceedToPayment.UseVisualStyleBackColor = false;
             this.btnProceedToPayment.Click += new System.EventHandler(this.btnProceedToPayment_Click);
             // 

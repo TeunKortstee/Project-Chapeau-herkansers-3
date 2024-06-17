@@ -110,7 +110,7 @@ namespace Project_Chapeau_herkansers_3
             }
             else {
 
-                lblSplitAmountErrorText.Text = "Please enter a valid amount!";
+                lblSplitAmountErrorText.Text = "Vul een valide hoeveelheid in AUB!";
             
             }
 
@@ -126,7 +126,7 @@ namespace Project_Chapeau_herkansers_3
 
                 if (!double.TryParse(item.getPaymentInput, out double result) || !double.TryParse(item.getTipInput, out double result2)) {
 
-                    lblPaymentErrorText.Text = "Please enter valid values!";
+                    lblPaymentErrorText.Text = "Vul valide hoeveelheden in AUB!";
                     return;
                 
                 }
@@ -138,12 +138,12 @@ namespace Project_Chapeau_herkansers_3
 
             if (code == 0) {
 
-                lblPaymentErrorText.Text = "Insufficient payment.";
+                lblPaymentErrorText.Text = "Betaling(en) niet genoeg!";
 
             } else if (code == 1)
             {
 
-                lblPaymentErrorText.Text = "Please enter valid values!";
+                lblPaymentErrorText.Text = "Vul valide hoeveelheden in AUB!";
 
             }
             else if (code == 2)

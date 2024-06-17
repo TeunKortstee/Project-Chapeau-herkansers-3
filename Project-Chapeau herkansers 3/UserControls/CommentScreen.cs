@@ -43,11 +43,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 rekeningService.VoegOpmerkingenToe(rekening, inputComment.Text);
                 lblSaved.ForeColor = Color.Green;
-                lblSaved.Text = "COMMENT HAS BEEN SAVED";
+                lblSaved.Text = "OPMERKING OPGESLAGEN";
             }
             else {
                 lblSaved.ForeColor = Color.Red;
-                lblSaved.Text = "PLEASE ENTER A COMMENT";
+                lblSaved.Text = "VOEG OPMERKING TOE AUB";
             
             }
         }
