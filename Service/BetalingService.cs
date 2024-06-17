@@ -27,8 +27,7 @@ namespace Service
         public double AddDoubleArray(double[] array) {
 
             double result = 0.00;
-            foreach (double d in array)
-            {
+            foreach (double d in array) {
                 result += d;
 
             }
