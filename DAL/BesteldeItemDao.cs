@@ -35,7 +35,7 @@ namespace DAL
         public void BestellingItemsAanmaken(Bestelling bestelling)
         {
             string query = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
-                "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @BestellingsId, @Hoeveelheid)";
+                "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @GerechtsStatus, @BestellingsId, @Hoeveelheid)";
 
             foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
             {
