@@ -63,6 +63,7 @@ namespace Project_Chapeau_herkansers_3
         {
             Form1 _form1 = Form1.Instance;
             _form1.personeel = personeel;
+            _form1.ChangeButtonText(personeel.AchterNaam);
             switch (personeel.Functie)
             {
                 case Functie.Serveerder:
