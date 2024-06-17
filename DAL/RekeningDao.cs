@@ -1,5 +1,6 @@
 ﻿using Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -13,7 +14,7 @@ namespace DAL
     {
         public Rekening? GetRekening(int tafelID)
         {
-            string query = "SELECT RekeningId, TafelId, Belasting, TotaalPrijs, Datum, Betaald FROM Rekeningen WHERE TafelID = @tafelId AND Betaald = 0";
+            string query = "SELECT RekeningId, TafelId, Belasting, TotaalPrijs, Datum, Betaald, Opmerkingen FROM Rekeningen WHERE TafelID = @tafelId AND Betaald = 0";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@tafelId", tafelID),
@@ -21,6 +22,7 @@ namespace DAL
             };
             List<Rekening> rekeningen = ReadTables(ExecuteSelectQuery(query, sqlParameters));
             if (rekeningen.Count > 0) {
+              
                 return rekeningen[0];
             }
 
@@ -51,11 +53,42 @@ namespace DAL
                     (double)row["TotaalPrijs"],
                     (bool)row["Betaald"], 
                     (DateTime)row["Datum"],
-                    (double)row["Belasting"]);
+                    (double)row["Belasting"],
+                    (string)row["Opmerkingen"]
+                    );
                 
                 rekeningen.Add(rekening);
             }
-            return rekeningen;
+            return rekeningen;      
+        }
+
+        public void RekeningBetaald(Rekening rekening) {
+            string query = "UPDATE Rekeningen SET Betaald = 1, Datum = GETDATE() WHERE RekeningId = @ID; UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TableNr AND Betaald = 0";
+           
+            
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@ID", rekening.RekeningId),
+                new SqlParameter("@TableNr", rekening.TafelId),
+                
+
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
+        {
+            string query = "UPDATE Rekeningen SET Opmerkingen = @Opmerkingen WHERE RekeningId = @ID;";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@ID", rekening.RekeningId),
+                new SqlParameter("@Opmerkingen",opmerkingen)
+
+
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
         }
 
         public int InsertRekening(Rekening rekening)

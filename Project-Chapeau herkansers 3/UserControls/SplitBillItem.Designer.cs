@@ -38,6 +38,7 @@
             // 
             // comboPaymentMethod
             // 
+            this.comboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboPaymentMethod.FormattingEnabled = true;
             this.comboPaymentMethod.Items.AddRange(new object[] {
             "Debit Card",
@@ -47,7 +48,7 @@
             this.comboPaymentMethod.Name = "comboPaymentMethod";
             this.comboPaymentMethod.Size = new System.Drawing.Size(97, 23);
             this.comboPaymentMethod.TabIndex = 0;
-            this.comboPaymentMethod.Text = "Debit Card";
+            this.comboPaymentMethod.SelectedIndexChanged += new System.EventHandler(this.comboPaymentMethod_SelectedIndexChanged);
             // 
             // lblMethod
             // 
@@ -65,6 +66,7 @@
             this.inputPayAmount.Size = new System.Drawing.Size(81, 23);
             this.inputPayAmount.TabIndex = 2;
             this.inputPayAmount.Text = "0.00";
+            this.inputPayAmount.TextChanged += new System.EventHandler(this.inputPayAmount_TextChanged);
             // 
             // lblPaymentAmount
             // 
@@ -78,7 +80,7 @@
             // lblTipAmount
             // 
             this.lblTipAmount.AutoSize = true;
-            this.lblTipAmount.Location = new System.Drawing.Point(225, 11);
+            this.lblTipAmount.Location = new System.Drawing.Point(225, 13);
             this.lblTipAmount.Name = "lblTipAmount";
             this.lblTipAmount.Size = new System.Drawing.Size(53, 15);
             this.lblTipAmount.TabIndex = 5;
@@ -91,6 +93,7 @@
             this.inputTipAmount.Size = new System.Drawing.Size(81, 23);
             this.inputTipAmount.TabIndex = 4;
             this.inputTipAmount.Text = "0.00";
+            this.inputTipAmount.TextChanged += new System.EventHandler(this.inputTipAmount_TextChanged);
             // 
             // SplitBillItem
             // 
