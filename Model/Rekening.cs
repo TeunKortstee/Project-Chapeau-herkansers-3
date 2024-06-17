@@ -21,8 +21,7 @@ namespace Model
 
 
 
-        public Rekening(int _RekeningId, int _TafelId, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting, string _Opmerkingen)
-        {
+        public Rekening(int _RekeningId, int _TafelId, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting, string _Opmerkingen) {
             Bestellingen = new List<Bestelling>();
 
             RekeningId = _RekeningId;
