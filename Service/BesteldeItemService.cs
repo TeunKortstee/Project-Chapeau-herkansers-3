@@ -17,9 +17,9 @@ namespace Service
 
         }
 
-        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel)
+        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel, Tafel tafel)
         {
-            return besteldeItemDao.BestellingAanmaken(bestelling, personeel);
+            return besteldeItemDao.BestellingAanmaken(bestelling, personeel, tafel);
         }
         public void BestellingItemsAanmaken(Bestelling bestelling)
         {

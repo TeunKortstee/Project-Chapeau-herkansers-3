@@ -39,7 +39,7 @@ namespace DAL
             return betalingen;
         }
 
-        public void InsertBetaling(Betaling betaling)
+        public void InsertBetaling(Betaling betaling, Rekening rekening)
         {
             string query = "INSERT INTO Betalingen(Methode,Bedrag,RekeningID,Fooi) VALUES (@Methode,@Bedrag,@RekeningID,@Fooi)";
             SqlParameter[] sqlParameters = new SqlParameter[]
