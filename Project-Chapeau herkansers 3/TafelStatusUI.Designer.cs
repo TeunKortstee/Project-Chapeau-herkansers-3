@@ -66,6 +66,7 @@
             this.MaakBestellingBtn.TabIndex = 4;
             this.MaakBestellingBtn.Text = "Maak Bestelling";
             this.MaakBestellingBtn.UseVisualStyleBackColor = true;
+            this.MaakBestellingBtn.Click += new System.EventHandler(this.MaakBestellingBtn_Click);
             // 
             // TerugBtn
             // 
@@ -76,6 +77,7 @@
             this.TerugBtn.TabIndex = 5;
             this.TerugBtn.Text = "Terug";
             this.TerugBtn.UseVisualStyleBackColor = true;
+            this.TerugBtn.Click += new System.EventHandler(this.TerugBtn_Click);
             // 
             // StatusBox
             // 
@@ -95,6 +97,7 @@
             this.AfrekenenBtn.TabIndex = 7;
             this.AfrekenenBtn.Text = "Afrekenen";
             this.AfrekenenBtn.UseVisualStyleBackColor = true;
+
             // 
             // labelBestellingAangemaakt
             // 
