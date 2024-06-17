@@ -45,8 +45,7 @@ namespace Service
             return tips;
         }
 
-        public double CalculateChange(double toPay, double amountPaid)
-        {
+        public double CalculateChange(double toPay, double amountPaid) {
 
 
 
