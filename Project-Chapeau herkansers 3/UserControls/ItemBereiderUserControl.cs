@@ -17,22 +17,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private int _personId = 0;
         ItemBereiderService _itemBereiderService;
-        public ItemBereiderUserControl()
+        public ItemBereiderUserControl(int personId)
         {
             InitializeComponent();
             _itemBereiderService = new ItemBereiderService();
+            _personId = personId;
         }
 
         private void OrdersListView()
         {
-            //waarom zoveel duplicate items
             var orderItems = _itemBereiderService.GetAllItems(_personId);
             orderListView.Items.Clear();
             foreach (var item in orderItems)
             {
                 ListViewItem li = new ListViewItem(item.BesteldItemId.ToString());
                 li.Tag = item;
-                li.SubItems.Add(item.BestellingsId.ToString());
+                li.SubItems.Add(item.BesteldItemId.ToString());
                 li.SubItems.Add(item.Hoeveelheid.ToString());
                 li.SubItems.Add(item.Opmerking?.ToString());
                 orderListView.Items.Add(li);
@@ -41,16 +41,21 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void UpdateOrderStatus(GerechtsStatus status)
         {
-
+            foreach (ListViewItem item in orderListView.SelectedItems)
+            {
+                BesteldeItem items = (BesteldeItem)item.Tag;
+                items.status = status;
+                _itemBereiderService.UpdateStatus(status, items.BesteldItemId);
+            }
         }
 
-
-        private void InPreparationButton_Click(object sender, EventArgs e)
+        private void InPreparationBtn_Click_1(object sender, EventArgs e)
         {
             UpdateOrderStatus(GerechtsStatus.InPreparation);
+
         }
 
-        private void preparedButton_Click(object sender, EventArgs e)
+        private void PreparedBtn_Click(object sender, EventArgs e)
         {
             UpdateOrderStatus(GerechtsStatus.Prepared);
         }
@@ -65,31 +70,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
             if (orderListView.SelectedItems.Count > 0)
             {
                 ListViewItem selectedItem = orderListView.SelectedItems[0];
-                ItemBereider selectedModel = selectedItem.Tag as ItemBereider;
-                //                informationTextBox.Text = $@"Id: {selectedModel.BestellingsId}
-                //Status: {selectedModel.Status}
-                //Naam: {selectedModel.Naam}
-                //Voorraad: {selectedModel.Voorraad}       
-                //MenuItemId: {selectedModel.MenuItemId}
-                //Hoeveelheid: {selectedModel.Hoeveelheid}
-                //Alcoholisch: {selectedModel.Alcoholisch}
-                //Opmerking: {selectedModel.Opmerking}
-                //InstuutTijd: {selectedModel.Instuurtijd}
-                //";
+                BesteldeItem selectedModel = selectedItem.Tag as BesteldeItem;
                 informationTextBox.Text = $@"
-                OrderId: {selectedModel.BestellingsId}
-                Status: {selectedModel.Status}
+                OrderId: {selectedModel.BesteldItemId}
+                Status: {selectedModel.status}
                 Naam: {selectedModel.Naam}
                 Hoeveelheid: {selectedModel.Hoeveelheid}
-                Alcoholisch: {selectedModel.Alcoholisch}
                 Opmerking: {selectedModel.Opmerking}
-                Instuurtijd: {selectedModel.Instuurtijd}
+                Instuurtijd: {selectedModel.InstuurTijd}
                 ";
-
-
-                // alcoholisch mag mischien ook wel weg
             }
 
         }
+
+        
     }
 }

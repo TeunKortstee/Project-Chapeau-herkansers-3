@@ -113,6 +113,7 @@
             PreparedBtn.TabIndex = 48;
             PreparedBtn.Text = "Prepared";
             PreparedBtn.UseVisualStyleBackColor = false;
+            PreparedBtn.Click += PreparedBtn_Click;
             // 
             // InPreparationBtn
             // 
@@ -124,6 +125,7 @@
             InPreparationBtn.TabIndex = 47;
             InPreparationBtn.Text = "In preparation";
             InPreparationBtn.UseVisualStyleBackColor = false;
+            InPreparationBtn.Click += InPreparationBtn_Click_1;
             // 
             // InfoGroupBox
             // 

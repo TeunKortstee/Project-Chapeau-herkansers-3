@@ -67,7 +67,9 @@ namespace Project_Chapeau_herkansers_3
                 BesteldeItemService besteldeItemService = new BesteldeItemService();
                 besteldeItemService.BestellingAanmaken(bestelling, form1.personeel, tafel);
                 besteldeItemService.BestellingItemsAanmaken(bestelling);
-                form1.SwitchPanels(new TafelStatusUI(tafel));
+                TafelStatusUI tafelStatusUI = new TafelStatusUI(tafel);
+                tafelStatusUI.SetStringName("Bestelling succesvol aangemaakt");
+                form1.SwitchPanels(tafelStatusUI);
             }
         }
 

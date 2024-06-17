@@ -13,6 +13,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlManager : UserControl
     {
+        const Functie startFunctie = Functie.Serveerder;
+        const MenuType startMenu = MenuType.Drank;
+
         private Form1 form;
 
         public UserControlManager()
@@ -20,23 +23,25 @@ namespace Project_Chapeau_herkansers_3.UserControls
             InitializeComponent();
             this.form = Form1.Instance;
         }
-
-        private void btnTableView_Click(object sender, EventArgs e)
-        {
-
-        }
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlManageOverview(Functie.Serveerder));
+            form.SwitchPanels(new UserControlManageOverview(startFunctie));
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlManageOverview(MenuType.Drank));
+            form.SwitchPanels(new UserControlManageOverview(startMenu));
         }
-         
+
+
         private void btnSa_Click(object sender, EventArgs e)
         {
+        
+        }
 
+      
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+            form.SwitchPanels(new UserControlSalesOverview());
         }
     }
 }
