@@ -11,7 +11,11 @@
 
         public Personeel()
         {
-
+            Id = 0;
+            email = "";
+            AchterNaam = "";
+            WachtWoord = "";
+            Functie = Functie.Serveerder;
         }
         public Personeel(string achternaam, string email, string wachtwoord, string salt, Functie functie)
         {
