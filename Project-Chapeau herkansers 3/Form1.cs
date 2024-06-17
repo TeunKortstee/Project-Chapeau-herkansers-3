@@ -1,8 +1,7 @@
 using Model;
-<<<<<<<<< Temporary merge branch 1
-=========
+
 using Project_Chapeau_herkansers_3.UserControls;
->>>>>>>>> Temporary merge branch 2
+
 
 
 namespace Project_Chapeau_herkansers_3
@@ -25,9 +24,9 @@ namespace Project_Chapeau_herkansers_3
         private Form1()
             InitializeComponent();
             SwitchPanels(new LoginControl());
-<<<<<<<<< Temporary merge branch 1
+
             personeel = new Personeel();
-            //SwitchPanels(new LoginControl());
+            
             //SwitchPanels(new UserControlManager());
         }
 
