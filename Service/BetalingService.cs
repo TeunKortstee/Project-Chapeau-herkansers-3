@@ -53,7 +53,6 @@ namespace Service
 
 
         }
-
         public double[] GetPaymentPerPerson(double price, int people)
         {
 
