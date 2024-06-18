@@ -65,38 +65,44 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Functionalities
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
+            try
             {
-                try
-                {
-                    MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, double.Parse(txt2.Text), chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem, int.Parse(txt3.Text));
-                    menuItemService.AddNewMenuItem(newMenuItem);
-                    form.SwitchPanels(new UserControlManageOverview((MenuType)btnConfirm.Tag));
-                }
-                catch (FormatException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
+                //if (personeelService == null)
+                //{
+                //    InsertMenuItem();
+                //}
+                //else
+                //{
+                //    InsertPersoneel();
+                //}
+                InsertMenuItem();
+                InsertPersoneel();
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    if (CheckNameInputs(txt1.Text, txt2.Text))
-                    {
-                        Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem);
-                        personeelService.InsertPersoneel(newEmployee);
-                        form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
-                    }
-                }
-                catch (FormatException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
+                lblError.Text = ex.Message;
+                return;
             }
-
+        }
+        private void InsertPersoneel()
+        {
+            if (CheckNameInputs(txt1.Text, txt2.Text))
+            {
+                Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem);
+                personeelService.InsertPersoneel(newEmployee);
+                form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
+            }
+        }
+        private void InsertMenuItem()
+        {
+            double price;
+            if (!double.TryParse(txt2.Text, out price))
+            {
+                throw new Exception("Vul een geldige prijs in");
+            }
+            MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, price, chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem, int.Parse(txt3.Text));
+            menuItemService.AddNewMenuItem(newMenuItem);
+            form.SwitchPanels(new UserControlManageOverview((MenuType)btnConfirm.Tag));
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -123,25 +129,34 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private bool CheckNameInputs(string nameInput, string emailInput)
         {
-            string namePattern = @"^[\p{L} ]+$";
-            string emailPattern = @"^[a-zA-Z0-9._]+$";
+            ValidateName(nameInput);
+            ValidateEmail(emailInput);
+            return true;
+        }
+        private void ValidateEmail(string emailInput)
+        {
             if (string.IsNullOrWhiteSpace(emailInput))
             {
                 throw new FormatException("Vul een username in");
             }
-            if (string.IsNullOrWhiteSpace(nameInput))
-            {
-                throw new FormatException("Vul een achternaam in");
-            }
-            if (!Regex.IsMatch(nameInput, namePattern))
-            {
-                throw new FormatException("Achternaam is niet geldig");
-            }
-            if (!Regex.IsMatch(emailInput, emailPattern))
+            else if (emailInput.Contains('@'))
             {
                 throw new FormatException("Vul alleen een username in met een punt of laag streepje, zonder spaties");
             }
-            return true;
+        }
+        private void ValidateName(string nameInput)
+        {
+            if (string.IsNullOrEmpty(nameInput))
+            {
+                throw new FormatException("Vul een achternaam in");
+            }
+            foreach(char character in nameInput)
+            {
+                if (!char.IsLetter(character) && character != ' ')
+                {
+                    throw new FormatException("Achternaam is niet geldig");
+                }
+            }
         }
         #endregion
     }

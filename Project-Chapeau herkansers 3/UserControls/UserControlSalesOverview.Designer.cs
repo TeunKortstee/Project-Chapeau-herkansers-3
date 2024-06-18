@@ -52,9 +52,9 @@
             lblSales.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
             lblSales.Location = new Point(118, 14);
             lblSales.Name = "lblSales";
-            lblSales.Size = new Size(177, 46);
+            lblSales.Size = new Size(162, 46);
             lblSales.TabIndex = 1;
-            lblSales.Text = "Inkomens";
+            lblSales.Text = "Inkomen";
             // 
             // btnReturn
             // 

@@ -41,24 +41,27 @@
             // 
             // EmailTxt
             // 
-            EmailTxt.Location = new Point(127, 49);
+            EmailTxt.Location = new Point(102, 39);
+            EmailTxt.Margin = new Padding(2, 2, 2, 2);
             EmailTxt.Name = "EmailTxt";
-            EmailTxt.Size = new Size(150, 31);
+            EmailTxt.Size = new Size(121, 27);
             EmailTxt.TabIndex = 0;
             // 
             // PasswordTxt
             // 
-            PasswordTxt.Location = new Point(127, 125);
+            PasswordTxt.Location = new Point(102, 100);
+            PasswordTxt.Margin = new Padding(2, 2, 2, 2);
             PasswordTxt.Name = "PasswordTxt";
             PasswordTxt.PasswordChar = '*';
-            PasswordTxt.Size = new Size(150, 31);
+            PasswordTxt.Size = new Size(121, 27);
             PasswordTxt.TabIndex = 1;
             // 
             // LoginBtn
             // 
-            LoginBtn.Location = new Point(56, 338);
+            LoginBtn.Location = new Point(45, 270);
+            LoginBtn.Margin = new Padding(2, 2, 2, 2);
             LoginBtn.Name = "LoginBtn";
-            LoginBtn.Size = new Size(112, 34);
+            LoginBtn.Size = new Size(90, 27);
             LoginBtn.TabIndex = 3;
             LoginBtn.Text = "Login";
             LoginBtn.UseVisualStyleBackColor = true;
@@ -68,24 +71,27 @@
             // 
             ErrorLbl.AutoSize = true;
             ErrorLbl.ForeColor = Color.Red;
-            ErrorLbl.Location = new Point(127, 159);
+            ErrorLbl.Location = new Point(102, 127);
+            ErrorLbl.Margin = new Padding(2, 0, 2, 0);
             ErrorLbl.Name = "ErrorLbl";
-            ErrorLbl.Size = new Size(0, 25);
+            ErrorLbl.Size = new Size(0, 20);
             ErrorLbl.TabIndex = 4;
             // 
             // ChangePasswordTxt
             // 
-            ChangePasswordTxt.Location = new Point(127, 198);
+            ChangePasswordTxt.Location = new Point(102, 158);
+            ChangePasswordTxt.Margin = new Padding(2, 2, 2, 2);
             ChangePasswordTxt.Name = "ChangePasswordTxt";
             ChangePasswordTxt.PasswordChar = '*';
-            ChangePasswordTxt.Size = new Size(150, 31);
+            ChangePasswordTxt.Size = new Size(121, 27);
             ChangePasswordTxt.TabIndex = 5;
             // 
             // Changepasswordbtn
             // 
-            Changepasswordbtn.Location = new Point(214, 338);
+            Changepasswordbtn.Location = new Point(171, 270);
+            Changepasswordbtn.Margin = new Padding(2, 2, 2, 2);
             Changepasswordbtn.Name = "Changepasswordbtn";
-            Changepasswordbtn.Size = new Size(168, 34);
+            Changepasswordbtn.Size = new Size(134, 27);
             Changepasswordbtn.TabIndex = 6;
             Changepasswordbtn.Text = "Change password";
             Changepasswordbtn.UseVisualStyleBackColor = true;
@@ -94,9 +100,10 @@
             // ChangePasswordCheck
             // 
             ChangePasswordCheck.AutoSize = true;
-            ChangePasswordCheck.Location = new Point(56, 288);
+            ChangePasswordCheck.Location = new Point(45, 230);
+            ChangePasswordCheck.Margin = new Padding(2, 2, 2, 2);
             ChangePasswordCheck.Name = "ChangePasswordCheck";
-            ChangePasswordCheck.Size = new Size(186, 29);
+            ChangePasswordCheck.Size = new Size(153, 24);
             ChangePasswordCheck.TabIndex = 7;
             ChangePasswordCheck.Text = "Change Password?";
             ChangePasswordCheck.UseVisualStyleBackColor = true;
@@ -106,22 +113,24 @@
             // 
             ChangePasswordErrorlbl.AutoSize = true;
             ChangePasswordErrorlbl.ForeColor = Color.Red;
-            ChangePasswordErrorlbl.Location = new Point(127, 232);
+            ChangePasswordErrorlbl.Location = new Point(102, 186);
+            ChangePasswordErrorlbl.Margin = new Padding(2, 0, 2, 0);
             ChangePasswordErrorlbl.Name = "ChangePasswordErrorlbl";
-            ChangePasswordErrorlbl.Size = new Size(0, 25);
+            ChangePasswordErrorlbl.Size = new Size(0, 20);
             ChangePasswordErrorlbl.TabIndex = 8;
             // 
             // Succeslbl
             // 
             Succeslbl.AutoSize = true;
-            Succeslbl.Location = new Point(129, 235);
+            Succeslbl.Location = new Point(103, 188);
+            Succeslbl.Margin = new Padding(2, 0, 2, 0);
             Succeslbl.Name = "Succeslbl";
-            Succeslbl.Size = new Size(0, 25);
+            Succeslbl.Size = new Size(0, 20);
             Succeslbl.TabIndex = 9;
             // 
             // LoginControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(Succeslbl);
             Controls.Add(ChangePasswordErrorlbl);
@@ -132,8 +141,9 @@
             Controls.Add(LoginBtn);
             Controls.Add(PasswordTxt);
             Controls.Add(EmailTxt);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "LoginControl";
-            Size = new Size(411, 500);
+            Size = new Size(329, 400);
             ResumeLayout(false);
             PerformLayout();
         }
