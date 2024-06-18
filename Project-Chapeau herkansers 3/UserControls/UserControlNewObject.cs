@@ -6,17 +6,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlNewObject : UserControl
     {
-        const string requiredPasswordChange = "0000";
         private Form1 form;
         private MenuItemService? menuItemService;
         private PersoneelService? personeelService;
-        public UserControlNewObject(Functie functie)
+        public UserControlNewObject(Functie function)
         {
             InitializeComponent();
             this.form = Form1.Instance;
             this.personeelService = new PersoneelService();
             this.menuItemService = null;
-            DisplayEmployeeElements(functie);
+            DisplayEmployeeElements(function);
         }
         public UserControlNewObject(MenuType menu)
         {
@@ -42,7 +41,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Employee
         private void DisplayEmployeeElements(Functie function)
         {
-            SetObjectText("Werknemer", "Achternaam", "Email", "Persoon@gmail.com", "Wachtwoord", "Functie");
+            SetObjectText("Werknemer", "Achternaam", "Email", "De_Graaf", "Wachtwoord", "Functie");
             txt3.Enabled = false;
             cmbType.DataSource = Enum.GetValues(typeof(Functie));
             cmbType.SelectedItem = function;
@@ -57,6 +56,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lbl1.Text = name;
             lbl2.Text = emailOrPrice;
             txt2.PlaceholderText = placeholder1;
+            txt3.PlaceholderText = "0000";
             lbl3.Text = numbers;
             lblEnum.Text = enumType;
         }
@@ -83,13 +83,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 try
                 {
-                    if (!IsValidEmail(txt2.Text)) 
+                    if (CheckNameInputs(txt1.Text, txt2.Text))
                     {
-                        throw new FormatException("Email is ongeldig");
+                        Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem);
+                        personeelService.InsertPersoneel(newEmployee);
+                        form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
                     }
-                    Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, requiredPasswordChange, (Functie)cmbType.SelectedItem);
-                    personeelService.InsertPersoneel(newEmployee);
-                    form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
                 }
                 catch (FormatException ex)
                 {
@@ -122,10 +121,27 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 chkAlcoholisch.Visible = false;
             }
         }
-        public bool IsValidEmail(string emailInput)
+        private bool CheckNameInputs(string nameInput, string emailInput)
         {
-            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-            return Regex.IsMatch(emailInput, pattern);
+            string namePattern = @"^[\p{L} ]+$";
+            string emailPattern = @"^[a-zA-Z0-9._]+$";
+            if (string.IsNullOrWhiteSpace(emailInput))
+            {
+                throw new FormatException("Vul een username in");
+            }
+            if (string.IsNullOrWhiteSpace(nameInput))
+            {
+                throw new FormatException("Vul een achternaam in");
+            }
+            if (!Regex.IsMatch(nameInput, namePattern))
+            {
+                throw new FormatException("Achternaam is niet geldig");
+            }
+            if (!Regex.IsMatch(emailInput, emailPattern))
+            {
+                throw new FormatException("Vul alleen een username in met een punt of laag streepje, zonder spaties");
+            }
+            return true;
         }
         #endregion
     }
