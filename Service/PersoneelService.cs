@@ -10,13 +10,17 @@ using BCrypt.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlTypes;
+using System.Text.RegularExpressions;
 
 namespace Service
 {
     public class PersoneelService
     {
+        const string chapeauDomain = "@chapeau.nl";
+        const string defaultPassword = "0000";
         const int workFactor = 11;
         const bool enhancedEntropy = true;
+
         private PersoneelDao personeelDao;
 
         public PersoneelService()
@@ -40,18 +44,40 @@ namespace Service
             personeelDao.RemovePersoneel(personeel);
         }
         // Lucas
-        public Personeel CreatePersoneel(string surname, string email, string password, Functie function)
+        public Personeel CreatePersoneel(string surname, string username, Functie function)
         {
-            if (!IsUniqueEmail(email)) 
-            {
-                throw new FormatException("Email bestaat al");
-            }
             string salt = GenerateSalt();
-            string slowSaltedHashedPassword = HashPasswordWithBCrypt(password, salt);
-            return new Personeel(surname, email, slowSaltedHashedPassword, salt, function);
+            string slowSaltedHashedPassword = HashPasswordWithBCrypt(defaultPassword, salt);
+            return new Personeel(surname, CreateEmail(username), slowSaltedHashedPassword, salt, function);
 
             // Had geprobeerd om een slow saltedhash te maken met Argon2
             // HashPasswordWithArgon2(password, salt, 4, 65536, 2);
+        }
+        private string CreateEmail(string username)
+        {
+            string formattedEmail = $"{username}{chapeauDomain}".ToLower();
+            CheckEmail(formattedEmail);
+            return formattedEmail;
+        }
+        private void CheckEmail(string formattedEmail)
+        {
+            if (!IsValidEmail(formattedEmail))
+            {
+                throw new FormatException("Email is niet geldig");
+            }
+            if (!IsUniqueEmail(formattedEmail))
+            {
+                throw new FormatException("Email bestaat al");
+            }
+        }
+        private bool IsValidEmail(string email)
+        {
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+        private bool IsUniqueEmail(string email)
+        {
+            return personeelDao.IsUniqueEmail(email);
         }
         private string HashPasswordWithBCrypt(string password, string salt)
         {
@@ -61,10 +87,6 @@ namespace Service
         private string GenerateSalt()
         {
             return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
-        }
-        private bool IsUniqueEmail(string email)
-        {
-            return personeelDao.IsUniqueEmail(email);
         }
 
         //private string HashPasswordWithArgon2(string password, int iterations, int memorySize, int parallelism)
