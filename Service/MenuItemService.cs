@@ -60,10 +60,7 @@ namespace Service
 
         public void UpdateAllMenuItemsStock(Bestelling bestelling)
         {
-            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
-            {
-                menuItemDao.UpdateMenuItemStock(besteldeItem.menuItem);
-            }
+            menuItemDao.UpdateAllMenuItemsStock(bestelling);
         }
         //public List<MenuItem> GetAllMenuItems(MenuType menuType)
         //{

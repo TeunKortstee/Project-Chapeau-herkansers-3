@@ -12,7 +12,6 @@ namespace Service
     {
         private RekeningDao rekeningDao;
         private BestellingDao bestellingDao;
-        private BesteldeItemDao besteldeItemDao;
         private const double vatNormal = 0.06;
         private const double vatAlcohol = 0.21;
 
@@ -21,7 +20,6 @@ namespace Service
         {
             rekeningDao = new RekeningDao();
             bestellingDao = new BestellingDao();
-            besteldeItemDao = new BesteldeItemDao();
         }
         public Rekening GetRekening(int bestellingID)
         {

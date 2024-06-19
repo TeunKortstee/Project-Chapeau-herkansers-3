@@ -99,6 +99,19 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
+
+        public void UpdateAllMenuItemsStock(Bestelling bestelling)
+        {
+            string query = "UPDATE MenuItems SET Voorraad = @Voorraad WHERE MenuItemId = @MenuItemId";
+            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[] {
+                new SqlParameter("@MenuItemId", besteldeItem.menuItem.MenuItemId),
+                new SqlParameter("@Voorraad", besteldeItem.menuItem.Voorraad)
+                };
+                ExecuteEditQuery(query, sqlParameters);
+            }
+        }
         public void DeleteMenuItem(MenuItem selectedMenuItem)
         {
             string query = "DELETE FROM MenuItems WHERE MenuItemId = @MenuItemId";
