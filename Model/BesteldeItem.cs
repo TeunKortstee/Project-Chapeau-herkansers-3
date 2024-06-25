@@ -8,12 +8,12 @@ namespace Model
         public string Opmerking { get; set; }
         public DateTime InstuurTijd { get; set; }
         public MenuItem menuItem { get; set; }
-        public int BestellingsID { get; set; }
+        public Bestelling bestelling { get; set; }
         public int Hoeveelheid { get; set; }
         public GerechtsStatus status { get; set; }
         public string? Naam { get; set; }
 
-        public BesteldeItem(MenuItem menuItem)
+        public BesteldeItem(MenuItem menuItem) //Luciano
         {
             Opmerking = "";
             InstuurTijd = DateTime.Now;

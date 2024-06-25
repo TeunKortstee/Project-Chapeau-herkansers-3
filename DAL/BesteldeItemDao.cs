@@ -16,30 +16,20 @@ namespace DAL
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-        public Bestelling BestellingAanmaken(Bestelling bestelling, Personeel personeel, Tafel tafel)
+        public void BestellingEnBesteldeItemsAanmaken(Bestelling bestelling)
         {
-            string query = "INSERT INTO Bestellingen (Personeelsid, TableNr) VALUES (@PersoneelsId, @TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
+            string queryToevoegenBestelling = "INSERT INTO Bestellingen (PersoneelsId, TableNr) VALUES (0, @TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
             SqlParameter[] sqlParameters = new SqlParameter[] {
-                new SqlParameter("@PersoneelsId", personeel.Id),
-                new SqlParameter("@TafelNummer", tafel.Id)
+                new SqlParameter("@TafelNummer", bestelling.tafel.Id)
             };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), bestelling);
-        }
+            bestelling.bestellingId = Convert.ToInt32(ExecuteSelectQuery(queryToevoegenBestelling, sqlParameters).Rows[0]["BestellingsId"]);
 
-        private Bestelling ReadTables(DataTable dataTable, Bestelling bestelling)
-        {
-            bestelling.bestellingId = Convert.ToInt32(dataTable.Rows[0]["BestellingsId"]);
-            return bestelling;
-        }
-
-        public void BestellingItemsAanmaken(Bestelling bestelling)
-        {
-            string query = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
-                "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @GerechtsStatus, @BestellingsId, @Hoeveelheid)";
+            string queryToevoegenBesteldeItem = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
+            "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @GerechtsStatus, @BestellingsId, @Hoeveelheid)";
 
             foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
             {
-                SqlParameter[] sqlParameters = new SqlParameter[] {
+                SqlParameter[] sqlParameters2 = new SqlParameter[] {
                     new SqlParameter("@Opmerking", besteldeItem.Opmerking),
                     new SqlParameter("@InstuurTijd", besteldeItem.InstuurTijd),
                     new SqlParameter("@MenuItemId", besteldeItem.menuItem.MenuItemId),
@@ -47,9 +37,10 @@ namespace DAL
                     new SqlParameter("@Hoeveelheid", besteldeItem.Hoeveelheid),
                     new SqlParameter("@GerechtsStatus", (int)besteldeItem.status)
                 };
-                ExecuteEditQuery(query, sqlParameters);
+                ExecuteEditQuery(queryToevoegenBesteldeItem, sqlParameters2);
             }
         }
+
         private List<BesteldeItem> ReadTables(DataTable dataTable)
         {
             List<BesteldeItem> items = new List<BesteldeItem>();
@@ -71,7 +62,7 @@ namespace DAL
                     BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
                     Opmerking = row["Opmerking"].ToString(),
                     InstuurTijd = (DateTime)row["Instuurtijd"],
-                    BestellingsID = Convert.ToInt32(row["BestellingsID"]),
+                    //BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
                     Naam = row["Naam"].ToString(),
                     status = (GerechtsStatus)row["GerechtsStatus"]
