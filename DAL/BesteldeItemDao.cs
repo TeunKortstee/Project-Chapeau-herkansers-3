@@ -18,13 +18,13 @@ namespace DAL
         }
         public void BestellingEnBesteldeItemsAanmaken(Bestelling bestelling)
         {
-            string query = "INSERT INTO Bestellingen (PersoneelsId, TableNr) VALUES (0, @TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
+            string queryToevoegenBestelling = "INSERT INTO Bestellingen (PersoneelsId, TableNr) VALUES (0, @TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
             SqlParameter[] sqlParameters = new SqlParameter[] {
                 new SqlParameter("@TafelNummer", bestelling.tafel.Id)
             };
-            bestelling.bestellingId = Convert.ToInt32(ExecuteSelectQuery(query, sqlParameters).Rows[0]["BestellingsId"]);
+            bestelling.bestellingId = Convert.ToInt32(ExecuteSelectQuery(queryToevoegenBestelling, sqlParameters).Rows[0]["BestellingsId"]);
 
-            string query2 = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
+            string queryToevoegenBesteldeItem = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
             "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @GerechtsStatus, @BestellingsId, @Hoeveelheid)";
 
             foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
@@ -37,7 +37,7 @@ namespace DAL
                     new SqlParameter("@Hoeveelheid", besteldeItem.Hoeveelheid),
                     new SqlParameter("@GerechtsStatus", (int)besteldeItem.status)
                 };
-                ExecuteEditQuery(query2, sqlParameters2);
+                ExecuteEditQuery(queryToevoegenBesteldeItem, sqlParameters2);
             }
         }
 
