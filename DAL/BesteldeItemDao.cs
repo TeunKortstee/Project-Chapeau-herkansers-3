@@ -37,7 +37,7 @@ namespace DAL
                     new SqlParameter("@Hoeveelheid", besteldeItem.Hoeveelheid),
                     new SqlParameter("@GerechtsStatus", (int)besteldeItem.status)
                 };
-                ExecuteEditQuery(query, sqlParameters2);
+                ExecuteEditQuery(query2, sqlParameters2);
             }
         }
 
