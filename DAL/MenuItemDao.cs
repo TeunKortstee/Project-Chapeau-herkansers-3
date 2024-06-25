@@ -30,7 +30,7 @@ namespace DAL
             return menu;
         }
 
-        private MenuItem CreateMenuItemFromRow(DataRow row)
+        private MenuItem CreateMenuItemFromRow(DataRow row) //Luciano
         {
             return new MenuItem()
             {
@@ -38,7 +38,7 @@ namespace DAL
                 Voorraad = Convert.ToInt32(row["Voorraad"]),
                 Prijs = (double)row["Prijs"],
                 Naam = (string)row["Naam"],
-                MenuId = Convert.ToInt32(row["MenuId"]),
+                menuType = (MenuType)Convert.ToInt32(row["MenuId"]),
                 IsAlcoholisch = (bool)row["Alcoholisch"],
             };
         }
@@ -69,7 +69,7 @@ namespace DAL
                     Voorraad = Convert.ToInt32(dr["Voorraad"]),
                     Prijs = (double)dr["Prijs"],
                     Naam = (string)dr["Naam"],
-                    MenuId = Convert.ToInt32(dr["MenuId"]),
+                    menuType = (MenuType)Convert.ToInt32(dr["MenuId"]),
                     IsAlcoholisch = (bool)dr["Alcoholisch"],
                 };
                 menuItems.Add(menuItem);
@@ -84,7 +84,7 @@ namespace DAL
                 new SqlParameter("@Naam", menuItem.Naam),
                 new SqlParameter("@Prijs", menuItem.Prijs),
                 new SqlParameter("@Alcoholisch", menuItem.IsAlcoholisch),
-                new SqlParameter("@MenuId", menuItem.MenuId),
+                new SqlParameter("@MenuId", menuItem.menuType),
                 new SqlParameter("@Voorraad", menuItem.Voorraad)
             };
             ExecuteEditQuery(query, sqlParameters);
