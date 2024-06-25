@@ -24,7 +24,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Menu Item
         private void DisplayMenuElements(MenuType menu)
         {
-            SetObjectText("MenuItem", "Naam", "Prijs", "€ 0,00", "Voorraad", "Menu");
+            SetObjectText("MenuItem", "Naam", "Prijs", "€ 0,00", "10", "Voorraad", "Menu");
             cmbType.DataSource = Enum.GetValues(typeof(MenuType));
             cmbType.SelectedItem = menu;
             btnCancel.Tag = menu;
@@ -35,7 +35,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Employee
         private void DisplayEmployeeElements(Functie function)
         {
-            SetObjectText("Werknemer", "Achternaam", "Email", "De_Graaf", "Wachtwoord", "Functie");
+            SetObjectText("Werknemer", "Achternaam", "Email", "De_Graaf", "0000", "Wachtwoord", "Functie");
             txt3.Enabled = false;
             cmbType.DataSource = Enum.GetValues(typeof(Functie));
             cmbType.SelectedItem = function;
@@ -44,13 +44,13 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        private void SetObjectText(string objectType, string name, string emailOrPrice, string placeholder1, string numbers, string enumType)
+        private void SetObjectText(string objectType, string name, string emailOrPrice, string placeholder1, string placeholder2, string numbers, string enumType)
         {
             lblObject.Text = $"Nieuw {objectType}";
             lbl1.Text = name;
             lbl2.Text = emailOrPrice;
             txt2.PlaceholderText = placeholder1;
-            txt3.PlaceholderText = "0000";
+            txt3.PlaceholderText = placeholder2;
             lbl3.Text = numbers;
             lblEnum.Text = enumType;
         }
@@ -61,13 +61,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             try
             {
-                InsertMenuItem();
-                InsertPersoneel();
+                switch (btnConfirm.Tag)
+                {
+                    case MenuType:
+                        InsertMenuItem();
+                        break;
+                    case Functie:
+                        InsertPersoneel();
+                        break;
+                    default:
+                        DisplayErrorMessage("Er ging iets mis");
+                        break;
+                }
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
-                return;
+                DisplayErrorMessage("Er ging iets mis bij de database");
             }
         }
         private void InsertPersoneel()
@@ -95,6 +104,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             form.SwitchPanels(new UserControlManageOverview((MenuType)btnCancel.Tag));
         }
+        #region MenuItemHandling
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -112,6 +122,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             return false;
         }
+        #endregion
+
         #region PersoneelHandling
         private bool CheckNameInputs(string nameInput, string emailInput)
         {
