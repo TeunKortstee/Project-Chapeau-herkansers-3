@@ -305,7 +305,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                         ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
                         MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
                         menuItemService.DeleteMenuItem(selectedMenuItem);
-                        FillMenuListView((MenuType)selectedMenuItem.MenuId);
+                        FillMenuListView((MenuType)selectedMenuItem.menuType);
                     }
                     else
                     {

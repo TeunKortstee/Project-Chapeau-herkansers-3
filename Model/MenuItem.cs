@@ -6,7 +6,7 @@
         public string Naam { get; set; }
         public double Prijs { get; set; }
         public bool IsAlcoholisch { get; set; }
-        public int MenuId { get; set; }
+        public MenuType menuType { get; set; }
         public int Voorraad { get; set; }
         public GerechtsType GerechtsType { get; set; }
         public MenuItem()
@@ -19,7 +19,7 @@
             Naam = naam;
             Prijs = prijs;
             IsAlcoholisch = isAlcoholisch;
-            MenuId = (int)menuId;
+            menuType = menuId;
             Voorraad = voorraad;
         }
     }
