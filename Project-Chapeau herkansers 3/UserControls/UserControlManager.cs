@@ -4,8 +4,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlManager : UserControl
     {
-        const Functie startFunctie = Functie.Serveerder;
-        const MenuType startMenu = MenuType.Drank;
+        private const Functie startFunctie = Functie.Serveerder;
+        private const MenuType startMenu = MenuType.Drank;
 
         private Form1 form;
 
@@ -22,8 +22,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             form.SwitchPanels(new UserControlManageOverview(startMenu));
         }
-
-
         private void btnSales_Click(object sender, EventArgs e)
         {
             form.SwitchPanels(new UserControlSalesOverview());

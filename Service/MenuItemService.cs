@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
+﻿using DAL;
 using Model;
 
 namespace Service
@@ -18,16 +11,6 @@ namespace Service
         {
             menuItemDao = new MenuItemDao();
         }
-
-        //public MenuItem GetById(int id)
-        //{
-        //    return menuItemDao.GetById(id);
-        //}
-        //public List<MenuItem> GetByItemType(ItemType itemType, int menuId)
-        //{
-        //    return menuItemDao.GetByItemType(itemType, menuId);
-        //}
-
         public Menu GetAllItems()
         {
             return menuItemDao.GetAllItems();
@@ -57,22 +40,9 @@ namespace Service
         {
             menuItemDao.DeleteMenuItem(selectedMenuItem);
         }
-
         public void UpdateAllMenuItemsStock(Bestelling bestelling)
         {
             menuItemDao.UpdateAllMenuItemsStock(bestelling);
         }
-        //public List<MenuItem> GetAllMenuItems(MenuType menuType)
-        //{
-        //    List<MenuItem> selectedMenu = new List<MenuItem>();
-        //    foreach (MenuItem menuItem in menuItemDao.GetAllMenuItems())
-        //    {
-        //        if (menuItem.MenuId == (int)menuType)
-        //        {
-        //            selectedMenu.Add(menuItem);
-        //        }
-        //    }
-        //    return selectedMenu;
-        //}
     }
 }

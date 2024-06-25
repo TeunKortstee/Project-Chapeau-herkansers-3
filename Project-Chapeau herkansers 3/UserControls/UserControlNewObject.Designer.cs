@@ -44,6 +44,7 @@
             txt1 = new TextBox();
             pictureBox3 = new PictureBox();
             cmbType = new ComboBox();
+            lblError = new Label();
             ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -207,10 +208,23 @@
             cmbType.TabIndex = 35;
             cmbType.SelectedIndexChanged += cmbType_SelectedIndexChanged;
             // 
+            // lblError
+            // 
+            lblError.AutoSize = true;
+            lblError.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblError.ForeColor = Color.Red;
+            lblError.Location = new Point(177, 190);
+            lblError.Name = "lblError";
+            lblError.Size = new Size(120, 25);
+            lblError.TabIndex = 36;
+            lblError.Text = "Error Bericht";
+            lblError.Visible = false;
+            // 
             // UserControlNewObject
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblError);
             Controls.Add(cmbType);
             Controls.Add(lbl1);
             Controls.Add(txt1);
@@ -256,5 +270,6 @@
         private TextBox txt1;
         private PictureBox pictureBox3;
         private ComboBox cmbType;
+        private Label lblError;
     }
 }

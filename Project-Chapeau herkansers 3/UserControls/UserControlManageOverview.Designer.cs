@@ -38,6 +38,7 @@
             btn2 = new Button();
             btn3 = new Button();
             chkManagers = new CheckBox();
+            lblError = new Label();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -165,10 +166,23 @@
             chkManagers.Visible = false;
             chkManagers.Click += chkManagers_Click;
             // 
+            // lblError
+            // 
+            lblError.AutoSize = true;
+            lblError.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblError.ForeColor = Color.Red;
+            lblError.Location = new Point(192, 619);
+            lblError.Name = "lblError";
+            lblError.Size = new Size(120, 25);
+            lblError.TabIndex = 37;
+            lblError.Text = "Error Bericht";
+            lblError.Visible = false;
+            // 
             // UserControlManageOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblError);
             Controls.Add(chkManagers);
             Controls.Add(btn3);
             Controls.Add(btn2);
@@ -198,5 +212,6 @@
         private Button btn2;
         private Button btn3;
         private CheckBox chkManagers;
+        private Label lblError;
     }
 }
