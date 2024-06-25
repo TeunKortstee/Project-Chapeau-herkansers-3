@@ -51,7 +51,7 @@ namespace DAL
         }
         public List<MenuItem> GetMenuItemsByMenuId(MenuType menu)
         {
-            string query = "SELECT mi.* FROM MenuItems mi JOIN Menu m ON mi.MenuId = m.MenuId WHERE mi.MenuId = @MenuId";
+            string query = "SELECT mi.* FROM MenuItems mi JOIN Menu m ON mi.MenuId = m.MenuId WHERE mi.MenuId = @MenuId AND Beschikbaar = 1";
             SqlParameter[] sqlParameters = new SqlParameter[]
                 {
                     new SqlParameter("@MenuId", (int)menu),
@@ -112,9 +112,9 @@ namespace DAL
                 ExecuteEditQuery(query, sqlParameters);
             }
         }
-        public void DeleteMenuItem(MenuItem selectedMenuItem)
+        public void SoftDeleteMenuItem(MenuItem selectedMenuItem)
         {
-            string query = "DELETE FROM MenuItems WHERE MenuItemId = @MenuItemId";
+            string query = "UPDATE MenuItems SET Beschikbaar = 0 WHERE MenuItemId = @MenuItemId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@MenuItemId", selectedMenuItem.MenuItemId),

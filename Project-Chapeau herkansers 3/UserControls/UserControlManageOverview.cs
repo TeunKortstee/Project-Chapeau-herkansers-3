@@ -156,11 +156,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
             btnAddNewObject.Tag = functie;
         }
         #endregion
+        #endregion
         private void SetObjectText(string objectType)
         {
             btnAddNewObject.Text = $"{objectType} toevoegen";
         }
-        #endregion
 
         #endregion
 
@@ -337,7 +337,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void RemoveMenuItem(MenuItem selectedMenuItem)
         {
             MenuItemService menuItemService = new MenuItemService();
-            menuItemService.DeleteMenuItem(selectedMenuItem);
+            menuItemService.SoftDeleteMenuItem(selectedMenuItem);
             FillMenuListView((MenuType)selectedMenuItem.MenuId);
         }
         private ListViewItem GetItemSelected()
