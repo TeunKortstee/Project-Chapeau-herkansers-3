@@ -7,22 +7,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
     public partial class UserControlNewObject : UserControl
     {
         private Form1 form;
-        private MenuItemService? menuItemService;
-        private PersoneelService? personeelService;
         public UserControlNewObject(Functie function)
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.personeelService = new PersoneelService();
-            this.menuItemService = null;
             DisplayEmployeeElements(function);
         }
         public UserControlNewObject(MenuType menu)
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.personeelService = null;
-            this.menuItemService = new MenuItemService();
             DisplayMenuElements(menu);
         }
         #region DisplayUIElements
@@ -67,14 +61,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             try
             {
-                //if (personeelService == null)
-                //{
-                //    InsertMenuItem();
-                //}
-                //else
-                //{
-                //    InsertPersoneel();
-                //}
                 InsertMenuItem();
                 InsertPersoneel();
             }
@@ -88,6 +74,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (CheckNameInputs(txt1.Text, txt2.Text))
             {
+                PersoneelService personeelService = new PersoneelService();
                 Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem);
                 personeelService.InsertPersoneel(newEmployee);
                 form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
@@ -98,8 +85,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             double price;
             if (!double.TryParse(txt2.Text, out price))
             {
-                throw new Exception("Vul een geldige prijs in");
+                DisplayErrorMessage("Vul een geldige prijs in");
             }
+            MenuItemService menuItemService = new MenuItemService();
             MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, price, chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem, int.Parse(txt3.Text));
             menuItemService.AddNewMenuItem(newMenuItem);
             form.SwitchPanels(new UserControlManageOverview((MenuType)btnConfirm.Tag));
@@ -111,22 +99,21 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
+            if (cmbType.SelectedItem is not MenuType)
             {
-                CheckIfDrinks((MenuType)cmbType.SelectedItem);
+                return;
             }
+            chkAlcoholisch.Visible = CheckIfDrinks((MenuType)cmbType.SelectedItem);
         }
-        private void CheckIfDrinks(MenuType menu)
+        private bool CheckIfDrinks(MenuType menu)
         {
             if (menu == MenuType.Drank)
             {
-                chkAlcoholisch.Visible = true;
+                return true;
             }
-            else
-            {
-                chkAlcoholisch.Visible = false;
-            }
+            return false;
         }
+        #region PersoneelHandling
         private bool CheckNameInputs(string nameInput, string emailInput)
         {
             ValidateName(nameInput);
@@ -137,11 +124,14 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (string.IsNullOrWhiteSpace(emailInput))
             {
-                throw new FormatException("Vul een username in");
+                throw new Exception("Vul een username in");
             }
-            else if (emailInput.Contains('@'))
+            foreach (char character in emailInput)
             {
-                throw new FormatException("Vul alleen een username in met een punt of laag streepje, zonder spaties");
+                if (!char.IsLetter(character) || character != '_' || character != '.')
+                {
+                    throw new Exception("Vul alleen een username in met een punt of laag streepje, zonder spaties");
+                }
             }
         }
         private void ValidateName(string nameInput)
@@ -152,11 +142,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             foreach(char character in nameInput)
             {
-                if (!char.IsLetter(character) && character != ' ')
+                if (!char.IsLetter(character) || character != ' ')
                 {
                     throw new FormatException("Achternaam is niet geldig");
                 }
             }
+        }
+        #endregion
+        private void DisplayErrorMessage(string errorMessage)
+        {
+            lblError.Text = errorMessage;
         }
         #endregion
     }

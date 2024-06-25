@@ -8,22 +8,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
         const int weinigInVoorraad = 3;
         
         private Form1 form;
-        private MenuItemService? menuItemService;
-        private PersoneelService? personeelService;
         public UserControlManageOverview(Functie functie)
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.personeelService = new PersoneelService();
-            this.menuItemService = null;
             DisplayEmployeeElements(functie);
         }
         public UserControlManageOverview(MenuType menu)
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.personeelService = null;
-            this.menuItemService = new MenuItemService();
             DisplayMenuElements(menu);
         }
         #region DisplayUIElements
@@ -36,6 +30,23 @@ namespace Project_Chapeau_herkansers_3.UserControls
             DisplayMenuButtons();
             RenableMenuButtons(menuType);
             FillMenuListView(menuType);
+        }
+        private void FillMenuListView(MenuType menuType)
+        {
+            lsvDatabaseItems.Clear();
+
+            lsvDatabaseItems.Columns.Add("Item", 250);
+            lsvDatabaseItems.Columns.Add("In Voorraad", 60);
+
+            MenuItemService menuItemService = new MenuItemService();
+            List<MenuItem> selectedMenu = menuItemService.GetMenuItemsByMenu(menuType);
+            foreach (MenuItem menuItem in selectedMenu)
+            {
+                ListViewItem item = new ListViewItem(menuItem.Naam);
+                item.SubItems.Add(menuItem.Voorraad.ToString());
+                item.Tag = menuItem;
+                CheckLowStock(item);
+            }
         }
         #region Buttons - MenuItem
         private void DisplayMenuButtons()
@@ -80,6 +91,23 @@ namespace Project_Chapeau_herkansers_3.UserControls
             DisplayEmployeeButtons();
             RenableEmployeeButtons(functie);
             FillEmployeeListView(functie);
+        }
+        private void FillEmployeeListView(Functie functie)
+        {
+            lsvDatabaseItems.Clear();
+
+            lsvDatabaseItems.Columns.Add("Naam", 100);
+            lsvDatabaseItems.Columns.Add("Functie", 150);
+
+            PersoneelService personeelService = new PersoneelService();
+            List<Personeel> personeel = personeelService.GetPersoneelByFunctie(functie);
+            foreach (Personeel werknemer in personeel)
+            {
+                ListViewItem item = new ListViewItem(werknemer.AchterNaam);
+                item.SubItems.Add(werknemer.Functie.ToString());
+                item.Tag = werknemer;
+                lsvDatabaseItems.Items.Add(item);
+            }
         }
         #region Buttons - Employee
         private void DisplayEmployeeButtons()
@@ -130,42 +158,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void SetObjectText(string objectType)
         {
             btnAddNew.Text = $"{objectType} toevoegen";
-        }
-        #endregion
-
-        #region ListView
-        private void FillMenuListView(MenuType menuType)
-        {
-            lsvDatabaseItems.Clear();
-
-            lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("In Voorraad", 60);
-
-
-            List<MenuItem> selectedMenu = menuItemService.GetMenuItemsByMenu(menuType);
-            foreach (MenuItem menuItem in selectedMenu)
-            {
-                ListViewItem item = new ListViewItem(menuItem.Naam);
-                item.SubItems.Add(menuItem.Voorraad.ToString());
-                item.Tag = menuItem;
-                CheckLowStock(item);
-            }
-        }
-        private void FillEmployeeListView(Functie functie)
-        {
-            lsvDatabaseItems.Clear();
-
-            lsvDatabaseItems.Columns.Add("Naam", 100);
-            lsvDatabaseItems.Columns.Add("Functie", 150);
-
-            List<Personeel> personeel = personeelService.GetPersoneelByFunctie(functie);
-            foreach (Personeel werknemer in personeel)
-            {
-                ListViewItem item = new ListViewItem(werknemer.AchterNaam);
-                item.SubItems.Add(werknemer.Functie.ToString());
-                item.Tag = werknemer;
-                lsvDatabaseItems.Items.Add(item);
-            }
         }
         #endregion
 
@@ -268,9 +260,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 ListViewItem selectedLsvItem = GetItemSelected();
                 if (selectedLsvItem != null)
                 {
-                    MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                    this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
+
                 }
+                MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
+                this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
             }
             catch (Exception ex)
             {
@@ -282,17 +275,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
             try
             {
                 ListViewItem selectedLsvItem = GetItemSelected();
-                if (selectedLsvItem == null)
+                switch (selectedLsvItem.Tag)
                 {
-                    throw new Exception("Selecteer een item uit de lijst");
-                }
-                if (selectedLsvItem.Tag == (MenuItem)selectedLsvItem.Tag)
-                {
-                    RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
-                }
-                else if (selectedLsvItem.Tag == (Personeel)selectedLsvItem.Tag)
-                {
-                    RemovePersoneel((Personeel)selectedLsvItem.Tag);
+                    case MenuItem:
+                        RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
+                        break;
+                    case Personeel:
+                        RemovePersoneel((Personeel)selectedLsvItem.Tag);
+                        break;
+                    default:
+                        DisplayErrorMessage("Selecteer een item uit de lijst");
+                        break;
                 }
             }
             catch (Exception ex)
@@ -302,23 +295,34 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
+            try
             {
-                this.form.SwitchPanels(new UserControlNewObject((MenuType)btnAddNew.Tag));
+                switch (btnAddNew.Tag)
+                {
+                    case MenuType:
+                        this.form.SwitchPanels(new UserControlNewObject((MenuType)btnAddNew.Tag));
+                        break;
+                    case Functie:
+                        this.form.SwitchPanels(new UserControlNewObject((Functie)btnAddNew.Tag));
+                        break;
+                    default:
+                        throw new Exception("Er ging iets mis");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.form.SwitchPanels(new UserControlNewObject((Functie)btnAddNew.Tag));
+                DisplayErrorMessage(ex.Message);
             }
-
         }
         private void RemovePersoneel(Personeel selectedEmployee)
         {
+            PersoneelService personeelService = new PersoneelService();
             personeelService.RemovePersoneel(selectedEmployee);
             FillEmployeeListView((Functie)selectedEmployee.Id);
         }
         private void RemoveMenuItem(MenuItem selectedMenuItem)
         {
+            MenuItemService menuItemService = new MenuItemService();
             menuItemService.DeleteMenuItem(selectedMenuItem);
             FillMenuListView((MenuType)selectedMenuItem.MenuId);
         }
@@ -331,9 +335,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             return null;
         }
-        private void DisplayErrorMessage(string exceptionMessage)
+        private void DisplayErrorMessage(string errorMessage)
         {
-            lblError.Text = exceptionMessage;
+            lblError.Text = errorMessage;
         }
     }
 }
