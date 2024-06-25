@@ -6,7 +6,6 @@
         public string email { get; set; }
         public string AchterNaam { get; set; }
         public string WachtWoord { get; set; }
-        public string Salt { get; set; }
         public Functie Functie { get; set; }
 
         public Personeel()
@@ -17,12 +16,10 @@
             WachtWoord = "";
             Functie = Functie.Serveerder;
         }
-        public Personeel(string achternaam, string email, string wachtwoord, string salt, Functie functie)
+        public Personeel(string achternaam, string email, Functie functie)
         {
             this.AchterNaam = achternaam;
             this.email = email;
-            this.WachtWoord = wachtwoord;
-            this.Salt = salt;
             this.Functie = functie;
         }
     }

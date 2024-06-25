@@ -13,6 +13,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             InitializeComponent();
             this.form = Form1.Instance;
             DisplayEmployeeElements(functie);
+
         }
         public UserControlManageOverview(MenuType menu)
         {
@@ -51,34 +52,34 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Buttons - MenuItem
         private void DisplayMenuButtons()
         {
-            btn1.Tag = MenuType.Lunch;
-            btn1.Text = MenuType.Lunch.ToString();
-            btn2.Tag = MenuType.Diner;
-            btn2.Text = MenuType.Diner.ToString();
-            btn3.Tag = MenuType.Drank;
-            btn3.Text = MenuType.Drank.ToString();
+            btnOption1.Tag = MenuType.Lunch;
+            btnOption1.Text = MenuType.Lunch.ToString();
+            btnOption2.Tag = MenuType.Diner;
+            btnOption2.Text = MenuType.Diner.ToString();
+            btnOption3.Tag = MenuType.Drank;
+            btnOption3.Text = MenuType.Drank.ToString();
         }
         private void RenableMenuButtons(MenuType menuType)
         {
             switch (menuType)
             {
                 case MenuType.Lunch:
-                    btn1.Enabled = false;
-                    btn2.Enabled = true;
-                    btn3.Enabled = true;
+                    btnOption1.Enabled = false;
+                    btnOption2.Enabled = true;
+                    btnOption3.Enabled = true;
                     break;
                 case MenuType.Diner:
-                    btn1.Enabled = true;
-                    btn2.Enabled = false;
-                    btn3.Enabled = true;
+                    btnOption1.Enabled = true;
+                    btnOption2.Enabled = false;
+                    btnOption3.Enabled = true;
                     break;
                 case MenuType.Drank:
-                    btn1.Enabled = true;
-                    btn2.Enabled = true;
-                    btn3.Enabled = false;
+                    btnOption1.Enabled = true;
+                    btnOption2.Enabled = true;
+                    btnOption3.Enabled = false;
                     break;
             }
-            btnAddNew.Tag = menuType;
+            btnAddNewObject.Tag = menuType;
         }
         #endregion
         #endregion
@@ -112,12 +113,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Buttons - Employee
         private void DisplayEmployeeButtons()
         {
-            btn1.Tag = Functie.Serveerder;
-            btn1.Text = Functie.Serveerder.ToString();
-            btn2.Tag = Functie.Keuken;
-            btn2.Text = Functie.Keuken.ToString();
-            btn3.Tag = Functie.Bar;
-            btn3.Text = Functie.Bar.ToString();
+            btnOption1.Tag = Functie.Serveerder;
+            btnOption1.Text = Functie.Serveerder.ToString();
+            btnOption2.Tag = Functie.Keuken;
+            btnOption2.Text = Functie.Keuken.ToString();
+            btnOption3.Tag = Functie.Bar;
+            btnOption3.Text = Functie.Bar.ToString();
             chkManagers.Visible = true;
             chkManagers.Tag = Functie.Manager;
             btnAdjust.Visible = false;
@@ -128,36 +129,36 @@ namespace Project_Chapeau_herkansers_3.UserControls
             switch (functie)
             {
                 case Functie.Serveerder:
-                    btn1.Enabled = false;
-                    btn2.Enabled = true;
-                    btn3.Enabled = true;
+                    btnOption1.Enabled = false;
+                    btnOption2.Enabled = true;
+                    btnOption3.Enabled = true;
                     chkManagers.CheckState = CheckState.Unchecked;
                     break;
                 case Functie.Keuken:
-                    btn1.Enabled = true;
-                    btn2.Enabled = false;
-                    btn3.Enabled = true;
+                    btnOption1.Enabled = true;
+                    btnOption2.Enabled = false;
+                    btnOption3.Enabled = true;
                     chkManagers.CheckState = CheckState.Unchecked;
                     break;
                 case Functie.Bar:
-                    btn1.Enabled = true;
-                    btn2.Enabled = true;
-                    btn3.Enabled = false;
+                    btnOption1.Enabled = true;
+                    btnOption2.Enabled = true;
+                    btnOption3.Enabled = false;
                     chkManagers.CheckState = CheckState.Unchecked;
                     break;
                 case Functie.Manager:
-                    btn1.Enabled = true;
-                    btn2.Enabled = true;
-                    btn3.Enabled = true;
+                    btnOption1.Enabled = true;
+                    btnOption2.Enabled = true;
+                    btnOption3.Enabled = true;
                     chkManagers.CheckState = CheckState.Checked;
                     break;
             }
-            btnAddNew.Tag = functie;
+            btnAddNewObject.Tag = functie;
         }
         #endregion
         private void SetObjectText(string objectType)
         {
-            btnAddNew.Text = $"{objectType} toevoegen";
+            btnAddNewObject.Text = $"{objectType} toevoegen";
         }
         #endregion
 
@@ -166,54 +167,66 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Top Buttons
         private void btn1_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
+            switch (btnOption1.Tag)
             {
-                FillMenuListView((MenuType)btn1.Tag);
-                RenableMenuButtons((MenuType)btn1.Tag);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)btn1.Tag);
-                RenableEmployeeButtons((Functie)btn1.Tag);
+                case MenuType:
+                    FillMenuListView((MenuType)btnOption1.Tag);
+                    RenableMenuButtons((MenuType)btnOption1.Tag);
+                    break;
+                case Functie:
+                    FillEmployeeListView((Functie)btnOption1.Tag);
+                    RenableEmployeeButtons((Functie)btnOption1.Tag);
+                    break;
+                default:
+                    DisplayErrorMessage("Er ging iets mis");
+                    break;
             }
         }
         private void btn1_EnabledChanged(object sender, EventArgs e)
         {
-            SetEnableColor(btn1);
+            SetEnableColor(btnOption1);
         }
         private void btn2_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
+            switch (btnOption2.Tag)
             {
-                FillMenuListView((MenuType)btn2.Tag);
-                RenableMenuButtons((MenuType)btn2.Tag);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)btn2.Tag);
-                RenableEmployeeButtons((Functie)btn2.Tag);
+                case MenuType:
+                    FillMenuListView((MenuType)btnOption2.Tag);
+                    RenableMenuButtons((MenuType)btnOption2.Tag);
+                    break;
+                case Functie:
+                    FillEmployeeListView((Functie)btnOption2.Tag);
+                    RenableEmployeeButtons((Functie)btnOption2.Tag);
+                    break;
+                default:
+                    DisplayErrorMessage("Er ging iets mis");
+                    break;
             }
         }
         private void btn2_EnabledChanged(object sender, EventArgs e)
         {
-            SetEnableColor(btn2);
+            SetEnableColor(btnOption2);
         }
         private void btn3_Click(object sender, EventArgs e)
         {
-            if (this.personeelService == null)
+            switch (btnOption3.Tag)
             {
-                FillMenuListView((MenuType)btn3.Tag);
-                RenableMenuButtons((MenuType)btn3.Tag);
-            }
-            else
-            {
-                FillEmployeeListView((Functie)btn3.Tag);
-                RenableEmployeeButtons((Functie)btn3.Tag);
+                case MenuType:
+                    FillMenuListView((MenuType)btnOption3.Tag);
+                    RenableMenuButtons((MenuType)btnOption3.Tag);
+                    break;
+                case Functie:
+                    FillEmployeeListView((Functie)btnOption3.Tag);
+                    RenableEmployeeButtons((Functie)btnOption3.Tag);
+                    break;
+                default:
+                    DisplayErrorMessage("Er ging iets mis");
+                    break;
             }
         }
         private void btn3_EnabledChanged(object sender, EventArgs e)
         {
-            SetEnableColor(btn3);
+            SetEnableColor(btnOption3);
         }
         private void chkManagers_Click(object sender, EventArgs e)
         {
@@ -238,7 +251,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void CheckLowStock(ListViewItem item)
         {
-            if (int.Parse(item.SubItems[2].Text) <= weinigInVoorraad)
+            if (int.Parse(item.SubItems[1].Text) <= weinigInVoorraad)
             {
                 item.BackColor = Color.FromArgb(0, 245, 108, 117);
                 lsvDatabaseItems.Items.Insert(0, item);
@@ -258,12 +271,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
             try
             {
                 ListViewItem selectedLsvItem = GetItemSelected();
-                if (selectedLsvItem != null)
+                if (selectedLsvItem == null)
                 {
-
+                    DisplayErrorMessage("Selecteer een item uit de lijst");
                 }
-                MenuItem selecteMenuItem = (MenuItem)selectedLsvItem.Tag;
-                this.form.SwitchPanels(new UserControlAdjustStock(selecteMenuItem));
+                else
+                {
+                    MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
+                    this.form.SwitchPanels(new UserControlAdjustStock(selectedMenuItem));
+                }
             }
             catch (Exception ex)
             {
@@ -278,10 +294,14 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 switch (selectedLsvItem.Tag)
                 {
                     case MenuItem:
-                        RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
+                        MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
+                        RemoveMenuItem(selectedMenuItem);
+                        FillMenuListView((MenuType)selectedMenuItem.MenuId);
                         break;
                     case Personeel:
-                        RemovePersoneel((Personeel)selectedLsvItem.Tag);
+                        Personeel selectedPersoneel = (Personeel)selectedLsvItem.Tag;
+                        RemovePersoneel(selectedPersoneel);
+                        FillEmployeeListView((Functie)selectedPersoneel.Id);
                         break;
                     default:
                         DisplayErrorMessage("Selecteer een item uit de lijst");
@@ -290,28 +310,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             catch (Exception ex)
             {
-                DisplayErrorMessage(ex.Message);
+                DisplayErrorMessage("Er ging iets mis met de database");
             }
         }
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            try
+            switch (btnAddNewObject.Tag)
             {
-                switch (btnAddNew.Tag)
-                {
-                    case MenuType:
-                        this.form.SwitchPanels(new UserControlNewObject((MenuType)btnAddNew.Tag));
-                        break;
-                    case Functie:
-                        this.form.SwitchPanels(new UserControlNewObject((Functie)btnAddNew.Tag));
-                        break;
-                    default:
-                        throw new Exception("Er ging iets mis");
-                }
-            }
-            catch (Exception ex)
-            {
-                DisplayErrorMessage(ex.Message);
+                case MenuType:
+                    this.form.SwitchPanels(new UserControlNewObject((MenuType)btnAddNewObject.Tag));
+                    break;
+                case Functie:
+                    this.form.SwitchPanels(new UserControlNewObject((Functie)btnAddNewObject.Tag));
+                    break;
+                default:
+                    DisplayErrorMessage("Er ging iets mis");
+                    break;
             }
         }
         private void RemovePersoneel(Personeel selectedEmployee)

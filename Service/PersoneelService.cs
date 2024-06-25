@@ -18,8 +18,7 @@ namespace Service
     {
         const string chapeauDomain = "@chapeau.nl";
         const string defaultPassword = "0000";
-        const int workFactor = 11;
-        const bool enhancedEntropy = true;
+
 
         private PersoneelDao personeelDao;
 
@@ -37,6 +36,8 @@ namespace Service
         }
         public void InsertPersoneel(Personeel personeel)
         {
+            string slowSaltedHashedPassword = HashPasswordWithBCrypt(defaultPassword, 11);
+            personeel.WachtWoord = slowSaltedHashedPassword;
             personeelDao.InsertPersoneel(personeel);
         }
         public void RemovePersoneel(Personeel personeel)
@@ -44,12 +45,6 @@ namespace Service
             personeelDao.RemovePersoneel(personeel);
         }
         // Lucas
-        public Personeel CreatePersoneel(string surname, string username, Functie function)
-        {
-            string salt = GenerateSalt();
-            string slowSaltedHashedPassword = HashPasswordWithBCrypt(defaultPassword, salt);
-            return new Personeel(surname, CreateEmail(username), slowSaltedHashedPassword, salt, function);
-        }
         private string CreateEmail(string username)
         {
             string formattedEmail = $"{username}{chapeauDomain}".ToLower();
@@ -67,12 +62,12 @@ namespace Service
         {
             return personeelDao.IsUniqueEmail(email);
         }
-        private string HashPasswordWithBCrypt(string password, string salt)
+        private string HashPasswordWithBCrypt(string password, int workfactor)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt, enhancedEntropy, HashType.SHA512);
+            string hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, workfactor, HashType.SHA512);
             return hashedPassword;
         }
-        private string GenerateSalt()
+        private string GenerateSalt(int workFactor)
         {
             return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
         }

@@ -213,7 +213,7 @@
             lblError.AutoSize = true;
             lblError.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lblError.ForeColor = Color.Red;
-            lblError.Location = new Point(177, 190);
+            lblError.Location = new Point(138, 499);
             lblError.Name = "lblError";
             lblError.Size = new Size(120, 25);
             lblError.TabIndex = 36;

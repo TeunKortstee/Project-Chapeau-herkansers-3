@@ -75,20 +75,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
             if (CheckNameInputs(txt1.Text, txt2.Text))
             {
                 PersoneelService personeelService = new PersoneelService();
-                Personeel newEmployee = personeelService.CreatePersoneel(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem);
-                personeelService.InsertPersoneel(newEmployee);
+                Personeel newPersoneel = new Personeel(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem);
+                personeelService.InsertPersoneel(newPersoneel);
                 form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
             }
         }
         private void InsertMenuItem()
         {
-            double price;
-            if (!double.TryParse(txt2.Text, out price))
+            if (!double.TryParse(txt2.Text, out double price))
             {
                 DisplayErrorMessage("Vul een geldige prijs in");
             }
             MenuItemService menuItemService = new MenuItemService();
-            MenuItem newMenuItem = menuItemService.CreateMenuItem(txt1.Text, price, chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem, int.Parse(txt3.Text));
+            MenuItem newMenuItem = new MenuItem(txt1.Text, price, chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem, int.Parse(txt3.Text));
             menuItemService.AddNewMenuItem(newMenuItem);
             form.SwitchPanels(new UserControlManageOverview((MenuType)btnConfirm.Tag));
         }

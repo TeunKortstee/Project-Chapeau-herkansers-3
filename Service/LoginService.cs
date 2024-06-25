@@ -7,8 +7,6 @@ namespace Service
     public class LoginService
     {
         private LoginDao loginDao;
-        const int workFactor = 11;
-        const bool enhancedEntropy = true;
         public LoginService()
         {
             loginDao = new LoginDao();
@@ -23,19 +21,13 @@ namespace Service
         }
         public void ChangePassword(Personeel personeel, string wachtwoord)
         {
-            personeel.Salt = GenerateSalt();
-            personeel.WachtWoord = HashPasswordWithBCrypt(wachtwoord, personeel.Salt);
+            personeel.WachtWoord = HashPasswordWithBCrypt(wachtwoord, 11);
             loginDao.ChangePassword(personeel);
         }
-        private string HashPasswordWithBCrypt(string password, string salt)
+        private string HashPasswordWithBCrypt(string password, int workfactor)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt, enhancedEntropy, HashType.SHA512);
+            string hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, workfactor, HashType.SHA512);
             return hashedPassword;
-        }
-        private string GenerateSalt()
-        {
-            string saltString = BCrypt.Net.BCrypt.GenerateSalt(workFactor);
-            return saltString;
         }
         public bool VerifyPassword(string password, string hashedPassword)
         {

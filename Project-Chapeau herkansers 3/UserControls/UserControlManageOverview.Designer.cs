@@ -30,13 +30,13 @@
         {
             lsvDatabaseItems = new ListView();
             lblOverview = new Label();
-            btnAddNew = new Button();
+            btnAddNewObject = new Button();
             btnAdjust = new Button();
             btnRemove = new Button();
             btnReturn = new Button();
-            btn1 = new Button();
-            btn2 = new Button();
-            btn3 = new Button();
+            btnOption1 = new Button();
+            btnOption2 = new Button();
+            btnOption3 = new Button();
             chkManagers = new CheckBox();
             lblError = new Label();
             SuspendLayout();
@@ -63,18 +63,18 @@
             lblOverview.TabIndex = 1;
             lblOverview.Text = "Overzicht";
             // 
-            // btnAddNew
+            // btnAddNewObject
             // 
-            btnAddNew.BackColor = Color.FromArgb(138, 210, 176);
-            btnAddNew.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNew.Location = new Point(14, 121);
-            btnAddNew.Margin = new Padding(3, 4, 3, 4);
-            btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(380, 48);
-            btnAddNew.TabIndex = 2;
-            btnAddNew.Text = "... Toevoegen";
-            btnAddNew.UseVisualStyleBackColor = false;
-            btnAddNew.Click += btnAddNew_Click;
+            btnAddNewObject.BackColor = Color.FromArgb(138, 210, 176);
+            btnAddNewObject.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddNewObject.Location = new Point(14, 121);
+            btnAddNewObject.Margin = new Padding(3, 4, 3, 4);
+            btnAddNewObject.Name = "btnAddNewObject";
+            btnAddNewObject.Size = new Size(380, 48);
+            btnAddNewObject.TabIndex = 2;
+            btnAddNewObject.Text = "... Toevoegen";
+            btnAddNewObject.UseVisualStyleBackColor = false;
+            btnAddNewObject.Click += btnAddNew_Click;
             // 
             // btnAdjust
             // 
@@ -115,44 +115,44 @@
             btnReturn.UseVisualStyleBackColor = false;
             btnReturn.Click += btnReturn_Click;
             // 
-            // btn1
+            // btnOption1
             // 
-            btn1.BackColor = Color.FromArgb(138, 210, 176);
-            btn1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn1.Location = new Point(14, 176);
-            btn1.Name = "btn1";
-            btn1.Size = new Size(123, 50);
-            btn1.TabIndex = 29;
-            btn1.Text = "Optie 1";
-            btn1.UseVisualStyleBackColor = false;
-            btn1.EnabledChanged += btn1_EnabledChanged;
-            btn1.Click += btn1_Click;
+            btnOption1.BackColor = Color.FromArgb(138, 210, 176);
+            btnOption1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnOption1.Location = new Point(14, 176);
+            btnOption1.Name = "btnOption1";
+            btnOption1.Size = new Size(123, 50);
+            btnOption1.TabIndex = 29;
+            btnOption1.Text = "Optie 1";
+            btnOption1.UseVisualStyleBackColor = false;
+            btnOption1.EnabledChanged += btn1_EnabledChanged;
+            btnOption1.Click += btn1_Click;
             // 
-            // btn2
+            // btnOption2
             // 
-            btn2.BackColor = Color.FromArgb(138, 210, 176);
-            btn2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn2.Location = new Point(143, 176);
-            btn2.Name = "btn2";
-            btn2.Size = new Size(123, 50);
-            btn2.TabIndex = 30;
-            btn2.Text = "Optie 2";
-            btn2.UseVisualStyleBackColor = false;
-            btn2.EnabledChanged += btn2_EnabledChanged;
-            btn2.Click += btn2_Click;
+            btnOption2.BackColor = Color.FromArgb(138, 210, 176);
+            btnOption2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnOption2.Location = new Point(143, 176);
+            btnOption2.Name = "btnOption2";
+            btnOption2.Size = new Size(123, 50);
+            btnOption2.TabIndex = 30;
+            btnOption2.Text = "Optie 2";
+            btnOption2.UseVisualStyleBackColor = false;
+            btnOption2.EnabledChanged += btn2_EnabledChanged;
+            btnOption2.Click += btn2_Click;
             // 
-            // btn3
+            // btnOption3
             // 
-            btn3.BackColor = Color.FromArgb(138, 210, 176);
-            btn3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn3.Location = new Point(272, 176);
-            btn3.Name = "btn3";
-            btn3.Size = new Size(123, 50);
-            btn3.TabIndex = 31;
-            btn3.Text = "Optie 3";
-            btn3.UseVisualStyleBackColor = false;
-            btn3.EnabledChanged += btn3_EnabledChanged;
-            btn3.Click += btn3_Click;
+            btnOption3.BackColor = Color.FromArgb(138, 210, 176);
+            btnOption3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnOption3.Location = new Point(272, 176);
+            btnOption3.Name = "btnOption3";
+            btnOption3.Size = new Size(123, 50);
+            btnOption3.TabIndex = 31;
+            btnOption3.Text = "Optie 3";
+            btnOption3.UseVisualStyleBackColor = false;
+            btnOption3.EnabledChanged += btn3_EnabledChanged;
+            btnOption3.Click += btn3_Click;
             // 
             // chkManagers
             // 
@@ -184,13 +184,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lblError);
             Controls.Add(chkManagers);
-            Controls.Add(btn3);
-            Controls.Add(btn2);
-            Controls.Add(btn1);
+            Controls.Add(btnOption3);
+            Controls.Add(btnOption2);
+            Controls.Add(btnOption1);
             Controls.Add(btnReturn);
             Controls.Add(btnRemove);
             Controls.Add(btnAdjust);
-            Controls.Add(btnAddNew);
+            Controls.Add(btnAddNewObject);
             Controls.Add(lblOverview);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
@@ -204,13 +204,13 @@
 
         private ListView lsvDatabaseItems;
         private Label lblOverview;
-        private Button btnAddNew;
+        private Button btnAddNewObject;
         private Button btnAdjust;
         private Button btnRemove;
         private Button btnReturn;
-        private Button btn1;
-        private Button btn2;
-        private Button btn3;
+        private Button btnOption1;
+        private Button btnOption2;
+        private Button btnOption3;
         private CheckBox chkManagers;
         private Label lblError;
     }
