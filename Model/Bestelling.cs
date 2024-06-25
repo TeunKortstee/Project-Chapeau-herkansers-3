@@ -2,15 +2,14 @@
 {
     public class Bestelling
     {
-        private List<BesteldeItem> besteldeItems;
+        private List<BesteldeItem> besteldeItems; //Yusuf
         public int bestellingId { get; set; }
-        public List<BesteldeItem> BestellingItems { get; set; }
-        //public Personeel personeel { get; set; }
+        public List<BesteldeItem> BestellingItems { get; set; } //Luciano
 
         public bool betaald { get; set; }
 
-        public Tafel tafel { get; set; }
-        public GerechtsStatus status { get; set; }
+        public Tafel tafel { get; set; } //Luciano
+        public GerechtsStatus status { get; set; } //Yusuf
 
         public Bestelling(Tafel tafel) //Luciano
         {
@@ -32,6 +31,5 @@
             betaald = _betaald;
             //tafelId = _tafelId;
         }
-
     }
 }
