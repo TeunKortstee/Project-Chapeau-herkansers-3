@@ -51,7 +51,7 @@ namespace Service
 
 
 
-        public Rekening CreateRekening(int tafelID) {
+        public Rekening CreateRekening(Tafel tafel) {
 
             Rekening? r = rekeningDao.GetRekening(tafelID);
             List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafelID);

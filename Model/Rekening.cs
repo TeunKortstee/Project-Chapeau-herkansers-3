@@ -5,7 +5,7 @@ namespace Model
     public class Rekening
     {
         public int RekeningId { get; set; }
-        public int TafelId { get; set; }
+        public Tafel Tafel { get; set; }
         public double TotaalPrijs { get; set; }
 
         public double Belasting { get; set; }
@@ -21,11 +21,11 @@ namespace Model
 
 
 
-        public Rekening(int _RekeningId, int _TafelId, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting, string _Opmerkingen) {
+        public Rekening(int _RekeningId, Tafel _Tafel, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting, string _Opmerkingen) {
             Bestellingen = new List<Bestelling>();
 
             RekeningId = _RekeningId;
-            TafelId = _TafelId;
+            Tafel = _Tafel;
             TotaalPrijs = _TotaalPrijs;
 
             Betaald = _Betaald;
@@ -35,5 +35,24 @@ namespace Model
 
 
         }
+
+        public Rekening(List<Bestelling> _Bestelligen, Tafel _Tafel, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting, string _Opmerkingen)
+        {
+            Bestellingen = _Bestelligen;
+
+            RekeningId = 0;
+            Tafel = _Tafel;
+            TotaalPrijs = _TotaalPrijs;
+
+            Betaald = _Betaald;
+            Datum = _Datum;
+            Belasting = _Belasting;
+            Opmerkingen = _Opmerkingen;
+
+
+        }
+
+
+
     }
 }
