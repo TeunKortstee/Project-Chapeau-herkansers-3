@@ -69,12 +69,11 @@ namespace Project_Chapeau_herkansers_3
         {
             RekeningService rekeningService = new RekeningService();
             BestellingService bestellingService = new BestellingService();
-
             if (bestellingService.GetBestellingen(tafel.Id).Count > 0)
             {
-                Rekening r = rekeningService.CreateRekening(tafel.Id);
-                Afrekenen a = new Afrekenen(r);
-                Exit(a);
+                Rekening gemaakteRekening = rekeningService.CreateRekening(tafel);
+                Afrekenen afrekenScherm = new Afrekenen(gemaakteRekening);
+                Exit(afrekenScherm);
             }
             else
             {

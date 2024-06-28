@@ -53,7 +53,7 @@ namespace Service
 
         public Rekening CreateRekening(Tafel tafel) {
 
-            Rekening? r = rekeningDao.GetRekening(tafelID);
+            Rekening r = new Rekening();
             List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafelID);
             if (r == null) {
 

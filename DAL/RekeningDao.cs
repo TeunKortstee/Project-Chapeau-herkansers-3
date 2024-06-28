@@ -12,7 +12,13 @@ namespace DAL
 {
     public class RekeningDao : BaseDao
     {
-        
+        private TafelDao tafelDao;
+        public RekeningDao() {
+            tafelDao = new TafelDao();
+
+
+        }
+
         // Lucas
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
@@ -24,15 +30,15 @@ namespace DAL
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-
         private List<Rekening> ReadTables(DataTable dataTable)
         {
             List<Rekening> rekeningen = new List<Rekening>();
+            TafelDao tafelDao = new TafelDao();
             foreach (DataRow row in dataTable.Rows)
             {
-
+                Tafel tafel = tafelDao.ReadTables(dataTable)[0];
                 Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
-                    Convert.ToInt32(row["TafelId"]), 
+                    tafel, 
                     (double)row["TotaalPrijs"],
                     (bool)row["Betaald"], 
                     (DateTime)row["Datum"],
@@ -44,12 +50,8 @@ namespace DAL
             }
             return rekeningen;      
         }
-
         public void RekeningBetaald(Rekening rekening) {
             string query = "UPDATE Rekeningen SET Betaald = 1, Datum = GETDATE() WHERE RekeningId = @ID; UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TableNr AND Betaald = 0; UPDATE Tafels SET StatusId = 1 WHERE TableNr = @TableNr;";
-           
-           
-            
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@ID", rekening.RekeningId),
@@ -57,10 +59,8 @@ namespace DAL
                 
 
             };
-
             ExecuteEditQuery(query, sqlParameters);
         }
-
         public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
         {
             string query = "UPDATE Rekeningen SET Opmerkingen = @Opmerkingen WHERE RekeningId = @ID;";
@@ -68,13 +68,9 @@ namespace DAL
             {
                 new SqlParameter("@ID", rekening.RekeningId),
                 new SqlParameter("@Opmerkingen",opmerkingen)
-
-
             };
-
             ExecuteEditQuery(query, sqlParameters);
         }
-
         public int InsertRekening(Rekening rekening)
         {
             string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,Betaald,Belasting) VALUES (@TafelId,@TotaalPrijs,@Betaald,@Belasting) SELECT CAST(scope_identity() AS int)";
@@ -88,7 +84,5 @@ namespace DAL
             };
             return ExecuteEditQueryReturnID(query, sqlParameters);
         }
-
-
     }
 }
