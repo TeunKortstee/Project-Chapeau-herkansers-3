@@ -206,7 +206,7 @@ namespace Project_Chapeau_herkansers_3
 
             foreach (MenuItem menuItem in menu.MenuItems)
             {
-                if ((MenuType)menuItem.MenuId == menu.MenuType)
+                if ((MenuType)menuItem.menuType == menu.MenuType)
                 {
                     ListViewItem item = new ListViewItem(menuItem.Naam);
                     item.SubItems.Add(menuItem.Prijs.ToString());

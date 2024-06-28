@@ -20,14 +20,6 @@ namespace Service
         {
             return menuItemDao.GetMenuItemsByMenuId(menuType);
         }
-        public MenuItem CreateMenuItem(string name, double price, bool alcoholic, MenuType menuId, int stock)
-        {
-            if (stock <= 0 || price <= 0)
-            {
-                throw new FormatException("Mag geen 0 zijn");
-            }
-            return new MenuItem(name, price, alcoholic, menuId, stock);
-        }
         public void AddNewMenuItem(MenuItem newMenuItem)
         {
             menuItemDao.AddNewMenuItem(newMenuItem);

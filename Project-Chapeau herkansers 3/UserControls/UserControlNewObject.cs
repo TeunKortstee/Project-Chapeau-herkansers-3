@@ -1,6 +1,5 @@
 ﻿using Model;
 using Service;
-using System.Text.RegularExpressions;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
@@ -35,7 +34,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Employee
         private void DisplayEmployeeElements(Functie function)
         {
-            SetObjectText("Werknemer", "Achternaam", "Email", "De_Graaf", "0000", "Wachtwoord", "Functie");
+            SetObjectText("Werknemer", "Achternaam", "Email", "De_Graaf", "", "Wachtwoord", "Functie");
             txt3.Enabled = false;
             cmbType.DataSource = Enum.GetValues(typeof(Functie));
             cmbType.SelectedItem = function;
@@ -76,27 +75,28 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             catch (Exception ex)
             {
-                DisplayErrorMessage("Er ging iets mis bij de database");
+                DisplayErrorMessage(ex.Message);
             }
         }
         private void InsertPersoneel()
         {
-            if (CheckNameInputs(txt1.Text, txt2.Text))
+            if (!AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem))
             {
-                PersoneelService personeelService = new PersoneelService();
-                Personeel newPersoneel = new Personeel(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem);
-                personeelService.InsertPersoneel(newPersoneel);
-                form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
+                return;
             }
+            PersoneelService personeelService = new PersoneelService();
+            Personeel newPersoneel = new Personeel(txt1.Text, personeelService.CreateEmail(txt2.Text), (Functie)cmbType.SelectedItem);
+            personeelService.InsertPersoneel(newPersoneel);
+            form.SwitchPanels(new UserControlManageOverview((Functie)btnConfirm.Tag));
         }
         private void InsertMenuItem()
         {
-            if (!double.TryParse(txt2.Text, out double price))
+            if (!AreValidMenuItemInputs(txt1.Text, txt2.Text, txt3.Text, (MenuType)cmbType.SelectedItem))
             {
-                DisplayErrorMessage("Vul een geldige prijs in");
+                return;
             }
             MenuItemService menuItemService = new MenuItemService();
-            MenuItem newMenuItem = new MenuItem(txt1.Text, price, chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem, int.Parse(txt3.Text));
+            MenuItem newMenuItem = new MenuItem(txt1.Text, ParsePrice(txt2.Text), chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem, ParseStock(txt3.Text));
             menuItemService.AddNewMenuItem(newMenuItem);
             form.SwitchPanels(new UserControlManageOverview((MenuType)btnConfirm.Tag));
         }
@@ -104,8 +104,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             form.SwitchPanels(new UserControlManageOverview((MenuType)btnCancel.Tag));
         }
-        #region MenuItemHandling
-
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbType.SelectedItem is not MenuType)
@@ -122,47 +120,80 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             return false;
         }
+        #region MenuItemHandling
+        private bool AreValidMenuItemInputs(string nameInput, string priceInput, string stockInput, MenuType selectedItem)
+        {
+            if (string.IsNullOrEmpty(nameInput) || string.IsNullOrEmpty(priceInput) || string.IsNullOrEmpty(stockInput) || !Enum.IsDefined(typeof(MenuType), selectedItem))
+            {
+                DisplayErrorMessage("Velden zijn niet geldig");
+                return false;
+            }
+            return true;
+        }
+        private double ParsePrice(string priceInput)
+        {
+            double price = 0;
+            if (!double.TryParse(priceInput, out price))
+            {
+                throw new Exception("Vul een geldige prijs in");
+            }
+            return price;
+        }
+        private int ParseStock(string stockInput)
+        {
+            int stock = 0;
+            if (!int.TryParse(stockInput, out stock))
+            {
+                throw new Exception("Vul een geldige voorraad in");
+            }
+            return stock;
+        }
+
         #endregion
 
         #region PersoneelHandling
-        private bool CheckNameInputs(string nameInput, string emailInput)
+        private bool AreValidPersoneelInputs(string nameInput, string emailInput, Functie selectedItem)
         {
-            ValidateName(nameInput);
-            ValidateEmail(emailInput);
+            if (!IsEmpty(nameInput, emailInput) || !ValidCharacters(nameInput, emailInput) || !Enum.IsDefined(typeof(Functie), selectedItem))
+            {
+                DisplayErrorMessage("Velden zijn niet geldig");
+                return false;
+            }
             return true;
         }
-        private void ValidateEmail(string emailInput)
+        private bool ValidCharacters(string nameInput, string emailInput)
         {
-            if (string.IsNullOrWhiteSpace(emailInput))
-            {
-                throw new Exception("Vul een username in");
-            }
             foreach (char character in emailInput)
             {
                 if (!char.IsLetter(character) || character != '_' || character != '.')
                 {
-                    throw new Exception("Vul alleen een username in met een punt of laag streepje, zonder spaties");
+                    DisplayErrorMessage("Username is niet geldig");
+                    return false;
                 }
             }
-        }
-        private void ValidateName(string nameInput)
-        {
-            if (string.IsNullOrEmpty(nameInput))
-            {
-                throw new FormatException("Vul een achternaam in");
-            }
-            foreach(char character in nameInput)
+            foreach (char character in nameInput)
             {
                 if (!char.IsLetter(character) || character != ' ')
                 {
-                    throw new FormatException("Achternaam is niet geldig");
+                    DisplayErrorMessage("Achternaam is niet geldig");
+                    return false;
                 }
             }
+            return true;
+        }
+        private bool IsEmpty(string nameInput, string emailInput)
+        {
+            if (string.IsNullOrEmpty(nameInput) || string.IsNullOrWhiteSpace(nameInput))
+            {
+                return false;
+            }
+            return true;
         }
         #endregion
         private void DisplayErrorMessage(string errorMessage)
         {
-            lblError.Text = errorMessage;
+            lblErrorNewObject.Visible = true;
+            lblErrorNewObject.Text = errorMessage;
         }
         #endregion
     }

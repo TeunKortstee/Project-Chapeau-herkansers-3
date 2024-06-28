@@ -18,7 +18,7 @@ namespace DAL
             string query = "SELECT PersoneelsId, Achternaam, Wachtwoord, Email, FunctieId FROM Personeel WHERE Email=@Email";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Email", personeel.email)
+                new SqlParameter("@Email", personeel.Email)
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
 
@@ -39,7 +39,7 @@ namespace DAL
             string query = "INSERT INTO Personeel(Achternaam, Email, Wachtwoord, FunctieId) VALUES (@Email, @Achternaam, @Wachtwoord, @Functie)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Email", personeel.email),
+                new SqlParameter("@Email", personeel.Email),
                 new SqlParameter("@Achternaam", personeel.AchterNaam),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord),
                 new SqlParameter("@Functie", personeel.Functie),
@@ -57,7 +57,7 @@ namespace DAL
                 Personeel student = new Personeel()
                 {
                     Id = Convert.ToInt32(dr["PersoneelsId"]),
-                    email = dr["Email"].ToString(),
+                    Email = dr["Email"].ToString(),
                     AchterNaam = dr["Achternaam"].ToString(),
                     WachtWoord = dr["Wachtwoord"].ToString(),
                     Functie = (Functie)Convert.ToInt32(dr["FunctieId"])

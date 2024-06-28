@@ -17,7 +17,7 @@ namespace Project_Chapeau_herkansers_3
             try
             {
                 LoginService service = new LoginService();
-                p.email = EmailTxt.Text;
+                p.Email = EmailTxt.Text;
                 Personeel personeel = service.GetPersoneel(p);
                 if (!service.VerifyPassword(PasswordTxt.Text, personeel.WachtWoord))
                     throw new LoginException();

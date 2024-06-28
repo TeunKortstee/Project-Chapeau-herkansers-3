@@ -38,17 +38,11 @@ namespace DAL
                 Voorraad = Convert.ToInt32(row["Voorraad"]),
                 Prijs = (double)row["Prijs"],
                 Naam = (string)row["Naam"],
-                MenuId = Convert.ToInt32(row["MenuId"]),
+                menuType = (MenuType)Convert.ToInt32(row["MenuId"]),
                 IsAlcoholisch = (bool)row["Alcoholisch"],
             };
         }
         // Lucas
-        public List<MenuItem> GetAllMenuItems()
-        {
-            string query = "SELECT * FROM MenuItems";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTablesWithList(ExecuteSelectQuery(query, sqlParameters));
-        }
         public List<MenuItem> GetMenuItemsByMenuId(MenuType menu)
         {
             string query = "SELECT mi.* FROM MenuItems mi JOIN Menu m ON mi.MenuId = m.MenuId WHERE mi.MenuId = @MenuId AND Beschikbaar = 1";
@@ -69,7 +63,7 @@ namespace DAL
                     Voorraad = Convert.ToInt32(dr["Voorraad"]),
                     Prijs = (double)dr["Prijs"],
                     Naam = (string)dr["Naam"],
-                    MenuId = Convert.ToInt32(dr["MenuId"]),
+                    menuType = (MenuType)Convert.ToInt32(dr["MenuId"]),
                     IsAlcoholisch = (bool)dr["Alcoholisch"],
                 };
                 menuItems.Add(menuItem);
@@ -84,7 +78,7 @@ namespace DAL
                 new SqlParameter("@Naam", menuItem.Naam),
                 new SqlParameter("@Prijs", menuItem.Prijs),
                 new SqlParameter("@Alcoholisch", menuItem.IsAlcoholisch),
-                new SqlParameter("@MenuId", menuItem.MenuId),
+                new SqlParameter("@MenuId", (int)menuItem.menuType),
                 new SqlParameter("@Voorraad", menuItem.Voorraad)
             };
             ExecuteEditQuery(query, sqlParameters);

@@ -1,16 +1,6 @@
 ﻿using BCrypt.Net;
 using DAL;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Cryptography;
-using BCrypt.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlTypes;
-using System.Text.RegularExpressions;
 
 namespace Service
 {
@@ -18,7 +8,6 @@ namespace Service
     {
         const string chapeauDomain = "@chapeau.nl";
         const string defaultPassword = "0000";
-
 
         private PersoneelDao personeelDao;
 
@@ -45,7 +34,7 @@ namespace Service
             personeelDao.RemovePersoneel(personeel);
         }
         // Lucas
-        private string CreateEmail(string username)
+        public string CreateEmail(string username)
         {
             string formattedEmail = $"{username}{chapeauDomain}".ToLower();
             CheckEmail(formattedEmail);

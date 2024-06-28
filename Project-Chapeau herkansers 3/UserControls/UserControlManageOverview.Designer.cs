@@ -38,7 +38,7 @@
             btnOption2 = new Button();
             btnOption3 = new Button();
             chkManagers = new CheckBox();
-            lblError = new Label();
+            lblErrorOverview = new Label();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -166,23 +166,23 @@
             chkManagers.Visible = false;
             chkManagers.Click += chkManagers_Click;
             // 
-            // lblError
+            // lblErrorOverview
             // 
-            lblError.AutoSize = true;
-            lblError.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblError.ForeColor = Color.Red;
-            lblError.Location = new Point(192, 619);
-            lblError.Name = "lblError";
-            lblError.Size = new Size(120, 25);
-            lblError.TabIndex = 37;
-            lblError.Text = "Error Bericht";
-            lblError.Visible = false;
+            lblErrorOverview.AutoSize = true;
+            lblErrorOverview.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblErrorOverview.ForeColor = Color.Red;
+            lblErrorOverview.Location = new Point(17, 707);
+            lblErrorOverview.Name = "lblErrorOverview";
+            lblErrorOverview.Size = new Size(120, 25);
+            lblErrorOverview.TabIndex = 37;
+            lblErrorOverview.Text = "Error Bericht";
+            lblErrorOverview.Visible = false;
             // 
             // UserControlManageOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lblError);
+            Controls.Add(lblErrorOverview);
             Controls.Add(chkManagers);
             Controls.Add(btnOption3);
             Controls.Add(btnOption2);
@@ -212,6 +212,6 @@
         private Button btnOption2;
         private Button btnOption3;
         private CheckBox chkManagers;
-        private Label lblError;
+        private Label lblErrorOverview;
     }
 }

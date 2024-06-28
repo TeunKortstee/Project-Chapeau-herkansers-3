@@ -44,7 +44,7 @@
             txt1 = new TextBox();
             pictureBox3 = new PictureBox();
             cmbType = new ComboBox();
-            lblError = new Label();
+            lblErrorNewObject = new Label();
             ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -208,23 +208,23 @@
             cmbType.TabIndex = 35;
             cmbType.SelectedIndexChanged += cmbType_SelectedIndexChanged;
             // 
-            // lblError
+            // lblErrorNewObject
             // 
-            lblError.AutoSize = true;
-            lblError.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblError.ForeColor = Color.Red;
-            lblError.Location = new Point(138, 499);
-            lblError.Name = "lblError";
-            lblError.Size = new Size(120, 25);
-            lblError.TabIndex = 36;
-            lblError.Text = "Error Bericht";
-            lblError.Visible = false;
+            lblErrorNewObject.AutoSize = true;
+            lblErrorNewObject.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblErrorNewObject.ForeColor = Color.Red;
+            lblErrorNewObject.Location = new Point(27, 526);
+            lblErrorNewObject.Name = "lblErrorNewObject";
+            lblErrorNewObject.Size = new Size(120, 25);
+            lblErrorNewObject.TabIndex = 36;
+            lblErrorNewObject.Text = "Error Bericht";
+            lblErrorNewObject.Visible = false;
             // 
             // UserControlNewObject
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lblError);
+            Controls.Add(lblErrorNewObject);
             Controls.Add(cmbType);
             Controls.Add(lbl1);
             Controls.Add(txt1);
@@ -270,6 +270,6 @@
         private TextBox txt1;
         private PictureBox pictureBox3;
         private ComboBox cmbType;
-        private Label lblError;
+        private Label lblErrorNewObject;
     }
 }

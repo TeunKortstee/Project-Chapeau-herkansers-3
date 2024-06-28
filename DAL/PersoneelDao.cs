@@ -34,7 +34,7 @@ namespace DAL
             string query = "SELECT PersoneelsId, Achternaam, Wachtwoord, FunctieId, Fooi FROM Personeel WHERE Email=@Email AND Wachtwoord=@Wachtwoord";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@Email", personeel.email),
+                new SqlParameter("@Email", personeel.Email),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord)
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
@@ -45,7 +45,7 @@ namespace DAL
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Achternaam", personeel.AchterNaam),
-                new SqlParameter("@Email", personeel.email),
+                new SqlParameter("@Email", personeel.Email),
                 new SqlParameter("@Wachtwoord", personeel.WachtWoord),
                 new SqlParameter("@FunctieId", (int)personeel.Functie)
 

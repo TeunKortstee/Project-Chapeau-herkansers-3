@@ -52,7 +52,7 @@ namespace DAL
                     Voorraad = Convert.ToInt32(row["Voorraad"]),
                     Prijs = (double)row["Prijs"],
                     Naam = (string)row["Naam"],
-                    MenuId = Convert.ToInt32(row["MenuId"]),
+                    menuType = (MenuType)Convert.ToInt32(row["MenuId"]),
                     IsAlcoholisch = (bool)row["Alcoholisch"]
 
                 };
