@@ -15,14 +15,11 @@ namespace DAL
         private TafelDao tafelDao;
         public RekeningDao() {
             tafelDao = new TafelDao();
-
-
         }
-
         // Lucas
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
-            string query = "SELECT * FROM Rekeningen WHERE Betaald = @Betaald";
+            string query = "SELECT Rekeningen.RekeningId, Rekeningen.TafelID, Rekeningen.Betaald, Rekeningen.Datum, Rekeningen.Belasting, Rekeningen.Opmerkingen, Tafels.TableNr, Tafels.Capaciteit, Tafels.StatusId FROM Rekeningen JOIN Tafels ON Rekeningen.TafelId=Tafels.TableNr WHERE Rekeningen.Betaald = @Betaald";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Betaald", betaald),

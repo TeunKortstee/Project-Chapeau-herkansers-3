@@ -12,81 +12,32 @@ namespace Service
     {
         private RekeningDao rekeningDao;
         private BestellingDao bestellingDao;
-        private const double vatNormal = 0.06;
-        private const double vatAlcohol = 0.21;
-
-
+        
         public RekeningService()
         {
             rekeningDao = new RekeningDao();
             bestellingDao = new BestellingDao();
-        }
-        public Rekening GetRekening(int bestellingID)
-        {
-            return rekeningDao.GetRekening(bestellingID);
-
-        }
+        }       
         public int InsertRekening(Rekening rekening)
         {
-
             return rekeningDao.InsertRekening(rekening);
         }
-
-
-        public static double BerekenBelasting(BesteldeItem b) {
-
-            double itemTotal = (b.menuItem.Prijs * b.Hoeveelheid);
-
-            if (b.menuItem.IsAlcoholisch)
-            {
-                return itemTotal * vatAlcohol;
-
-            }
-            return itemTotal * vatNormal;
-
-
-
-
-        }
-
-
-
         public Rekening CreateRekening(Tafel tafel) {
 
-            Rekening r = new Rekening();
-            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafelID);
-            if (r == null) {
+            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafel.Id);
+            double totaalPrijs = 0.00;
+            double belasting = 0.00;
 
-                double totaalPrijs = 0.00;
-                double belasting = 0.00;
+            foreach (Bestelling bestelling in bestellingen) {
+                foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
 
-
-
-
-
-                foreach (Bestelling bestelling in bestellingen) {
-
-                    foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
-
-                        totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
-                        belasting += BerekenBelasting(besteldeItem);
-
-
-
-
-                    }
+                    totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
+                    belasting += BerekenBelasting(besteldeItem);
                 }
-
-                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now, belasting,"");
-
-                int ID = InsertRekening(r);
-
-                r.RekeningId = ID;
             }
 
-            r.Bestellingen = bestellingen;
-            return r;
-
+            Rekening rekening = new Rekening(bestellingen, tafel,totaalPrijs,belasting);
+            return rekening;
         }
 
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
