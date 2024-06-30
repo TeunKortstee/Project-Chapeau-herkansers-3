@@ -15,13 +15,9 @@ namespace Service
         {
             this.personeelDao = new PersoneelDao();
         }
-        public List<Personeel> GetAllPersoneel()
-        {
-            return personeelDao.GetAllPersoneel();
-        }
         public List<Personeel> GetPersoneelByFunctie(Functie functie)
         {
-            return personeelDao.GetPersoneelByFunctieId(functie);
+            return personeelDao.GetPersoneelByFunctie(functie);
         }
         public void InsertPersoneel(Personeel personeel)
         {
@@ -33,19 +29,19 @@ namespace Service
         {
             personeelDao.RemovePersoneel(personeel);
         }
+        public void UpdatePersoneel(Personeel personeel)
+        {
+            personeelDao.UpdatePersoneel(personeel);
+        }
         // Lucas
         public string CreateEmail(string username)
         {
             string formattedEmail = $"{username}{chapeauDomain}".ToLower();
-            CheckEmail(formattedEmail);
-            return formattedEmail;
-        }
-        private void CheckEmail(string formattedEmail)
-        {
             if (!IsUniqueEmail(formattedEmail))
             {
                 throw new Exception("Email bestaat al");
             }
+            return formattedEmail;
         }
         private bool IsUniqueEmail(string email)
         {
@@ -55,10 +51,6 @@ namespace Service
         {
             string hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, workfactor, HashType.SHA512);
             return hashedPassword;
-        }
-        private string GenerateSalt(int workFactor)
-        {
-            return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
         }
     }
 }

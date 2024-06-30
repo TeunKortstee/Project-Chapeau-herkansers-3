@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlNewObject
+    partial class UserControlNieuwItem
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,9 +34,6 @@
             picName = new PictureBox();
             txt2 = new TextBox();
             lbl2 = new Label();
-            pictureBox1 = new PictureBox();
-            lbl3 = new Label();
-            txt3 = new TextBox();
             chkAlcoholisch = new CheckBox();
             lblEnum = new Label();
             pictureBox2 = new PictureBox();
@@ -46,7 +43,6 @@
             cmbType = new ComboBox();
             lblErrorNewObject = new Label();
             ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
@@ -114,37 +110,10 @@
             lbl2.TabIndex = 13;
             lbl2.Text = "Veld2";
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.FromArgb(196, 196, 196);
-            pictureBox1.Location = new Point(30, 363);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(352, 62);
-            pictureBox1.TabIndex = 14;
-            pictureBox1.TabStop = false;
-            // 
-            // lbl3
-            // 
-            lbl3.AutoSize = true;
-            lbl3.BackColor = Color.FromArgb(196, 196, 196);
-            lbl3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl3.Location = new Point(49, 382);
-            lbl3.Name = "lbl3";
-            lbl3.Size = new Size(59, 25);
-            lbl3.TabIndex = 17;
-            lbl3.Text = "Veld3";
-            // 
-            // txt3
-            // 
-            txt3.Location = new Point(177, 380);
-            txt3.Name = "txt3";
-            txt3.Size = new Size(187, 27);
-            txt3.TabIndex = 16;
-            // 
             // chkAlcoholisch
             // 
             chkAlcoholisch.AutoSize = true;
-            chkAlcoholisch.Location = new Point(27, 499);
+            chkAlcoholisch.Location = new Point(27, 427);
             chkAlcoholisch.Name = "chkAlcoholisch";
             chkAlcoholisch.Size = new Size(107, 24);
             chkAlcoholisch.TabIndex = 21;
@@ -157,7 +126,7 @@
             lblEnum.AutoSize = true;
             lblEnum.BackColor = Color.FromArgb(196, 196, 196);
             lblEnum.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEnum.Location = new Point(49, 450);
+            lblEnum.Location = new Point(49, 378);
             lblEnum.Name = "lblEnum";
             lblEnum.Size = new Size(97, 25);
             lblEnum.TabIndex = 30;
@@ -166,7 +135,7 @@
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.FromArgb(196, 196, 196);
-            pictureBox2.Location = new Point(30, 431);
+            pictureBox2.Location = new Point(30, 359);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(352, 62);
             pictureBox2.TabIndex = 28;
@@ -202,7 +171,7 @@
             // cmbType
             // 
             cmbType.FormattingEnabled = true;
-            cmbType.Location = new Point(177, 451);
+            cmbType.Location = new Point(177, 379);
             cmbType.Name = "cmbType";
             cmbType.Size = new Size(187, 28);
             cmbType.TabIndex = 35;
@@ -213,14 +182,14 @@
             lblErrorNewObject.AutoSize = true;
             lblErrorNewObject.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorNewObject.ForeColor = Color.Red;
-            lblErrorNewObject.Location = new Point(27, 526);
+            lblErrorNewObject.Location = new Point(27, 454);
             lblErrorNewObject.Name = "lblErrorNewObject";
             lblErrorNewObject.Size = new Size(120, 25);
             lblErrorNewObject.TabIndex = 36;
             lblErrorNewObject.Text = "Error Bericht";
             lblErrorNewObject.Visible = false;
             // 
-            // UserControlNewObject
+            // UserControlNewItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -232,9 +201,6 @@
             Controls.Add(lblEnum);
             Controls.Add(pictureBox2);
             Controls.Add(chkAlcoholisch);
-            Controls.Add(lbl3);
-            Controls.Add(txt3);
-            Controls.Add(pictureBox1);
             Controls.Add(lbl2);
             Controls.Add(txt2);
             Controls.Add(picName);
@@ -242,10 +208,9 @@
             Controls.Add(btnConfirm);
             Controls.Add(lblObject);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlNewObject";
+            Name = "UserControlNewItem";
             Size = new Size(414, 736);
             ((System.ComponentModel.ISupportInitialize)picName).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
@@ -256,13 +221,10 @@
         private Label lblObject;
         private Button btnConfirm;
         private Button btnCancel;
-        private PictureBox pictureBox1;
         private PictureBox picName;
         private PictureBox pictureBox5;
         private TextBox txt2;
         private Label lbl2;
-        private Label lbl3;
-        private TextBox txt3;
         private CheckBox chkAlcoholisch;
         private Label lblEnum;
         private PictureBox pictureBox2;

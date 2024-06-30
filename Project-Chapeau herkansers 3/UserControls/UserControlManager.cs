@@ -16,15 +16,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlManageOverview(startFunctie));
+            form.SwitchPanels(new UserControlItemOverzicht(startFunctie));
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlManageOverview(startMenu));
+            form.SwitchPanels(new UserControlItemOverzicht(startMenu));
         }
         private void btnSales_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlSalesOverview());
+            form.SwitchPanels(new UserControlInkomen());
+        }
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            form.SwitchPanels(new UserControlVoorraad(startMenu));
         }
     }
 }

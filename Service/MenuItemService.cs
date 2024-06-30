@@ -24,6 +24,10 @@ namespace Service
         {
             menuItemDao.AddNewMenuItem(newMenuItem);
         }
+        public void UpdateMenuItem(MenuItem selectedMenuItem)
+        {
+            menuItemDao.UpdateMenuItem(selectedMenuItem);
+        }
         public void UpdateMenuItemStock(MenuItem selectedMenuItem)
         {
             menuItemDao.UpdateMenuItemStock(selectedMenuItem);

@@ -3,19 +3,17 @@ using Service;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlManageOverview : UserControl
+    public partial class UserControlItemOverzicht : UserControl
     {
-        const int weinigInVoorraad = 3;
-        
         private Form1 form;
-        public UserControlManageOverview(Functie functie)
+        public UserControlItemOverzicht(Functie functie)
         {
             InitializeComponent();
             this.form = Form1.Instance;
             DisplayEmployeeElements(functie);
 
         }
-        public UserControlManageOverview(MenuType menu)
+        public UserControlItemOverzicht(MenuType menu)
         {
             InitializeComponent();
             this.form = Form1.Instance;
@@ -36,20 +34,47 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Clear();
 
             lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("In Voorraad", 60);
-
-            DisplayMenuItems(menuType);
-        }
-        private void DisplayMenuItems(MenuType menuType)
-        {
-            MenuItemService menuItemService = new MenuItemService();
-            foreach (MenuItem menuItem in menuItemService.GetMenuItemsByMenu(menuType))
+            lsvDatabaseItems.Columns.Add("Prijs", 60);
+            if (menuType == MenuType.Drank)
             {
-                ListViewItem item = new ListViewItem(menuItem.Naam);
-                item.SubItems.Add(menuItem.Voorraad.ToString());
-                item.Tag = menuItem;
-                CheckLowStock(item);
+                lsvDatabaseItems.Columns.Add("Alcoholisch", 60);
             }
+
+            GetMenuItems(menuType);
+        }
+        private void GetMenuItems(MenuType menuType)
+        {
+            try
+            {
+                MenuItemService menuItemService = new MenuItemService();
+                foreach (MenuItem menuItem in menuItemService.GetMenuItemsByMenu(menuType))
+                {
+                    DisplayMenuItems(menuItem);
+                }
+            }
+            catch (Exception)
+            {
+                DisplayErrorMessage("Er ging iets mis bij de database");
+            }
+        }
+        private void DisplayMenuItems(MenuItem menuItem)
+        {
+            ListViewItem item = new ListViewItem(menuItem.Naam);
+            item.SubItems.Add(menuItem.Prijs.ToString());
+            if (DisplayAlcoholic(menuItem))
+            {
+                item.SubItems.Add("Ja");
+            }
+            item.Tag = menuItem;
+            lsvDatabaseItems.Items.Add(item);
+        }
+        private bool DisplayAlcoholic(MenuItem menuItem)
+        {
+            if (menuItem.MenuType == MenuType.Drank && menuItem.IsAlcoholisch)
+            {
+                return true;
+            }
+            return false;
         }
         #endregion
 
@@ -68,19 +93,29 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Columns.Add("Naam", 100);
             lsvDatabaseItems.Columns.Add("Functie", 150);
 
-            DisplayPersoneel(functie);
+            GetPersoneel(functie);
 
         }
-        private void DisplayPersoneel(Functie functie)
+        private void GetPersoneel(Functie functie)
         {
-            PersoneelService personeelService = new PersoneelService();
-            foreach (Personeel personeel in personeelService.GetPersoneelByFunctie(functie))
+            try
             {
-                ListViewItem item = new ListViewItem(personeel.AchterNaam);
-                item.SubItems.Add(personeel.Functie.ToString());
-                item.Tag = personeel;
-                lsvDatabaseItems.Items.Add(item);
+                PersoneelService personeelService = new PersoneelService();
+                foreach (Personeel personeel in personeelService.GetPersoneelByFunctie(functie))
+                {
+                    DisplayPersoneel(personeel);
+                }
             }
+            catch(Exception) {
+                DisplayErrorMessage("Er ging iets mis bij de database");
+            }
+        }
+        private void DisplayPersoneel(Personeel personeel)
+        {
+            ListViewItem item = new ListViewItem(personeel.AchterNaam);
+            item.SubItems.Add(personeel.Functie.ToString());
+            item.Tag = personeel;
+            lsvDatabaseItems.Items.Add(item);
         }
         #endregion
 
@@ -125,29 +160,28 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 case Functie.Serveerder:
                     SetButtonStates(false, true, true);
-                    chkManagers.CheckState = CheckState.Unchecked;
+                    chkOption4.CheckState = CheckState.Unchecked;
                     break;
                 case Functie.Keuken:
                     SetButtonStates(true, false, true);
-                    chkManagers.CheckState = CheckState.Unchecked;
+                    chkOption4.CheckState = CheckState.Unchecked;
                     break;
                 case Functie.Bar:
                     SetButtonStates(true, true, false);
-                    chkManagers.CheckState = CheckState.Unchecked;
+                    chkOption4.CheckState = CheckState.Unchecked;
                     break;
                 case Functie.Manager:
                     SetButtonStates(true, true, true);
-                    chkManagers.CheckState = CheckState.Checked;
+                    chkOption4.CheckState = CheckState.Checked;
                     break;
             }
             btnAddNewObject.Tag = functie;
         }
         private void AddButtonChangesForPersoneelManagement()
         {
-            chkManagers.Visible = true;
-            chkManagers.Tag = Functie.Manager;
-            btnAdjust.Visible = false;
-            btnRemove.Location = new Point(14, 651);
+            chkOption4.Visible = true;
+            chkOption4.Text = "Managers weergeven";
+            chkOption4.Tag = Functie.Manager;
         }
         #endregion
 
@@ -172,7 +206,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
 
         #region Top Buttons
-        private void btn1_Click(object sender, EventArgs e)
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            switch (btnAddNewObject.Tag)
+            {
+                case MenuType:
+                    this.form.SwitchPanels(new UserControlNieuwItem((MenuType)btnAddNewObject.Tag));
+                    break;
+                case Functie:
+                    this.form.SwitchPanels(new UserControlNieuwItem((Functie)btnAddNewObject.Tag));
+                    break;
+                default:
+                    DisplayErrorMessage("Er ging iets mis");
+                    break;
+            }
+        }
+        private void btnOption1_Click(object sender, EventArgs e)
         {
             switch (btnOption1.Tag)
             {
@@ -189,11 +238,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     break;
             }
         }
-        private void btn1_EnabledChanged(object sender, EventArgs e)
+        private void btnOption1_EnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnOption1);
         }
-        private void btn2_Click(object sender, EventArgs e)
+        private void btnOption2_Click(object sender, EventArgs e)
         {
             switch (btnOption2.Tag)
             {
@@ -210,11 +259,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     break;
             }
         }
-        private void btn2_EnabledChanged(object sender, EventArgs e)
+        private void btnOption2_EnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnOption2);
         }
-        private void btn3_Click(object sender, EventArgs e)
+        private void btnOption3_Click(object sender, EventArgs e)
         {
             switch (btnOption3.Tag)
             {
@@ -231,43 +280,30 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     break;
             }
         }
-        private void btn3_EnabledChanged(object sender, EventArgs e)
+        private void btnOption3_EnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnOption3);
         }
-        private void chkManagers_Click(object sender, EventArgs e)
+        private void chkOption4_Click(object sender, EventArgs e)
         {
-            RenableEmployeeButtons((Functie)chkManagers.Tag);
-            FillEmployeeListView((Functie)chkManagers.Tag);
+            RenableEmployeeButtons((Functie)chkOption4.Tag);
+            FillEmployeeListView((Functie)chkOption4.Tag);
         }
         private void SetEnableColor(Button button)
         {
-            //button.BackColor = Color.FromArgb(255, 234, 219, 202);
             if (button.Enabled)
             {
-                // Enabled
                 button.BackColor = Color.FromArgb(255, 138, 210, 176);
             }
             else
             {
-                // Disabled
                 button.BackColor = Color.FromArgb(114, 138, 210, 176);
             }
         }
         #endregion
 
-        private void CheckLowStock(ListViewItem item)
-        {
-            if (int.Parse(item.SubItems[1].Text) <= weinigInVoorraad)
-            {
-                item.BackColor = Color.FromArgb(0, 245, 108, 117);
-                lsvDatabaseItems.Items.Insert(0, item);
-            }
-            else
-            {
-                lsvDatabaseItems.Items.Add(item);
-            }
-        }
+        #region Bottom Buttons
+
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.form.SwitchPanels(new UserControlManager());
@@ -275,25 +311,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnAdjust_Click(object sender, EventArgs e)
         {
-            ListViewItem selectedLsvItem = GetItemSelected();
-            if (selectedLsvItem == null)
+            if (!IsSelected())
             {
-                DisplayErrorMessage("Selecteer een item uit de lijst");
                 return;
             }
-            MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
-            this.form.SwitchPanels(new UserControlAdjustStock(selectedMenuItem));
+            ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
+            AdjustSelectedItem(selectedLsvItem);
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
             try
             {
-                ListViewItem selectedLsvItem = GetItemSelected();
-                if (selectedLsvItem == null)
+                if (!IsSelected())
                 {
-                    DisplayErrorMessage("Selecteer een item uit de lijst");
                     return;
                 }
+                ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
 
                 DeleteSelectedItem(selectedLsvItem);
             }
@@ -302,6 +335,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 DisplayErrorMessage(ex.Message);
             }
         }
+        #endregion
+
         #region DeleteSelectedItem
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
@@ -313,8 +348,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 case Personeel:
                     RemovePersoneel((Personeel)selectedLsvItem.Tag);
                     break;
-                default:
-                    DisplayErrorMessage("Selecteer een item uit de lijst");
+            }
+        }
+        private void AdjustSelectedItem(ListViewItem selectedLsvItem)
+        {
+            switch (selectedLsvItem.Tag)
+            {
+                case MenuItem:
+                    this.form.SwitchPanels(new UserControlItemAanpas((MenuItem)selectedLsvItem.Tag));
+                    break;
+                case Personeel:
+                    this.form.SwitchPanels(new UserControlItemAanpas((Personeel)selectedLsvItem.Tag));
                     break;
             }
         }
@@ -328,32 +372,18 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             MenuItemService menuItemService = new MenuItemService();
             menuItemService.SoftDeleteMenuItem(selectedMenuItem);
-            FillMenuListView(selectedMenuItem.menuType);
+            FillMenuListView(selectedMenuItem.MenuType);
         }
         #endregion
-        private void btnAddNew_Click(object sender, EventArgs e)
-        {
-            switch (btnAddNewObject.Tag)
-            {
-                case MenuType:
-                    this.form.SwitchPanels(new UserControlNewObject((MenuType)btnAddNewObject.Tag));
-                    break;
-                case Functie:
-                    this.form.SwitchPanels(new UserControlNewObject((Functie)btnAddNewObject.Tag));
-                    break;
-                default:
-                    DisplayErrorMessage("Er ging iets mis");
-                    break;
-            }
-        }
 
-        private ListViewItem GetItemSelected()
+        private bool IsSelected()
         {
             if (lsvDatabaseItems.SelectedItems.Count > 0)
             {
-                return lsvDatabaseItems.SelectedItems[0];
+                return true;
             }
-            return null;
+            DisplayErrorMessage("Selecteer een item uit de lijst");
+            return false;
         }
         private void DisplayErrorMessage(string errorMessage)
         {
