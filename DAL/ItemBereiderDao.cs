@@ -6,15 +6,30 @@ namespace DAL
 {
     public class ItemBereiderDao : BaseDao
     {
-        public List<BesteldeItem> GetAllItems(int personeelsId)
+        public List<BesteldeItem> GetAllBesteldeItems()
         {
-            string query = @"SELECT BesteldItemId, Opmerking, Instuurtijd,  BesteldeItems.MenuItemId, MenuItems.Naam, BesteldeItems.BestellingsId, Hoeveelheid, 
-                            Bestellingen.PersoneelsId,  BesteldeItems.GerechtsStatus FROM BesteldeItems JOIN MenuItems ON (MenuItems.MenuItemId=BesteldeItems.MenuItemId) 
-                            JOIN Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId;";
-
-            
+            string query = @"
+            SELECT 
+                BesteldItemId, 
+                Opmerking, 
+                Instuurtijd,  
+                BesteldeItems.MenuItemId, 
+                MenuItems.Naam, 
+                BesteldeItems.BestellingsId, 
+                Hoeveelheid, 
+                Bestellingen.PersoneelsId,  
+                BesteldeItems.GerechtsStatus 
+            FROM 
+                BesteldeItems 
+            JOIN 
+                MenuItems ON MenuItems.MenuItemId = BesteldeItems.MenuItemId 
+            JOIN 
+                Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId
+            WHERE 
+                Instuurtijd >= DATEADD(day, -1, GETDATE());
+            ";
             return ReadTables(ExecuteSelectQuery(query));
-        }
+            
         public void ChangeKeukenStatus(Bestelling bestelling)
         {
             string query = $"UPDATE Keuken SET Status=@Status WHERE BestellingId = @BestellingId;";
@@ -90,8 +105,6 @@ namespace DAL
             List<BesteldeItem> items = new List<BesteldeItem>();
             foreach (DataRow row in dataTable.Rows)
             {
-
-
                 BesteldeItem item = new BesteldeItem()
                 {
                     BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
@@ -100,14 +113,15 @@ namespace DAL
                     //BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
                     Naam = row["Naam"].ToString(),
-                    status = (GerechtsStatus)row["GerechtsStatus"]
-
+                    Status = (GerechtsStatus)row["GerechtsStatus"]
                 };
                 items.Add(item);
             }
             return items;
         }
-        public void UpdateStatus(GerechtsStatus status, int besteldeItemId)
+
+        public void UpdateBestellingStatus(GerechtsStatus status, int besteldeItemId)
+
         {
             string query = "UPDATE BesteldeItems SET GerechtsStatus = @status WHERE BesteldItemId = @id";
             SqlParameter[] sqlParameters = new SqlParameter[]

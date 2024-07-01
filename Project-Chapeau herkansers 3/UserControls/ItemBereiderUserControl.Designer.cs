@@ -35,6 +35,7 @@
             DescriptionHdr = new ColumnHeader();
             TitelLbl = new Label();
             ActionsGroupBox = new GroupBox();
+            ServedButton = new Button();
             PreparedBtn = new Button();
             InPreparationBtn = new Button();
             InfoGroupBox = new GroupBox();
@@ -93,6 +94,7 @@
             // 
             // ActionsGroupBox
             // 
+            ActionsGroupBox.Controls.Add(ServedButton);
             ActionsGroupBox.Controls.Add(PreparedBtn);
             ActionsGroupBox.Controls.Add(InPreparationBtn);
             ActionsGroupBox.Dock = DockStyle.Top;
@@ -102,6 +104,18 @@
             ActionsGroupBox.TabIndex = 61;
             ActionsGroupBox.TabStop = false;
             ActionsGroupBox.Text = "Actions";
+            // 
+            // ServedButton
+            // 
+            ServedButton.BackColor = Color.LimeGreen;
+            ServedButton.Location = new Point(201, 21);
+            ServedButton.Margin = new Padding(2);
+            ServedButton.Name = "ServedButton";
+            ServedButton.Size = new Size(90, 32);
+            ServedButton.TabIndex = 49;
+            ServedButton.Text = "Served";
+            ServedButton.UseVisualStyleBackColor = false;
+            ServedButton.Click += ServedButton_Click;
             // 
             // PreparedBtn
             // 
@@ -125,7 +139,7 @@
             InPreparationBtn.TabIndex = 47;
             InPreparationBtn.Text = "In preparation";
             InPreparationBtn.UseVisualStyleBackColor = false;
-            InPreparationBtn.Click += InPreparationBtn_Click_1;
+            InPreparationBtn.Click += InPreparationBtn_Click;
             // 
             // InfoGroupBox
             // 
@@ -185,5 +199,6 @@
         private Button InPreparationBtn;
         private GroupBox InfoGroupBox;
         private TextBox informationTextBox;
+        private Button ServedButton;
     }
 }

@@ -1,4 +1,5 @@
 using Model;
+using Project_Chapeau_herkansers_3.UserControls;
 
 namespace Project_Chapeau_herkansers_3
 {
@@ -22,7 +23,8 @@ namespace Project_Chapeau_herkansers_3
             InitializeComponent();
             _instance = this;
             personeel = new Personeel();
-            SwitchPanels(new LoginControl());
+            //SwitchPanels(new LoginControl());
+            SwitchPanels(new ItemBereiderUserControl());
             //SwitchPanels(new UserControlManager());
         }
 
