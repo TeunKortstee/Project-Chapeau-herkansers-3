@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,25 +17,63 @@ namespace Project_Chapeau_herkansers_3.UserControls
     public partial class ItemBereiderUserControl : UserControl
     {
         ItemBereiderService _itemBereiderService;
+        List<BesteldeItem> keukenItems;
+        List<BesteldeItem> barItems;
         public ItemBereiderUserControl()
         {
             InitializeComponent();
             _itemBereiderService = new ItemBereiderService();
+            keukenItems = new List<BesteldeItem>();
+            barItems = new List<BesteldeItem>();
+            divideBarItems();
+            OrdersListView(true);
         }
 
-        private void OrdersListView()
+        private void OrdersListView(bool isKeuken)
         {
-            var orderItems = _itemBereiderService.GetAllBesteldeItems();
             orderListView.Items.Clear();
-            foreach (var item in orderItems)
+            if (isKeuken)
             {
-                if (item.Status != GerechtsStatus.Served)
+                foreach (BesteldeItem keukenitem in keukenItems)
                 {
-                    ListViewItem li = new ListViewItem(item.BesteldItemId.ToString());
-                    li.Tag = item;
-                    li.SubItems.Add(item.Hoeveelheid.ToString());
-                    li.SubItems.Add(item.Opmerking);
-                    orderListView.Items.Add(li);
+                    AddItemToView(keukenitem);
+                }
+            }
+            else
+            {
+                foreach (BesteldeItem barItem in barItems)
+                {
+                    AddItemToView(barItem);
+                }
+            }
+        }
+
+        private void AddItemToView(BesteldeItem item)
+        {
+            if (item.Status != GerechtsStatus.Served)
+            {
+                ListViewItem li = new ListViewItem(item.BesteldItemId.ToString());
+                li.Tag = item;
+                li.SubItems.Add(item.Hoeveelheid.ToString());
+                li.SubItems.Add(item.Opmerking);
+                orderListView.Items.Add(li);
+            }
+        }
+
+        private void divideBarItems()
+        {
+            List<BesteldeItem> orderItems = _itemBereiderService.GetAllBesteldeItems();
+
+            foreach (BesteldeItem item in orderItems)
+            {
+                if (item.menuItem.MenuType == MenuType.Drank)
+                {
+                    barItems.Add(item);
+                }
+
+                else
+                {
+                    keukenItems.Add(item);
                 }
             }
         }
@@ -86,7 +125,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void ItemBereiderUserControl_Load(object sender, EventArgs e)
         {
-            OrdersListView();
+            //OrdersListView(true);
         }
 
         private void orderListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,6 +149,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 Instuurtijd: {selectedModel.InstuurTijd}
                 ";
             }
+        }
+
+        private void BarButton_Click(object sender, EventArgs e)
+        {
+            OrdersListView(false);
+        }
+
+        private void KeukenButton_Click(object sender, EventArgs e)
+        {
+            OrdersListView(true);
         }
     }
 }

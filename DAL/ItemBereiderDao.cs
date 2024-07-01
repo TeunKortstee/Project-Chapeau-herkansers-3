@@ -81,24 +81,22 @@ namespace DAL
         public List<BesteldeItem> GetAllBesteldeItems()
         {
             string query = @"
-            SELECT 
-                BesteldItemId, 
-                Opmerking, 
-                Instuurtijd,  
-                BesteldeItems.MenuItemId, 
-                MenuItems.Naam, 
-                BesteldeItems.BestellingsId, 
-                Hoeveelheid, 
-                BesteldeItems.GerechtsStatus 
-            FROM 
-                BesteldeItems 
-            JOIN 
-                MenuItems ON MenuItems.MenuItemId = BesteldeItems.MenuItemId 
-            JOIN 
-                Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId
-            WHERE 
-                Instuurtijd >= DATEADD(day, -1, GETDATE());
-            ";
+            SELECT BesteldeItems.BesteldItemId, 
+            BesteldeItems.Opmerking, 
+            BesteldeItems.Instuurtijd, 
+            BesteldeItems.BestellingsId,    
+            BesteldeItems.GerechtsStatus, 
+            BesteldeItems.Hoeveelheid, 
+            MenuItems.MenuItemId, 
+            MenuItems.Naam, 
+            MenuItems.Prijs, 
+            MenuItems.Alcoholisch, 
+            MenuItems.MenuId, 
+            MenuItems.Voorraad 
+            FROM BesteldeItems 
+            JOIN MenuItems ON MenuItems.MenuItemId=BesteldeItems.MenuItemId 
+            JOIN Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId 
+            WHERE Instuurtijd >= DATEADD(day, -1, GETDATE())";
             return ReadTables(ExecuteSelectQuery(query));
 
         }
@@ -108,14 +106,26 @@ namespace DAL
             List<BesteldeItem> items = new List<BesteldeItem>();
             foreach (DataRow row in dataTable.Rows)
             {
-                BesteldeItem item = new BesteldeItem()
+                MenuItem _menuItem = new MenuItem()
+                {
+                    MenuItemId = Convert.ToInt32(row["MenuItemId"]),
+                    Voorraad = Convert.ToInt32(row["Voorraad"]),
+                    Prijs = (double)row["Prijs"],
+                    Naam = (string)row["Naam"],
+                    MenuType = (MenuType)Convert.ToInt32(row["MenuId"]),
+                    IsAlcoholisch = (bool)row["Alcoholisch"]
+
+                };
+                BesteldeItem item = new BesteldeItem(_menuItem)
                 {
                     BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
                     Opmerking = row["Opmerking"].ToString(),
                     InstuurTijd = (DateTime)row["Instuurtijd"],
+                    //BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
                     Naam = row["Naam"].ToString(),
                     Status = (GerechtsStatus)row["GerechtsStatus"]
+
                 };
                 items.Add(item);
             }

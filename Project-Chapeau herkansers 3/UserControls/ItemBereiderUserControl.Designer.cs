@@ -39,6 +39,8 @@
             InPreparationBtn = new Button();
             InfoGroupBox = new GroupBox();
             informationTextBox = new TextBox();
+            BarButton = new Button();
+            KeukenButton = new Button();
             ActionsGroupBox.SuspendLayout();
             InfoGroupBox.SuspendLayout();
             SuspendLayout();
@@ -53,7 +55,7 @@
             orderListView.Location = new Point(0, 0);
             orderListView.Margin = new Padding(2);
             orderListView.Name = "orderListView";
-            orderListView.Size = new Size(1227, 253);
+            orderListView.Size = new Size(1227, 270);
             orderListView.TabIndex = 42;
             orderListView.UseCompatibleStateImageBehavior = false;
             orderListView.View = View.Details;
@@ -87,11 +89,13 @@
             // 
             // ActionsGroupBox
             // 
+            ActionsGroupBox.Controls.Add(KeukenButton);
+            ActionsGroupBox.Controls.Add(BarButton);
             ActionsGroupBox.Controls.Add(ServedButton);
             ActionsGroupBox.Controls.Add(PreparedBtn);
             ActionsGroupBox.Controls.Add(InPreparationBtn);
             ActionsGroupBox.Dock = DockStyle.Top;
-            ActionsGroupBox.Location = new Point(0, 253);
+            ActionsGroupBox.Location = new Point(0, 270);
             ActionsGroupBox.Name = "ActionsGroupBox";
             ActionsGroupBox.Size = new Size(1227, 58);
             ActionsGroupBox.TabIndex = 61;
@@ -138,9 +142,9 @@
             // 
             InfoGroupBox.Controls.Add(informationTextBox);
             InfoGroupBox.Dock = DockStyle.Fill;
-            InfoGroupBox.Location = new Point(0, 311);
+            InfoGroupBox.Location = new Point(0, 328);
             InfoGroupBox.Name = "InfoGroupBox";
-            InfoGroupBox.Size = new Size(1227, 324);
+            InfoGroupBox.Size = new Size(1227, 307);
             InfoGroupBox.TabIndex = 62;
             InfoGroupBox.TabStop = false;
             InfoGroupBox.Text = "Info";
@@ -152,8 +156,28 @@
             informationTextBox.Multiline = true;
             informationTextBox.Name = "informationTextBox";
             informationTextBox.ReadOnly = true;
-            informationTextBox.Size = new Size(1221, 302);
+            informationTextBox.Size = new Size(1221, 285);
             informationTextBox.TabIndex = 0;
+            // 
+            // BarButton
+            // 
+            BarButton.Location = new Point(982, 21);
+            BarButton.Name = "BarButton";
+            BarButton.Size = new Size(85, 27);
+            BarButton.TabIndex = 50;
+            BarButton.Text = "BAR";
+            BarButton.UseVisualStyleBackColor = true;
+            BarButton.Click += BarButton_Click;
+            // 
+            // KeukenButton
+            // 
+            KeukenButton.Location = new Point(1083, 21);
+            KeukenButton.Name = "KeukenButton";
+            KeukenButton.Size = new Size(82, 27);
+            KeukenButton.TabIndex = 51;
+            KeukenButton.Text = "KEUKEN";
+            KeukenButton.UseVisualStyleBackColor = true;
+            KeukenButton.Click += KeukenButton_Click;
             // 
             // ItemBereiderUserControl
             // 
@@ -192,5 +216,7 @@
         private GroupBox InfoGroupBox;
         private TextBox informationTextBox;
         private Button ServedButton;
+        private Button KeukenButton;
+        private Button BarButton;
     }
 }
