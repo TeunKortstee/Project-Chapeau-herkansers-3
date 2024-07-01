@@ -38,6 +38,7 @@ namespace DAL
         }
         public void InsertInkomen(MenuItem menuItem, BereidingsPlek bereidingsPlek)
         {
+            
             string query = "INSERT INTO Inkomen (MenuItemId, BereidingsPlek) VALUES (@MenuItemId, @BereidingsPlek)";
             SqlParameter[] sqlParameters = new SqlParameter[]
                 {

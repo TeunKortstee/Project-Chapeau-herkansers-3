@@ -5,17 +5,13 @@ namespace Project_Chapeau_herkansers_3.UserControls
 {
     public partial class UserControlInkomen : UserControl
     {
-        const bool betaald = true;
-
         private Form1 form;
-        private BetalingService betalingService;
         private InkomenService inkomenService;
 
         public UserControlInkomen()
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            //this.betalingService = new BetalingService();
             this.inkomenService = new InkomenService();
             FillSalesListView(BereidingsPlek.Keuken);
         }

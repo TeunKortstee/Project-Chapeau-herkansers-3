@@ -29,6 +29,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 if (!int.TryParse(txtStock.Text, out int stock))
                 {
                     DisplayErrorMessage(InvalidInput());
+                    return;
                 }
                 this.selectedMenuItem.Voorraad = stock;
                 menuItemService.UpdateMenuItemStock(this.selectedMenuItem);

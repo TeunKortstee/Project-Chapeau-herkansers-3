@@ -66,7 +66,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                         InsertPersoneel();
                         break;
                 }
-                ReturnToOverview();
             }
             catch (Exception ex)
             {
@@ -82,6 +81,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             PersoneelService personeelService = new PersoneelService();
             Personeel newPersoneel = new Personeel(txt1.Text, personeelService.CreateEmail(txt2.Text), (Functie)cmbType.SelectedItem);
             personeelService.InsertPersoneel(newPersoneel);
+            ReturnToOverview();
         }
         private void InsertMenuItem()
         {
@@ -91,9 +91,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             MenuItemService menuItemService = new MenuItemService();
             MenuItem newMenuItem = new MenuItem(txt1.Text, ParsePrice(txt2.Text), chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem);
-            menuItemService.AddNewMenuItem(newMenuItem);
+            newMenuItem.MenuItemId = menuItemService.AddNewMenuItem(newMenuItem);
             InsertMenuItemInkomen(newMenuItem, (MenuType)cmbType.SelectedItem);
-
+            ReturnToOverview();
         }
         private void InsertMenuItemInkomen(MenuItem menuItem, MenuType menuType)
         {
