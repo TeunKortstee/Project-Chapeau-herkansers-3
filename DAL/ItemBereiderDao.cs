@@ -12,7 +12,7 @@ namespace DAL
                             Bestellingen.PersoneelsId,  BesteldeItems.GerechtsStatus FROM BesteldeItems JOIN MenuItems ON (MenuItems.MenuItemId=BesteldeItems.MenuItemId) 
                             JOIN Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId;";
 
-            
+
             return ReadTables(ExecuteSelectQuery(query));
         }
         public void ChangeKeukenStatus(Bestelling bestelling)
@@ -117,6 +117,5 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-
     }
 }

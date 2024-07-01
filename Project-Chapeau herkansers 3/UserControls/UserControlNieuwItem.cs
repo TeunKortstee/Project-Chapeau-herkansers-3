@@ -92,6 +92,21 @@ namespace Project_Chapeau_herkansers_3.UserControls
             MenuItemService menuItemService = new MenuItemService();
             MenuItem newMenuItem = new MenuItem(txt1.Text, ParsePrice(txt2.Text), chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem);
             menuItemService.AddNewMenuItem(newMenuItem);
+            InsertMenuItemInkomen(newMenuItem, (MenuType)cmbType.SelectedItem);
+
+        }
+        private void InsertMenuItemInkomen(MenuItem menuItem, MenuType menuType)
+        {
+            InkomenService inkomenService = new InkomenService();
+            switch (menuType)
+            {
+                case MenuType.Drank:
+                    inkomenService.InsertInkomen(menuItem, BereidingsPlek.Bar);
+                    break;
+                default:
+                    inkomenService.InsertInkomen(menuItem, BereidingsPlek.Keuken);
+                    break;
+            }
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {

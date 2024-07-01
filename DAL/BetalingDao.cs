@@ -12,17 +12,7 @@ namespace DAL
 {
     public class BetalingDao : BaseDao
     {
-        public Betaling GetBetaling(Rekening rekening)
-        {
-            string query = "SELECT BetalingID, Methode, Bedrag, RekeningID, Fooi FROM Betalingen WHERE RekeningID = @rekeningId";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@rekeningId", rekening.RekeningId),
-             
-            };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters),rekening)[0];
-        }
-        private List<Betaling> ReadTables(DataTable dataTable,Rekening rekening)
+        private List<Betaling> ReadTables(DataTable dataTable)
         {
             List<Betaling> betalingen = new List<Betaling>();
             foreach (DataRow row in dataTable.Rows)
@@ -30,8 +20,7 @@ namespace DAL
                     Betaling betaling = new Betaling(Convert.ToInt32(row["BetalingId"]),
                     Convert.ToInt32(row["Methode"]),
                     (double)row["Bedrag"],
-                    (double)row["Fooi"],
-                    rekening);
+                    (double)row["Fooi"]);
 
                 betalingen.Add(betaling);
             }
@@ -66,6 +55,15 @@ namespace DAL
             }
         }
         // Lucas
+        public List<Betaling> GetBetalingen(bool betaald)
+        {
+            string query = "SELECT b.BetalingID, Methode, Bedrag, Fooi FROM Betalingen b JOIN Rekeningen r ON b.RekeningID = r.RekeningId WHERE r.Betaald = @betaald";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@betaald", betaald),
 
+            };
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
     }
 }

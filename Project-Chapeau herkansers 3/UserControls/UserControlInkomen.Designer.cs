@@ -32,6 +32,8 @@
             lblSales = new Label();
             btnReturn = new Button();
             lblTotalIncome = new Label();
+            btnBar = new Button();
+            btnKeuken = new Button();
             SuspendLayout();
             // 
             // lsvPaidBills
@@ -72,17 +74,43 @@
             // lblTotalIncome
             // 
             lblTotalIncome.AutoSize = true;
-            lblTotalIncome.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalIncome.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             lblTotalIncome.Location = new Point(14, 108);
             lblTotalIncome.Name = "lblTotalIncome";
-            lblTotalIncome.Size = new Size(135, 46);
+            lblTotalIncome.Size = new Size(134, 38);
             lblTotalIncome.TabIndex = 32;
-            lblTotalIncome.Text = "Totaal: ";
+            lblTotalIncome.Text = "Inkomen";
+            // 
+            // btnBar
+            // 
+            btnBar.BackColor = Color.FromArgb(138, 210, 176);
+            btnBar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnBar.Location = new Point(204, 194);
+            btnBar.Name = "btnBar";
+            btnBar.Size = new Size(190, 50);
+            btnBar.TabIndex = 49;
+            btnBar.Text = "Bar";
+            btnBar.UseVisualStyleBackColor = false;
+            btnBar.Click += btnBar_Click;
+            // 
+            // btnKeuken
+            // 
+            btnKeuken.BackColor = Color.FromArgb(138, 210, 176);
+            btnKeuken.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnKeuken.Location = new Point(14, 194);
+            btnKeuken.Name = "btnKeuken";
+            btnKeuken.Size = new Size(190, 50);
+            btnKeuken.TabIndex = 48;
+            btnKeuken.Text = "Keuken";
+            btnKeuken.UseVisualStyleBackColor = false;
+            btnKeuken.Click += btnKeuken_Click;
             // 
             // UserControlInkomen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnBar);
+            Controls.Add(btnKeuken);
             Controls.Add(lblTotalIncome);
             Controls.Add(btnReturn);
             Controls.Add(lblSales);
@@ -100,5 +128,7 @@
         private Label lblSales;
         private Button btnReturn;
         private Label lblTotalIncome;
+        private Button btnBar;
+        private Button btnKeuken;
     }
 }
