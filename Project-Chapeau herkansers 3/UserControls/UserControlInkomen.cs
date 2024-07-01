@@ -39,14 +39,14 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             lsvPaidBills.Clear();
 
-            lsvPaidBills.Columns.Add("Item", 100);
-            lsvPaidBills.Columns.Add("Totale Inkomens", 100);
-            lsvPaidBills.Columns.Add("Hoeveelheid Verkocht", 100);
+            lsvPaidBills.Columns.Add("Item", 150);
+            lsvPaidBills.Columns.Add("Totale Inkomens", 150);
+            lsvPaidBills.Columns.Add("Hoeveelheid", 150);
         }
         private ListViewItem DisplayInkomen(Inkomen inkomen)
         {
             ListViewItem item = new ListViewItem(inkomen.MenuItem.Naam);
-            item.SubItems.Add($"€ {inkomen.TotaleInkomen:00.00}");
+            item.SubItems.Add($"€ {inkomen.TotaleInkomen:0.00}");
             item.SubItems.Add($"{inkomen.Hoeveelheid}");
             return item;
         }

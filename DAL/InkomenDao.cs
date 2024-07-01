@@ -22,20 +22,15 @@ namespace DAL
         }
         private Inkomen MenuItemForInkomen(DataRow row)
         {
-            double totaleInkomen = 0.0;
-            if (row["TotaleInkomen"] != DBNull.Value)
-            {
-                totaleInkomen = (double)row["TotaleInkomen"];
-            }
             MenuItem menuItem = new MenuItem()
             {
                 MenuItemId = Convert.ToInt32(row["MenuItemId"]),
-                Naam = row["Naam"].ToString()
+                Naam = row["Naam"].ToString(),
             }; 
             Inkomen inkomst = new Inkomen()
             {
                 InkomenId = Convert.ToInt32(row["InkomenId"]),
-                TotaleInkomen = totaleInkomen,
+                TotaleInkomen = (double)row["TotaleInkomen"],
                 MenuItem = menuItem,
                 Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
             };
