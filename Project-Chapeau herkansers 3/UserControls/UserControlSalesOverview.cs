@@ -43,17 +43,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvPaidBills.Columns.Add("Fooi", 100);
 
 
-            List<Betaling> betaaldeRekeningen = betalingService.GetBetalingen(betaald);
-            foreach (Betaling betaling in betaaldeRekeningen)
-            {
-                ListViewItem item = new ListViewItem(betaling.BetalingId.ToString());
-                item.SubItems.Add(betaling.Methode.ToString());
-                item.SubItems.Add($"€ {betaling.Bedrag:00.00}");
-                item.SubItems.Add($"€ {betaling.Fooi:00.00}");
-                lsvPaidBills.Items.Add(item);
-                totaleInkomens += betaling.Bedrag;
-            }
-            lblTotalIncome.Text += $"€ {totaleInkomens:00.00}";
+            //List<Betaling> betaaldeRekeningen = betalingService.GetBetalingen(betaald);
+            //foreach (Betaling betaling in betaaldeRekeningen)
+            //{
+            //    ListViewItem item = new ListViewItem(betaling.BetalingId.ToString());
+            //    item.SubItems.Add(betaling.Methode.ToString());
+            //    item.SubItems.Add($"€ {betaling.Bedrag:00.00}");
+            //    item.SubItems.Add($"€ {betaling.Fooi:00.00}");
+            //    lsvPaidBills.Items.Add(item);
+            //    totaleInkomens += betaling.Bedrag;
+            //}
+            //lblTotalIncome.Text += $"€ {totaleInkomens:00.00}";
         }
         #endregion
 
