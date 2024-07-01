@@ -60,6 +60,7 @@
             this.orderListView.TabIndex = 42;
             this.orderListView.UseCompatibleStateImageBehavior = false;
             this.orderListView.View = System.Windows.Forms.View.Details;
+            this.orderListView.SelectedIndexChanged += orderListView_SelectedIndexChanged;
             // 
             // BesteldItemIdHdr
             // 
@@ -112,6 +113,7 @@
             this.ServedButton.TabIndex = 49;
             this.ServedButton.Text = "Served";
             this.ServedButton.UseVisualStyleBackColor = false;
+            this.ServedButton.Click += ServedButton_Click;
             // 
             // PreparedBtn
             // 
@@ -123,6 +125,7 @@
             this.PreparedBtn.TabIndex = 48;
             this.PreparedBtn.Text = "Prepared";
             this.PreparedBtn.UseVisualStyleBackColor = false;
+            this.PreparedBtn.Click += PreparedBtn_Click;
             // 
             // InPreparationBtn
             // 
@@ -134,6 +137,7 @@
             this.InPreparationBtn.TabIndex = 47;
             this.InPreparationBtn.Text = "In preparation";
             this.InPreparationBtn.UseVisualStyleBackColor = false;
+            this.InPreparationBtn.Click += InPreparationBtn_Click;
             // 
             // InfoGroupBox
             // 
