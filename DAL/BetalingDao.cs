@@ -74,8 +74,7 @@ namespace DAL
                 new SqlParameter("@betaald", betaald),
 
             };
-            //return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-            return new List<Betaling>();
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
     }
 }
