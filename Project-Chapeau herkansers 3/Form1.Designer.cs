@@ -49,6 +49,7 @@
             this.GebruikerBtn.TabIndex = 1;
             this.GebruikerBtn.Text = "Gebruiker";
             this.GebruikerBtn.UseVisualStyleBackColor = true;
+            this.GebruikerBtn.Click += GebruikerBtn_Click_1;
             // 
             // Form1
             // 

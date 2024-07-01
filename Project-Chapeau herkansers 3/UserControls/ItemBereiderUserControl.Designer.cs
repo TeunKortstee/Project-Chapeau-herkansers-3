@@ -28,149 +28,154 @@
         /// </summary>
         private void InitializeComponent()
         {
-            orderListView = new ListView();
-            BesteldItemIdHdr = new ColumnHeader();
-            CountHdr = new ColumnHeader();
-            DescriptionHdr = new ColumnHeader();
-            TitelLbl = new Label();
-            ActionsGroupBox = new GroupBox();
-            ServedButton = new Button();
-            PreparedBtn = new Button();
-            InPreparationBtn = new Button();
-            InfoGroupBox = new GroupBox();
-            informationTextBox = new TextBox();
-            ActionsGroupBox.SuspendLayout();
-            InfoGroupBox.SuspendLayout();
-            SuspendLayout();
+            this.orderListView = new System.Windows.Forms.ListView();
+            this.BesteldItemIdHdr = new System.Windows.Forms.ColumnHeader();
+            this.CountHdr = new System.Windows.Forms.ColumnHeader();
+            this.DescriptionHdr = new System.Windows.Forms.ColumnHeader();
+            this.TitelLbl = new System.Windows.Forms.Label();
+            this.ActionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.ServedButton = new System.Windows.Forms.Button();
+            this.PreparedBtn = new System.Windows.Forms.Button();
+            this.InPreparationBtn = new System.Windows.Forms.Button();
+            this.InfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.informationTextBox = new System.Windows.Forms.TextBox();
+            this.ActionsGroupBox.SuspendLayout();
+            this.InfoGroupBox.SuspendLayout();
+            this.SuspendLayout();
             // 
             // orderListView
             // 
-            orderListView.Columns.AddRange(new ColumnHeader[] { BesteldItemIdHdr, CountHdr, DescriptionHdr });
-            orderListView.Dock = DockStyle.Top;
-            orderListView.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            orderListView.FullRowSelect = true;
-            orderListView.GridLines = true;
-            orderListView.Location = new Point(0, 0);
-            orderListView.Margin = new Padding(2);
-            orderListView.Name = "orderListView";
-            orderListView.Size = new Size(1227, 253);
-            orderListView.TabIndex = 42;
-            orderListView.UseCompatibleStateImageBehavior = false;
-            orderListView.View = View.Details;
-            orderListView.SelectedIndexChanged += orderListView_SelectedIndexChanged;
+            this.orderListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.BesteldItemIdHdr,
+            this.CountHdr,
+            this.DescriptionHdr});
+            this.orderListView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.orderListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.orderListView.FullRowSelect = true;
+            this.orderListView.GridLines = true;
+            this.orderListView.Location = new System.Drawing.Point(0, 0);
+            this.orderListView.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.orderListView.Name = "orderListView";
+            this.orderListView.Size = new System.Drawing.Size(1402, 336);
+            this.orderListView.TabIndex = 42;
+            this.orderListView.UseCompatibleStateImageBehavior = false;
+            this.orderListView.View = System.Windows.Forms.View.Details;
             // 
             // BesteldItemIdHdr
             // 
-            BesteldItemIdHdr.Tag = "";
-            BesteldItemIdHdr.Text = "OrderId";
-            BesteldItemIdHdr.Width = 80;
+            this.BesteldItemIdHdr.Tag = "";
+            this.BesteldItemIdHdr.Text = "OrderId";
+            this.BesteldItemIdHdr.Width = 80;
             // 
             // CountHdr
             // 
-            CountHdr.Tag = "";
-            CountHdr.Text = "Count";
+            this.CountHdr.Tag = "";
+            this.CountHdr.Text = "Count";
             // 
             // DescriptionHdr
             // 
-            DescriptionHdr.Tag = "";
-            DescriptionHdr.Text = "Description";
-            DescriptionHdr.Width = 400;
+            this.DescriptionHdr.Tag = "";
+            this.DescriptionHdr.Text = "Description";
+            this.DescriptionHdr.Width = 400;
             // 
             // TitelLbl
             // 
-            TitelLbl.AutoSize = true;
-            TitelLbl.Location = new Point(426, 13);
-            TitelLbl.Margin = new Padding(2, 0, 2, 0);
-            TitelLbl.Name = "TitelLbl";
-            TitelLbl.Size = new Size(0, 15);
-            TitelLbl.TabIndex = 41;
+            this.TitelLbl.AutoSize = true;
+            this.TitelLbl.Location = new System.Drawing.Point(487, 17);
+            this.TitelLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TitelLbl.Name = "TitelLbl";
+            this.TitelLbl.Size = new System.Drawing.Size(0, 20);
+            this.TitelLbl.TabIndex = 41;
             // 
             // ActionsGroupBox
             // 
-            ActionsGroupBox.Controls.Add(ServedButton);
-            ActionsGroupBox.Controls.Add(PreparedBtn);
-            ActionsGroupBox.Controls.Add(InPreparationBtn);
-            ActionsGroupBox.Dock = DockStyle.Top;
-            ActionsGroupBox.Location = new Point(0, 253);
-            ActionsGroupBox.Name = "ActionsGroupBox";
-            ActionsGroupBox.Size = new Size(1227, 58);
-            ActionsGroupBox.TabIndex = 61;
-            ActionsGroupBox.TabStop = false;
-            ActionsGroupBox.Text = "Actions";
+            this.ActionsGroupBox.Controls.Add(this.ServedButton);
+            this.ActionsGroupBox.Controls.Add(this.PreparedBtn);
+            this.ActionsGroupBox.Controls.Add(this.InPreparationBtn);
+            this.ActionsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ActionsGroupBox.Location = new System.Drawing.Point(0, 336);
+            this.ActionsGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ActionsGroupBox.Name = "ActionsGroupBox";
+            this.ActionsGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ActionsGroupBox.Size = new System.Drawing.Size(1402, 77);
+            this.ActionsGroupBox.TabIndex = 61;
+            this.ActionsGroupBox.TabStop = false;
+            this.ActionsGroupBox.Text = "Actions";
             // 
             // ServedButton
             // 
-            ServedButton.BackColor = Color.LimeGreen;
-            ServedButton.Location = new Point(201, 21);
-            ServedButton.Margin = new Padding(2);
-            ServedButton.Name = "ServedButton";
-            ServedButton.Size = new Size(90, 32);
-            ServedButton.TabIndex = 49;
-            ServedButton.Text = "Served";
-            ServedButton.UseVisualStyleBackColor = false;
-            ServedButton.Click += ServedButton_Click;
+            this.ServedButton.BackColor = System.Drawing.Color.LimeGreen;
+            this.ServedButton.Location = new System.Drawing.Point(245, 28);
+            this.ServedButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ServedButton.Name = "ServedButton";
+            this.ServedButton.Size = new System.Drawing.Size(103, 43);
+            this.ServedButton.TabIndex = 49;
+            this.ServedButton.Text = "Served";
+            this.ServedButton.UseVisualStyleBackColor = false;
             // 
             // PreparedBtn
             // 
-            PreparedBtn.BackColor = Color.DarkOrange;
-            PreparedBtn.Location = new Point(107, 21);
-            PreparedBtn.Margin = new Padding(2);
-            PreparedBtn.Name = "PreparedBtn";
-            PreparedBtn.Size = new Size(90, 32);
-            PreparedBtn.TabIndex = 48;
-            PreparedBtn.Text = "Prepared";
-            PreparedBtn.UseVisualStyleBackColor = false;
-            PreparedBtn.Click += PreparedBtn_Click;
+            this.PreparedBtn.BackColor = System.Drawing.Color.DarkOrange;
+            this.PreparedBtn.Location = new System.Drawing.Point(138, 28);
+            this.PreparedBtn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.PreparedBtn.Name = "PreparedBtn";
+            this.PreparedBtn.Size = new System.Drawing.Size(103, 43);
+            this.PreparedBtn.TabIndex = 48;
+            this.PreparedBtn.Text = "Prepared";
+            this.PreparedBtn.UseVisualStyleBackColor = false;
             // 
             // InPreparationBtn
             // 
-            InPreparationBtn.BackColor = SystemColors.ControlLightLight;
-            InPreparationBtn.Location = new Point(9, 21);
-            InPreparationBtn.Margin = new Padding(2);
-            InPreparationBtn.Name = "InPreparationBtn";
-            InPreparationBtn.Size = new Size(94, 32);
-            InPreparationBtn.TabIndex = 47;
-            InPreparationBtn.Text = "In preparation";
-            InPreparationBtn.UseVisualStyleBackColor = false;
-            InPreparationBtn.Click += InPreparationBtn_Click;
+            this.InPreparationBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.InPreparationBtn.Location = new System.Drawing.Point(10, 28);
+            this.InPreparationBtn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.InPreparationBtn.Name = "InPreparationBtn";
+            this.InPreparationBtn.Size = new System.Drawing.Size(124, 43);
+            this.InPreparationBtn.TabIndex = 47;
+            this.InPreparationBtn.Text = "In preparation";
+            this.InPreparationBtn.UseVisualStyleBackColor = false;
             // 
             // InfoGroupBox
             // 
-            InfoGroupBox.Controls.Add(informationTextBox);
-            InfoGroupBox.Dock = DockStyle.Fill;
-            InfoGroupBox.Location = new Point(0, 311);
-            InfoGroupBox.Name = "InfoGroupBox";
-            InfoGroupBox.Size = new Size(1227, 324);
-            InfoGroupBox.TabIndex = 62;
-            InfoGroupBox.TabStop = false;
-            InfoGroupBox.Text = "Info";
+            this.InfoGroupBox.Controls.Add(this.informationTextBox);
+            this.InfoGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InfoGroupBox.Location = new System.Drawing.Point(0, 413);
+            this.InfoGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.InfoGroupBox.Name = "InfoGroupBox";
+            this.InfoGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.InfoGroupBox.Size = new System.Drawing.Size(1402, 434);
+            this.InfoGroupBox.TabIndex = 62;
+            this.InfoGroupBox.TabStop = false;
+            this.InfoGroupBox.Text = "Info";
             // 
             // informationTextBox
             // 
-            informationTextBox.Dock = DockStyle.Fill;
-            informationTextBox.Location = new Point(3, 19);
-            informationTextBox.Multiline = true;
-            informationTextBox.Name = "informationTextBox";
-            informationTextBox.ReadOnly = true;
-            informationTextBox.Size = new Size(1221, 302);
-            informationTextBox.TabIndex = 0;
+            this.informationTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.informationTextBox.Location = new System.Drawing.Point(3, 24);
+            this.informationTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.informationTextBox.Multiline = true;
+            this.informationTextBox.Name = "informationTextBox";
+            this.informationTextBox.ReadOnly = true;
+            this.informationTextBox.Size = new System.Drawing.Size(1396, 406);
+            this.informationTextBox.TabIndex = 0;
             // 
             // ItemBereiderUserControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(InfoGroupBox);
-            Controls.Add(ActionsGroupBox);
-            Controls.Add(orderListView);
-            Controls.Add(TitelLbl);
-            Name = "ItemBereiderUserControl";
-            Size = new Size(1227, 635);
-            Load += ItemBereiderUserControl_Load;
-            ActionsGroupBox.ResumeLayout(false);
-            InfoGroupBox.ResumeLayout(false);
-            InfoGroupBox.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.InfoGroupBox);
+            this.Controls.Add(this.ActionsGroupBox);
+            this.Controls.Add(this.orderListView);
+            this.Controls.Add(this.TitelLbl);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "ItemBereiderUserControl";
+            this.Size = new System.Drawing.Size(1402, 847);
+            this.ActionsGroupBox.ResumeLayout(false);
+            this.InfoGroupBox.ResumeLayout(false);
+            this.InfoGroupBox.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
