@@ -67,6 +67,7 @@
             this.MaakBestellingBtn.TabIndex = 4;
             this.MaakBestellingBtn.Text = "Maak Bestelling";
             this.MaakBestellingBtn.UseVisualStyleBackColor = true;
+            this.MaakBestellingBtn.Click += MaakBestellingBtn_Click;
             // 
             // TerugBtn
             // 
@@ -77,6 +78,7 @@
             this.TerugBtn.TabIndex = 5;
             this.TerugBtn.Text = "Terug";
             this.TerugBtn.UseVisualStyleBackColor = true;
+            this.TerugBtn.Click += TerugBtn_Click;
             // 
             // StatusBox
             // 
