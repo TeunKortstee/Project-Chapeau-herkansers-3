@@ -88,6 +88,7 @@
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.Size = new System.Drawing.Size(129, 23);
             this.StatusBox.TabIndex = 6;
+            StatusBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // AfrekenenBtn
             // 
