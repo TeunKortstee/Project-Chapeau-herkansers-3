@@ -5,19 +5,21 @@
         public int BetalingId { get; set; }
         public BetaalMethode Methode { get; set; }
         public double Bedrag { get; set; }
-        public int RekeningId { get; set; }
-
+        public Rekening? Rekening { get; set; }
         public double Fooi { get; set; }
-
-
-        public Betaling(int _BetalingId, int _Methode, double _Bedrag, int _RekeningId, double _Fooi) {
+        public Betaling(int _BetalingId, int _Methode, double _Bedrag, double _Fooi) {
             BetalingId = _BetalingId;
             Methode = (BetaalMethode)_Methode;
             Bedrag = _Bedrag;
-            RekeningId = _RekeningId;
             Fooi = _Fooi;
-          
-        
+        }
+        public Betaling(int _BetalingId, int _Methode, double _Bedrag, double _Fooi, Rekening _Rekening)
+        {
+            BetalingId = _BetalingId;
+            Methode = (BetaalMethode)_Methode;
+            Bedrag = _Bedrag;
+            Fooi = _Fooi;
+            Rekening = _Rekening;
         }
     }
 }

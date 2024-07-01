@@ -51,16 +51,6 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
-        {
-            string query = "UPDATE Rekeningen SET Opmerkingen = @Opmerkingen WHERE RekeningId = @ID;";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@ID", rekening.RekeningId),
-                new SqlParameter("@Opmerkingen",opmerkingen)
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
         public int InsertRekening(Rekening rekening)
         {
             string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,BelastingNormaal,BelastingAlcoholisch) VALUES (@TafelId,@TotaalPrijs,@BelastingNormaal,@BelastingAlcoholisch) SELECT CAST(scope_identity() AS int)";

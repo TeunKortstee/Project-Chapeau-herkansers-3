@@ -12,8 +12,10 @@ namespace Model
         public DateTime Datum { get; set; }
         public string Opmerkingen { get; set; }
         public List<Bestelling> Bestellingen { get; set; }
+        public List<Betaling> Betalingen { get; set; }
         public Rekening(int _RekeningId, Tafel _Tafel, double _TotaalPrijs, DateTime _Datum, double _BelastingNormaal, double _BelastingAlcoholisch, string _Opmerkingen) {
             Bestellingen = new List<Bestelling>();
+            Betalingen = new List<Betaling>();
             RekeningId = _RekeningId;
             Tafel = _Tafel;
             TotaalPrijs = _TotaalPrijs;           
@@ -32,6 +34,7 @@ namespace Model
             BelastingAlcoholisch = _BelastingAlcoholisch;
             Datum = DateTime.Now;
             Opmerkingen = "";
+            Betalingen = new List<Betaling>();
         }
 
     }

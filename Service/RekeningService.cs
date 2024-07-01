@@ -12,11 +12,13 @@ namespace Service
     {
         private RekeningDao rekeningDao;
         private BestellingDao bestellingDao;
+        private BetalingDao betalingDao;
         private BelastingService belastingService;
         public RekeningService()
         {
             rekeningDao = new RekeningDao();
             bestellingDao = new BestellingDao();
+            betalingDao = new BetalingDao();
             belastingService = new BelastingService();
         }
         public int InsertRekening(Rekening rekening)
@@ -62,9 +64,15 @@ namespace Service
             }
             return payments;
         }
-        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
-        {
-            rekeningDao.VoegOpmerkingenToe(rekening, opmerkingen);
+        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen) {
+            rekening.Opmerkingen = opmerkingen;   
+        }
+        
+        public void BetaalRekening(Rekening rekening) {
+            // Voeg fooi aan btw toe
+            belastingService.BetaalBelastingOverFooi(rekening);
+            int rekeningID = InsertRekening(rekening);
+            betalingDao.InsertBetalingen(rekening.Betalingen);                  
         }
     }
 }

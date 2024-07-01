@@ -96,6 +96,7 @@
             this.AfrekenenBtn.TabIndex = 7;
             this.AfrekenenBtn.Text = "Afrekenen";
             this.AfrekenenBtn.UseVisualStyleBackColor = true;
+            this.AfrekenenBtn.Click += AfrekenenBtn_Click;
             // 
             // BestellingDisplayBtn
             // 

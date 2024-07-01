@@ -12,50 +12,43 @@ using System.Windows.Forms;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class CommentScreen : UserControl
+    public partial class OpmerkingScherm : UserControl
     {
         private Rekening rekening;
         private RekeningService rekeningService;
-        private List<SplitBillItemObj> paymentObjs;
-        public CommentScreen(Rekening rekening, List<SplitBillItemObj> paymentObjs)
+      
+        public OpmerkingScherm(Rekening rekening)
         {
-            
             InitializeComponent();
-            this.rekening = rekening;
-            this.paymentObjs = paymentObjs;
+            this.rekening = rekening;           
             rekeningService = new RekeningService();
-            panelAddComment.Visible = false;
+            panelVoegOpmerkingToe.Visible = false;
         }
-
         private void btnContinuePayment_Click(object sender, EventArgs e)
         {
-            Form1.Instance.SwitchPanels(new BillSettledScreen(rekening,paymentObjs));
+            Form1.Instance.SwitchPanels(new RekeningBetaaldScherm(rekening));
         }
-
         private void btnAddComment_Click(object sender, EventArgs e)
         {
-            panelAddComment.Visible = true;
+            panelVoegOpmerkingToe.Visible = true;
         }
-
         private void btnConfirmComment_Click(object sender, EventArgs e)
         {
-            if (inputComment.Text != "")
+            if (inputOpmerkingen.Text != "")
             {
-                rekeningService.VoegOpmerkingenToe(rekening, inputComment.Text);
-                lblSaved.ForeColor = Color.Green;
-                lblSaved.Text = "OPMERKING OPGESLAGEN";
+                rekeningService.VoegOpmerkingenToe(rekening, inputOpmerkingen.Text);
+                labelFeedback.ForeColor = Color.Green;
+                labelFeedback.Text = "OPMERKING OPGESLAGEN";
             }
             else {
-                lblSaved.ForeColor = Color.Red;
-                lblSaved.Text = "VOEG OPMERKING TOE AUB";
-            
+                labelFeedback.ForeColor = Color.Red;
+                labelFeedback.Text = "VOEG OPMERKING TOE AUB";            
             }
         }
-
         private void btnBack_Click(object sender, EventArgs e)
         {
-            panelAddComment.Visible = false;
-            lblSaved.Text = "";
+            panelVoegOpmerkingToe.Visible = false;
+            labelFeedback.Text = "";
         }
     }
 }

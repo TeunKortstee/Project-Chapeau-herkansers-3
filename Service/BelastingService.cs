@@ -23,5 +23,12 @@ namespace Service
             }
             return new double[2] {normaalBelasting, alcoholBelasting};
         }
+        public void BetaalBelastingOverFooi(Rekening rekening)
+        {
+            foreach (Betaling betaling in rekening.Betalingen)
+            {
+                rekening.BelastingNormaal += betaling.Fooi * belastingFactorNormaal;
+            }
+        }
     }
 }
