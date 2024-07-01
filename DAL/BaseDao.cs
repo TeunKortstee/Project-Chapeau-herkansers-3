@@ -95,7 +95,7 @@ namespace DAL
                 command.CommandText = query;
                 command.Parameters.AddRange(sqlParameters);
                 adapter.InsertCommand = command;
-                int ID = (Int32)command.ExecuteScalar();
+                int ID = Convert.ToInt32(command.ExecuteScalar());
                 return ID;
             }
             catch (SqlException e)
@@ -107,7 +107,6 @@ namespace DAL
             {
                 CloseConnection();
             }
-            
         }
 
 

@@ -131,6 +131,5 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-
     }
 }

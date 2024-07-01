@@ -65,9 +65,11 @@ namespace DAL
             }
             return menuItems;
         }
-        public void AddNewMenuItem(MenuItem menuItem)
+        public int AddNewMenuItem(MenuItem menuItem)
         {
-            string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId) VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId)";
+            string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId) " +
+                "VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId);" +
+                "SELECT SCOPE_IDENTITY();";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Naam", menuItem.Naam),
@@ -75,7 +77,7 @@ namespace DAL
                 new SqlParameter("@Alcoholisch", menuItem.IsAlcoholisch),
                 new SqlParameter("@MenuId", (int)menuItem.MenuType),
             };
-            ExecuteEditQuery(query, sqlParameters);
+            return ExecuteEditQueryReturnID(query, sqlParameters);
         }
         public void UpdateMenuItem(MenuItem selectedMenuItem)
         {

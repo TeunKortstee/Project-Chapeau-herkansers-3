@@ -178,7 +178,7 @@
             lblErrorOverview.Text = "Error Bericht";
             lblErrorOverview.Visible = false;
             // 
-            // UserControlManageOverview
+            // UserControlItemOverzicht
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -194,7 +194,7 @@
             Controls.Add(lblOverview);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlManageOverview";
+            Name = "UserControlItemOverzicht";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();

@@ -75,5 +75,9 @@ namespace Service
             }
             return 0;
         }
+        public List<Betaling> GetBetalingen(bool betaald)
+        {
+            return betalingDao.GetBetalingen(betaald);
+        }
     }
 }

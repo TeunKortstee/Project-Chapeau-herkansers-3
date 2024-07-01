@@ -81,7 +81,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                         UpdatePersoneel((Personeel)btnConfirm.Tag);
                         break;
                 }
-                ReturnToOverview();
             }
             catch (Exception ex)
             {
@@ -99,6 +98,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             selectedPersoneel.Email = personeelService.CreateEmail(txt2.Text);
             selectedPersoneel.Functie = (Functie)cmbType.SelectedItem;
             personeelService.UpdatePersoneel(selectedPersoneel);
+            ReturnToOverview();
         }
         private void UpdateMenuItem(MenuItem selectedMenuItem)
         {
@@ -111,6 +111,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             selectedMenuItem.Prijs = ParsePrice(txt2.Text);
             selectedMenuItem.MenuType = (MenuType)cmbType.SelectedItem;
             menuItemService.UpdateMenuItem(selectedMenuItem);
+            ReturnToOverview();
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {

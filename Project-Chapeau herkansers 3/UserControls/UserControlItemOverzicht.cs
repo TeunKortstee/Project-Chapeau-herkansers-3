@@ -106,7 +106,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     DisplayPersoneel(personeel);
                 }
             }
-            catch(Exception) {
+            catch (Exception)
+            {
                 DisplayErrorMessage("Er ging iets mis bij de database");
             }
         }
