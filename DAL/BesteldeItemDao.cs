@@ -6,12 +6,12 @@ namespace DAL
 {
     public class BesteldeItemDao : BaseDao
     {
-        public List<BesteldeItem> GetItemsFromBestelling(int bestellingID)
+        public List<BesteldeItem> GetItemsFromBestelling(Bestelling bestelling)
         {
             string query = "SELECT BesteldeItems.BesteldItemId, BesteldeItems.Opmerking, BesteldeItems.Instuurtijd, BesteldeItems.BestellingsId, BesteldeItems.GerechtsStatus, BesteldeItems.Hoeveelheid, MenuItems.MenuItemId, MenuItems.Naam, MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.MenuId, MenuItems.Voorraad FROM BesteldeItems JOIN MenuItems ON MenuItems.MenuItemId=BesteldeItems.MenuItemId WHERE BestellingsId = @bestellingId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@bestellingId", bestellingID),
+                new SqlParameter("@bestellingId", bestelling.bestellingId),
 
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));

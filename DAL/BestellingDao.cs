@@ -30,7 +30,7 @@ namespace DAL
                     (bool)row["Betaald"],
                     Convert.ToInt32(row["TableNr"]));
 
-                bestelling.BesteldeItems = besteldeItemDao.GetItemsFromBestelling(bestelling.bestellingId);
+                bestelling.BesteldeItems = besteldeItemDao.GetItemsFromBestelling(bestelling);
                 bestellingen.Add(bestelling);
             }
             return bestellingen;
