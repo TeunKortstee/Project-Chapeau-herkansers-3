@@ -8,7 +8,7 @@ namespace Model
         public string Opmerking { get; set; }
         public DateTime InstuurTijd { get; set; }
         public MenuItem menuItem { get; set; }
-        public Bestelling bestelling { get; set; } //Luciano
+
         public int Hoeveelheid { get; set; }
         public GerechtsStatus Status { get; set; } //Yusuf
         public string? Naam { get; set; } //Yusuf
