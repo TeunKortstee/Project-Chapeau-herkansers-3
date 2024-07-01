@@ -38,7 +38,7 @@ namespace Project_Chapeau_herkansers_3
                     form.SwitchPanels(new UserControlManager());
                     break;
                 default:
-                    form.SwitchPanels(new ItemBereiderUserControl(0));
+                    form.SwitchPanels(new ItemBereiderUserControl());
                     break;
             }
         }

@@ -29,7 +29,8 @@ namespace DAL
                 Instuurtijd >= DATEADD(day, -1, GETDATE());
             ";
             return ReadTables(ExecuteSelectQuery(query));
-            
+
+        }
         public void ChangeKeukenStatus(Bestelling bestelling)
         {
             string query = $"UPDATE Keuken SET Status=@Status WHERE BestellingId = @BestellingId;";
