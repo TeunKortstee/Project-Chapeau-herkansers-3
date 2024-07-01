@@ -50,11 +50,10 @@ namespace DAL
         // Lucas
         public List<Inkomen> GetInkomens(bool betaald, BereidingsPlek bereidingsPlek)
         {
-            string query = "SELECT i.InkomenId, i.TotaleInkomen, mi.MenuItemId, mi.Naam, i.Hoeveelheid FROM Inkomen i JOIN MenuItems mi ON i.MenuItemId = mi.MenuItemId JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId WHERE b.Betaald = @Betaald AND i.BereidingsPlek = @BereidingsPlek";
+            string query = "SELECT DISTINCT i.InkomenId, i.TotaleInkomen, mi.MenuItemId, mi.Naam, i.Hoeveelheid FROM Inkomen i JOIN MenuItems mi ON i.MenuItemId = mi.MenuItemId JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId WHERE i.BereidingsPlek = @BereidingsPlek";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                 {
-                new SqlParameter("@Betaald", betaald),
                 new SqlParameter("@BereidingsPlek", (int)bereidingsPlek),
                 };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
