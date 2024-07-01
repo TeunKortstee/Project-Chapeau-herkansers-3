@@ -77,7 +77,7 @@ namespace Project_Chapeau_herkansers_3
             }
             else
             {
-                MessageBox.Show("Er zijn geen items om af te rekenen!");
+                labelBestellingAangemaakt.Text = "Er zijn geen items om af te rekenen!";
             }
         }
         public void SetStringName(string message)
