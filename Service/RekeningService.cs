@@ -29,7 +29,6 @@ namespace Service
         public Rekening MaakRekeningObject(Tafel tafel)
         {
             List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafel);
-            InkomenService inkomenService = new InkomenService();
             double totaalPrijs = 0.00;
             double belastingNormaal = 0.00;
             double belastingAlcoholisch = 0.00;
@@ -37,7 +36,6 @@ namespace Service
             {
                 foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems)
                 {
-                    inkomenService.UpdateInkomen(besteldeItem);
                     totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
                 }
                 double[] belastingCategorieen = belastingService.BerekenBelasting(bestelling);
