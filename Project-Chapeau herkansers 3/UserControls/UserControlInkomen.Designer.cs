@@ -80,7 +80,6 @@
             lblTotalIncome.Text = "Totaal: ";
             // 
             // UserControlInkomen
-            // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lblTotalIncome);
