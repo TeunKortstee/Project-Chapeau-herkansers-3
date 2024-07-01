@@ -46,9 +46,8 @@ namespace DAL
             table.Columns.Add("RekeningID", typeof(int));
             table.Columns.Add("Fooi", typeof(double));
                     
-            foreach (Betaling betaling in betalingen) {
-                int methode = (int)betaling.Methode;
-                table.Rows.Add(methode,betaling.Bedrag,betaling.Rekening.RekeningId,betaling.Fooi);            
+            foreach (Betaling betaling in betalingen) {               
+                table.Rows.Add((int)betaling.Methode, betaling.Bedrag,betaling.Rekening.RekeningId,betaling.Fooi);            
             }            
             try
             {
