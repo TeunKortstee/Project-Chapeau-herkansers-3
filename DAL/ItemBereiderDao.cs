@@ -97,7 +97,7 @@ namespace DAL
                     InstuurTijd = Convert.ToDateTime(row["Instuurtijd"]),
                 };
 
-                bestelling.BestellingItems.Add(besteldeItem);
+                bestelling.BesteldeItems.Add(besteldeItem);
             }
             return bestellingen;
         }

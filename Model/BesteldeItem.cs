@@ -10,8 +10,8 @@ namespace Model
         public MenuItem menuItem { get; set; }
         public Bestelling bestelling { get; set; } //Luciano
         public int Hoeveelheid { get; set; }
-        public GerechtsStatus Status { get; set; }
-        public string? Naam { get; set; }
+        public GerechtsStatus Status { get; set; } //Yusuf
+        public string? Naam { get; set; } //Yusuf
 
         public BesteldeItem(MenuItem menuItem) //Luciano
         {

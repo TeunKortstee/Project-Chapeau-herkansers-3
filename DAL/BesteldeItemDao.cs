@@ -27,7 +27,7 @@ namespace DAL
             string queryToevoegenBesteldeItem = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
             "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @GerechtsStatus, @BestellingsId, @Hoeveelheid)";
 
-            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+            foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems)
             {
                 SqlParameter[] sqlParameters2 = new SqlParameter[] {
                     new SqlParameter("@Opmerking", besteldeItem.Opmerking),

@@ -4,7 +4,7 @@
     {
         private List<BesteldeItem> besteldeItems; //Yusuf
         public int bestellingId { get; set; }
-        public List<BesteldeItem> BestellingItems { get; set; } //Luciano
+        public List<BesteldeItem> BesteldeItems { get; set; } //Luciano
 
         public bool betaald { get; set; }
 
@@ -14,7 +14,7 @@
         public Bestelling(Tafel tafel) //Luciano
         {
             this.tafel = tafel;
-            BestellingItems = new List<BesteldeItem>();
+            BesteldeItems = new List<BesteldeItem>();
             betaald = false;
         }
 
