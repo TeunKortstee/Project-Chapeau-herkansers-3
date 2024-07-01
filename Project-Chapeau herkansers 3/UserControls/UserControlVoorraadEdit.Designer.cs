@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlAdjustStock
+    partial class UserControlVoorraadEdit
     {
         /// <summary> 
         /// Required designer variable.
@@ -35,10 +35,9 @@
             btnAdd = new Button();
             btnSubtract = new Button();
             lblNewStock = new Label();
-            cmbType = new ComboBox();
-            lblType = new Label();
             btnCancel = new Button();
             lblAdjustItem = new Label();
+            lblErrorVoorraad = new Label();
             ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
             SuspendLayout();
             // 
@@ -69,7 +68,7 @@
             // picName
             // 
             picName.BackColor = Color.FromArgb(196, 196, 196);
-            picName.Location = new Point(30, 295);
+            picName.Location = new Point(27, 226);
             picName.Name = "picName";
             picName.Size = new Size(285, 62);
             picName.TabIndex = 6;
@@ -77,17 +76,16 @@
             // 
             // txtStock
             // 
-            txtStock.Location = new Point(241, 313);
+            txtStock.Location = new Point(238, 244);
             txtStock.Name = "txtStock";
             txtStock.Size = new Size(31, 27);
             txtStock.TabIndex = 10;
             txtStock.TextAlign = HorizontalAlignment.Center;
-            txtStock.TextChanged += txtStock_TextChanged;
             // 
             // btnAdd
             // 
             btnAdd.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAdd.Location = new Point(278, 313);
+            btnAdd.Location = new Point(275, 244);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(24, 29);
             btnAdd.TabIndex = 11;
@@ -98,7 +96,7 @@
             // btnSubtract
             // 
             btnSubtract.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSubtract.Location = new Point(211, 313);
+            btnSubtract.Location = new Point(208, 244);
             btnSubtract.Name = "btnSubtract";
             btnSubtract.Size = new Size(24, 29);
             btnSubtract.TabIndex = 12;
@@ -111,32 +109,11 @@
             lblNewStock.AutoSize = true;
             lblNewStock.BackColor = Color.FromArgb(196, 196, 196);
             lblNewStock.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblNewStock.Location = new Point(46, 315);
+            lblNewStock.Location = new Point(43, 246);
             lblNewStock.Name = "lblNewStock";
             lblNewStock.Size = new Size(112, 25);
             lblNewStock.TabIndex = 13;
             lblNewStock.Text = "In Voorraad";
-            // 
-            // cmbType
-            // 
-            cmbType.FormattingEnabled = true;
-            cmbType.Location = new Point(30, 261);
-            cmbType.Name = "cmbType";
-            cmbType.Size = new Size(151, 28);
-            cmbType.TabIndex = 27;
-            cmbType.Visible = false;
-            // 
-            // lblType
-            // 
-            lblType.AutoSize = true;
-            lblType.BackColor = SystemColors.Control;
-            lblType.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblType.Location = new Point(30, 233);
-            lblType.Name = "lblType";
-            lblType.Size = new Size(61, 25);
-            lblType.TabIndex = 28;
-            lblType.Text = "Menu";
-            lblType.Visible = false;
             // 
             // btnCancel
             // 
@@ -161,14 +138,25 @@
             lblAdjustItem.TabIndex = 31;
             lblAdjustItem.Text = "Aanpassing Item";
             // 
-            // UserControlAdjustStock
+            // lblErrorVoorraad
+            // 
+            lblErrorVoorraad.AutoSize = true;
+            lblErrorVoorraad.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblErrorVoorraad.ForeColor = Color.Red;
+            lblErrorVoorraad.Location = new Point(27, 300);
+            lblErrorVoorraad.Name = "lblErrorVoorraad";
+            lblErrorVoorraad.Size = new Size(120, 25);
+            lblErrorVoorraad.TabIndex = 37;
+            lblErrorVoorraad.Text = "Error Bericht";
+            lblErrorVoorraad.Visible = false;
+            // 
+            // UserControlVoorraadEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblErrorVoorraad);
             Controls.Add(lblAdjustItem);
             Controls.Add(btnCancel);
-            Controls.Add(lblType);
-            Controls.Add(cmbType);
             Controls.Add(lblNewStock);
             Controls.Add(btnSubtract);
             Controls.Add(btnAdd);
@@ -177,7 +165,7 @@
             Controls.Add(btnConfirm);
             Controls.Add(lblStock);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlAdjustStock";
+            Name = "UserControlVoorraadEdit";
             Size = new Size(414, 736);
             ((System.ComponentModel.ISupportInitialize)picName).EndInit();
             ResumeLayout(false);
@@ -194,9 +182,8 @@
         private Button btnAdd;
         private Button btnSubtract;
         private Label lblNewStock;
-        private ComboBox cmbType;
-        private Label lblType;
         private Button btnCancel;
         private Label lblAdjustItem;
+        private Label lblErrorVoorraad;
     }
 }
