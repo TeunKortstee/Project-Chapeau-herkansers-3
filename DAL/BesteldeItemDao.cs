@@ -16,9 +16,9 @@ namespace DAL
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-        public void BestellingEnBesteldeItemsAanmaken(Bestelling bestelling)
+        public void BestellingEnBesteldeItemsAanmaken(Bestelling bestelling) //verbetering
         {
-            string queryToevoegenBestelling = "INSERT INTO Bestellingen (PersoneelsId, TableNr) VALUES (0, @TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
+            string queryToevoegenBestelling = "INSERT INTO Bestellingen (TableNr) VALUES (@TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
             SqlParameter[] sqlParameters = new SqlParameter[] {
                 new SqlParameter("@TafelNummer", bestelling.tafel.Id)
             };
