@@ -15,12 +15,14 @@ namespace Service
         private BestellingDao bestellingDao;
         private BetalingDao betalingDao;
         private BelastingService belastingService;
+        private BetalingService betalingService;
         public RekeningService()
         {
             rekeningDao = new RekeningDao();
             bestellingDao = new BestellingDao();
             betalingDao = new BetalingDao();
             belastingService = new BelastingService();
+            betalingService = new BetalingService();
         }
         public int InsertRekening(Rekening rekening)
         {
@@ -49,21 +51,9 @@ namespace Service
         {
             return rekeningDao.GetBetaaldeRekeningen(betaald);
         }
-        public double[] GetPaymentPerPerson(double price, int people)
+        public double[] KrijgBetalingPerPersoon(double prijs, int mensen)
         {
-            double[] payments = new double[people];
-            double division = Math.Round(price / people, 2, MidpointRounding.ToZero);
-            for (int i = 0; i < people; i++)
-            {
-                payments[i] = division;
-            }
-            // Voor als er door een oneven getal word gedeeld
-            if (division * people < price)
-            {
-                double remainder = price - division;
-                payments[0] += remainder;
-            }
-            return payments;
+            return betalingService.KrijgBetalingPerPersoon(prijs,mensen);
         }
         public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen) {
             rekening.Opmerkingen = opmerkingen;   
