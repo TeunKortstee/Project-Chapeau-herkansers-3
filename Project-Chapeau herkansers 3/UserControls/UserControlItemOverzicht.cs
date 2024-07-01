@@ -60,7 +60,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void DisplayMenuItems(MenuItem menuItem)
         {
             ListViewItem item = new ListViewItem(menuItem.Naam);
-            item.SubItems.Add(menuItem.Prijs.ToString());
+            item.SubItems.Add($"€ {menuItem.Prijs:0.00}");
             if (DisplayAlcoholic(menuItem))
             {
                 item.SubItems.Add("Ja");

@@ -59,9 +59,5 @@ namespace DAL
                 CloseConnection();
             }
         }
-
-            };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
     }
 }

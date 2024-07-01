@@ -64,7 +64,7 @@ namespace Project_Chapeau_herkansers_3
             {
                 BestellingOpslaan((Bestelling)BesteldeItemsListView.SelectedItems[0].Tag, checkComboBox(), GerechtsStatus.Served);
                 InkomenService inkomenService = new InkomenService();
-                inkomenService.UpdateInkomen(((Bestelling)BesteldeItemsListView.SelectedItems[0].Tag).BestellingItems);
+                inkomenService.UpdateInkomen(((Bestelling)BesteldeItemsListView.SelectedItems[0].Tag).BesteldeItems);
                 GaTerug();
             }
             catch (Exception)
