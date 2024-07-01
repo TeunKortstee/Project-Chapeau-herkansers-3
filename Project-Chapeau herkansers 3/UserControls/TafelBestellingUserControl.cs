@@ -18,7 +18,7 @@ namespace Project_Chapeau_herkansers_3
             BesteldeItemsListView.Items.Clear();
             foreach (Bestelling bestelling in bestellingen)
             {
-                foreach (BesteldeItem item in bestelling.BestellingItems)
+                foreach (BesteldeItem item in bestelling.BesteldeItems)
                 {
                     TimeSpan wachtTijd = DateTime.Now - item.InstuurTijd;
                     string wachtTijdString = string.Format("{0:%h}h {0:%m}m {0:%s}s", wachtTijd);

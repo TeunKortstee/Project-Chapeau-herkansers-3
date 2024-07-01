@@ -18,7 +18,7 @@ namespace DAL
         }
         public void BestellingEnBesteldeItemsAanmaken(Bestelling bestelling)
         {
-            string queryToevoegenBestelling = "INSERT INTO Bestellingen (PersoneelsId, TableNr) VALUES (0, @TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
+            string queryToevoegenBestelling = "INSERT INTO Bestellingen (TableNr) VALUES (@TafelNummer); SELECT @@IDENTITY AS BestellingsId;";
             SqlParameter[] sqlParameters = new SqlParameter[] {
                 new SqlParameter("@TafelNummer", bestelling.tafel.Id)
             };
@@ -27,7 +27,7 @@ namespace DAL
             string queryToevoegenBesteldeItem = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
             "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @GerechtsStatus, @BestellingsId, @Hoeveelheid)";
 
-            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+            foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems)
             {
                 SqlParameter[] sqlParameters2 = new SqlParameter[] {
                     new SqlParameter("@Opmerking", besteldeItem.Opmerking),

@@ -103,7 +103,7 @@ namespace DAL
         public void UpdateAllMenuItemsStock(Bestelling bestelling)
         {
             string query = "UPDATE MenuItems SET Voorraad = @Voorraad WHERE MenuItemId = @MenuItemId";
-            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+            foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems)
             {
                 SqlParameter[] sqlParameters = new SqlParameter[] {
                 new SqlParameter("@MenuItemId", besteldeItem.menuItem.MenuItemId),

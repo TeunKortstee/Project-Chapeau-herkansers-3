@@ -11,7 +11,7 @@ namespace Service
         {
             double normaalBelasting = 0.00;
             double alcoholBelasting = 0.00;
-            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
+            foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems) {
                 double totaalPrijs = besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
                 if (besteldeItem.menuItem.IsAlcoholisch)
                 {

@@ -18,7 +18,7 @@ namespace Project_Chapeau_herkansers_3
             rekeningLijst.Items.Clear();
             double totaal = rekening.TotaalPrijs;   
             foreach (Bestelling bestelling in rekening.Bestellingen) {               
-                foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+                foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems)
                 {
                     VoegItemToeAanView(besteldeItem);
                 }
