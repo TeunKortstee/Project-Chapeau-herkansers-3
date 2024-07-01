@@ -81,7 +81,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void ServedButton_Click(object sender, EventArgs e)
         {
             UpdateOrderStatus(GerechtsStatus.Served);
-
+            InkomenService inkomenService = new InkomenService();
+            inkomenService.UpdateInkomen(besteldeItem);
         }
 
         private void ItemBereiderUserControl_Load(object sender, EventArgs e)
