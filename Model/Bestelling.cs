@@ -2,23 +2,23 @@
 {
     public class Bestelling
     {
-        private List<BesteldeItem> besteldeItems; //Yusuf
+        private List<BesteldeItem> besteldeItems; //Teun
         public int bestellingId { get; set; }
-        public List<BesteldeItem> BestellingItems { get; set; } //Luciano
+        public List<BesteldeItem> BesteldeItems { get; set; } //Luciano
 
         public bool betaald { get; set; }
 
         public Tafel tafel { get; set; } //Luciano
-        public GerechtsStatus status { get; set; } //Yusuf
+        public GerechtsStatus status { get; set; } //Teun
 
         public Bestelling(Tafel tafel) //Luciano
         {
             this.tafel = tafel;
-            BestellingItems = new List<BesteldeItem>();
+            BesteldeItems = new List<BesteldeItem>();
             betaald = false;
         }
 
-        public Bestelling() //Yusuf
+        public Bestelling() //Teun
         {
 
         }
