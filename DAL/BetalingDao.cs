@@ -44,18 +44,17 @@ namespace DAL
             table.Columns.Add("Bedrag", typeof(double));
             table.Columns.Add("RekeningID", typeof(int));
             table.Columns.Add("Fooi", typeof(double));
+
             foreach (Betaling betaling in betalingen) {
                 table.Rows.Add((int)betaling.Methode,betaling.Bedrag,betaling.Rekening.RekeningId,betaling.Fooi);            
-            }
-            SqlCommand command = new SqlCommand();
+            }            
             try
             {
-                command.Connection = OpenConnection();
-                using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(command.Connection)) {
+                SqlConnection connection = OpenConnection();
+                using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(connection)) {
+                    sqlBulkCopy.DestinationTableName = "Betalingen";
                     sqlBulkCopy.WriteToServer(table);
-                }
-                adapter.InsertCommand = command;
-                command.ExecuteNonQuery();
+                }                
             }
             catch (SqlException e)
             {
@@ -75,8 +74,8 @@ namespace DAL
                 new SqlParameter("@betaald", betaald),
 
             };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-            
+            //return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return new List<Betaling>();
         }
     }
 }

@@ -66,8 +66,7 @@ namespace Service
         }
         public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen) {
             rekening.Opmerkingen = opmerkingen;   
-        }
-        
+        }        
         public void BetaalRekening(Rekening rekening) {
             // Voeg fooi aan btw toe
             belastingService.BetaalBelastingOverFooi(rekening);

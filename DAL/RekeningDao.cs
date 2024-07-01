@@ -41,26 +41,17 @@ namespace DAL
                 rekeningen.Add(rekening);
             }
             return rekeningen;      
-        }
-        public void RekeningBetaald(Rekening rekening) {
-            string query = "UPDATE Rekeningen SET Betaald = 1, Datum = GETDATE() WHERE RekeningId = @ID; UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TableNr AND Betaald = 0; UPDATE Tafels SET StatusId = 1 WHERE TableNr = @TableNr;";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@ID", rekening.RekeningId),
-                new SqlParameter("@TableNr", rekening.Tafel.Id),                
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
+        }       
         public int InsertRekening(Rekening rekening)
         {
-            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,BelastingNormaal,BelastingAlcoholisch) VALUES (@TafelId,@TotaalPrijs,@BelastingNormaal,@BelastingAlcoholisch) SELECT CAST(scope_identity() AS int)";
+            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,BelastingNormaal,BelastingAlcoholisch,Opmerkingen) VALUES (@TafelId,@TotaalPrijs,@BelastingNormaal,@BelastingAlcoholisch,@Opmerkingen) SELECT CAST(scope_identity() AS int); UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TafelId AND Betaald = 0; UPDATE Tafels SET StatusId = 1 WHERE TableNr = @TafelId;";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@TafelId", rekening.Tafel.Id),
                 new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),
                 new SqlParameter("@BelastingNormaal", rekening.BelastingNormaal),
-                new SqlParameter("@BelastingAlcoholisch", rekening.BelastingAlcoholisch)
-
+                new SqlParameter("@BelastingAlcoholisch", rekening.BelastingAlcoholisch),
+                new SqlParameter("@Opmerkingen", rekening.Opmerkingen)
             };
             return ExecuteEditQueryReturnID(query, sqlParameters);
         }

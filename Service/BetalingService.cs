@@ -62,7 +62,7 @@ namespace Service
             List<Betaling> betalingen = new List<Betaling>();            
             foreach (GesplitsteRekeningObject betaling in gesplitsteRekeningObjecten) {
                 if (betaling.betaling > 0 && betaling.fooi >= 0) {
-                    totaalHoeveelheidBetaald += betaling.betaling;
+                    totaalHoeveelheidBetaald += betaling.betaling;                    
                     betalingen.Add(new Betaling(0, (int)betaling.betaalMethode, betaling.betaling, betaling.fooi,rekening));                    
                 } else {
                     return 1;

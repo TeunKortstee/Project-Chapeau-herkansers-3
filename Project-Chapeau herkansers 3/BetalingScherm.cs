@@ -75,15 +75,15 @@ namespace Project_Chapeau_herkansers_3
         }
         private void btnPay_Click(object sender, EventArgs e)
         {
-            List<GesplitsteRekeningObject> paymentObjs = new List<GesplitsteRekeningObject>();
+            List<GesplitsteRekeningObject> betalingObjs = new List<GesplitsteRekeningObject>();
             foreach (GesplitsteRekeningItem item in gesplitsteRekeningItems) {
                 if (!double.TryParse(item.getPaymentInput, out double result) || !double.TryParse(item.getTipInput, out double result2)) {
                     lblPaymentErrorText.Text = "Vul valide hoeveelheden in AUB!";
                     return;                
                 }
-                paymentObjs.Add(item.toObj());
+                betalingObjs.Add(item.toObj());
             }
-            int exitCode = betalingService.BevestigBetalingen(rekening,paymentObjs);    
+            int exitCode = betalingService.BevestigBetalingen(rekening,betalingObjs);    
             if (exitCode == 0) {
                 lblPaymentErrorText.Text = "Betaling(en) niet genoeg!";
             } else if (exitCode == 1)
@@ -92,7 +92,7 @@ namespace Project_Chapeau_herkansers_3
             }
             else if (exitCode == 2)
             {
-                Form1.Instance.SwitchPanels(new OpmerkingScherm(rekening, paymentObjs));
+                Form1.Instance.SwitchPanels(new OpmerkingScherm(rekening));
             }
         }
         private void inputSplitAmount_TextChanged(object sender, EventArgs e)
