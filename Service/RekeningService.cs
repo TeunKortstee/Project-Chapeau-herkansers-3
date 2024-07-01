@@ -33,7 +33,7 @@ namespace Service
             double belastingAlcoholisch = 0.00;
             foreach (Bestelling bestelling in bestellingen)
             {
-                foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+                foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems)
                 {
                     totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
                 }

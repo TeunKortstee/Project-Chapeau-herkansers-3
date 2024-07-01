@@ -27,7 +27,7 @@ namespace DAL
             string queryToevoegenBesteldeItem = "INSERT INTO BesteldeItems (Opmerking, Instuurtijd, MenuItemId, GerechtsStatus, BestellingsId, Hoeveelheid) " +
             "VALUES (@Opmerking, @InstuurTijd, @MenuItemId, @GerechtsStatus, @BestellingsId, @Hoeveelheid)";
 
-            foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+            foreach (BesteldeItem besteldeItem in bestelling.BesteldeItems)
             {
                 SqlParameter[] sqlParameters2 = new SqlParameter[] {
                     new SqlParameter("@Opmerking", besteldeItem.Opmerking),
@@ -35,7 +35,7 @@ namespace DAL
                     new SqlParameter("@MenuItemId", besteldeItem.menuItem.MenuItemId),
                     new SqlParameter("@BestellingsId", bestelling.bestellingId),
                     new SqlParameter("@Hoeveelheid", besteldeItem.Hoeveelheid),
-                    new SqlParameter("@GerechtsStatus", (int)besteldeItem.status)
+                    new SqlParameter("@GerechtsStatus", (int)besteldeItem.Status)
                 };
                 ExecuteEditQuery(queryToevoegenBesteldeItem, sqlParameters2);
             }
@@ -52,7 +52,7 @@ namespace DAL
                     Voorraad = Convert.ToInt32(row["Voorraad"]),
                     Prijs = (double)row["Prijs"],
                     Naam = (string)row["Naam"],
-                    //MenuId = Convert.ToInt32(row["MenuId"]),
+                    MenuType = (MenuType)Convert.ToInt32(row["MenuId"]),
                     IsAlcoholisch = (bool)row["Alcoholisch"]
 
                 };
@@ -64,7 +64,7 @@ namespace DAL
                     //BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
                     Naam = row["Naam"].ToString(),
-                    status = (GerechtsStatus)row["GerechtsStatus"]
+                    Status = (GerechtsStatus)row["GerechtsStatus"]
 
                 };
                 items.Add(item);

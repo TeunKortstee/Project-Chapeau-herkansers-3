@@ -14,7 +14,7 @@ namespace Project_Chapeau_herkansers_3
         {
             Form1 form = Form1.Instance;
             AchternaamLbl.Text = form.personeel.AchterNaam;
-            EmailLbl.Text = form.personeel.email;
+            EmailLbl.Text = form.personeel.Email;
             FunctieLbl.Text = form.personeel.Functie.ToString();
         }
 
@@ -38,7 +38,7 @@ namespace Project_Chapeau_herkansers_3
                     form.SwitchPanels(new UserControlManager());
                     break;
                 default:
-                    form.SwitchPanels(new ItemBereiderUserControl(0));
+                    form.SwitchPanels(new ItemBereiderUserControl());
                     break;
             }
         }

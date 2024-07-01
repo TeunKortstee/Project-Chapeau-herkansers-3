@@ -1,16 +1,6 @@
 ﻿using BCrypt.Net;
 using DAL;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Cryptography;
-using BCrypt.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlTypes;
-using System.Text.RegularExpressions;
 
 namespace Service
 {
@@ -19,20 +9,15 @@ namespace Service
         const string chapeauDomain = "@chapeau.nl";
         const string defaultPassword = "0000";
 
-
         private PersoneelDao personeelDao;
 
         public PersoneelService()
         {
             this.personeelDao = new PersoneelDao();
         }
-        public List<Personeel> GetAllPersoneel()
-        {
-            return personeelDao.GetAllPersoneel();
-        }
         public List<Personeel> GetPersoneelByFunctie(Functie functie)
         {
-            return personeelDao.GetPersoneelByFunctieId(functie);
+            return personeelDao.GetPersoneelByFunctie(functie);
         }
         public void InsertPersoneel(Personeel personeel)
         {
@@ -44,19 +29,19 @@ namespace Service
         {
             personeelDao.RemovePersoneel(personeel);
         }
+        public void UpdatePersoneel(Personeel personeel)
+        {
+            personeelDao.UpdatePersoneel(personeel);
+        }
         // Lucas
-        private string CreateEmail(string username)
+        public string CreateEmail(string username)
         {
             string formattedEmail = $"{username}{chapeauDomain}".ToLower();
-            CheckEmail(formattedEmail);
-            return formattedEmail;
-        }
-        private void CheckEmail(string formattedEmail)
-        {
             if (!IsUniqueEmail(formattedEmail))
             {
                 throw new Exception("Email bestaat al");
             }
+            return formattedEmail;
         }
         private bool IsUniqueEmail(string email)
         {
@@ -66,10 +51,6 @@ namespace Service
         {
             string hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, workfactor, HashType.SHA512);
             return hashedPassword;
-        }
-        private string GenerateSalt(int workFactor)
-        {
-            return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
         }
     }
 }
