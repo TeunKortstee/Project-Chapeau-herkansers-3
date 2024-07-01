@@ -296,7 +296,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     case MenuItem:
                         MenuItem selectedMenuItem = (MenuItem)selectedLsvItem.Tag;
                         RemoveMenuItem(selectedMenuItem);
-                        FillMenuListView((MenuType)selectedMenuItem.MenuId);
+                        FillMenuListView(selectedMenuItem.menuType);
                         break;
                     case Personeel:
                         Personeel selectedPersoneel = (Personeel)selectedLsvItem.Tag;
@@ -338,7 +338,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             MenuItemService menuItemService = new MenuItemService();
             menuItemService.SoftDeleteMenuItem(selectedMenuItem);
-            FillMenuListView((MenuType)selectedMenuItem.MenuId);
+            FillMenuListView(selectedMenuItem.menuType);
         }
         private ListViewItem GetItemSelected()
         {

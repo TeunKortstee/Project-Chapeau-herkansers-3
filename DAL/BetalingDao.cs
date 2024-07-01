@@ -66,15 +66,6 @@ namespace DAL
             }
         }
         // Lucas
-        public List<Betaling> GetBetalingen(bool betaald)
-        {
-            string query = "SELECT b.* FROM Betalingen b JOIN Rekeningen r ON b.RekeningID = r.RekeningID WHERE r.Betaald = @betaald";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@betaald", betaald),
 
-            };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
     }
 }
