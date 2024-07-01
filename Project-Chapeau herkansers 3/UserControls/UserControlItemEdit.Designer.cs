@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlItemAanpas
+    partial class UserControlItemEdit
     {
         /// <summary> 
         /// Required designer variable.

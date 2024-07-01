@@ -5,16 +5,16 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlItemAanpas : UserControl
+    public partial class UserControlItemEdit : UserControl
     {
         private Form1 form;
-        public UserControlItemAanpas(Personeel personeel)
+        public UserControlItemEdit(Personeel personeel)
         {
             InitializeComponent();
             this.form = Form1.Instance;
             DisplayEmployeeElements(personeel);
         }
-        public UserControlItemAanpas(MenuItem menuItem)
+        public UserControlItemEdit(MenuItem menuItem)
         {
             InitializeComponent();
             this.form = Form1.Instance;

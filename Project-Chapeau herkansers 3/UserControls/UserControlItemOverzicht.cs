@@ -355,10 +355,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
             switch (selectedLsvItem.Tag)
             {
                 case MenuItem:
-                    this.form.SwitchPanels(new UserControlItemAanpas((MenuItem)selectedLsvItem.Tag));
+                    this.form.SwitchPanels(new UserControlItemEdit((MenuItem)selectedLsvItem.Tag));
                     break;
                 case Personeel:
-                    this.form.SwitchPanels(new UserControlItemAanpas((Personeel)selectedLsvItem.Tag));
+                    this.form.SwitchPanels(new UserControlItemEdit((Personeel)selectedLsvItem.Tag));
                     break;
             }
         }
