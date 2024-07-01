@@ -30,7 +30,6 @@
         {
             orderListView = new ListView();
             BesteldItemIdHdr = new ColumnHeader();
-            BestellingsIdHdr = new ColumnHeader();
             CountHdr = new ColumnHeader();
             DescriptionHdr = new ColumnHeader();
             TitelLbl = new Label();
@@ -46,7 +45,7 @@
             // 
             // orderListView
             // 
-            orderListView.Columns.AddRange(new ColumnHeader[] { BesteldItemIdHdr, BestellingsIdHdr, CountHdr, DescriptionHdr });
+            orderListView.Columns.AddRange(new ColumnHeader[] { BesteldItemIdHdr, CountHdr, DescriptionHdr });
             orderListView.Dock = DockStyle.Top;
             orderListView.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point);
             orderListView.FullRowSelect = true;
@@ -65,12 +64,6 @@
             BesteldItemIdHdr.Tag = "";
             BesteldItemIdHdr.Text = "OrderId";
             BesteldItemIdHdr.Width = 80;
-            // 
-            // BestellingsIdHdr
-            // 
-            BestellingsIdHdr.Tag = "";
-            BestellingsIdHdr.Text = "OrderNumber";
-            BestellingsIdHdr.Width = 120;
             // 
             // CountHdr
             // 
@@ -190,7 +183,6 @@
         private ColumnHeader columnHeader4;
         private ListView orderListView;
         private ColumnHeader BesteldItemIdHdr;
-        private ColumnHeader BestellingsIdHdr;
         private ColumnHeader CountHdr;
         private ColumnHeader DescriptionHdr;
         private Label TitelLbl;

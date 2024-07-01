@@ -17,7 +17,6 @@ namespace DAL
                 MenuItems.Naam, 
                 BesteldeItems.BestellingsId, 
                 Hoeveelheid, 
-                Bestellingen.PersoneelsId,  
                 BesteldeItems.GerechtsStatus 
             FROM 
                 BesteldeItems 
