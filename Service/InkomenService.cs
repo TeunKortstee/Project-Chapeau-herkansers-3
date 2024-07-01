@@ -17,13 +17,10 @@ namespace Service
         {
             return inkomenDao.GetInkomens(betaald, bereidingsPlek);
         }
-        public void UpdateInkomen(List<BesteldeItem> besteldeItems)
+        public void UpdateInkomen(BesteldeItem besteldeItem)
         {
-            foreach (BesteldeItem besteldeItem in besteldeItems)
-            {
-                double nieuweInkomen = besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
-                inkomenDao.UpdateInkomen(nieuweInkomen, besteldeItem.Hoeveelheid, besteldeItem.menuItem);
-            }
+            double nieuweInkomen = besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
+            inkomenDao.UpdateInkomen(nieuweInkomen, besteldeItem.Hoeveelheid, besteldeItem.menuItem);
         }
         public void InsertInkomen(MenuItem menuItem, BereidingsPlek bereidingsPlek)
         {
