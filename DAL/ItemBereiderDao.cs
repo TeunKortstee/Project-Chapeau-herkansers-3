@@ -6,30 +6,7 @@ namespace DAL
 {
     public class ItemBereiderDao : BaseDao
     {
-        public List<BesteldeItem> GetAllBesteldeItems()
-        {
-            string query = @"
-            SELECT 
-                BesteldItemId, 
-                Opmerking, 
-                Instuurtijd,  
-                BesteldeItems.MenuItemId, 
-                MenuItems.Naam, 
-                BesteldeItems.BestellingsId, 
-                Hoeveelheid, 
-                BesteldeItems.GerechtsStatus 
-            FROM 
-                BesteldeItems 
-            JOIN 
-                MenuItems ON MenuItems.MenuItemId = BesteldeItems.MenuItemId 
-            JOIN 
-                Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId
-            WHERE 
-                Instuurtijd >= DATEADD(day, -1, GETDATE());
-            ";
-            return ReadTables(ExecuteSelectQuery(query));
-
-        }
+        
         public void ChangeKeukenStatus(Bestelling bestelling)
         {
             string query = $"UPDATE Keuken SET Status=@Status WHERE BestellingId = @BestellingId;";
@@ -100,6 +77,32 @@ namespace DAL
             }
             return bestellingen;
         }
+
+        public List<BesteldeItem> GetAllBesteldeItems()
+        {
+            string query = @"
+            SELECT 
+                BesteldItemId, 
+                Opmerking, 
+                Instuurtijd,  
+                BesteldeItems.MenuItemId, 
+                MenuItems.Naam, 
+                BesteldeItems.BestellingsId, 
+                Hoeveelheid, 
+                BesteldeItems.GerechtsStatus 
+            FROM 
+                BesteldeItems 
+            JOIN 
+                MenuItems ON MenuItems.MenuItemId = BesteldeItems.MenuItemId 
+            JOIN 
+                Bestellingen ON Bestellingen.BestellingsId = BesteldeItems.BesteldItemId
+            WHERE 
+                Instuurtijd >= DATEADD(day, -1, GETDATE());
+            ";
+            return ReadTables(ExecuteSelectQuery(query));
+
+        }
+
         private List<BesteldeItem> ReadTables(DataTable dataTable)
         {
             List<BesteldeItem> items = new List<BesteldeItem>();
@@ -110,7 +113,6 @@ namespace DAL
                     BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
                     Opmerking = row["Opmerking"].ToString(),
                     InstuurTijd = (DateTime)row["Instuurtijd"],
-                    //BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
                     Naam = row["Naam"].ToString(),
                     Status = (GerechtsStatus)row["GerechtsStatus"]
