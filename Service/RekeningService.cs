@@ -12,74 +12,59 @@ namespace Service
     {
         private RekeningDao rekeningDao;
         private BestellingDao bestellingDao;
-        
+        private BelastingService belastingService;
         public RekeningService()
         {
             rekeningDao = new RekeningDao();
             bestellingDao = new BestellingDao();
-        }       
+            belastingService = new BelastingService();
+        }
         public int InsertRekening(Rekening rekening)
         {
             return rekeningDao.InsertRekening(rekening);
         }
-        public Rekening CreateRekening(Tafel tafel) {
-
+        public Rekening MaakRekeningObject(Tafel tafel)
+        {
             List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafel.Id);
             double totaalPrijs = 0.00;
-            double belasting = 0.00;
-
-            foreach (Bestelling bestelling in bestellingen) {
-                foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
-
+            double belastingNormaal = 0.00;
+            double belastingAlcoholisch = 0.00;
+            foreach (Bestelling bestelling in bestellingen)
+            {
+                foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+                {
                     totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
-                    belasting += BerekenBelasting(besteldeItem);
                 }
+                double[] belastingCategorieen = belastingService.BerekenBelasting(bestelling);
+                belastingNormaal += belastingCategorieen[0];
+                belastingAlcoholisch += belastingCategorieen[1];
             }
-
-            Rekening rekening = new Rekening(bestellingen, tafel,totaalPrijs,belasting);
+            Rekening rekening = new Rekening(bestellingen, tafel, totaalPrijs, belastingNormaal, belastingAlcoholisch);
             return rekening;
         }
-
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
             return rekeningDao.GetBetaaldeRekeningen(betaald);
         }
         public double[] GetPaymentPerPerson(double price, int people)
         {
-
             double[] payments = new double[people];
             double division = Math.Round(price / people, 2, MidpointRounding.ToZero);
             for (int i = 0; i < people; i++)
             {
                 payments[i] = division;
-
-
             }
-
             // Voor als er door een oneven getal word gedeeld
             if (division * people < price)
             {
                 double remainder = price - division;
                 payments[0] += remainder;
             }
-
-
-
-
             return payments;
-
         }
         public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
         {
             rekeningDao.VoegOpmerkingenToe(rekening, opmerkingen);
-
         }
-
-
     }
-
-
-        
-    
-
 }

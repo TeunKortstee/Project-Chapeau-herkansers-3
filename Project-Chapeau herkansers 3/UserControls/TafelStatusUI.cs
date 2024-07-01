@@ -71,7 +71,7 @@ namespace Project_Chapeau_herkansers_3
             BestellingService bestellingService = new BestellingService();
             if (bestellingService.GetBestellingen(tafel.Id).Count > 0)
             {
-                Rekening gemaakteRekening = rekeningService.CreateRekening(tafel);
+                Rekening gemaakteRekening = rekeningService.MaakRekeningObject(tafel);
                 Afrekenen afrekenScherm = new Afrekenen(gemaakteRekening);
                 Exit(afrekenScherm);
             }

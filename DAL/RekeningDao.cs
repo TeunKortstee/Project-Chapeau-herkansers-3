@@ -19,13 +19,8 @@ namespace DAL
         // Lucas
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
-            string query = "SELECT Rekeningen.RekeningId, Rekeningen.TafelID, Rekeningen.Betaald, Rekeningen.Datum, Rekeningen.Belasting, Rekeningen.Opmerkingen, Tafels.TableNr, Tafels.Capaciteit, Tafels.StatusId FROM Rekeningen JOIN Tafels ON Rekeningen.TafelId=Tafels.TableNr WHERE Rekeningen.Betaald = @Betaald";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@Betaald", betaald),
-
-            };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            string query = "SELECT Rekeningen.RekeningId, Rekeningen.TafelID, Rekeningen.Datum, Rekeningen.BelastingNormaal, Rekeningen.BelastingAlcoholisch, Rekeningen.Opmerkingen, Tafels.TableNr, Tafels.Capaciteit, Tafels.StatusId FROM Rekeningen JOIN Tafels ON Rekeningen.TafelId=Tafels.TableNr";
+            return ReadTables(ExecuteSelectQuery(query));
         }
         private List<Rekening> ReadTables(DataTable dataTable)
         {
@@ -37,9 +32,9 @@ namespace DAL
                 Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
                     tafel, 
                     (double)row["TotaalPrijs"],
-                    (bool)row["Betaald"], 
                     (DateTime)row["Datum"],
-                    (double)row["Belasting"],
+                    (double)row["BelastingNormaal"],
+                    (double)row["BelastingAlcoholisch"],
                     (string)row["Opmerkingen"]
                     );
                 
@@ -52,9 +47,7 @@ namespace DAL
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@ID", rekening.RekeningId),
-                new SqlParameter("@TableNr", rekening.Tafel.Id),
-                
-
+                new SqlParameter("@TableNr", rekening.Tafel.Id),                
             };
             ExecuteEditQuery(query, sqlParameters);
         }
@@ -70,13 +63,13 @@ namespace DAL
         }
         public int InsertRekening(Rekening rekening)
         {
-            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,Betaald,Belasting) VALUES (@TafelId,@TotaalPrijs,@Betaald,@Belasting) SELECT CAST(scope_identity() AS int)";
+            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,BelastingNormaal,BelastingAlcoholisch) VALUES (@TafelId,@TotaalPrijs,@BelastingNormaal,@BelastingAlcoholisch) SELECT CAST(scope_identity() AS int)";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@TafelId", rekening.Tafel.Id),
-                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
-                new SqlParameter("@Betaald", rekening.Betaald),
-                new SqlParameter("@Belasting", rekening.Belasting)
+                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),
+                new SqlParameter("@BelastingNormaal", rekening.BelastingNormaal),
+                new SqlParameter("@BelastingAlcoholisch", rekening.BelastingAlcoholisch)
 
             };
             return ExecuteEditQueryReturnID(query, sqlParameters);

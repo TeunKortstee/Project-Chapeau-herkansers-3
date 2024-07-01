@@ -56,7 +56,6 @@ namespace DAL
                     IsAlcoholisch = (bool)row["Alcoholisch"]
 
                 };
-
                 BesteldeItem item = new BesteldeItem(_menuItem)
                 {
                     BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
@@ -72,7 +71,5 @@ namespace DAL
             }
             return items;
         }
-
-
     }
 }

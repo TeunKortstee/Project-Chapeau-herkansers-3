@@ -8,29 +8,28 @@ namespace Model
         public Tafel Tafel { get; set; }
         public double TotaalPrijs { get; set; }
         public double BelastingNormaal { get; set; }
-        public double BelastingAlcoholisch { get; set; }
-        public bool Betaald { get; set; }        
+        public double BelastingAlcoholisch { get; set; }     
         public DateTime Datum { get; set; }
         public string Opmerkingen { get; set; }
         public List<Bestelling> Bestellingen { get; set; }
-        public Rekening(int _RekeningId, Tafel _Tafel, double _TotaalPrijs, bool _Betaald, DateTime _Datum, double _Belasting, string _Opmerkingen) {
+        public Rekening(int _RekeningId, Tafel _Tafel, double _TotaalPrijs, DateTime _Datum, double _BelastingNormaal, double _BelastingAlcoholisch, string _Opmerkingen) {
             Bestellingen = new List<Bestelling>();
             RekeningId = _RekeningId;
             Tafel = _Tafel;
-            TotaalPrijs = _TotaalPrijs;
-            Betaald = _Betaald;
+            TotaalPrijs = _TotaalPrijs;           
             Datum = _Datum;
-            Belasting = _Belasting;
+            BelastingNormaal = _BelastingNormaal;
+            BelastingAlcoholisch = _BelastingAlcoholisch;
             Opmerkingen = _Opmerkingen;
         }
-        public Rekening(List<Bestelling> _Bestellingen, Tafel _Tafel, double _TotaalPrijs, double _Belasting)
+        public Rekening(List<Bestelling> _Bestellingen, Tafel _Tafel, double _TotaalPrijs, double _BelastingNormaal, double _BelastingAlcoholisch)
         {
             Bestellingen = _Bestellingen;
             RekeningId = 0;
             Tafel = _Tafel;
             TotaalPrijs = _TotaalPrijs;
-            Betaald = false;            
-            Belasting = _Belasting;
+            BelastingNormaal = _BelastingNormaal;
+            BelastingAlcoholisch = _BelastingAlcoholisch;
             Datum = DateTime.Now;
             Opmerkingen = "";
         }
