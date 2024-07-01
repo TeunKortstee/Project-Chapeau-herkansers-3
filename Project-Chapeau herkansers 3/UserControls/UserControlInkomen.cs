@@ -15,23 +15,23 @@ namespace Project_Chapeau_herkansers_3.UserControls
             InitializeComponent();
             this.form = Form1.Instance;
             this.betalingService = new BetalingService();
-            FillSalesListView();
+            //FillSalesListView();
         }
 
         #region ListView
-        private void FillSalesListView()
-        {
-            double totaleInkomens = 0;
-            SetListViewColumns();
+        //private void FillSalesListView()
+        //{
+        //    double totaleInkomens = 0;
+        //    SetListViewColumns();
 
-            foreach (Betaling betaling in betalingService.GetBetalingen(betaald))
-            {
-                ListViewItem item = DisplayBetalingen(betaling);
-                lsvPaidBills.Items.Add(item);
-                totaleInkomens += betaling.Bedrag;
-            }
-            lblTotalIncome.Text += $"€ {totaleInkomens:00.00}";
-        }
+        //    foreach (Betaling betaling in betalingService.GetBetalingen(betaald))
+        //    {
+        //        ListViewItem item = DisplayBetalingen(betaling);
+        //        lsvPaidBills.Items.Add(item);
+        //        totaleInkomens += betaling.Bedrag;
+        //    }
+        //    lblTotalIncome.Text += $"€ {totaleInkomens:00.00}";
+        //}
         #endregion
         private void SetListViewColumns()
         {
