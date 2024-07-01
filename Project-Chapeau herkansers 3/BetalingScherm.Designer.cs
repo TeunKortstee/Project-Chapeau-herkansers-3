@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.payementsPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.betalingenPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.inputSplitAmount = new System.Windows.Forms.TextBox();
             this.lblSplitAmount = new System.Windows.Forms.Label();
             this.btnConfirmSplit = new System.Windows.Forms.Button();
             this.lblAmountTitle = new System.Windows.Forms.Label();
-            this.lblAmountToBePaid = new System.Windows.Forms.Label();
-            this.lblAmountPaid = new System.Windows.Forms.Label();
+            this.labelHoeveelheidOmTeBetalen = new System.Windows.Forms.Label();
+            this.labelHoeveelheidBetaald = new System.Windows.Forms.Label();
             this.lblAmountTitle2 = new System.Windows.Forms.Label();
-            this.lblChange = new System.Windows.Forms.Label();
+            this.labelWisselgeld = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPay = new System.Windows.Forms.Button();
             this.lblTipTitle = new System.Windows.Forms.Label();
-            this.lblTip = new System.Windows.Forms.Label();
+            this.labelFooi = new System.Windows.Forms.Label();
             this.lblSplitAmountErrorText = new System.Windows.Forms.Label();
             this.lblPaymentErrorText = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // payementsPanel
+            // betalingenPanel
             // 
-            this.payementsPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.payementsPanel.AutoScroll = true;
-            this.payementsPanel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.payementsPanel.Location = new System.Drawing.Point(25, 114);
-            this.payementsPanel.Name = "payementsPanel";
-            this.payementsPanel.Size = new System.Drawing.Size(355, 297);
-            this.payementsPanel.TabIndex = 0;
+            this.betalingenPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.betalingenPanel.AutoScroll = true;
+            this.betalingenPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.betalingenPanel.Location = new System.Drawing.Point(25, 114);
+            this.betalingenPanel.Name = "betalingenPanel";
+            this.betalingenPanel.Size = new System.Drawing.Size(355, 297);
+            this.betalingenPanel.TabIndex = 0;
             // 
             // inputSplitAmount
             // 
@@ -93,27 +93,27 @@
             this.lblAmountTitle.TabIndex = 4;
             this.lblAmountTitle.Text = "Hoeveel er betaald moet worden: ";
             // 
-            // lblAmountToBePaid
+            // labelHoeveelheidOmTeBetalen
             // 
-            this.lblAmountToBePaid.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAmountToBePaid.Location = new System.Drawing.Point(221, 446);
-            this.lblAmountToBePaid.Name = "lblAmountToBePaid";
-            this.lblAmountToBePaid.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblAmountToBePaid.Size = new System.Drawing.Size(159, 25);
-            this.lblAmountToBePaid.TabIndex = 5;
-            this.lblAmountToBePaid.Text = "€  0.00\r\n";
-            this.lblAmountToBePaid.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.labelHoeveelheidOmTeBetalen.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelHoeveelheidOmTeBetalen.Location = new System.Drawing.Point(221, 446);
+            this.labelHoeveelheidOmTeBetalen.Name = "labelHoeveelheidOmTeBetalen";
+            this.labelHoeveelheidOmTeBetalen.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelHoeveelheidOmTeBetalen.Size = new System.Drawing.Size(159, 25);
+            this.labelHoeveelheidOmTeBetalen.TabIndex = 5;
+            this.labelHoeveelheidOmTeBetalen.Text = "€  0.00\r\n";
+            this.labelHoeveelheidOmTeBetalen.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // lblAmountPaid
+            // labelHoeveelheidBetaald
             // 
-            this.lblAmountPaid.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAmountPaid.Location = new System.Drawing.Point(221, 421);
-            this.lblAmountPaid.Name = "lblAmountPaid";
-            this.lblAmountPaid.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblAmountPaid.Size = new System.Drawing.Size(159, 25);
-            this.lblAmountPaid.TabIndex = 7;
-            this.lblAmountPaid.Text = "€  0.00\r\n";
-            this.lblAmountPaid.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.labelHoeveelheidBetaald.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelHoeveelheidBetaald.Location = new System.Drawing.Point(221, 421);
+            this.labelHoeveelheidBetaald.Name = "labelHoeveelheidBetaald";
+            this.labelHoeveelheidBetaald.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelHoeveelheidBetaald.Size = new System.Drawing.Size(159, 25);
+            this.labelHoeveelheidBetaald.TabIndex = 7;
+            this.labelHoeveelheidBetaald.Text = "€  0.00\r\n";
+            this.labelHoeveelheidBetaald.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblAmountTitle2
             // 
@@ -121,20 +121,20 @@
             this.lblAmountTitle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblAmountTitle2.Location = new System.Drawing.Point(25, 425);
             this.lblAmountTitle2.Name = "lblAmountTitle2";
-            this.lblAmountTitle2.Size = new System.Drawing.Size(55, 15);
+            this.lblAmountTitle2.Size = new System.Drawing.Size(117, 15);
             this.lblAmountTitle2.TabIndex = 6;
-            this.lblAmountTitle2.Text = "Betaald: ";
+            this.lblAmountTitle2.Text = "Betaald (excl. fooi): ";
             // 
-            // lblChange
+            // labelWisselgeld
             // 
-            this.lblChange.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblChange.Location = new System.Drawing.Point(221, 471);
-            this.lblChange.Name = "lblChange";
-            this.lblChange.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblChange.Size = new System.Drawing.Size(159, 25);
-            this.lblChange.TabIndex = 9;
-            this.lblChange.Text = "€  0.00\r\n";
-            this.lblChange.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.labelWisselgeld.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelWisselgeld.Location = new System.Drawing.Point(221, 471);
+            this.labelWisselgeld.Name = "labelWisselgeld";
+            this.labelWisselgeld.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelWisselgeld.Size = new System.Drawing.Size(159, 25);
+            this.labelWisselgeld.TabIndex = 9;
+            this.labelWisselgeld.Text = "€  0.00\r\n";
+            this.labelWisselgeld.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
             // 
@@ -168,16 +168,16 @@
             this.lblTipTitle.TabIndex = 11;
             this.lblTipTitle.Text = "Fooi:";
             // 
-            // lblTip
+            // labelFooi
             // 
-            this.lblTip.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTip.Location = new System.Drawing.Point(221, 496);
-            this.lblTip.Name = "lblTip";
-            this.lblTip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTip.Size = new System.Drawing.Size(159, 25);
-            this.lblTip.TabIndex = 12;
-            this.lblTip.Text = "€  0.00\r\n";
-            this.lblTip.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.labelFooi.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelFooi.Location = new System.Drawing.Point(221, 496);
+            this.labelFooi.Name = "labelFooi";
+            this.labelFooi.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelFooi.Size = new System.Drawing.Size(159, 25);
+            this.labelFooi.TabIndex = 12;
+            this.labelFooi.Text = "€  0.00\r\n";
+            this.labelFooi.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblSplitAmountErrorText
             // 
@@ -205,19 +205,19 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lblPaymentErrorText);
             this.Controls.Add(this.lblSplitAmountErrorText);
-            this.Controls.Add(this.lblTip);
+            this.Controls.Add(this.labelFooi);
             this.Controls.Add(this.lblTipTitle);
             this.Controls.Add(this.btnPay);
-            this.Controls.Add(this.lblChange);
+            this.Controls.Add(this.labelWisselgeld);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblAmountPaid);
+            this.Controls.Add(this.labelHoeveelheidBetaald);
             this.Controls.Add(this.lblAmountTitle2);
-            this.Controls.Add(this.lblAmountToBePaid);
+            this.Controls.Add(this.labelHoeveelheidOmTeBetalen);
             this.Controls.Add(this.lblAmountTitle);
             this.Controls.Add(this.btnConfirmSplit);
             this.Controls.Add(this.lblSplitAmount);
             this.Controls.Add(this.inputSplitAmount);
-            this.Controls.Add(this.payementsPanel);
+            this.Controls.Add(this.betalingenPanel);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "BetalingScherm";
             this.Size = new System.Drawing.Size(407, 631);
@@ -228,19 +228,19 @@
 
         #endregion
 
-        private FlowLayoutPanel payementsPanel;
+        private FlowLayoutPanel betalingenPanel;
         private TextBox inputSplitAmount;
         private Label lblSplitAmount;
         private Button btnConfirmSplit;
         private Label lblAmountTitle;
-        private Label lblAmountToBePaid;
-        private Label lblAmountPaid;
+        private Label labelHoeveelheidOmTeBetalen;
+        private Label labelHoeveelheidBetaald;
         private Label lblAmountTitle2;
-        private Label lblChange;
+        private Label labelWisselgeld;
         private Label label2;
         private Button btnPay;
         private Label lblTipTitle;
-        private Label lblTip;
+        private Label labelFooi;
         private Label lblSplitAmountErrorText;
         private Label lblPaymentErrorText;
     }

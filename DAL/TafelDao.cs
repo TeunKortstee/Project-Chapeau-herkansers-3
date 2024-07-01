@@ -22,7 +22,7 @@ namespace DAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        private List<Tafel> ReadTables(DataTable dataTable)
+        public List<Tafel> ReadTables(DataTable dataTable)
         {
             List<Tafel> tafels = new List<Tafel>();
             foreach (DataRow dr in dataTable.Rows)

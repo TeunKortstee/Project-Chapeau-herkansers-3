@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class CommentScreen
+    partial class OpmerkingScherm
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,13 +31,13 @@
             this.anyCommentsLbl = new System.Windows.Forms.Label();
             this.btnAddComment = new System.Windows.Forms.Button();
             this.btnContinuePayment = new System.Windows.Forms.Button();
-            this.panelAddComment = new System.Windows.Forms.Panel();
+            this.panelVoegOpmerkingToe = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
-            this.lblSaved = new System.Windows.Forms.Label();
+            this.labelFeedback = new System.Windows.Forms.Label();
             this.btnConfirmComment = new System.Windows.Forms.Button();
-            this.inputComment = new System.Windows.Forms.TextBox();
+            this.inputOpmerkingen = new System.Windows.Forms.TextBox();
             this.lblTypeComment = new System.Windows.Forms.Label();
-            this.panelAddComment.SuspendLayout();
+            this.panelVoegOpmerkingToe.SuspendLayout();
             this.SuspendLayout();
             // 
             // anyCommentsLbl
@@ -76,15 +76,15 @@
             // 
             // panelAddComment
             // 
-            this.panelAddComment.Controls.Add(this.btnBack);
-            this.panelAddComment.Controls.Add(this.lblSaved);
-            this.panelAddComment.Controls.Add(this.btnConfirmComment);
-            this.panelAddComment.Controls.Add(this.inputComment);
-            this.panelAddComment.Controls.Add(this.lblTypeComment);
-            this.panelAddComment.Location = new System.Drawing.Point(39, 118);
-            this.panelAddComment.Name = "panelAddComment";
-            this.panelAddComment.Size = new System.Drawing.Size(332, 404);
-            this.panelAddComment.TabIndex = 3;
+            this.panelVoegOpmerkingToe.Controls.Add(this.btnBack);
+            this.panelVoegOpmerkingToe.Controls.Add(this.labelFeedback);
+            this.panelVoegOpmerkingToe.Controls.Add(this.btnConfirmComment);
+            this.panelVoegOpmerkingToe.Controls.Add(this.inputOpmerkingen);
+            this.panelVoegOpmerkingToe.Controls.Add(this.lblTypeComment);
+            this.panelVoegOpmerkingToe.Location = new System.Drawing.Point(39, 118);
+            this.panelVoegOpmerkingToe.Name = "panelAddComment";
+            this.panelVoegOpmerkingToe.Size = new System.Drawing.Size(332, 404);
+            this.panelVoegOpmerkingToe.TabIndex = 3;
             // 
             // btnBack
             // 
@@ -100,12 +100,12 @@
             // 
             // lblSaved
             // 
-            this.lblSaved.AutoSize = true;
-            this.lblSaved.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSaved.Location = new System.Drawing.Point(24, 356);
-            this.lblSaved.Name = "lblSaved";
-            this.lblSaved.Size = new System.Drawing.Size(0, 20);
-            this.lblSaved.TabIndex = 3;
+            this.labelFeedback.AutoSize = true;
+            this.labelFeedback.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelFeedback.Location = new System.Drawing.Point(24, 356);
+            this.labelFeedback.Name = "lblSaved";
+            this.labelFeedback.Size = new System.Drawing.Size(0, 20);
+            this.labelFeedback.TabIndex = 3;
             // 
             // btnConfirmComment
             // 
@@ -121,11 +121,11 @@
             // 
             // inputComment
             // 
-            this.inputComment.Location = new System.Drawing.Point(24, 67);
-            this.inputComment.Multiline = true;
-            this.inputComment.Name = "inputComment";
-            this.inputComment.Size = new System.Drawing.Size(281, 235);
-            this.inputComment.TabIndex = 1;
+            this.inputOpmerkingen.Location = new System.Drawing.Point(24, 67);
+            this.inputOpmerkingen.Multiline = true;
+            this.inputOpmerkingen.Name = "inputComment";
+            this.inputOpmerkingen.Size = new System.Drawing.Size(281, 235);
+            this.inputOpmerkingen.TabIndex = 1;
             // 
             // lblTypeComment
             // 
@@ -142,14 +142,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.panelAddComment);
+            this.Controls.Add(this.panelVoegOpmerkingToe);
             this.Controls.Add(this.btnContinuePayment);
             this.Controls.Add(this.btnAddComment);
             this.Controls.Add(this.anyCommentsLbl);
             this.Name = "CommentScreen";
             this.Size = new System.Drawing.Size(407, 631);
-            this.panelAddComment.ResumeLayout(false);
-            this.panelAddComment.PerformLayout();
+            this.panelVoegOpmerkingToe.ResumeLayout(false);
+            this.panelVoegOpmerkingToe.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,11 +160,11 @@
         private Label anyCommentsLbl;
         private Button btnAddComment;
         private Button btnContinuePayment;
-        private Panel panelAddComment;
+        private Panel panelVoegOpmerkingToe;
         private Button btnConfirmComment;
-        private TextBox inputComment;
+        private TextBox inputOpmerkingen;
         private Label lblTypeComment;
-        private Label lblSaved;
+        private Label labelFeedback;
         private Button btnBack;
     }
 }

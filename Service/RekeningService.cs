@@ -12,123 +12,66 @@ namespace Service
     {
         private RekeningDao rekeningDao;
         private BestellingDao bestellingDao;
-        private const double vatNormal = 0.06;
-        private const double vatAlcohol = 0.21;
-
-
+        private BetalingDao betalingDao;
+        private BelastingService belastingService;
         public RekeningService()
         {
             rekeningDao = new RekeningDao();
             bestellingDao = new BestellingDao();
-        }
-        public Rekening GetRekening(int bestellingID)
-        {
-            return rekeningDao.GetRekening(bestellingID);
-
+            betalingDao = new BetalingDao();
+            belastingService = new BelastingService();
         }
         public int InsertRekening(Rekening rekening)
         {
-
             return rekeningDao.InsertRekening(rekening);
         }
-
-
-        public static double BerekenBelasting(BesteldeItem b) {
-
-            double itemTotal = (b.menuItem.Prijs * b.Hoeveelheid);
-
-            if (b.menuItem.IsAlcoholisch)
+        public Rekening MaakRekeningObject(Tafel tafel)
+        {
+            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafel.Id);
+            double totaalPrijs = 0.00;
+            double belastingNormaal = 0.00;
+            double belastingAlcoholisch = 0.00;
+            foreach (Bestelling bestelling in bestellingen)
             {
-                return itemTotal * vatAlcohol;
-
-            }
-            return itemTotal * vatNormal;
-
-
-
-
-        }
-
-
-
-        public Rekening CreateRekening(int tafelID) {
-
-            Rekening? r = rekeningDao.GetRekening(tafelID);
-            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafelID);
-            if (r == null) {
-
-                double totaalPrijs = 0.00;
-                double belasting = 0.00;
-
-
-
-
-
-                foreach (Bestelling bestelling in bestellingen) {
-
-                    foreach (BesteldeItem besteldeItem in bestelling.BestellingItems) {
-
-                        totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
-                        belasting += BerekenBelasting(besteldeItem);
-
-
-
-
-                    }
+                foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
+                {
+                    totaalPrijs += besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid;
                 }
-
-                r = new Rekening(0, tafelID, totaalPrijs, false, DateTime.Now, belasting,"");
-
-                int ID = InsertRekening(r);
-
-                r.RekeningId = ID;
+                double[] belastingCategorieen = belastingService.BerekenBelasting(bestelling);
+                belastingNormaal += belastingCategorieen[0];
+                belastingAlcoholisch += belastingCategorieen[1];
             }
-
-            r.Bestellingen = bestellingen;
-            return r;
-
+            Rekening rekening = new Rekening(bestellingen, tafel, totaalPrijs, belastingNormaal, belastingAlcoholisch);
+            return rekening;
         }
-
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
             return rekeningDao.GetBetaaldeRekeningen(betaald);
         }
         public double[] GetPaymentPerPerson(double price, int people)
         {
-
             double[] payments = new double[people];
             double division = Math.Round(price / people, 2, MidpointRounding.ToZero);
             for (int i = 0; i < people; i++)
             {
                 payments[i] = division;
-
-
             }
-
             // Voor als er door een oneven getal word gedeeld
             if (division * people < price)
             {
                 double remainder = price - division;
                 payments[0] += remainder;
             }
-
-
-
-
             return payments;
-
         }
-        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
-        {
-            rekeningDao.VoegOpmerkingenToe(rekening, opmerkingen);
-
+        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen) {
+            rekening.Opmerkingen = opmerkingen;   
+        }        
+        public void BetaalRekening(Rekening rekening) {
+            // Voeg fooi aan btw toe
+            belastingService.BetaalBelastingOverFooi(rekening);
+            int rekeningID = InsertRekening(rekening);
+            betalingDao.InsertBetalingen(rekening.Betalingen);                  
         }
-
-
     }
-
-
-        
-    
-
 }

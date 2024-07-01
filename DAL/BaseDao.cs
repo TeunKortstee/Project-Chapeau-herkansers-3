@@ -6,7 +6,7 @@ namespace DAL
 {
     public abstract class BaseDao
     {
-        private SqlDataAdapter adapter;
+        public SqlDataAdapter adapter;
         private SqlConnection conn;
 
         public BaseDao()
@@ -33,7 +33,7 @@ namespace DAL
             return conn;
         }
 
-        private void CloseConnection()
+        public void CloseConnection()
         {
             conn.Close();
         }

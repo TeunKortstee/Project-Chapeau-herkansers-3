@@ -12,105 +12,66 @@ namespace Service
     public class BetalingService
     {
         private BetalingDao betalingDao;
-        private RekeningDao rekeningDao;
-        private const double vatNormal = 0.06;
-        private const double vatAlcohol = 0.21;
-
-
+        private RekeningDao rekeningDao;       
         public BetalingService()
         {
             betalingDao = new BetalingDao();
             rekeningDao = new RekeningDao();
 
         }
-
-        public double AddDoubleArray(double[] array) 
+        public double VoegDoublesBijElkaar(double[] doubleArray) 
         {
-
-            double result = 0.00;
-            foreach (double d in array) {
-                result += d;
-            
+            double resultaat = 0.00;
+            foreach (double doubleItem in doubleArray) {
+                resultaat += doubleItem;            
             }
-            return result;
+            return resultaat;
         }
-        public double[] GetTipPerPerson(int people)
+        public double[] KrijgGesplitsteFooi(int hoeveelheidMensen)
         {
-            double[] tips = new double[people];
-            for (int i = 0; i < people; i++)
+            double[] fooiLijst = new double[hoeveelheidMensen];
+            for (int i = 0; i < hoeveelheidMensen; i++)
             {
-                tips[i] = 0.00;
-
-
+                fooiLijst[i] = 0.00;
             }
-            return tips;
+            return fooiLijst;
         }
-
-        public double CalculateChange(double toPay, double amountPaid) 
+        public double BerekenWisselgeld(double teBetalen, double betaald) 
         {
-
-
-
-            return amountPaid - toPay;
-        
-        
+            return betaald - teBetalen;
         }
-        public double[] GetPaymentPerPerson(double price, int people)
+        public double[] KrijgBetalingPerPersoon(double prijs, int mensen)
         {
-
-            double[] payments = new double[people];
-            double division = Math.Round(price / people, 2, MidpointRounding.ToZero);
-            for (int i = 0; i < people; i++)
+            double[] betalingen = new double[mensen];
+            double deling = Math.Round(prijs / mensen, 2, MidpointRounding.ToZero);
+            for (int i = 0; i < mensen; i++)
             {
-                payments[i] = division;
-
-
+                betalingen[i] = deling;
             }
-
             // Voor als er door een oneven getal word gedeeld
-            double remainder = price - (division * people);
-            if (remainder > 0)
-            {
-                
-                payments[0] = Math.Round(division+remainder,2,MidpointRounding.ToEven);
+            double rest = prijs - (deling * mensen);
+            if (rest > 0)
+            {                
+                betalingen[0] = Math.Round(deling+rest,2,MidpointRounding.ToEven);
             }
-
-
-
-
-            return payments;
-
+            return betalingen;
         }
-        public int ConfirmPayments(Rekening bill, List<SplitBillItemObj> payments) 
+        public int BevestigBetalingen(Rekening rekening, List<GesplitsteRekeningObject> gesplitsteRekeningObjecten) 
         {
-
-
-            double totalAmountPaid = 0.00;
-
-            List<Betaling> betalingen = new List<Betaling>();
-            
-            foreach (SplitBillItemObj payment in payments) {
-
-                if (payment.payment > 0 && payment.tip >= 0) {
-                    totalAmountPaid += payment.payment;
-                    betalingen.Add(new Betaling(0, (int)payment.method, payment.payment, bill.RekeningId, payment.tip));
-                    
+            double totaalHoeveelheidBetaald = 0.00;
+            List<Betaling> betalingen = new List<Betaling>();            
+            foreach (GesplitsteRekeningObject betaling in gesplitsteRekeningObjecten) {
+                if (betaling.betaling > 0 && betaling.fooi >= 0) {
+                    totaalHoeveelheidBetaald += betaling.betaling;                    
+                    betalingen.Add(new Betaling(0, (int)betaling.betaalMethode, betaling.betaling, betaling.fooi,rekening));                    
                 } else {
                     return 1;
-
                 }
             }
-
-            if (totalAmountPaid >= bill.TotaalPrijs) {
+            if (totaalHoeveelheidBetaald >= rekening.TotaalPrijs) {
                 // Succes!
-                foreach (Betaling betaling in betalingen)
-                {
-                    betalingDao.InsertBetaling(betaling);
-                }
-                rekeningDao.RekeningBetaald(bill);
-
+                rekening.Betalingen = betalingen;                
                 return 2;
-
             }
             return 0;
         }
@@ -119,9 +80,4 @@ namespace Service
             return betalingDao.GetBetalingen(betaald);
         }
     }
-
-
-        
-    
-
 }
