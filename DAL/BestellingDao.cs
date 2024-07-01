@@ -11,12 +11,12 @@ namespace DAL
 {
     public class BestellingDao : BaseDao
     {
-        public List<Bestelling> GetBestellingen(int tafelID)
+        public List<Bestelling> GetBestellingen(Tafel tafel)
         {
-            string query = "SELECT BestellingsId, PersoneelsId, TableNr, Betaald FROM Bestellingen WHERE TableNr = @tafelId AND Betaald = 0";
+            string query = "SELECT BestellingsId, TableNr, Betaald FROM Bestellingen WHERE TableNr = @tafelId AND Betaald = 0";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@tafelId", tafelID),
+                new SqlParameter("@tafelId", tafel.Id),
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -27,7 +27,6 @@ namespace DAL
             foreach (DataRow row in dataTable.Rows)
             {               
                 Bestelling bestelling = new Bestelling(Convert.ToInt32(row["BestellingsId"]),
-                     new Personeel(),
                     (bool)row["Betaald"],
                     Convert.ToInt32(row["TableNr"]));
 

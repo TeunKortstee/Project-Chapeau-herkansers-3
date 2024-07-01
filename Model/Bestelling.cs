@@ -23,7 +23,7 @@
 
         }
 
-        public Bestelling(int _bestellingId, Personeel _personeel, bool _betaald, int _tafelId) //Laurens
+        public Bestelling(int _bestellingId, bool _betaald, int _tafelId) //Laurens
         {
             besteldeItems = new List<BesteldeItem>();
             bestellingId = _bestellingId;
