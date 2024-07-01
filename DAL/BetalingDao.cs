@@ -40,18 +40,24 @@ namespace DAL
         public void InsertBetalingen(List<Betaling> betalingen)
         {
             DataTable table = new DataTable();
+           
             table.Columns.Add("Methode",typeof(int));
             table.Columns.Add("Bedrag", typeof(double));
             table.Columns.Add("RekeningID", typeof(int));
             table.Columns.Add("Fooi", typeof(double));
-
+                    
             foreach (Betaling betaling in betalingen) {
-                table.Rows.Add((int)betaling.Methode,betaling.Bedrag,betaling.Rekening.RekeningId,betaling.Fooi);            
+                int methode = (int)betaling.Methode;
+                table.Rows.Add(methode,betaling.Bedrag,betaling.Rekening.RekeningId,betaling.Fooi);            
             }            
             try
             {
                 SqlConnection connection = OpenConnection();
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(connection)) {
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        sqlBulkCopy.ColumnMappings.Add(column.ColumnName,column.ColumnName);
+                    }
                     sqlBulkCopy.DestinationTableName = "Betalingen";
                     sqlBulkCopy.WriteToServer(table);
                 }                
