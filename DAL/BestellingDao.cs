@@ -27,9 +27,8 @@ namespace DAL
             foreach (DataRow row in dataTable.Rows)
             {               
                 Bestelling bestelling = new Bestelling(Convert.ToInt32(row["BestellingsId"]),
-                    (bool)row["Betaald"],
-                    Convert.ToInt32(row["TableNr"]));
-
+                (bool)row["Betaald"],
+                Convert.ToInt32(row["TableNr"]));
                 bestelling.BesteldeItems = besteldeItemDao.GetItemsFromBestelling(bestelling);
                 bestellingen.Add(bestelling);
             }
