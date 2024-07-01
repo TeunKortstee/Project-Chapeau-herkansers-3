@@ -16,9 +16,9 @@ namespace Service
         {
             bestellingDao = new BestellingDao();
         }
-        public List<Bestelling> GetBestellingen(int tafelID)
+        public List<Bestelling> GetBestellingen(Tafel tafel)
         {
-            return bestellingDao.GetBestellingen(tafelID);
+            return bestellingDao.GetBestellingen(tafel);
 
         }
         

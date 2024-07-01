@@ -27,7 +27,7 @@ namespace Service
         }
         public Rekening MaakRekeningObject(Tafel tafel)
         {
-            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafel.Id);
+            List<Bestelling> bestellingen = bestellingDao.GetBestellingen(tafel);
             double totaalPrijs = 0.00;
             double belastingNormaal = 0.00;
             double belastingAlcoholisch = 0.00;

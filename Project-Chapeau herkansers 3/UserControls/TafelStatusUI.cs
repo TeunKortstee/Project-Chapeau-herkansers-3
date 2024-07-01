@@ -69,7 +69,7 @@ namespace Project_Chapeau_herkansers_3
         {
             RekeningService rekeningService = new RekeningService();
             BestellingService bestellingService = new BestellingService();
-            if (bestellingService.GetBestellingen(tafel.Id).Count > 0)
+            if (bestellingService.GetBestellingen(tafel).Count > 0)
             {
                 Rekening gemaakteRekening = rekeningService.MaakRekeningObject(tafel);
                 Afrekenen afrekenScherm = new Afrekenen(gemaakteRekening);
@@ -77,7 +77,7 @@ namespace Project_Chapeau_herkansers_3
             }
             else
             {
-                MessageBox.Show("There are no items to check out!");
+                MessageBox.Show("Er zijn geen items om af te rekenen!");
             }
         }
         public void SetStringName(string message)
