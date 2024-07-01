@@ -10,7 +10,7 @@ namespace Model
         public MenuItem menuItem { get; set; }
         public int BestellingsID { get; set; }
         public int Hoeveelheid { get; set; }
-        public GerechtsStatus status { get; set; }
+        public GerechtsStatus Status { get; set; }
         public string? Naam { get; set; }
 
         public BesteldeItem(MenuItem menuItem)
@@ -25,5 +25,10 @@ namespace Model
         {
             
         }
-    }
+
+        public void UpdateOrderStatus(GerechtsStatus status)
+        {
+            Status = status;
+        }
+    } 
 }

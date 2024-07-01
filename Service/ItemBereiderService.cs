@@ -16,13 +16,13 @@ namespace Service
         {
             itemBereiderDao = new ItemBereiderDao();
         }
-        public List<BesteldeItem> GetAllItems(int personelId)
+        public List<BesteldeItem> GetAllBesteldeItems()
         {
-            return itemBereiderDao.GetAllItems(personelId);
+            return itemBereiderDao.GetAllBesteldeItems();
         }
-        public void UpdateStatus(GerechtsStatus status, int besteldeItemId)
+        public void UpdateBestellingStatus(GerechtsStatus status, int besteldeItemId)
         {
-            itemBereiderDao.UpdateStatus(status, besteldeItemId);
+            itemBereiderDao.UpdateBestellingStatus(status, besteldeItemId);
         }
     }
 }
