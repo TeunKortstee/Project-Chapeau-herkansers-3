@@ -65,7 +65,7 @@ namespace DAL
                 CloseConnection();
             }
         }
-        // Lucas
+
 
     }
 }

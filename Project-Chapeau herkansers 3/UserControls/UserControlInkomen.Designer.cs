@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlSalesOverview
+    partial class UserControlInkomen
     {
         /// <summary> 
         /// Required designer variable.
@@ -79,8 +79,7 @@
             lblTotalIncome.TabIndex = 32;
             lblTotalIncome.Text = "Totaal: ";
             // 
-            // UserControlSalesOverview
-            // 
+            // UserControlInkomen
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lblTotalIncome);
@@ -88,7 +87,7 @@
             Controls.Add(lblSales);
             Controls.Add(lsvPaidBills);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlSalesOverview";
+            Name = "UserControlInkomen";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();

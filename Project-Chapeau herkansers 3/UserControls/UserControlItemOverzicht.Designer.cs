@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlManageOverview
+    partial class UserControlItemOverzicht
     {
         /// <summary> 
         /// Required designer variable.
@@ -37,8 +37,8 @@
             btnOption1 = new Button();
             btnOption2 = new Button();
             btnOption3 = new Button();
-            chkManagers = new CheckBox();
-            lblError = new Label();
+            chkOption4 = new CheckBox();
+            lblErrorOverview = new Label();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -125,8 +125,8 @@
             btnOption1.TabIndex = 29;
             btnOption1.Text = "Optie 1";
             btnOption1.UseVisualStyleBackColor = false;
-            btnOption1.EnabledChanged += btn1_EnabledChanged;
-            btnOption1.Click += btn1_Click;
+            btnOption1.EnabledChanged += btnOption1_EnabledChanged;
+            btnOption1.Click += btnOption1_Click;
             // 
             // btnOption2
             // 
@@ -138,8 +138,8 @@
             btnOption2.TabIndex = 30;
             btnOption2.Text = "Optie 2";
             btnOption2.UseVisualStyleBackColor = false;
-            btnOption2.EnabledChanged += btn2_EnabledChanged;
-            btnOption2.Click += btn2_Click;
+            btnOption2.EnabledChanged += btnOption2_EnabledChanged;
+            btnOption2.Click += btnOption2_Click;
             // 
             // btnOption3
             // 
@@ -151,39 +151,39 @@
             btnOption3.TabIndex = 31;
             btnOption3.Text = "Optie 3";
             btnOption3.UseVisualStyleBackColor = false;
-            btnOption3.EnabledChanged += btn3_EnabledChanged;
-            btnOption3.Click += btn3_Click;
+            btnOption3.EnabledChanged += btnOption3_EnabledChanged;
+            btnOption3.Click += btnOption3_Click;
             // 
-            // chkManagers
+            // chkOption4
             // 
-            chkManagers.AutoSize = true;
-            chkManagers.Location = new Point(14, 620);
-            chkManagers.Name = "chkManagers";
-            chkManagers.Size = new Size(172, 24);
-            chkManagers.TabIndex = 32;
-            chkManagers.Text = "Managers weergeven";
-            chkManagers.UseVisualStyleBackColor = true;
-            chkManagers.Visible = false;
-            chkManagers.Click += chkManagers_Click;
+            chkOption4.AutoSize = true;
+            chkOption4.Location = new Point(14, 620);
+            chkOption4.Name = "chkOption4";
+            chkOption4.Size = new Size(80, 24);
+            chkOption4.TabIndex = 32;
+            chkOption4.Text = "Optie 4";
+            chkOption4.UseVisualStyleBackColor = true;
+            chkOption4.Visible = false;
+            chkOption4.Click += chkOption4_Click;
             // 
-            // lblError
+            // lblErrorOverview
             // 
-            lblError.AutoSize = true;
-            lblError.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblError.ForeColor = Color.Red;
-            lblError.Location = new Point(192, 619);
-            lblError.Name = "lblError";
-            lblError.Size = new Size(120, 25);
-            lblError.TabIndex = 37;
-            lblError.Text = "Error Bericht";
-            lblError.Visible = false;
+            lblErrorOverview.AutoSize = true;
+            lblErrorOverview.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblErrorOverview.ForeColor = Color.Red;
+            lblErrorOverview.Location = new Point(17, 707);
+            lblErrorOverview.Name = "lblErrorOverview";
+            lblErrorOverview.Size = new Size(120, 25);
+            lblErrorOverview.TabIndex = 37;
+            lblErrorOverview.Text = "Error Bericht";
+            lblErrorOverview.Visible = false;
             // 
             // UserControlManageOverview
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lblError);
-            Controls.Add(chkManagers);
+            Controls.Add(lblErrorOverview);
+            Controls.Add(chkOption4);
             Controls.Add(btnOption3);
             Controls.Add(btnOption2);
             Controls.Add(btnOption1);
@@ -211,7 +211,7 @@
         private Button btnOption1;
         private Button btnOption2;
         private Button btnOption3;
-        private CheckBox chkManagers;
-        private Label lblError;
+        private CheckBox chkOption4;
+        private Label lblErrorOverview;
     }
 }

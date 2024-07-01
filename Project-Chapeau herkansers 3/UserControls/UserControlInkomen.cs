@@ -1,62 +1,53 @@
-﻿using Model;
+using Model;
 using Service;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlSalesOverview : UserControl
+    public partial class UserControlInkomen : UserControl
     {
         const bool betaald = true;
 
         private Form1 form;
         private BetalingService betalingService;
 
-        public UserControlSalesOverview()
+        public UserControlInkomen()
         {
             InitializeComponent();
             this.form = Form1.Instance;
             this.betalingService = new BetalingService();
-            FillSalesListView();
+            //FillSalesListView();
         }
 
         #region ListView
-        private void FillSalesListView()
+        //private void FillSalesListView()
+        //{
+        //    double totaleInkomens = 0;
+        //    SetListViewColumns();
+
+        //    foreach (Betaling betaling in betalingService.GetBetalingen(betaald))
+        //    {
+        //        ListViewItem item = DisplayBetalingen(betaling);
+        //        lsvPaidBills.Items.Add(item);
+        //        totaleInkomens += betaling.Bedrag;
+        //    }
+        //    lblTotalIncome.Text += $"€ {totaleInkomens:00.00}";
+        //}
+        #endregion
+        private void SetListViewColumns()
         {
-            double totaleInkomens = 0;
             lsvPaidBills.Clear();
 
-            lsvPaidBills.Columns.Add("Id", 60);
             lsvPaidBills.Columns.Add("Methode", 100);
             lsvPaidBills.Columns.Add("Bedrag", 100);
             lsvPaidBills.Columns.Add("Fooi", 100);
-
-
-            //List<Betaling> betaaldeRekeningen = betalingService.GetBetalingen(betaald);
-            //foreach (Betaling betaling in betaaldeRekeningen)
-            //{
-            //    ListViewItem item = new ListViewItem(betaling.BetalingId.ToString());
-            //    item.SubItems.Add(betaling.Methode.ToString());
-            //    item.SubItems.Add($"€ {betaling.Bedrag:00.00}");
-            //    item.SubItems.Add($"€ {betaling.Fooi:00.00}");
-            //    lsvPaidBills.Items.Add(item);
-            //    totaleInkomens += betaling.Bedrag;
-            //}
-            //lblTotalIncome.Text += $"€ {totaleInkomens:00.00}";
         }
-        #endregion
-
+        private ListViewItem DisplayBetalingen(Betaling betaling)
+        {
+            ListViewItem item = new ListViewItem(betaling.Methode.ToString());
+            item.SubItems.Add($"€ {betaling.Bedrag:00.00}");
+            item.SubItems.Add($"€ {betaling.Fooi:00.00}");
+            return item;
+        }
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.form.SwitchPanels(new UserControlManager());

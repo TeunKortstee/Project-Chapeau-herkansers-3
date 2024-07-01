@@ -33,6 +33,7 @@
             btnMenu = new Button();
             btnSales = new Button();
             pictureBox1 = new PictureBox();
+            btnStock = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -40,7 +41,7 @@
             // 
             btnEmployee.BackColor = Color.FromArgb(138, 210, 176);
             btnEmployee.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEmployee.Location = new Point(36, 268);
+            btnEmployee.Location = new Point(41, 378);
             btnEmployee.Name = "btnEmployee";
             btnEmployee.Size = new Size(335, 67);
             btnEmployee.TabIndex = 3;
@@ -52,7 +53,7 @@
             // 
             btnMenu.BackColor = Color.FromArgb(138, 210, 176);
             btnMenu.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnMenu.Location = new Point(36, 389);
+            btnMenu.Location = new Point(41, 499);
             btnMenu.Name = "btnMenu";
             btnMenu.Size = new Size(335, 67);
             btnMenu.TabIndex = 4;
@@ -64,7 +65,7 @@
             // 
             btnSales.BackColor = Color.FromArgb(138, 210, 176);
             btnSales.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSales.Location = new Point(36, 508);
+            btnSales.Location = new Point(41, 257);
             btnSales.Name = "btnSales";
             btnSales.Size = new Size(335, 67);
             btnSales.TabIndex = 6;
@@ -82,10 +83,23 @@
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
             // 
+            // btnStock
+            // 
+            btnStock.BackColor = Color.FromArgb(138, 210, 176);
+            btnStock.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            btnStock.Location = new Point(41, 620);
+            btnStock.Name = "btnStock";
+            btnStock.Size = new Size(335, 67);
+            btnStock.TabIndex = 8;
+            btnStock.Text = "Voorraad";
+            btnStock.UseVisualStyleBackColor = false;
+            btnStock.Click += btnStock_Click;
+            // 
             // UserControlManager
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnStock);
             Controls.Add(pictureBox1);
             Controls.Add(btnSales);
             Controls.Add(btnMenu);
@@ -101,6 +115,7 @@
         private Button btnMenu;
         private Button btnSales;
         private PictureBox pictureBox1;
+        private Button btnStock;
     }
 
 }
