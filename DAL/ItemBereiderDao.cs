@@ -1,11 +1,6 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -34,19 +29,88 @@ namespace DAL
                 Instuurtijd >= DATEADD(day, -1, GETDATE());
             ";
             return ReadTables(ExecuteSelectQuery(query));
+            
+        public void ChangeKeukenStatus(Bestelling bestelling)
+        {
+            string query = $"UPDATE Keuken SET Status=@Status WHERE BestellingId = @BestellingId;";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Status", bestelling.status),
+                new SqlParameter("@BestellingId", bestelling.bestellingId)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void ChangeBarStatus(Bestelling bestelling)
+        {
+            string query = $"UPDATE Bar SET Status=@Status WHERE BestellingId = @BestellingId;";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Status", bestelling.status),
+                new SqlParameter("@BestellingId", bestelling.bestellingId)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public List<Bestelling> GetTafelBestellingKeuken(Tafel tafel)
+        {
+            string query = $"SELECT Naam, Bestellingen.BestellingsId, Status, Opmerking, Instuurtijd FROM Bestellingen \r\nJOIN Keuken ON Keuken.BestellingId = Bestellingen.BestellingsId\r\nJOIN BesteldeItems ON BesteldeItems.BestellingsId = Bestellingen.BestellingsId\r\nJOIN MenuItems ON MenuItems.MenuItemId = Besteldeitems.MenuItemId WHERE TableNr=@TableNr";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@TableNr", tafel.Id),
+            };
+            return ReadBestelling(ExecuteSelectQuery(query, sqlParameters));
         }
 
+        public List<Bestelling> GetTafelBestellingBar(Tafel tafel)
+        {
+            string query = $"SELECT Naam, Bestellingen.BestellingsId, Status, Opmerking, Instuurtijd FROM Bestellingen \r\nJOIN Bar ON Bar.BestellingId = Bestellingen.BestellingsId\r\nJOIN BesteldeItems ON BesteldeItems.BestellingsId = Bestellingen.BestellingsId\r\nJOIN MenuItems ON MenuItems.MenuItemId = Besteldeitems.MenuItemId WHERE TableNr=@TableNr";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@TableNr", tafel.Id),
+            };
+            return ReadBestelling(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private List<Bestelling> ReadBestelling(DataTable dataTable)
+        {
+            List<Bestelling> bestellingen = new List<Bestelling>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                int bestellingId = Convert.ToInt32(row["BestellingsId"]);
+                Bestelling bestelling = bestellingen.Find(b => b.bestellingId == bestellingId);
+
+                if (bestelling == null)
+                {
+                    bestelling = new Bestelling
+                    {
+                        bestellingId = bestellingId,
+                        status = (GerechtsStatus)Convert.ToInt32(row["Status"])
+                    };
+                    bestellingen.Add(bestelling);
+                }
+
+                BesteldeItem besteldeItem = new BesteldeItem(new MenuItem
+                {
+                    Naam = row["Naam"].ToString(),
+                })
+                {
+                    Opmerking = row["Opmerking"].ToString(),
+                    InstuurTijd = Convert.ToDateTime(row["Instuurtijd"]),
+                };
+
+                bestelling.BestellingItems.Add(besteldeItem);
+            }
+            return bestellingen;
+        }
         private List<BesteldeItem> ReadTables(DataTable dataTable)
         {
             List<BesteldeItem> items = new List<BesteldeItem>();
             foreach (DataRow row in dataTable.Rows)
-            { 
+            {
                 BesteldeItem item = new BesteldeItem()
                 {
                     BesteldItemId = Convert.ToInt32(row["BesteldItemId"]),
                     Opmerking = row["Opmerking"].ToString(),
                     InstuurTijd = (DateTime)row["Instuurtijd"],
-                    BestellingsID = Convert.ToInt32(row["BestellingsID"]),
+                    //BestellingsID = Convert.ToInt32(row["BestellingsID"]),
                     Hoeveelheid = Convert.ToInt32(row["Hoeveelheid"]),
                     Naam = row["Naam"].ToString(),
                     Status = (GerechtsStatus)row["GerechtsStatus"]
@@ -57,6 +121,7 @@ namespace DAL
         }
 
         public void UpdateBestellingStatus(GerechtsStatus status, int besteldeItemId)
+
         {
             string query = "UPDATE BesteldeItems SET GerechtsStatus = @status WHERE BesteldItemId = @id";
             SqlParameter[] sqlParameters = new SqlParameter[]
@@ -66,5 +131,6 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
+
     }
 }

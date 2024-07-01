@@ -6,18 +6,15 @@ namespace Project_Chapeau_herkansers_3
 {
     public partial class TafelOverzichtUserControl : UserControl
     {
-        private List<Tafel> tafels;
-        public Form1 form;
         public TafelOverzichtUserControl()
         {
-            this.form = Form1.Instance;
             InitializeComponent();
-            tafels = GetTafels();
-            FillTableLayoutPanel();
+            FillTableLayoutPanel(GetTafels());
         }
         private void Table_Click(object sender, EventArgs e)
         {
             //button click naar volgende pagina om status aan te passen
+            Form1 form = Form1.Instance;
             Button btn = (Button)sender;
             TafelStatusUI tafelstatusui = new TafelStatusUI((Tafel)btn.Tag);
             form.SwitchPanels(tafelstatusui);
@@ -32,17 +29,17 @@ namespace Project_Chapeau_herkansers_3
             btn.Tag = tafel;
             switch (tafel.status)
             {
-                case (TafelStatus)0:
+                case (TafelStatus)1:
                     btn.BackColor = Color.MediumAquamarine;
                     break;
-                case (TafelStatus)1:
+                case (TafelStatus)2:
                     btn.BackColor = Color.SandyBrown;
                     break;
             }
 
             return btn;
         }
-        private void FillTableLayoutPanel()
+        private void FillTableLayoutPanel(List<Tafel> tafels)
         {
             CreateTableLayout(tafels);
             foreach (Tafel tafel in tafels)
@@ -78,6 +75,11 @@ namespace Project_Chapeau_herkansers_3
             //Get alle tafels van db
             TafelService service = new TafelService();
             return service.GetAllTafels();
+        }
+
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            FillTableLayoutPanel(GetTafels());
         }
     }
 }

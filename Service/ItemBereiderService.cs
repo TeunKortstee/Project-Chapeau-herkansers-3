@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
+﻿using DAL;
 using Model;
 
 namespace Service
@@ -23,6 +18,29 @@ namespace Service
         public void UpdateBestellingStatus(GerechtsStatus status, int besteldeItemId)
         {
             itemBereiderDao.UpdateBestellingStatus(status, besteldeItemId);
+        }
+        public List<Bestelling> GetTafelBestelling(Tafel tafel, string ItemBereider)
+        {
+            if (ItemBereider == "Keuken")
+            {
+                return itemBereiderDao.GetTafelBestellingKeuken(tafel);
+            }
+            else if (ItemBereider == "Bar")
+            {
+                return itemBereiderDao.GetTafelBestellingBar(tafel);
+            }
+            return null;
+        }
+        public void ChangeStatus(Bestelling bestelling, string ItemBereider)
+        {
+            if (ItemBereider == "Keuken")
+            {
+                itemBereiderDao.ChangeKeukenStatus(bestelling);
+            }
+            else if (ItemBereider == "Bar")
+            {
+                itemBereiderDao.ChangeBarStatus(bestelling);
+            }
         }
     }
 }

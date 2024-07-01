@@ -12,99 +12,48 @@ namespace DAL
 {
     public class RekeningDao : BaseDao
     {
-        public Rekening? GetRekening(int tafelID)
-        {
-            string query = "SELECT RekeningId, TafelId, Belasting, TotaalPrijs, Datum, Betaald, Opmerkingen FROM Rekeningen WHERE TafelID = @tafelId AND Betaald = 0";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@tafelId", tafelID),
-             
-            };
-            List<Rekening> rekeningen = ReadTables(ExecuteSelectQuery(query, sqlParameters));
-            if (rekeningen.Count > 0) {
-              
-                return rekeningen[0];
-            }
-
-            // Als er geen rekening gevonden kan worden
-            return null;
-            
+        private TafelDao tafelDao;
+        public RekeningDao() {
+            tafelDao = new TafelDao();
         }
         // Lucas
         public List<Rekening> GetBetaaldeRekeningen(bool betaald)
         {
-            string query = "SELECT * FROM Rekeningen WHERE Betaald = @Betaald";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@Betaald", betaald),
-
-            };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            string query = "SELECT Rekeningen.RekeningId, Rekeningen.TafelID, Rekeningen.Datum, Rekeningen.BelastingNormaal, Rekeningen.BelastingAlcoholisch, Rekeningen.Opmerkingen, Tafels.TableNr, Tafels.Capaciteit, Tafels.StatusId FROM Rekeningen JOIN Tafels ON Rekeningen.TafelId=Tafels.TableNr";
+            return ReadTables(ExecuteSelectQuery(query));
         }
-
         private List<Rekening> ReadTables(DataTable dataTable)
         {
             List<Rekening> rekeningen = new List<Rekening>();
+            TafelDao tafelDao = new TafelDao();
             foreach (DataRow row in dataTable.Rows)
             {
-
+                Tafel tafel = tafelDao.ReadTables(dataTable)[0];
                 Rekening rekening = new Rekening(Convert.ToInt32(row["RekeningId"]), 
-                    Convert.ToInt32(row["TafelId"]), 
+                    tafel, 
                     (double)row["TotaalPrijs"],
-                    (bool)row["Betaald"], 
                     (DateTime)row["Datum"],
-                    (double)row["Belasting"],
+                    (double)row["BelastingNormaal"],
+                    (double)row["BelastingAlcoholisch"],
                     (string)row["Opmerkingen"]
                     );
                 
                 rekeningen.Add(rekening);
             }
             return rekeningen;      
-        }
-
-        public void RekeningBetaald(Rekening rekening) {
-            string query = "UPDATE Rekeningen SET Betaald = 1, Datum = GETDATE() WHERE RekeningId = @ID; UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TableNr AND Betaald = 0";
-           
-            
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@ID", rekening.RekeningId),
-                new SqlParameter("@TableNr", rekening.TafelId),
-                
-
-            };
-
-            ExecuteEditQuery(query, sqlParameters);
-        }
-
-        public void VoegOpmerkingenToe(Rekening rekening, string opmerkingen)
-        {
-            string query = "UPDATE Rekeningen SET Opmerkingen = @Opmerkingen WHERE RekeningId = @ID;";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@ID", rekening.RekeningId),
-                new SqlParameter("@Opmerkingen",opmerkingen)
-
-
-            };
-
-            ExecuteEditQuery(query, sqlParameters);
-        }
-
+        }       
         public int InsertRekening(Rekening rekening)
         {
-            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,Betaald,Belasting) VALUES (@TafelId,@TotaalPrijs,@Betaald,@Belasting) SELECT CAST(scope_identity() AS int)";
+            string query = "INSERT INTO Rekeningen (TafelId,TotaalPrijs,BelastingNormaal,BelastingAlcoholisch,Opmerkingen) VALUES (@TafelId,@TotaalPrijs,@BelastingNormaal,@BelastingAlcoholisch,@Opmerkingen) SELECT CAST(scope_identity() AS int); UPDATE Bestellingen SET Betaald = 1 WHERE TableNr = @TafelId AND Betaald = 0; UPDATE Tafels SET StatusId = 1 WHERE TableNr = @TafelId;";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@TafelId", rekening.TafelId),
-                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),                
-                new SqlParameter("@Betaald", rekening.Betaald),
-                new SqlParameter("@Belasting", rekening.Belasting)
-
+                new SqlParameter("@TafelId", rekening.Tafel.Id),
+                new SqlParameter("@TotaalPrijs", rekening.TotaalPrijs),
+                new SqlParameter("@BelastingNormaal", rekening.BelastingNormaal),
+                new SqlParameter("@BelastingAlcoholisch", rekening.BelastingAlcoholisch),
+                new SqlParameter("@Opmerkingen", rekening.Opmerkingen)
             };
             return ExecuteEditQueryReturnID(query, sqlParameters);
         }
-
-
     }
 }

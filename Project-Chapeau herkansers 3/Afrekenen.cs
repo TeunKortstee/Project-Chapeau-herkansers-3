@@ -6,73 +6,49 @@ namespace Project_Chapeau_herkansers_3
 {
     public partial class Afrekenen : UserControl
     {
-
-
-        private BesteldeItemService serviceBI;
         private Rekening rekening;
-
-        public Afrekenen(Rekening r)
+        public Afrekenen(Rekening rekening)
         {
-            InitializeComponent();
-
-            serviceBI = new BesteldeItemService();
-            rekening = r;
-            RefreshBillItems();
-
-
-
-
+            this.rekening = rekening;
+            InitializeComponent();                 
+            VerversRekeningItems();
         }
-
-       
-
-        public void RefreshBillItems()
+        public void VerversRekeningItems()
         {
-            double total = rekening.TotaalPrijs;
-            billListView.Items.Clear();
-            double belasting = rekening.Belasting;
-            
-
-            foreach (Bestelling bestelling in rekening.Bestellingen) {
-                List<BesteldeItem> besteldeItems = bestelling.BestellingItems;
-                foreach (BesteldeItem b in besteldeItems)
+            rekeningLijst.Items.Clear();
+            double totaal = rekening.TotaalPrijs;   
+            foreach (Bestelling bestelling in rekening.Bestellingen) {               
+                foreach (BesteldeItem besteldeItem in bestelling.BestellingItems)
                 {
-
-                    ListViewItem item = new ListViewItem(b.Hoeveelheid + "x");
-                    item.SubItems.Add(b.menuItem.Naam);
-                    item.SubItems.Add($"€ {(b.menuItem.Prijs * b.Hoeveelheid):0.00}");
-                     
-
-
-                    billListView.Items.Add(item);
-                    if (b.Opmerking != null && b.Opmerking != "")
-                    {
-                        ListViewItem comment = new ListViewItem("");
-                        comment.SubItems.Add(b.Opmerking + "");
-                        comment.ForeColor = Color.Gray;
-                        Font commentFont = new Font(comment.Font, FontStyle.Italic);
-
-                        comment.Font = commentFont;
-                        billListView.Items.Add(comment);
-
-                    }
-
-                   
-
-
-
+                    VoegItemToeAanView(besteldeItem);
                 }
             }
-            billTotalAmountText.Text = $"€ {(total):0.00}";
-            totalVatPriceLabel.Text = $"€ {(belasting):0.00}";
+            labelRekeningTotaalHoeveelheid.Text = $"€ {(totaal):0.00}";
+            labelBelastingNormaal.Text = $"€ {(rekening.BelastingNormaal):0.00}";
+            labelBelastingAlcohol.Text = $"€ {(rekening.BelastingAlcoholisch):0.00}";
+            labelBelastingTotaal.Text = $"€ {(rekening.BelastingNormaal+rekening.BelastingAlcoholisch):0.00}";
         }
-
+        public void VoegItemToeAanView(BesteldeItem besteldeItem) {
+            ListViewItem item = new ListViewItem(besteldeItem.Hoeveelheid + "x");
+            item.SubItems.Add(besteldeItem.menuItem.Naam);
+            item.SubItems.Add($"€ {(besteldeItem.menuItem.Prijs * besteldeItem.Hoeveelheid):0.00}");
+            rekeningLijst.Items.Add(item);
+            if (besteldeItem.Opmerking != null && besteldeItem.Opmerking != "")
+            {
+                VoegOpmerkingToeAanView(besteldeItem.Opmerking);
+            }
+        }
+        public void VoegOpmerkingToeAanView(string opmerking) {
+            ListViewItem opmerkingItem = new ListViewItem("");
+            opmerkingItem.SubItems.Add(opmerking + "");
+            opmerkingItem.ForeColor = Color.Gray;
+            Font commentLettertype = new Font(opmerkingItem.Font, FontStyle.Italic);
+            opmerkingItem.Font = commentLettertype;
+            rekeningLijst.Items.Add(opmerkingItem);
+        }
         private void btnProceedToPayment_Click(object sender, EventArgs e)
         {
-           
             Form1.Instance.SwitchPanels(new BetalingScherm(rekening));
         }
-
-       
     }
 }

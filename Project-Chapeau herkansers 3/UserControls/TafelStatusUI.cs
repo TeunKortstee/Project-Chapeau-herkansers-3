@@ -6,11 +6,9 @@ namespace Project_Chapeau_herkansers_3
     public partial class TafelStatusUI : UserControl
     {
         private Tafel tafel;
-        private Form1 form1;
         public TafelStatusUI(Tafel tafel)
         {
             InitializeComponent();
-            this.form1 = Form1.Instance;
             this.tafel = tafel;
             SetLabels();
             FillComboBox();
@@ -29,25 +27,25 @@ namespace Project_Chapeau_herkansers_3
             {
                 StatusBox.Items.Add(status);
             }
-            StatusBox.SelectedIndex = (int)tafel.status;
+            StatusBox.SelectedIndex = (int)tafel.status - 1;
         }
 
         private void MaakBestellingBtn_Click(object sender, EventArgs e)
         {
-            SaveTafel();
-            //Open naar bestelling Ui
-            /*OpnemenBestellen opnemenBestellen = new OpnemenBestellen();
-            opnemenBestellen.Tag = this;
-            AddUserControl(opnemenBestellen);*/
-            form1.SwitchPanels(new OpnemenBestellen(tafel));
+            Exit(new OpnemenBestellen(this.tafel));
         }
 
         private void TerugBtn_Click(object sender, EventArgs e)
         {
-            //sla tafel op in db
             SaveTafel();
-            //ga terug naar tafeloverzicht
+            Form1 form1 = Form1.Instance;
             form1.SwitchPanels(new TafelOverzichtUserControl());
+        }
+        private void Exit(UserControl control)
+        {
+            SaveTafel();
+            Form1 form1 = Form1.Instance;
+            form1.SwitchPanels(control);
         }
         private void SaveTafel()
         {
@@ -58,13 +56,34 @@ namespace Project_Chapeau_herkansers_3
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tafel.status = (TafelStatus)StatusBox.SelectedIndex;
+            tafel.status = (TafelStatus)StatusBox.SelectedIndex + 1;
             SetLabels();
         }
 
+        private void BestellingDisplayBtn_Click(object sender, EventArgs e)
+        {
+            Exit(new TafelBestellingUserControl(tafel));
+        }
+
+        private void AfrekenenBtn_Click(object sender, EventArgs e)
+        {
+            RekeningService rekeningService = new RekeningService();
+            BestellingService bestellingService = new BestellingService();
+            if (bestellingService.GetBestellingen(tafel.Id).Count > 0)
+            {
+                Rekening gemaakteRekening = rekeningService.MaakRekeningObject(tafel);
+                Afrekenen afrekenScherm = new Afrekenen(gemaakteRekening);
+                Exit(afrekenScherm);
+            }
+            else
+            {
+                MessageBox.Show("There are no items to check out!");
+            }
+        }
         public void SetStringName(string message)
         {
             labelBestellingAangemaakt.Text = message;
         }
     }
+
 }

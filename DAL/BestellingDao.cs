@@ -17,35 +17,24 @@ namespace DAL
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@tafelId", tafelID),
-
             };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-
-
-
         private List<Bestelling> ReadTables(DataTable dataTable)
         {
             List<Bestelling> bestellingen = new List<Bestelling>();
-            BesteldeItemDao besteldeItemDao = new BesteldeItemDao();
-           
+            BesteldeItemDao besteldeItemDao = new BesteldeItemDao();           
             foreach (DataRow row in dataTable.Rows)
-            {
-               
-               
+            {               
                 Bestelling bestelling = new Bestelling(Convert.ToInt32(row["BestellingsId"]),
                      new Personeel(),
                     (bool)row["Betaald"],
                     Convert.ToInt32(row["TableNr"]));
 
                 bestelling.BestellingItems = besteldeItemDao.GetItemsFromBestelling(bestelling.bestellingId);
-
                 bestellingen.Add(bestelling);
             }
             return bestellingen;
         }
-
-
-
     }
 }

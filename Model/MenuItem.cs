@@ -6,21 +6,20 @@
         public string Naam { get; set; }
         public double Prijs { get; set; }
         public bool IsAlcoholisch { get; set; }
-        public int MenuId { get; set; }
-        public int Voorraad { get; set; }
+        public MenuType MenuType { get; set; }
         public GerechtsType GerechtsType { get; set; }
+        public int Voorraad { get; set; }
         public MenuItem()
         {
 
         }
 
-        public MenuItem(string naam, double prijs, bool isAlcoholisch, MenuType menuId, int voorraad)
+        public MenuItem(string naam, double prijs, bool isAlcoholisch, MenuType menuId)
         {
             Naam = naam;
             Prijs = prijs;
             IsAlcoholisch = isAlcoholisch;
-            MenuId = (int)menuId;
-            Voorraad = voorraad;
+            MenuType = menuId;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlSalesOverview
+    partial class UserControlInkomen
     {
         /// <summary> 
         /// Required designer variable.
@@ -52,9 +52,9 @@
             lblSales.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
             lblSales.Location = new Point(118, 14);
             lblSales.Name = "lblSales";
-            lblSales.Size = new Size(177, 46);
+            lblSales.Size = new Size(162, 46);
             lblSales.TabIndex = 1;
-            lblSales.Text = "Inkomens";
+            lblSales.Text = "Inkomen";
             // 
             // btnReturn
             // 
@@ -79,7 +79,7 @@
             lblTotalIncome.TabIndex = 32;
             lblTotalIncome.Text = "Totaal: ";
             // 
-            // UserControlSalesOverview
+            // UserControlInkomen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -88,7 +88,7 @@
             Controls.Add(lblSales);
             Controls.Add(lsvPaidBills);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlSalesOverview";
+            Name = "UserControlInkomen";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();
