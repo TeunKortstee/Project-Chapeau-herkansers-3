@@ -85,7 +85,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void CheckLowStock(ListViewItem item)
         {
-            if (int.Parse(item.SubItems[1].Text) <= weinigInVoorraad)
+            if (int.TryParse(item.SubItems[1].Text, out int voorraad) && voorraad <= weinigInVoorraad)
             {
                 item.BackColor = Color.FromArgb(0, 245, 108, 117);
                 lsvStockItems.Items.Insert(0, item);
