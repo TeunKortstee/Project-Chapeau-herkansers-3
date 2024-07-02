@@ -39,7 +39,7 @@ namespace Service
             string formattedEmail = $"{username}{chapeauDomain}".ToLower();
             if (!IsUniqueEmail(formattedEmail))
             {
-                throw new Exception("Email bestaat al");
+                return "Email bestaat al";
             }
             return formattedEmail;
         }

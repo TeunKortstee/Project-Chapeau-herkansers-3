@@ -36,6 +36,7 @@ namespace Service
         {
             menuItemDao.SoftDeleteMenuItem(selectedMenuItem);
         }
+        //
         public void UpdateAllMenuItemsStock(Bestelling bestelling)
         {
             menuItemDao.UpdateAllMenuItemsStock(bestelling);
