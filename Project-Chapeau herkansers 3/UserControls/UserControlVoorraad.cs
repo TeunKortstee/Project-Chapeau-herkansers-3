@@ -49,21 +49,21 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnAdjustStock_Click(object sender, EventArgs e)
         {
-            ListViewItem selectedLsvItem = GetItemSelected();
-            if (selectedLsvItem == null)
+            if (!IsSelected())
             {
-                DisplayErrorMessage(NoItemSelected());
                 return;
             }
+            ListViewItem selectedLsvItem = lsvStockItems.SelectedItems[0];
             this.form.SwitchPanels(new UserControlVoorraadEdit((MenuItem)selectedLsvItem.Tag));
         }
-        private ListViewItem GetItemSelected()
+        private bool IsSelected()
         {
             if (lsvStockItems.SelectedItems.Count > 0)
             {
-                return lsvStockItems.SelectedItems[0];
+                return true;
             }
-            return null;
+            DisplayErrorMessage("Selecteer een item uit de lijst");
+            return false;
         }
 
         private void btnOption1_Click(object sender, EventArgs e)
@@ -94,10 +94,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 lsvStockItems.Items.Add(item);
             }
-        }
-        private string NoItemSelected()
-        {
-            return "Selecteer een item uit de lijst";
         }
         private void DisplayErrorMessage(string errorMessage)
         {

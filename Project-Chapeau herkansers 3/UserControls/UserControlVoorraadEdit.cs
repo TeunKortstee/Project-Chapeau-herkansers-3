@@ -83,7 +83,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 txtStock.Text = newStock.ToString();
             }
         }
-        #region Errors
+        #region ErrorsChecks
         private string InvalidInput()
         {
             return "Vul een geldig getal in";
