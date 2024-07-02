@@ -67,9 +67,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                DisplayErrorMessage(ex.Message);
+                DisplayErrorMessage("Er ging iets mis bij de database");
             }
         }
         private void InsertPersoneel()

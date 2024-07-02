@@ -14,14 +14,13 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.form = Form1.Instance;
             this.menuItemService = new MenuItemService();
             this.selectedMenuItem = selectedMenuItem;
-            DisplayUIElements(this.selectedMenuItem);
+            DisplayUIElements(selectedMenuItem);
         }
         private void DisplayUIElements(MenuItem selectedMenuItem)
         {
             txtStock.Text = selectedMenuItem.Voorraad.ToString();
             CheckStockMinAndMax(selectedMenuItem.Voorraad);
         }
-
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             try

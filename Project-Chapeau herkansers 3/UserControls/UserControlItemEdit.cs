@@ -1,7 +1,5 @@
-﻿using DAL;
-using Model;
+﻿using Model;
 using Service;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
@@ -82,9 +80,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                DisplayErrorMessage(ex.Message);
+                DisplayErrorMessage("Er ging iets mis bij de database");
             }
         }
         private void UpdatePersoneel(Personeel selectedPersoneel)
