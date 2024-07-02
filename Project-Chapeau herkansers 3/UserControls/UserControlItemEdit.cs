@@ -143,8 +143,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private double ParsePrice(string priceInput)
         {
-            double price = 0;
-            if (!double.TryParse(priceInput, out price))
+            if (!double.TryParse(priceInput, out double price))
             {
                 throw new Exception("Vul een geldige prijs in");
             }
