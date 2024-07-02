@@ -69,7 +69,7 @@
             btnSales.Name = "btnSales";
             btnSales.Size = new Size(335, 67);
             btnSales.TabIndex = 6;
-            btnSales.Text = "Inkomens";
+            btnSales.Text = "Inkomen";
             btnSales.UseVisualStyleBackColor = false;
             btnSales.Click += btnSales_Click;
             // 
