@@ -20,12 +20,6 @@ namespace Service
         {
             return bestellingDao.GetBestellingen(tafel);
 
-        }
-        
+        }        
     }
-
-
-        
-    
-
 }
