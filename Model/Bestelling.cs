@@ -26,10 +26,8 @@
         public Bestelling(int _bestellingId, bool _betaald, int _tafelId) //Laurens
         {
             besteldeItems = new List<BesteldeItem>();
-            bestellingId = _bestellingId;
-            //personeel = _personeel;
-            betaald = _betaald;
-            //tafelId = _tafelId;
+            bestellingId = _bestellingId;            
+            betaald = _betaald;            
         }
     }
 }
