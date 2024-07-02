@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,11 +69,12 @@ namespace Service
                     return 1;
                 }
             }
-            if (totaalHoeveelheidBetaald >= rekening.TotaalPrijs) {
+            if (Math.Round(totaalHoeveelheidBetaald,2) >= rekening.TotaalPrijs) {
                 // Succes!
                 rekening.Betalingen = betalingen;                
                 return 2;
             }
+          
             return 0;
         }
     }
