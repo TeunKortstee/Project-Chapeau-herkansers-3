@@ -16,9 +16,9 @@ namespace Service
             return menuItemDao.GetAllItems();
         }
         // Lucas
-        public List<MenuItem> GetMenuItemsByMenu(MenuType menuType)
+        public List<MenuItem> GetMenuItems()
         {
-            return menuItemDao.GetMenuItemsByMenuId(menuType);
+            return menuItemDao.GetMenuItems();
         }
         public int AddNewMenuItem(MenuItem newMenuItem)
         {

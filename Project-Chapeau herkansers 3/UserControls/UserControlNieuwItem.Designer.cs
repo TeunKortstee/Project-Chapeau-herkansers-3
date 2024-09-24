@@ -161,7 +161,7 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.BackColor = Color.FromArgb(196, 196, 196);
+            pictureBox3.BackColor = Color.Silver;
             pictureBox3.Location = new Point(30, 227);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(352, 62);
@@ -189,7 +189,7 @@
             lblErrorNewObject.Text = "Error Bericht";
             lblErrorNewObject.Visible = false;
             // 
-            // UserControlNewItem
+            // UserControlNieuwItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -208,7 +208,7 @@
             Controls.Add(btnConfirm);
             Controls.Add(lblObject);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlNewItem";
+            Name = "UserControlNieuwItem";
             Size = new Size(414, 736);
             ((System.ComponentModel.ISupportInitialize)picName).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

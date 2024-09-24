@@ -29,7 +29,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             try
             {
-                foreach (MenuItem menuItem in menuItemService.GetMenuItemsByMenu(menuType))
+                foreach (MenuItem menuItem in menuItemService.GetMenuItems(menuType))
                 {
                     DisplayMenuItems(menuItem);
                 }

@@ -6,69 +6,112 @@ namespace Project_Chapeau_herkansers_3.UserControls
     public partial class UserControlItemOverzicht : UserControl
     {
         private Form1 form;
-        public UserControlItemOverzicht(Functie functie)
+        private MenuItemService menuItemService;
+        private List<MenuItem> menu;
+        public UserControlItemOverzicht()
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            DisplayEmployeeElements(functie);
-
+            this.menuItemService = new MenuItemService();
+            this.menu = GetMenuItems();
+            DisplayMenuElements();
+            SetButtonTags();
         }
-        public UserControlItemOverzicht(MenuType menu)
+        private List<MenuItem> GetMenuItems()
         {
-            InitializeComponent();
-            this.form = Form1.Instance;
-            DisplayMenuElements(menu);
-        }
-        #region DisplayUIElements
-
-        #region MenuItem
-        private void DisplayMenuElements(MenuType menuType)
-        {
-            SetObjectText("Menu", "Menu Item");
-            DisplayMenuButtons();
-            RenableMenuButtons(menuType);
-            FillMenuListView(menuType);
-        }
-        private void FillMenuListView(MenuType menuType)
-        {
-            lsvDatabaseItems.Clear();
-
-            lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("Prijs", 60);
-            if (menuType == MenuType.Drank)
-            {
-                lsvDatabaseItems.Columns.Add("Alcoholisch", 60);
-            }
-
-            GetMenuItems(menuType);
-        }
-        private void GetMenuItems(MenuType menuType)
-        {
+            List<MenuItem> menu = new List<MenuItem>();
             try
             {
-                MenuItemService menuItemService = new MenuItemService();
-                foreach (MenuItem menuItem in menuItemService.GetMenuItemsByMenu(menuType))
-                {
-                    DisplayMenuItems(menuItem);
-                }
+                menu = menuItemService.GetMenuItems();
             }
             catch (Exception)
             {
                 DisplayErrorMessage("Er ging iets mis bij de database");
             }
+            return menu;
         }
-        private void DisplayMenuItems(MenuItem menuItem)
+        #region DisplayUIElements
+
+        #region MenuItem
+        private void SetButtonTags()
+        {
+            btnKeuken.Tag = BereidingsPlek.Keuken;
+            btnBar.Tag = BereidingsPlek.Bar;
+        }
+        private void DisplayMenuElements()
+        {
+            SetObjectText("Menu", "Menu Item");
+            CreateMenuListView((BereidingsPlek)btnKeuken.Tag);
+            GetMenuItems((BereidingsPlek)btnKeuken.Tag);
+        }
+        private void CreateMenuListView(BereidingsPlek bereidingsPlek)
+        {
+            lsvDatabaseItems.Clear();
+
+            lsvDatabaseItems.Columns.Add("Item", 250);
+            lsvDatabaseItems.Columns.Add("Prijs", 60);
+            if (bereidingsPlek == BereidingsPlek.Bar)
+            {
+                lsvDatabaseItems.Columns.Add("Alcoholisch", 60);
+            }
+        }
+        private void GetMenuItems(BereidingsPlek bereidingsPlek)
+        {
+            List<MenuItem> list = new List<MenuItem>(); 
+            switch (bereidingsPlek)
+            {
+                case BereidingsPlek.Bar:
+                    list = GetDrinks();
+                    break;
+                case BereidingsPlek.Keuken:
+                    list = GetFood();
+                    break;
+            }
+            DisplayMenuItems(list);
+        }
+        private List<MenuItem> GetDrinks()
+        {
+            List<MenuItem> barList = new List<MenuItem>();
+            foreach(MenuItem menuItem in menu)
+            {
+                if (menuItem.MenuType == MenuType.Drank)
+                {
+                    barList.Add(menuItem);
+                }
+            }
+            return barList;
+        }
+        private List<MenuItem> GetFood()
+        {
+            List<MenuItem> kitchenList = new List<MenuItem>();
+            foreach (MenuItem menuItem in menu)
+            {
+                if (menuItem.MenuType != MenuType.Drank)
+                {
+                    kitchenList.Add(menuItem);
+                }
+            }
+            return kitchenList;
+        }
+        private void DisplayMenuItems(List<MenuItem> menuItems)
+        {
+            foreach (MenuItem menuItem in menuItems)
+            {
+                DisplayMenuItem(menuItem);
+            }
+        }
+        private void DisplayMenuItem(MenuItem menuItem)
         {
             ListViewItem item = new ListViewItem(menuItem.Naam);
             item.SubItems.Add($"€ {menuItem.Prijs:0.00}");
-            if (DisplayAlcoholic(menuItem))
+            if (IsAlcoholic(menuItem))
             {
                 item.SubItems.Add("Ja");
             }
             item.Tag = menuItem;
             lsvDatabaseItems.Items.Add(item);
         }
-        private bool DisplayAlcoholic(MenuItem menuItem)
+        private bool IsAlcoholic(MenuItem menuItem)
         {
             if (menuItem.MenuType == MenuType.Drank && menuItem.IsAlcoholisch)
             {
@@ -78,130 +121,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        #region Employee
-        private void DisplayEmployeeElements(Functie functie)
-        {
-            SetObjectText("Personeel", "Werknemer");
-            DisplayEmployeeButtons();
-            RenableEmployeeButtons(functie);
-            FillEmployeeListView(functie);
-        }
-        private void FillEmployeeListView(Functie functie)
-        {
-            lsvDatabaseItems.Clear();
-
-            lsvDatabaseItems.Columns.Add("Naam", 100);
-            lsvDatabaseItems.Columns.Add("Functie", 150);
-
-            GetPersoneel(functie);
-
-        }
-        private void GetPersoneel(Functie functie)
-        {
-            try
-            {
-                PersoneelService personeelService = new PersoneelService();
-                foreach (Personeel personeel in personeelService.GetPersoneelByFunctie(functie))
-                {
-                    DisplayPersoneel(personeel);
-                }
-            }
-            catch (Exception)
-            {
-                DisplayErrorMessage("Er ging iets mis bij de database");
-            }
-        }
-        private void DisplayPersoneel(Personeel personeel)
-        {
-            ListViewItem item = new ListViewItem(personeel.AchterNaam);
-            item.SubItems.Add(personeel.Functie.ToString());
-            item.Tag = personeel;
-            lsvDatabaseItems.Items.Add(item);
-        }
-        #endregion
-
-        #region Buttons - MenuItem
-        private void DisplayMenuButtons()
-        {
-            btnOption1.Tag = MenuType.Lunch;
-            btnOption2.Tag = MenuType.Diner;
-            btnOption3.Tag = MenuType.Drank;
-            SetButtonText(MenuType.Lunch.ToString(), MenuType.Diner.ToString(), MenuType.Drank.ToString());
-        }
-        private void RenableMenuButtons(MenuType menuType)
-        {
-            switch (menuType)
-            {
-                case MenuType.Lunch:
-                    SetButtonStates(false, true, true);
-                    break;
-                case MenuType.Diner:
-                    SetButtonStates(true, false, true);
-                    break;
-                case MenuType.Drank:
-                    SetButtonStates(true, true, false);
-                    break;
-            }
-            btnAddNewObject.Tag = menuType;
-        }
-        #endregion
-
-        #region Buttons - Employee
-        private void DisplayEmployeeButtons()
-        {
-            btnOption1.Tag = Functie.Serveerder;
-            btnOption2.Tag = Functie.Keuken;
-            btnOption3.Tag = Functie.Bar;
-            SetButtonText(Functie.Serveerder.ToString(), Functie.Keuken.ToString(), Functie.Bar.ToString());
-            AddButtonChangesForPersoneelManagement();
-        }
-        private void RenableEmployeeButtons(Functie functie)
-        {
-            switch (functie)
-            {
-                case Functie.Serveerder:
-                    SetButtonStates(false, true, true);
-                    chkOption4.CheckState = CheckState.Unchecked;
-                    break;
-                case Functie.Keuken:
-                    SetButtonStates(true, false, true);
-                    chkOption4.CheckState = CheckState.Unchecked;
-                    break;
-                case Functie.Bar:
-                    SetButtonStates(true, true, false);
-                    chkOption4.CheckState = CheckState.Unchecked;
-                    break;
-                case Functie.Manager:
-                    SetButtonStates(true, true, true);
-                    chkOption4.CheckState = CheckState.Checked;
-                    break;
-            }
-            btnAddNewObject.Tag = functie;
-        }
-        private void AddButtonChangesForPersoneelManagement()
-        {
-            chkOption4.Visible = true;
-            chkOption4.Text = "Managers weergeven";
-            chkOption4.Tag = Functie.Manager;
-        }
-        #endregion
-
         private void SetObjectText(string title, string objectType)
         {
-            lblOverview.Text = title;
+            lblTitel.Text = title;
             btnAddNewObject.Text = $"{objectType} toevoegen";
-        }
-        private void SetButtonText(string option1, string option2, string option3)
-        {
-            btnOption1.Text = option1;
-            btnOption2.Text = option2;
-            btnOption3.Text = option3;
-        }
-        private void SetButtonStates(bool option1, bool option2, bool option3)
-        {
-            btnOption1.Enabled = option1;
-            btnOption2.Enabled = option2;
-            btnOption3.Enabled = option3;
         }
 
         #endregion

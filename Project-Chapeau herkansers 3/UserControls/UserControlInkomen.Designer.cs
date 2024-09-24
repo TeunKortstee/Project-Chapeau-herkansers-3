@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lsvPaidBills = new ListView();
-            lblSales = new Label();
+            lsvItemOverzicht = new ListView();
+            lblTitel = new Label();
             btnReturn = new Button();
             lblTotalIncome = new Label();
             btnBar = new Button();
             btnKeuken = new Button();
             SuspendLayout();
             // 
-            // lsvPaidBills
+            // lsvItemOverzicht
             // 
-            lsvPaidBills.FullRowSelect = true;
-            lsvPaidBills.Location = new Point(14, 251);
-            lsvPaidBills.Margin = new Padding(3, 4, 3, 4);
-            lsvPaidBills.MultiSelect = false;
-            lsvPaidBills.Name = "lsvPaidBills";
-            lsvPaidBills.Size = new Size(380, 380);
-            lsvPaidBills.TabIndex = 0;
-            lsvPaidBills.UseCompatibleStateImageBehavior = false;
-            lsvPaidBills.View = View.Details;
+            lsvItemOverzicht.FullRowSelect = true;
+            lsvItemOverzicht.Location = new Point(14, 251);
+            lsvItemOverzicht.Margin = new Padding(3, 4, 3, 4);
+            lsvItemOverzicht.MultiSelect = false;
+            lsvItemOverzicht.Name = "lsvItemOverzicht";
+            lsvItemOverzicht.Size = new Size(380, 380);
+            lsvItemOverzicht.TabIndex = 0;
+            lsvItemOverzicht.UseCompatibleStateImageBehavior = false;
+            lsvItemOverzicht.View = View.Details;
             // 
-            // lblSales
+            // lblTitel
             // 
-            lblSales.AutoSize = true;
-            lblSales.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSales.Location = new Point(118, 14);
-            lblSales.Name = "lblSales";
-            lblSales.Size = new Size(162, 46);
-            lblSales.TabIndex = 1;
-            lblSales.Text = "Inkomen";
+            lblTitel.AutoSize = true;
+            lblTitel.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitel.Location = new Point(118, 14);
+            lblTitel.Name = "lblTitel";
+            lblTitel.Size = new Size(162, 46);
+            lblTitel.TabIndex = 1;
+            lblTitel.Text = "Inkomen";
             // 
             // btnReturn
             // 
@@ -106,14 +106,15 @@
             btnKeuken.Click += btnKeuken_Click;
             // 
             // UserControlInkomen
+            // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btnBar);
             Controls.Add(btnKeuken);
             Controls.Add(lblTotalIncome);
             Controls.Add(btnReturn);
-            Controls.Add(lblSales);
-            Controls.Add(lsvPaidBills);
+            Controls.Add(lblTitel);
+            Controls.Add(lsvItemOverzicht);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlInkomen";
             Size = new Size(414, 736);
@@ -123,8 +124,8 @@
 
         #endregion
 
-        private ListView lsvPaidBills;
-        private Label lblSales;
+        private ListView lsvItemOverzicht;
+        private Label lblTitel;
         private Button btnReturn;
         private Label lblTotalIncome;
         private Button btnBar;
