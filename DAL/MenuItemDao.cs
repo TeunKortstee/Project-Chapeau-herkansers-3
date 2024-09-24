@@ -38,14 +38,10 @@ namespace DAL
             };
         }
         // Lucas
-        public List<MenuItem> GetMenuItemsByMenuId(MenuType menu)
+        public List<MenuItem> GetMenuItems()
         {
-            string query = "SELECT * FROM MenuItems WHERE MenuId = @MenuId AND Beschikbaar = 1";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-                {
-                    new SqlParameter("@MenuId", (int)menu),
-                };
-            return ReadTablesWithList(ExecuteSelectQuery(query, sqlParameters));
+            string query = "SELECT * FROM MenuItems WHERE Beschikbaar = 1";
+            return ReadTablesWithList(ExecuteSelectQuery(query));
         }
         private List<MenuItem> ReadTablesWithList(DataTable dataTable)
         {

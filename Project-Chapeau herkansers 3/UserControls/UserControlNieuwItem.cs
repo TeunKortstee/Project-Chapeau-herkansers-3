@@ -51,6 +51,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lblEnum.Text = enumType;
         }
         #endregion
+        private void CreateEditFields()
+        {
+            PictureBox picName = new PictureBox();
+            picName.Size = new Size(352, 62);
+            picName.BackColor = Color.Silver;
+            picName.Location = new Point(30, 227);
+            TextBox txt2 = new TextBox();
+            Label lbl2 = new Label();
+        }
 
         #region Functionalities
         private void btnConfirm_Click(object sender, EventArgs e)
@@ -199,10 +208,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
             switch (btnCancel.Tag)
             {
                 case MenuType:
-                    form.SwitchPanels(new UserControlItemOverzicht((MenuType)btnCancel.Tag));
+                    form.SwitchPanels(new UserControlItemOverzicht(new MenuItemService()));
                     break;
                 case Functie:
-                    form.SwitchPanels(new UserControlItemOverzicht((Functie)btnCancel.Tag));
+                    form.SwitchPanels(new UserControlItemOverzicht(new PersoneelService()));
                     break;
             }
         }

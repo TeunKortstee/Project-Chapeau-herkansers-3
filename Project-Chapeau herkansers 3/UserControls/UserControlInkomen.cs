@@ -25,7 +25,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             foreach (Inkomen inkomen in inkomenService.GetInkomens(bereidingsPlek))
             {
                 ListViewItem item = DisplayInkomen(inkomen);
-                lsvPaidBills.Items.Add(item);
+                lsvItemOverzicht.Items.Add(item);
                 totaleInkomens += inkomen.TotaleInkomen;
             }
             lblTotalIncome.Text = $"{bereidingsPlek}: € {totaleInkomens:0.00}";
@@ -33,11 +33,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
         private void SetListViewColumns()
         {
-            lsvPaidBills.Clear();
+            lsvItemOverzicht.Clear();
 
-            lsvPaidBills.Columns.Add("Item", 150);
-            lsvPaidBills.Columns.Add("Totale Inkomens", 150);
-            lsvPaidBills.Columns.Add("Hoeveelheid", 150);
+            lsvItemOverzicht.Columns.Add("Item", 150);
+            lsvItemOverzicht.Columns.Add("Totale Inkomens", 150);
+            lsvItemOverzicht.Columns.Add("Hoeveelheid", 150);
         }
         private ListViewItem DisplayInkomen(Inkomen inkomen)
         {
