@@ -135,6 +135,7 @@
             btnBar.TabIndex = 51;
             btnBar.Text = "Bar";
             btnBar.UseVisualStyleBackColor = false;
+            btnBar.EnabledChanged += BarButtonEnabledChanged;
             // 
             // btnKeuken
             // 
@@ -146,6 +147,7 @@
             btnKeuken.TabIndex = 50;
             btnKeuken.Text = "Keuken";
             btnKeuken.UseVisualStyleBackColor = false;
+            btnKeuken.EnabledChanged += KitchenButtonEnabledChanged;
             // 
             // UserControlItemOverzicht
             // 

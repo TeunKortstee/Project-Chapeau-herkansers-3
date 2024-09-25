@@ -21,5 +21,13 @@
             IsAlcoholisch = isAlcoholisch;
             MenuType = menuId;
         }
+        public int TotaalVerkocht
+        {
+            get; set;
+        }
+        public double TotaleInkomen(int aantal)
+        {
+            return Prijs * aantal;
+        }
     }
 }

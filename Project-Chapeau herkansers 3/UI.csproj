@@ -36,6 +36,9 @@
     <Compile Update="UserControls\UserControlItemEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\UserControlPersoneelOverzicht.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\UserControlVoorraadEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
