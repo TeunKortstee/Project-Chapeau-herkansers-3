@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlItemOverzicht
+    partial class UserControlMenuItem
     {
         /// <summary> 
         /// Required designer variable.
@@ -72,6 +72,7 @@
             btnAddNewObject.TabIndex = 2;
             btnAddNewObject.Text = "... Toevoegen";
             btnAddNewObject.UseVisualStyleBackColor = false;
+            btnAddNewObject.Visible = false;
             btnAddNewObject.Click += btnAddNew_Click;
             // 
             // btnAdjust
@@ -147,9 +148,9 @@
             btnKeuken.TabIndex = 50;
             btnKeuken.Text = "Keuken";
             btnKeuken.UseVisualStyleBackColor = false;
-            btnKeuken.EnabledChanged += KitchenButtonEnabledChanged;
+            btnKeuken.EnabledChanged += KeukenButtonEnabledChanged;
             // 
-            // UserControlItemOverzicht
+            // UserControlMenuItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -163,7 +164,7 @@
             Controls.Add(lblTitel);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlItemOverzicht";
+            Name = "UserControlMenuItem";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();

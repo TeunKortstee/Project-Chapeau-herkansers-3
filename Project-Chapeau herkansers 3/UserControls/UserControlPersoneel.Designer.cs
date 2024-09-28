@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlPersoneelOverzicht
+    partial class UserControlPersoneel
     {
         /// <summary> 
         /// Required designer variable.
@@ -70,6 +70,7 @@
             btnAddNewObject.TabIndex = 2;
             btnAddNewObject.Text = "Personeel Toevoegen";
             btnAddNewObject.UseVisualStyleBackColor = false;
+            btnAddNewObject.Click += btnAddNewObject_Click;
             // 
             // btnAdjust
             // 
@@ -122,7 +123,7 @@
             lblErrorOverview.Text = "Error Bericht";
             lblErrorOverview.Visible = false;
             // 
-            // UserControlPersoneelOverzicht
+            // UserControlPersoneel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -134,7 +135,7 @@
             Controls.Add(lblOverview);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlPersoneelOverzicht";
+            Name = "UserControlPersoneel";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();

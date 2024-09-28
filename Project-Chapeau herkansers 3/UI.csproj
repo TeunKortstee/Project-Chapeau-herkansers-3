@@ -33,16 +33,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UserControls\UserControlItemEdit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserControls\UserControlPersoneelOverzicht.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserControls\UserControlVoorraadEdit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserControls\UserControlNieuwItem.cs">
+    <Compile Update="UserControls\UserControlPersoneel.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

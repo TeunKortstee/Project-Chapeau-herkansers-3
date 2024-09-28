@@ -15,13 +15,14 @@ namespace Service
         {
             this.personeelDao = new PersoneelDao();
         }
-        public List<Personeel> GetPersoneelByFunctie(Functie functie)
+        public List<Personeel> GetPersoneel()
         {
-            return personeelDao.GetPersoneelByFunctie(functie);
+            return personeelDao.GetPersoneel();
         }
         public void InsertPersoneel(Personeel personeel)
         {
             string slowSaltedHashedPassword = HashPasswordWithBCrypt(defaultPassword, 11);
+            personeel.Email = CreateEmail(personeel.Email);
             personeel.WachtWoord = slowSaltedHashedPassword;
             personeelDao.InsertPersoneel(personeel);
         }
@@ -31,21 +32,19 @@ namespace Service
         }
         public void UpdatePersoneel(Personeel personeel)
         {
+            personeel.Email = CreateEmail(personeel.Email);
             personeelDao.UpdatePersoneel(personeel);
         }
         // Lucas
-        public string CreateEmail(string username)
+        public string CreateEmail(string email)
         {
-            string formattedEmail = $"{username}{chapeauDomain}".ToLower();
-            if (!IsUniqueEmail(formattedEmail))
+            if (!email.ToLower().EndsWith(chapeauDomain))
             {
-                return "Email bestaat al";
+                // If not, append the domain
+                email = $"{email}{chapeauDomain}";
             }
-            return formattedEmail;
-        }
-        private bool IsUniqueEmail(string email)
-        {
-            return personeelDao.IsUniqueEmail(email);
+    
+            return email.ToLower(); 
         }
         private string HashPasswordWithBCrypt(string password, int workfactor)
         {

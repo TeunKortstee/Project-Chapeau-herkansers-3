@@ -3,33 +3,34 @@ using Service;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlPersoneelOverzicht : UserControl
+    public partial class UserControlPersoneel : UserControl
     {
         private Form1 form;
-        public UserControlPersoneelOverzicht()
+        private PersoneelService personeelService;
+        public UserControlPersoneel()
         {
             InitializeComponent();
             this.form = Form1.Instance;
+            CreateEmployeeListView();
+            personeelService = new PersoneelService();
+            GetPersoneel();
         }
 
         #region DisplayUIElements
 
-        private void FillEmployeeListView(Functie functie)
+        private void CreateEmployeeListView()
         {
             lsvDatabaseItems.Clear();
 
             lsvDatabaseItems.Columns.Add("Naam", 100);
             lsvDatabaseItems.Columns.Add("Functie", 150);
-
-            GetPersoneel(functie);
-
         }
-        private void GetPersoneel(Functie functie)
+        private void GetPersoneel()
         {
             try
             {
-                PersoneelService personeelService = new PersoneelService();
-                foreach (Personeel personeel in personeelService.GetPersoneelByFunctie(functie))
+                List<Personeel> personeelList = personeelService.GetPersoneel();
+                foreach (Personeel personeel in personeelList)
                 {
                     DisplayPersoneel(personeel);
                 }
@@ -49,7 +50,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         #endregion
 
-        #region Bottom Buttons
+        #region Buttons
+        private void btnAddNewObject_Click(object sender, EventArgs e)
+        {
+            this.form.SwitchPanels(new UserControlNieuwItem(new Personeel(), false));
+        }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -88,24 +93,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
             RemovePersoneel((Personeel)selectedLsvItem.Tag);
+            lsvDatabaseItems.Items.Remove(selectedLsvItem);
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
-            switch (selectedLsvItem.Tag)
-            {
-                case MenuItem:
-                    this.form.SwitchPanels(new UserControlItemEdit((MenuItem)selectedLsvItem.Tag));
-                    break;
-                case Personeel:
-                    this.form.SwitchPanels(new UserControlItemEdit((Personeel)selectedLsvItem.Tag));
-                    break;
-            }
+            this.form.SwitchPanels(new UserControlNieuwItem((Personeel)selectedLsvItem.Tag, true));
         }
         private void RemovePersoneel(Personeel selectedPersoneel)
         {
-            PersoneelService personeelService = new PersoneelService();
-            personeelService.RemovePersoneel(selectedPersoneel);
-            FillEmployeeListView(selectedPersoneel.Functie);
+            this.personeelService.RemovePersoneel(selectedPersoneel);
         }
         #endregion
 

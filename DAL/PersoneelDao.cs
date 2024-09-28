@@ -47,25 +47,10 @@ namespace DAL
             ExecuteEditQuery(query, sqlParameters);
         }
         // Lucas
-        public List<Personeel> GetPersoneelByFunctie(Functie functie)
+        public List<Personeel> GetPersoneel()
         {
-            string query = "SELECT PersoneelsId, Achternaam, Email, FunctieId FROM Personeel WHERE FunctieId = @FunctieId";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-                {
-                    new SqlParameter("@FunctieId", (int)functie),
-                };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
-        public bool IsUniqueEmail(string email)
-        {
-            string query = "SELECT PersoneelsId, Achternaam, Email, FunctieId FROM Personeel WHERE Email = @Email";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@Email", email),
-            };
-
-            List<Personeel> personeel = ReadTables(ExecuteSelectQuery(query, sqlParameters));
-            return personeel.Count == 0;
+            string query = "SELECT * FROM Personeel";
+            return ReadTables(ExecuteSelectQuery(query));
         }
         public void UpdatePersoneel(Personeel selectedPersoneel)
         {

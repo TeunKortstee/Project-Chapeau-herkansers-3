@@ -40,7 +40,7 @@ namespace DAL
         // Lucas
         public List<MenuItem> GetMenuItems()
         {
-            string query = "SELECT * FROM MenuItems WHERE Beschikbaar = 1";
+            string query = "SELECT * FROM MenuItems WHERE IsBeschikbaar = 1";
             return ReadTablesWithList(ExecuteSelectQuery(query));
         }
         private List<MenuItem> ReadTablesWithList(DataTable dataTable)
@@ -61,7 +61,7 @@ namespace DAL
             }
             return menuItems;
         }
-        public int AddNewMenuItem(MenuItem menuItem)
+        public void AddNewMenuItem(MenuItem menuItem)
         {
             string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId) " +
                 "VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId);" +
@@ -73,7 +73,7 @@ namespace DAL
                 new SqlParameter("@Alcoholisch", menuItem.IsAlcoholisch),
                 new SqlParameter("@MenuId", (int)menuItem.MenuType),
             };
-            return ExecuteEditQueryReturnID(query, sqlParameters);
+            ExecuteEditQuery(query, sqlParameters);
         }
         public void UpdateMenuItem(MenuItem selectedMenuItem)
         {
@@ -112,12 +112,22 @@ namespace DAL
         }
         public void SoftDeleteMenuItem(MenuItem selectedMenuItem)
         {
-            string query = "UPDATE MenuItems SET Beschikbaar = 0 WHERE MenuItemId = @MenuItemId";
+            string query = "UPDATE MenuItems SET IsBeschikbaar = 0 WHERE MenuItemId = @MenuItemId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@MenuItemId", selectedMenuItem.MenuItemId),
             };
             ExecuteEditQuery(query, sqlParameters);
         }
+        //public List<int> GetInkomens(bool betaald, BereidingsPlek bereidingsPlek)
+        //{
+        //    string query = "SELECT DISTINCT mi.Naam, FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId WHERE b.Betaald = @Betaald";
+
+        //    SqlParameter[] sqlParameters = new SqlParameter[]
+        //        {
+        //        new SqlParameter("@Betaald", betaald),
+        //        };
+        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        //}
     }
 }

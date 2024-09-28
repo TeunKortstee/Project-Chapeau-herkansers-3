@@ -7,7 +7,7 @@
         public double Prijs { get; set; }
         public bool IsAlcoholisch { get; set; }
         public MenuType MenuType { get; set; }
-        public GerechtsType GerechtsType { get; set; }
+        //public GerechtsType GerechtsType { get; set; }
         public int Voorraad { get; set; }
         public MenuItem()
         {
@@ -21,13 +21,10 @@
             IsAlcoholisch = isAlcoholisch;
             MenuType = menuId;
         }
-        public int TotaalVerkocht
-        {
-            get; set;
-        }
-        public double TotaleInkomen(int aantal)
-        {
-            return Prijs * aantal;
+        public int TotaalVerkocht{ get; set; }
+        public double TotaleInkomen
+        { 
+            get { return Prijs * TotaalVerkocht; } 
         }
     }
 }

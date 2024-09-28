@@ -5,36 +5,45 @@ using System.Diagnostics;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlItemOverzicht : UserControl
+    public partial class UserControlMenuItem : UserControl
     {
         private Form1 form;
+        private MenuItemService menuItemService;
         private List<MenuItem> menu;
         private MenuItemControl controlMode;
-        public UserControlItemOverzicht(MenuItemControl controlMode)
+        public UserControlMenuItem(MenuItemControl controlMode)
         {
             InitializeComponent();
             this.form = Form1.Instance;
             this.controlMode = controlMode;
             SetLogic(controlMode);
+            this.menuItemService = new MenuItemService();
             this.menu = GetMenuItemsFromDao();
+            DisplayMenuItems(GetMenuItems(BereidingsPlek.Keuken), controlMode);
         }
         #region ControlLogic
         private void SetLogic(MenuItemControl controlMode)
         {
             SetButtons();
+            SetSpecificLogic(controlMode, (BereidingsPlek)btnKeuken.Tag);
+        }
+        private void SetSpecificLogic(MenuItemControl controlMode, BereidingsPlek bereidingsPlek)
+        {
+            SetButtons();
             switch (controlMode)
             {
                 case MenuItemControl.Menu:
+                    CreateMenuListView(bereidingsPlek);
                     SetObjectText("Menu", "Menu Item");
-                    CreateMenuListView((BereidingsPlek)btnKeuken.Tag);
+                    btnAddNewObject.Visible = true;
                     break;
                 case MenuItemControl.Voorraad:
                     SetObjectText("Voorraad", "Menu Item");
-                    CreateVoorraadListView((BereidingsPlek)btnKeuken.Tag);
+                    CreateVoorraadListView();
                     break;
-                case MenuItemControl.Inkomen:
+                case MenuItemControl.Inkomen:             
                     SetObjectText("Inkomen", "Menu Item");
-                    CreateInkomenListView((BereidingsPlek)btnKeuken.Tag);
+                    CreateInkomenListView();
                     break;
             }
         }
@@ -42,14 +51,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             btnKeuken.Tag = BereidingsPlek.Keuken;
             btnBar.Tag = BereidingsPlek.Bar;
+            btnKeuken.Click += KeukenButtonClick;
+            btnBar.Click += BarButtonClick;
         }
         #endregion
+
         private List<MenuItem> GetMenuItemsFromDao()
         {
             List<MenuItem> menu = new List<MenuItem>();
             try
             {
-                MenuItemService menuItemService = new MenuItemService();
                 menu = menuItemService.GetMenuItems();
             }
             catch (Exception)
@@ -72,21 +83,20 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 lsvDatabaseItems.Columns.Add("Alcoholisch", 60);
             }
         }
-        private void CreateVoorraadListView(BereidingsPlek bereidingsPlek)
+        private void CreateVoorraadListView()
         {
             lsvDatabaseItems.Clear();
 
             lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("Prijs", 60);
             lsvDatabaseItems.Columns.Add("In Voorraad", 60);
         }
-        private void CreateInkomenListView(BereidingsPlek bereidingsPlek)
+        private void CreateInkomenListView()
         {
             lsvDatabaseItems.Clear();
 
             lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("Prijs", 60);
             lsvDatabaseItems.Columns.Add("Verkocht", 60);
+            lsvDatabaseItems.Columns.Add("Inkomen", 60);
         }
         #endregion
 
@@ -150,11 +160,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     }
                     break;
                 case MenuItemControl.Voorraad:
-                    item.SubItems.Add($"€ {menuItem.Voorraad}");
+                    item.SubItems.Add($"{menuItem.Voorraad}");
                     break;
                 case MenuItemControl.Inkomen:
-                    SetObjectText("Inkomen", "Menu Item");
-                    CreateInkomenListView((BereidingsPlek)btnKeuken.Tag);
+                    item.SubItems.Add($"€ {menuItem.Prijs:0.00}");
                     break;
             }
             return item;
@@ -179,33 +188,25 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Top Buttons
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            switch (btnAddNewObject.Tag)
-            {
-                case MenuType:
-                    this.form.SwitchPanels(new UserControlNieuwItem((MenuType)btnAddNewObject.Tag));
-                    break;
-                default:
-                    DisplayErrorMessage("Er ging iets mis");
-                    break;
-            }
+            this.form.SwitchPanels(new UserControlNieuwItem(new MenuItem(), false, controlMode));
         }
         private void BarButtonEnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnBar);
         }
-        private void KitchenButtonEnabledChanged(object sender, EventArgs e)
+        private void KeukenButtonEnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnKeuken);
         }
         private void BarButtonClick(object sender, EventArgs e)
         {
-            CreateMenuListView((BereidingsPlek)btnBar.Tag);
+            SetSpecificLogic(this.controlMode, (BereidingsPlek)btnBar.Tag);
             List<MenuItem> barList = GetMenuItems((BereidingsPlek)btnBar.Tag);
             DisplayMenuItems(barList, this.controlMode);
         }
-        private void KitchenButtonClick(object sender, EventArgs e)
+        private void KeukenButtonClick(object sender, EventArgs e)
         {
-            CreateMenuListView((BereidingsPlek)btnKeuken.Tag);
+            SetSpecificLogic(this.controlMode, (BereidingsPlek)btnKeuken.Tag);
             List<MenuItem> keukenList = GetMenuItems((BereidingsPlek)btnKeuken.Tag);
             DisplayMenuItems(keukenList, this.controlMode);
         }
@@ -261,10 +262,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
             RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
+            lsvDatabaseItems.Items.Remove(selectedLsvItem);
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
-            this.form.SwitchPanels(new UserControlItemEdit((MenuItem)selectedLsvItem.Tag));
+            this.form.SwitchPanels(new UserControlNieuwItem((MenuItem)selectedLsvItem.Tag, true, controlMode));
         }
         private void RemoveMenuItem(MenuItem selectedMenuItem)
         {

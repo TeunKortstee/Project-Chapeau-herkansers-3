@@ -20,9 +20,9 @@ namespace Service
         {
             return menuItemDao.GetMenuItems();
         }
-        public int AddNewMenuItem(MenuItem newMenuItem)
+        public void AddNewMenuItem(MenuItem newMenuItem)
         {
-            return menuItemDao.AddNewMenuItem(newMenuItem);
+            menuItemDao.AddNewMenuItem(newMenuItem);
         }
         public void UpdateMenuItem(MenuItem selectedMenuItem)
         {

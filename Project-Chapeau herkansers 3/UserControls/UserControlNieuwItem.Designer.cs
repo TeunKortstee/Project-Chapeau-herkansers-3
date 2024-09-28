@@ -31,20 +31,23 @@
             lblObject = new Label();
             btnConfirm = new Button();
             btnCancel = new Button();
-            picName = new PictureBox();
+            field2 = new PictureBox();
             txt2 = new TextBox();
             lbl2 = new Label();
             chkAlcoholisch = new CheckBox();
             lblEnum = new Label();
-            pictureBox2 = new PictureBox();
+            field3 = new PictureBox();
             lbl1 = new Label();
             txt1 = new TextBox();
-            pictureBox3 = new PictureBox();
+            field1 = new PictureBox();
             cmbType = new ComboBox();
             lblErrorNewObject = new Label();
-            ((System.ComponentModel.ISupportInitialize)picName).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            btnSubtract = new Button();
+            btnAdd = new Button();
+            txtStock = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)field2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)field3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)field1).BeginInit();
             SuspendLayout();
             // 
             // lblObject
@@ -83,14 +86,14 @@
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
-            // picName
+            // field2
             // 
-            picName.BackColor = Color.FromArgb(196, 196, 196);
-            picName.Location = new Point(30, 295);
-            picName.Name = "picName";
-            picName.Size = new Size(352, 62);
-            picName.TabIndex = 6;
-            picName.TabStop = false;
+            field2.BackColor = Color.FromArgb(196, 196, 196);
+            field2.Location = new Point(30, 295);
+            field2.Name = "field2";
+            field2.Size = new Size(352, 62);
+            field2.TabIndex = 6;
+            field2.TabStop = false;
             // 
             // txt2
             // 
@@ -132,14 +135,14 @@
             lblEnum.TabIndex = 30;
             lblEnum.Text = "VeldEnum";
             // 
-            // pictureBox2
+            // field3
             // 
-            pictureBox2.BackColor = Color.FromArgb(196, 196, 196);
-            pictureBox2.Location = new Point(30, 359);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(352, 62);
-            pictureBox2.TabIndex = 28;
-            pictureBox2.TabStop = false;
+            field3.BackColor = Color.FromArgb(196, 196, 196);
+            field3.Location = new Point(30, 359);
+            field3.Name = "field3";
+            field3.Size = new Size(352, 62);
+            field3.TabIndex = 28;
+            field3.TabStop = false;
             // 
             // lbl1
             // 
@@ -159,14 +162,14 @@
             txt1.Size = new Size(187, 27);
             txt1.TabIndex = 33;
             // 
-            // pictureBox3
+            // field1
             // 
-            pictureBox3.BackColor = Color.Silver;
-            pictureBox3.Location = new Point(30, 227);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(352, 62);
-            pictureBox3.TabIndex = 32;
-            pictureBox3.TabStop = false;
+            field1.BackColor = Color.Silver;
+            field1.Location = new Point(30, 227);
+            field1.Name = "field1";
+            field1.Size = new Size(352, 62);
+            field1.TabIndex = 32;
+            field1.TabStop = false;
             // 
             // cmbType
             // 
@@ -189,30 +192,66 @@
             lblErrorNewObject.Text = "Error Bericht";
             lblErrorNewObject.Visible = false;
             // 
+            // btnSubtract
+            // 
+            btnSubtract.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnSubtract.Location = new Point(273, 244);
+            btnSubtract.Name = "btnSubtract";
+            btnSubtract.Size = new Size(24, 29);
+            btnSubtract.TabIndex = 39;
+            btnSubtract.Text = "-";
+            btnSubtract.UseVisualStyleBackColor = true;
+            btnSubtract.Visible = false;
+            btnSubtract.Click += btnSubtract_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAdd.Location = new Point(340, 244);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(24, 29);
+            btnAdd.TabIndex = 38;
+            btnAdd.Text = "+";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Visible = false;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // txtStock
+            // 
+            txtStock.Location = new Point(303, 244);
+            txtStock.Name = "txtStock";
+            txtStock.Size = new Size(31, 27);
+            txtStock.TabIndex = 37;
+            txtStock.TextAlign = HorizontalAlignment.Center;
+            txtStock.Visible = false;
+            // 
             // UserControlNieuwItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnSubtract);
+            Controls.Add(btnAdd);
+            Controls.Add(txtStock);
             Controls.Add(lblErrorNewObject);
             Controls.Add(cmbType);
             Controls.Add(lbl1);
             Controls.Add(txt1);
-            Controls.Add(pictureBox3);
+            Controls.Add(field1);
             Controls.Add(lblEnum);
-            Controls.Add(pictureBox2);
+            Controls.Add(field3);
             Controls.Add(chkAlcoholisch);
             Controls.Add(lbl2);
             Controls.Add(txt2);
-            Controls.Add(picName);
+            Controls.Add(field2);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             Controls.Add(lblObject);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlNieuwItem";
             Size = new Size(414, 736);
-            ((System.ComponentModel.ISupportInitialize)picName).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)field2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)field3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)field1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -221,17 +260,20 @@
         private Label lblObject;
         private Button btnConfirm;
         private Button btnCancel;
-        private PictureBox picName;
+        private PictureBox field2;
         private PictureBox pictureBox5;
         private TextBox txt2;
         private Label lbl2;
         private CheckBox chkAlcoholisch;
         private Label lblEnum;
-        private PictureBox pictureBox2;
+        private PictureBox field3;
         private Label lbl1;
         private TextBox txt1;
-        private PictureBox pictureBox3;
+        private PictureBox field1;
         private ComboBox cmbType;
         private Label lblErrorNewObject;
+        private Button btnSubtract;
+        private Button btnAdd;
+        private TextBox txtStock;
     }
 }
