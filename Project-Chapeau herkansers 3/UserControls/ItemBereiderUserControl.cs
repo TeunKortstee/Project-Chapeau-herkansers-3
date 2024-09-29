@@ -99,8 +99,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
                     if (status == GerechtsStatus.Served)
                     {
-                        InkomenService inkomenService = new InkomenService();
-                        inkomenService.UpdateInkomen((besteldeItem));
                         orderListView.Items.Remove(listViewItem);
                     }
                 }
