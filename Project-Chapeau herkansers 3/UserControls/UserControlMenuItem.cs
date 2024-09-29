@@ -19,7 +19,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             SetLogic(controlMode);
             this.menuItemService = new MenuItemService();
             this.menu = GetMenuItemsFromDao();
-            DisplayMenuItems(GetMenuItems(BereidingsPlek.Keuken), controlMode);
+            DisplayMenuItems(GetMenuItems((BereidingsPlek)btnKeuken.Tag), controlMode);
         }
         #region ControlLogic
         private void SetLogic(MenuItemControl controlMode)
@@ -140,11 +140,18 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void DisplayMenuItems(List<MenuItem> menuItems, MenuItemControl controlMode)
         {
+            double totaleInkomens = 0;
             foreach (MenuItem menuItem in menuItems)
             {
                 ListViewItem item = CreateListViewItem(menuItem, controlMode);
                 item.Tag = menuItem;
                 lsvDatabaseItems.Items.Add(item);
+                totaleInkomens += menuItem.TotaleInkomen;
+            }
+            if (controlMode == MenuItemControl.Inkomen)
+            {
+                lblTotalIncome.Visible = true;  
+                lblTotalIncome.Text = $"€ {totaleInkomens:0.00}";
             }
         }
         private ListViewItem CreateListViewItem(MenuItem menuItem, MenuItemControl controlMode)
@@ -163,7 +170,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     item.SubItems.Add($"{menuItem.Voorraad}");
                     break;
                 case MenuItemControl.Inkomen:
-                    item.SubItems.Add($"€ {menuItem.Prijs:0.00}");
+                    item.SubItems.Add($"{menuItem.TotaalVerkocht}");
+                    item.SubItems.Add($"€ {menuItem.TotaleInkomen:0.00}");
                     break;
             }
             return item;
@@ -270,7 +278,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void RemoveMenuItem(MenuItem selectedMenuItem)
         {
-            MenuItemService menuItemService = new MenuItemService();
             menuItemService.SoftDeleteMenuItem(selectedMenuItem);
             //FillMenuListView(selectedMenuItem.MenuType);
         }

@@ -37,6 +37,7 @@
             lblErrorOverview = new Label();
             btnBar = new Button();
             btnKeuken = new Button();
+            lblTotalIncome = new Label();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -150,10 +151,22 @@
             btnKeuken.UseVisualStyleBackColor = false;
             btnKeuken.EnabledChanged += KeukenButtonEnabledChanged;
             // 
+            // lblTotalIncome
+            // 
+            lblTotalIncome.AutoSize = true;
+            lblTotalIncome.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalIncome.Location = new Point(14, 108);
+            lblTotalIncome.Name = "lblTotalIncome";
+            lblTotalIncome.Size = new Size(134, 38);
+            lblTotalIncome.TabIndex = 52;
+            lblTotalIncome.Text = "Inkomen";
+            lblTotalIncome.Visible = false;
+            // 
             // UserControlMenuItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblTotalIncome);
             Controls.Add(btnBar);
             Controls.Add(btnKeuken);
             Controls.Add(lblErrorOverview);
@@ -181,5 +194,6 @@
         private Label lblErrorOverview;
         private Button btnBar;
         private Button btnKeuken;
+        private Label lblTotalIncome;
     }
 }

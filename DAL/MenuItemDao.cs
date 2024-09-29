@@ -57,9 +57,19 @@ namespace DAL
                     MenuType = (MenuType)Convert.ToInt32(dr["MenuId"]),
                     IsAlcoholisch = (bool)dr["Alcoholisch"],
                 };
+                menuItem.TotaalVerkocht = GetMenuItemSales(menuItem);
                 menuItems.Add(menuItem);
             }
             return menuItems;
+        }
+        private int ReadTablesWithCount(DataTable dataTable)
+        {
+            if (dataTable.Rows.Count > 0)
+            {
+                // Get the first row and extract the "AantalVerkocht" value (the count)
+                return Convert.ToInt32(dataTable.Rows[0]["TotaalVerkocht"]);
+            }
+            return 0;
         }
         public void AddNewMenuItem(MenuItem menuItem)
         {
@@ -119,15 +129,15 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        //public List<int> GetInkomens(bool betaald, BereidingsPlek bereidingsPlek)
-        //{
-        //    string query = "SELECT DISTINCT mi.Naam, FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId WHERE b.Betaald = @Betaald";
+        private int GetMenuItemSales(MenuItem menuItem)
+        {
+            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1";
 
-        //    SqlParameter[] sqlParameters = new SqlParameter[]
-        //        {
-        //        new SqlParameter("@Betaald", betaald),
-        //        };
-        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
+            SqlParameter[] sqlParameters = new SqlParameter[]
+                {
+                new SqlParameter("@MenuItemId", menuItem.MenuItemId),
+                };
+            return ReadTablesWithCount(ExecuteSelectQuery(query, sqlParameters));
+        }
     }
 }

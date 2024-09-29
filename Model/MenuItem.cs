@@ -21,7 +21,7 @@
             IsAlcoholisch = isAlcoholisch;
             MenuType = menuId;
         }
-        public int TotaalVerkocht{ get; set; }
+        public int TotaalVerkocht { get; set; }
         public double TotaleInkomen
         { 
             get { return Prijs * TotaalVerkocht; } 
