@@ -21,6 +21,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.menu = GetMenuItemsFromDao();
             DisplayMenuItems(GetMenuItems((BereidingsPlek)btnKeuken.Tag), controlMode);
         }
+        private List<MenuItem> GetMenuItemsFromDao()
+        {
+            List<MenuItem> menu = new List<MenuItem>();
+            try
+            {
+                menu = menuItemService.GetMenuItems();
+            }
+            catch (Exception)
+            {
+                DisplayErrorMessage("Er ging iets mis bij de database");
+            }
+            return menu;
+        }
         #region ControlLogic
         private void SetLogic(MenuItemControl controlMode)
         {
@@ -58,19 +71,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        private List<MenuItem> GetMenuItemsFromDao()
-        {
-            List<MenuItem> menu = new List<MenuItem>();
-            try
-            {
-                menu = menuItemService.GetMenuItems();
-            }
-            catch (Exception)
-            {
-                DisplayErrorMessage("Er ging iets mis bij de database");
-            }
-            return menu;
-        }
         #region DisplayUIElements
 
         #region ListViews
@@ -101,6 +101,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Columns.Add("Inkomen", 60);
         }
         #endregion
+
+        #region Sorteer Items
 
         private List<MenuItem> GetMenuItems(BereidingsPlek bereidingsPlek)
         {
@@ -140,6 +142,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             return kitchenList;
         }
+        #endregion
         private void DisplayMenuItems(List<MenuItem> menuItems, MenuItemControl controlMode)
         {
             double totaleInkomens = 0;
@@ -283,7 +286,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        #region DeleteSelectedItem
+        #region ListViewItem
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
             RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
