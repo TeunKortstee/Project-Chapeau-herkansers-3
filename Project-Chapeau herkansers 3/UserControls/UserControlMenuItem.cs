@@ -156,7 +156,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             if (controlMode == MenuItemControl.Inkomen)
             {
                 lblTotalIncome.Visible = true;
-                lblTotalIncome.Text = $"€ {totaleInkomens:0.00}";
+                lblTotalIncome.Text = $"Totale Inkomen: € {totaleInkomens:0.00}";
             }
         }
         private ListViewItem CreateListViewItem(MenuItem menuItem, MenuItemControl controlMode)
