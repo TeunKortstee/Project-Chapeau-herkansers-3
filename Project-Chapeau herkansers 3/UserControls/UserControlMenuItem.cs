@@ -181,8 +181,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private int GetMenuItemSales(MenuItem menuItem)
         {
-            DateTime datum = dtpDatum.Value;
-            return menuItemService.GetMenuItemSales(menuItem, datum);
+            int totalSales = 0; 
+            try
+            {
+                DateTime datum = dtpDatum.Value;
+                totalSales = menuItemService.GetMenuItemSales(menuItem, datum);
+            }
+            catch (Exception)
+            {
+                DisplayErrorMessage("Er ging iets mis bij de database");
+            }
+            return totalSales;
         }
         private bool IsAlcoholic(MenuItem menuItem)
         {
