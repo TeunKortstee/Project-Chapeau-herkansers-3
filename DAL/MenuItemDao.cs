@@ -57,7 +57,6 @@ namespace DAL
                     MenuType = (MenuType)Convert.ToInt32(dr["MenuId"]),
                     IsAlcoholisch = (bool)dr["Alcoholisch"],
                 };
-                menuItem.TotaalVerkocht = GetMenuItemSales(menuItem);
                 menuItems.Add(menuItem);
             }
             return menuItems;
@@ -129,13 +128,14 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        private int GetMenuItemSales(MenuItem menuItem)
+        public int GetMenuItemSales(MenuItem menuItem, DateTime datum)
         {
-            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1";
+            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId JOIN Rekeningen r ON b.TableNr = r.TafelID WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1 AND r.Datum BETWEEN @Datum AND GETDATE()";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                 {
                 new SqlParameter("@MenuItemId", menuItem.MenuItemId),
+                new SqlParameter("@Datum", datum),
                 };
             return ReadTablesWithCount(ExecuteSelectQuery(query, sqlParameters));
         }

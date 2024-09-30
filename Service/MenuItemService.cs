@@ -36,10 +36,10 @@ namespace Service
         {
             menuItemDao.SoftDeleteMenuItem(selectedMenuItem);
         }
-        //public int GetMenuItemSales(bool betaald, MenuItem menuItem)
-        //{
-        //    return menuItemDao.GetMenuItemSales(betaald, menuItem);
-        //}
+        public int GetMenuItemSales(MenuItem menuItem, DateTime datum)
+        {
+            return menuItemDao.GetMenuItemSales(menuItem, datum);
+        }
         // Luciano
         public void UpdateAllMenuItemsStock(Bestelling bestelling)
         {

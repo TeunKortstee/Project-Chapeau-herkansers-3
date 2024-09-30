@@ -38,6 +38,7 @@
             btnBar = new Button();
             btnKeuken = new Button();
             lblTotalIncome = new Label();
+            dtpDatum = new DateTimePicker();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -100,6 +101,7 @@
             btnRemove.TabIndex = 4;
             btnRemove.Text = "Verwijderen";
             btnRemove.UseVisualStyleBackColor = false;
+            btnRemove.Visible = false;
             btnRemove.Click += btnRemove_Click;
             // 
             // btnReturn
@@ -162,10 +164,19 @@
             lblTotalIncome.Text = "Inkomen";
             lblTotalIncome.Visible = false;
             // 
+            // dtpDatum
+            // 
+            dtpDatum.Location = new Point(14, 620);
+            dtpDatum.Name = "dtpDatum";
+            dtpDatum.Size = new Size(252, 27);
+            dtpDatum.TabIndex = 53;
+            dtpDatum.Visible = false;
+            // 
             // UserControlMenuItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dtpDatum);
             Controls.Add(lblTotalIncome);
             Controls.Add(btnBar);
             Controls.Add(btnKeuken);
@@ -195,5 +206,6 @@
         private Button btnBar;
         private Button btnKeuken;
         private Label lblTotalIncome;
+        private DateTimePicker dtpDatum;
     }
 }

@@ -29,21 +29,23 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void SetSpecificLogic(MenuItemControl controlMode, BereidingsPlek bereidingsPlek)
         {
-            SetButtons();
             switch (controlMode)
             {
                 case MenuItemControl.Menu:
                     CreateMenuListView(bereidingsPlek);
                     SetObjectText("Menu", "Menu Item");
                     btnAddNewObject.Visible = true;
+                    btnRemove.Visible = true;
                     break;
                 case MenuItemControl.Voorraad:
                     SetObjectText("Voorraad", "Menu Item");
                     CreateVoorraadListView();
                     break;
-                case MenuItemControl.Inkomen:             
+                case MenuItemControl.Inkomen:
                     SetObjectText("Inkomen", "Menu Item");
                     CreateInkomenListView();
+                    btnAdjust.Visible = false;
+                    dtpDatum.Visible = true;
                     break;
             }
         }
@@ -102,7 +104,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private List<MenuItem> GetMenuItems(BereidingsPlek bereidingsPlek)
         {
-            List<MenuItem> list = new List<MenuItem>(); 
+            List<MenuItem> list = new List<MenuItem>();
             switch (bereidingsPlek)
             {
                 case BereidingsPlek.Bar:
@@ -112,12 +114,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     list = GetFood();
                     break;
             }
-            return list;  
+            return list;
         }
         private List<MenuItem> GetDrinks()
         {
             List<MenuItem> barList = new List<MenuItem>();
-            foreach(MenuItem menuItem in menu)
+            foreach (MenuItem menuItem in menu)
             {
                 if (menuItem.MenuType == MenuType.Drank)
                 {
@@ -150,7 +152,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             if (controlMode == MenuItemControl.Inkomen)
             {
-                lblTotalIncome.Visible = true;  
+                lblTotalIncome.Visible = true;
                 lblTotalIncome.Text = $"€ {totaleInkomens:0.00}";
             }
         }
@@ -170,11 +172,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     item.SubItems.Add($"{menuItem.Voorraad}");
                     break;
                 case MenuItemControl.Inkomen:
+                    menuItem.TotaalVerkocht = GetMenuItemSales(menuItem);
                     item.SubItems.Add($"{menuItem.TotaalVerkocht}");
                     item.SubItems.Add($"€ {menuItem.TotaleInkomen:0.00}");
                     break;
             }
             return item;
+        }
+        private int GetMenuItemSales(MenuItem menuItem)
+        {
+            DateTime datum = dtpDatum.Value;
+            return menuItemService.GetMenuItemSales(menuItem, datum);
         }
         private bool IsAlcoholic(MenuItem menuItem)
         {

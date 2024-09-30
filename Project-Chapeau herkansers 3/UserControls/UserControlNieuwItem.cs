@@ -198,19 +198,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.currentMenuItem.Voorraad = stock;
             menuItemService.UpdateMenuItemStock(this.currentMenuItem);
         }
-        private void InsertMenuItemInkomen(MenuItem menuItem, MenuType menuType)
-        {
-            InkomenService inkomenService = new InkomenService();
-            switch (menuType)
-            {
-                case MenuType.Drank:
-                    inkomenService.InsertInkomen(menuItem, BereidingsPlek.Bar);
-                    break;
-                default:
-                    inkomenService.InsertInkomen(menuItem, BereidingsPlek.Keuken);
-                    break;
-            }
-        }
         #endregion
         private void btnCancel_Click(object sender, EventArgs e)
         {
