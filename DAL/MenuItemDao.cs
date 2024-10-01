@@ -10,7 +10,7 @@ namespace DAL
         {
             string query = "SELECT MenuItems.MenuItemId, MenuItems.Naam, " +
                 "MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.Voorraad, " +
-                "MenuItems.MenuId FROM MenuItems";   
+                "MenuItems.MenuId FROM MenuItems WHERE IsBeschikbaar = 1";   
             return ReadTables(ExecuteSelectQuery(query));
         }
 
@@ -130,7 +130,7 @@ namespace DAL
         }
         public int GetMenuItemSales(MenuItem menuItem, DateTime datum)
         {
-            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId JOIN Rekeningen r ON b.TableNr = r.TafelID WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1 AND r.Datum BETWEEN @Datum AND GETDATE()";
+            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId JOIN Rekeningen r ON b.TableNr = r.TafelID WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1 AND r.Datum BETWEEN @Datum AND CAST(GETDATE() AS DATE)";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                 {
