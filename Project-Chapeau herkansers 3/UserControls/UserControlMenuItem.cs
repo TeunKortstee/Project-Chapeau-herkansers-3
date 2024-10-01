@@ -143,6 +143,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             return kitchenList;
         }
         #endregion
+
         private void DisplayMenuItems(List<MenuItem> menuItems, MenuItemControl controlMode)
         {
             double totaleInkomens = 0;
@@ -299,7 +300,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void RemoveMenuItem(MenuItem selectedMenuItem)
         {
             menuItemService.SoftDeleteMenuItem(selectedMenuItem);
-            //FillMenuListView(selectedMenuItem.MenuType);
         }
         #endregion
 
