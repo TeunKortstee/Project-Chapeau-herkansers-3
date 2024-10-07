@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlMenuItem
+    partial class UserControlMenu
     {
         /// <summary> 
         /// Required designer variable.
@@ -35,10 +35,11 @@
             btnRemove = new Button();
             btnReturn = new Button();
             lblErrorOverview = new Label();
-            btnBar = new Button();
-            btnKeuken = new Button();
+            btnDiner = new Button();
+            btnLunch = new Button();
             lblTotalIncome = new Label();
             dtpDatum = new DateTimePicker();
+            btnDrank = new Button();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -129,29 +130,29 @@
             lblErrorOverview.Text = "Error Bericht";
             lblErrorOverview.Visible = false;
             // 
-            // btnBar
+            // btnDiner
             // 
-            btnBar.BackColor = Color.FromArgb(138, 210, 176);
-            btnBar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnBar.Location = new Point(204, 176);
-            btnBar.Name = "btnBar";
-            btnBar.Size = new Size(190, 50);
-            btnBar.TabIndex = 51;
-            btnBar.Text = "Bar";
-            btnBar.UseVisualStyleBackColor = false;
-            btnBar.EnabledChanged += BarButtonEnabledChanged;
+            btnDiner.BackColor = Color.FromArgb(138, 210, 176);
+            btnDiner.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnDiner.Location = new Point(143, 176);
+            btnDiner.Name = "btnDiner";
+            btnDiner.Size = new Size(123, 50);
+            btnDiner.TabIndex = 51;
+            btnDiner.Text = "Diner";
+            btnDiner.UseVisualStyleBackColor = false;
+            btnDiner.EnabledChanged += DinerButtonEnabledChanged;
             // 
-            // btnKeuken
+            // btnLunch
             // 
-            btnKeuken.BackColor = Color.FromArgb(138, 210, 176);
-            btnKeuken.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnKeuken.Location = new Point(14, 176);
-            btnKeuken.Name = "btnKeuken";
-            btnKeuken.Size = new Size(190, 50);
-            btnKeuken.TabIndex = 50;
-            btnKeuken.Text = "Keuken";
-            btnKeuken.UseVisualStyleBackColor = false;
-            btnKeuken.EnabledChanged += KeukenButtonEnabledChanged;
+            btnLunch.BackColor = Color.FromArgb(138, 210, 176);
+            btnLunch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnLunch.Location = new Point(14, 176);
+            btnLunch.Name = "btnLunch";
+            btnLunch.Size = new Size(123, 50);
+            btnLunch.TabIndex = 50;
+            btnLunch.Text = "Lunch";
+            btnLunch.UseVisualStyleBackColor = false;
+            btnLunch.EnabledChanged += DinerButtonEnabledChanged;
             // 
             // lblTotalIncome
             // 
@@ -172,14 +173,26 @@
             dtpDatum.TabIndex = 53;
             dtpDatum.Visible = false;
             // 
-            // UserControlMenuItem
+            // btnDrank
+            // 
+            btnDrank.BackColor = Color.FromArgb(138, 210, 176);
+            btnDrank.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnDrank.Location = new Point(272, 176);
+            btnDrank.Name = "btnDrank";
+            btnDrank.Size = new Size(123, 50);
+            btnDrank.TabIndex = 54;
+            btnDrank.Text = "Drank";
+            btnDrank.UseVisualStyleBackColor = false;
+            // 
+            // UserControlMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnDrank);
             Controls.Add(dtpDatum);
             Controls.Add(lblTotalIncome);
-            Controls.Add(btnBar);
-            Controls.Add(btnKeuken);
+            Controls.Add(btnDiner);
+            Controls.Add(btnLunch);
             Controls.Add(lblErrorOverview);
             Controls.Add(btnReturn);
             Controls.Add(btnRemove);
@@ -188,7 +201,7 @@
             Controls.Add(lblTitel);
             Controls.Add(lsvDatabaseItems);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlMenuItem";
+            Name = "UserControlMenu";
             Size = new Size(414, 736);
             ResumeLayout(false);
             PerformLayout();
@@ -203,9 +216,10 @@
         private Button btnRemove;
         private Button btnReturn;
         private Label lblErrorOverview;
-        private Button btnBar;
-        private Button btnKeuken;
+        private Button btnDiner;
+        private Button btnLunch;
         private Label lblTotalIncome;
         private DateTimePicker dtpDatum;
+        private Button btnDrank;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Model;
 using Service;
+using System.Collections.Generic;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
@@ -7,13 +8,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private Form1 form;
         private PersoneelService personeelService;
+        private List<Personeel> personeel;
         public UserControlPersoneel()
         {
             InitializeComponent();
             this.form = Form1.Instance;
             CreateEmployeeListView();
             personeelService = new PersoneelService();
-            GetPersoneel();
+            this.personeel = GetAllPersoneel();
+            DisplayAllPersoneel(this.personeel);
         }
 
         #region DisplayUIElements
@@ -25,27 +28,29 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Columns.Add("Naam", 100);
             lsvDatabaseItems.Columns.Add("Functie", 150);
         }
-        private void GetPersoneel()
+        // Geef betere naam
+        private List<Personeel> GetAllPersoneel()
         {
+            List<Personeel> personeelList = new List<Personeel>();
             try
             {
-                List<Personeel> personeelList = personeelService.GetPersoneel();
-                foreach (Personeel personeel in personeelList)
-                {
-                    DisplayPersoneel(personeel);
-                }
+                personeelList = personeelService.GetAllPersoneel();
             }
             catch (Exception)
             {
                 DisplayErrorMessage("Er ging iets mis bij de database");
             }
+            return personeelList;   
         }
-        private void DisplayPersoneel(Personeel personeel)
+        private void DisplayAllPersoneel(List<Personeel> personeel)
         {
-            ListViewItem item = new ListViewItem(personeel.AchterNaam);
-            item.SubItems.Add(personeel.Functie.ToString());
-            item.Tag = personeel;
-            lsvDatabaseItems.Items.Add(item);
+            foreach (Personeel werknemer in personeel)
+            {
+                ListViewItem item = new ListViewItem(werknemer.AchterNaam);
+                item.SubItems.Add(werknemer.Functie.ToString());
+                item.Tag = werknemer;
+                lsvDatabaseItems.Items.Add(item);
+            }
         }
 
         #endregion
@@ -53,7 +58,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Buttons
         private void btnAddNewObject_Click(object sender, EventArgs e)
         {
-            this.form.SwitchPanels(new UserControlNieuwItem(new Personeel(), false));
+            this.form.SwitchPanels(new UserControlPersoneelEdit(new Personeel(), false));
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -97,7 +102,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
-            this.form.SwitchPanels(new UserControlNieuwItem((Personeel)selectedLsvItem.Tag, true));
+            this.form.SwitchPanels(new UserControlPersoneelEdit((Personeel)selectedLsvItem.Tag, true));
         }
         private void RemovePersoneel(Personeel selectedPersoneel)
         {

@@ -17,15 +17,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlMenuItem(MenuItemControl.Menu));
+            form.SwitchPanels(new UserControlMenu(MenuItemControl.Menu));
         }
         private void btnSales_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlMenuItem(MenuItemControl.Inkomen));
+            form.SwitchPanels(new UserControlMenu(MenuItemControl.Inkomen));
         }
         private void btnStock_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlMenuItem(MenuItemControl.Voorraad));
+            form.SwitchPanels(new UserControlMenu(MenuItemControl.Voorraad));
         }
     }
 }

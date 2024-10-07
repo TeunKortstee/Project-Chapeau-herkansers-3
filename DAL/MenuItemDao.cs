@@ -6,14 +6,21 @@ namespace DAL
 {
     public class MenuItemDao : BaseDao
     {
-        public Menu GetAllItems()
+        // Enum van MenuType er in
+        // Uit Menu met MenuItems
+        public Menu GetAllMenuItemsByMenuType(MenuType menuType)
         {
-            string query = "SELECT MenuItems.MenuItemId, MenuItems.Naam, " +
-                "MenuItems.Prijs, MenuItems.Alcoholisch, MenuItems.Voorraad, " +
-                "MenuItems.MenuId FROM MenuItems WHERE IsBeschikbaar = 1";   
+            string query = "SELECT MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, MenuId FROM MenuItems WHERE MenuId = @MenuId AND IsBeschikbaar = 1";
+            SqlParameter sqlParameter = new SqlParameter("@MenuId", (int)menuType);
+
+            return ReadTables(ExecuteSelectQuery(query, sqlParameter));
+        }
+        public Menu GetAllMenuItemsInMenu()
+        {
+            string query = "SELECT MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, MenuId FROM MenuItems WHERE IsBeschikbaar = 1";
+
             return ReadTables(ExecuteSelectQuery(query));
         }
-
         private Menu ReadTables(DataTable dataTable)
         {
             Menu menu = new Menu();
@@ -38,29 +45,6 @@ namespace DAL
             };
         }
         // Lucas
-        public List<MenuItem> GetMenuItems()
-        {
-            string query = "SELECT * FROM MenuItems WHERE IsBeschikbaar = 1";
-            return ReadTablesWithList(ExecuteSelectQuery(query));
-        }
-        private List<MenuItem> ReadTablesWithList(DataTable dataTable)
-        {
-            List<MenuItem> menuItems = new List<MenuItem>();
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                MenuItem menuItem = new MenuItem()
-                {
-                    MenuItemId = Convert.ToInt32(dr["MenuItemId"]),
-                    Voorraad = Convert.ToInt32(dr["Voorraad"]),
-                    Prijs = (double)dr["Prijs"],
-                    Naam = (string)dr["Naam"],
-                    MenuType = (MenuType)Convert.ToInt32(dr["MenuId"]),
-                    IsAlcoholisch = (bool)dr["Alcoholisch"],
-                };
-                menuItems.Add(menuItem);
-            }
-            return menuItems;
-        }
         private int ReadTablesWithCount(DataTable dataTable)
         {
             if (dataTable.Rows.Count > 0)

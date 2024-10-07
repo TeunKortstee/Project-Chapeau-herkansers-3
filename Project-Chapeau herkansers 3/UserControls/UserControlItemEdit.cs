@@ -3,29 +3,13 @@ using Service;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
-    public partial class UserControlNieuwItem : UserControl
+    public partial class UserControlItemEdit : UserControl
     {
         private Form1 form;
         private bool isEditing;
         private MenuItem currentMenuItem;
-        private Personeel currentPersoneel;
 
-        public UserControlNieuwItem(Personeel currentPersoneel, bool isEditing)
-        {
-            InitializeComponent();
-            this.form = Form1.Instance;
-            this.currentPersoneel = currentPersoneel;
-            this.isEditing = isEditing;
-            if (!isEditing)
-            {
-                SetNewPersoneelLogic(Functie.Serveerder);
-            }
-            else
-            {
-                SetEditPersoneelLogic(currentPersoneel);
-            }
-        }
-        public UserControlNieuwItem(MenuItem currentMenuItem, bool isEditing, MenuItemControl menuItemControl)
+        public UserControlItemEdit(MenuItem currentMenuItem, bool isEditing, MenuItemControl menuItemControl)
         {
             InitializeComponent();
             this.form = Form1.Instance;
@@ -42,11 +26,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             SetButtonTags(menuItemControl);
         }
         #region Menu Specific Logic
-        private void SetEditPersoneelLogic(Personeel personeel)
-        {
-            SetCurrentObjectInfo(personeel.AchterNaam, personeel.Email);
-            SetNewPersoneelLogic(personeel.Functie);
-        }
         private void SetEditMenuItemLogic(MenuItem menuItem, MenuItemControl menuItemControl)
         {
             switch (menuItemControl)
@@ -73,17 +52,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
             cmbType.DataSource = Enum.GetValues(typeof(MenuType));
             cmbType.SelectedItem = menu;
         }
-
-        private void SetNewPersoneelLogic(Functie function)
-        {
-            SetObjectText("Werknemer", "Achternaam", "Email", "De_Graaf", "Functie");
-            cmbType.DataSource = Enum.GetValues(typeof(Functie));
-            cmbType.SelectedItem = function;
-        }
         private void SetCurrentObjectInfo(string firstField, string secondField)
         {
             txt1.Text = firstField;
-            txt2.Text = secondField;
+            txt2.Text = $"{secondField:0.00}";
         }
         private void SetVoorraadLogic(int voorraad)
         {
@@ -129,10 +101,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     case MenuItemControl.Voorraad:
                         UpdateVoorraad();
                         break;
-                    default:
-                        InsertPersoneel();
-                        UpdatePersoneel();
-                        break;
                 }
             }
             catch (Exception ex)
@@ -141,29 +109,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             ReturnToOverview();
         }
-        #region Send to Database
-        private void InsertPersoneel()
-        {
-            if (!AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem) || isEditing)
-            {
-                return;
-            }
-            PersoneelService personeelService = new PersoneelService();
-            Personeel newPersoneel = new Personeel(txt1.Text, personeelService.CreateEmail(txt2.Text), (Functie)cmbType.SelectedItem);
-            personeelService.InsertPersoneel(newPersoneel);
-        }
-        private void UpdatePersoneel()
-        {
-            if (!AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem) || !isEditing)
-            {
-                return;
-            }
-            this.currentPersoneel.AchterNaam = txt1.Text;
-            this.currentPersoneel.Email = txt2.Text;
-            this.currentPersoneel.Functie = (Functie)cmbType.SelectedItem;
-            PersoneelService personeelService = new PersoneelService();
-            personeelService.UpdatePersoneel(this.currentPersoneel);
-        }
+        #region Send to Service
         private void InsertMenuItem()
         {
             if (!AreValidMenuItemInputs(txt1.Text, txt2.Text, (MenuType)cmbType.SelectedItem) || isEditing)
@@ -235,53 +181,13 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private double ParsePrice(string priceInput)
         {
-            if (!double.TryParse(priceInput, out double price))
+            if (!double.TryParse(priceInput, out double price) || price < 0)
             {
                 throw new Exception("Vul een geldige prijs in");
             }
             return price;
         }
 
-        #endregion
-
-        #region PersoneelHandling
-        private bool AreValidPersoneelInputs(string nameInput, string emailInput, Functie selectedItem)
-        {
-            if (!IsEmpty(nameInput, emailInput) || !ValidCharacters(nameInput, emailInput) || !Enum.IsDefined(typeof(Functie), selectedItem))
-            {
-                return false;
-            }
-            return true;
-        }
-        private bool ValidCharacters(string nameInput, string emailInput)
-        {
-            foreach (char character in emailInput)
-            {
-                if (!char.IsLetter(character) && character != '_' && character != '.')
-                {
-                    DisplayErrorMessage("Username is niet geldig");
-                    return false;
-                }
-            }
-            foreach (char character in nameInput)
-            {
-                if (!char.IsLetter(character) && character != ' ')
-                {
-                    DisplayErrorMessage("Achternaam is niet geldig");
-                    return false;
-                }
-            }
-            return true;
-        }
-        private bool IsEmpty(string nameInput, string emailInput)
-        {
-            if (string.IsNullOrEmpty(nameInput) || string.IsNullOrWhiteSpace(nameInput))
-            {
-                DisplayErrorMessage("Vul alle velden in");
-                return false;
-            }
-            return true;
-        }
         #endregion
 
         #region VoorraadHandeling
@@ -301,12 +207,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 txtStock.Text = newStock.ToString();
             }
         }
-        #endregion
-
         private string InvalidInput()
         {
             return "Vul een geldig getal in";
         }
+        #endregion
+
         private void DisplayErrorMessage(string errorMessage)
         {
             lblErrorNewObject.Visible = true;
@@ -323,7 +229,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             else
             {
-                form.SwitchPanels(new UserControlMenuItem((MenuItemControl)btnCancel.Tag));
+                form.SwitchPanels(new UserControlMenu((MenuItemControl)btnCancel.Tag));
             }
         }
 

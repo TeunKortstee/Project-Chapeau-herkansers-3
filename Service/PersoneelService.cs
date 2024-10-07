@@ -15,9 +15,9 @@ namespace Service
         {
             this.personeelDao = new PersoneelDao();
         }
-        public List<Personeel> GetPersoneel()
+        public List<Personeel> GetAllPersoneel()
         {
-            return personeelDao.GetPersoneel();
+            return personeelDao.GetAllPersoneel();
         }
         public void InsertPersoneel(Personeel personeel)
         {
@@ -28,7 +28,7 @@ namespace Service
         }
         public void RemovePersoneel(Personeel personeel)
         {
-            personeelDao.RemovePersoneel(personeel);
+            personeelDao.SoftDeletePersoneel(personeel);
         }
         public void UpdatePersoneel(Personeel personeel)
         {

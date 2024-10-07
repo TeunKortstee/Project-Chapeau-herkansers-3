@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlNieuwItem
+    partial class UserControlPersoneelEdit
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,7 +34,6 @@
             field2 = new PictureBox();
             txt2 = new TextBox();
             lbl2 = new Label();
-            chkAlcoholisch = new CheckBox();
             lblEnum = new Label();
             field3 = new PictureBox();
             lbl1 = new Label();
@@ -42,9 +41,6 @@
             field1 = new PictureBox();
             cmbType = new ComboBox();
             lblErrorNewObject = new Label();
-            btnSubtract = new Button();
-            btnAdd = new Button();
-            txtStock = new TextBox();
             ((System.ComponentModel.ISupportInitialize)field2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)field3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)field1).BeginInit();
@@ -113,17 +109,6 @@
             lbl2.TabIndex = 13;
             lbl2.Text = "Veld2";
             // 
-            // chkAlcoholisch
-            // 
-            chkAlcoholisch.AutoSize = true;
-            chkAlcoholisch.Location = new Point(27, 427);
-            chkAlcoholisch.Name = "chkAlcoholisch";
-            chkAlcoholisch.Size = new Size(107, 24);
-            chkAlcoholisch.TabIndex = 21;
-            chkAlcoholisch.Text = "Alcoholisch";
-            chkAlcoholisch.UseVisualStyleBackColor = true;
-            chkAlcoholisch.Visible = false;
-            // 
             // lblEnum
             // 
             lblEnum.AutoSize = true;
@@ -178,60 +163,23 @@
             cmbType.Name = "cmbType";
             cmbType.Size = new Size(187, 28);
             cmbType.TabIndex = 35;
-            cmbType.SelectedIndexChanged += cmbType_SelectedIndexChanged;
             // 
             // lblErrorNewObject
             // 
             lblErrorNewObject.AutoSize = true;
             lblErrorNewObject.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorNewObject.ForeColor = Color.Red;
-            lblErrorNewObject.Location = new Point(27, 454);
+            lblErrorNewObject.Location = new Point(30, 424);
             lblErrorNewObject.Name = "lblErrorNewObject";
             lblErrorNewObject.Size = new Size(120, 25);
             lblErrorNewObject.TabIndex = 36;
             lblErrorNewObject.Text = "Error Bericht";
             lblErrorNewObject.Visible = false;
             // 
-            // btnSubtract
-            // 
-            btnSubtract.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSubtract.Location = new Point(273, 244);
-            btnSubtract.Name = "btnSubtract";
-            btnSubtract.Size = new Size(24, 29);
-            btnSubtract.TabIndex = 39;
-            btnSubtract.Text = "-";
-            btnSubtract.UseVisualStyleBackColor = true;
-            btnSubtract.Visible = false;
-            btnSubtract.Click += btnSubtract_Click;
-            // 
-            // btnAdd
-            // 
-            btnAdd.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAdd.Location = new Point(340, 244);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(24, 29);
-            btnAdd.TabIndex = 38;
-            btnAdd.Text = "+";
-            btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Visible = false;
-            btnAdd.Click += btnAdd_Click;
-            // 
-            // txtStock
-            // 
-            txtStock.Location = new Point(303, 244);
-            txtStock.Name = "txtStock";
-            txtStock.Size = new Size(31, 27);
-            txtStock.TabIndex = 37;
-            txtStock.TextAlign = HorizontalAlignment.Center;
-            txtStock.Visible = false;
-            // 
-            // UserControlNieuwItem
+            // UserControlPersoneelEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(btnSubtract);
-            Controls.Add(btnAdd);
-            Controls.Add(txtStock);
             Controls.Add(lblErrorNewObject);
             Controls.Add(cmbType);
             Controls.Add(lbl1);
@@ -239,7 +187,6 @@
             Controls.Add(field1);
             Controls.Add(lblEnum);
             Controls.Add(field3);
-            Controls.Add(chkAlcoholisch);
             Controls.Add(lbl2);
             Controls.Add(txt2);
             Controls.Add(field2);
@@ -247,7 +194,7 @@
             Controls.Add(btnConfirm);
             Controls.Add(lblObject);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlNieuwItem";
+            Name = "UserControlPersoneelEdit";
             Size = new Size(414, 736);
             ((System.ComponentModel.ISupportInitialize)field2).EndInit();
             ((System.ComponentModel.ISupportInitialize)field3).EndInit();
@@ -264,7 +211,6 @@
         private PictureBox pictureBox5;
         private TextBox txt2;
         private Label lbl2;
-        private CheckBox chkAlcoholisch;
         private Label lblEnum;
         private PictureBox field3;
         private Label lbl1;
@@ -272,8 +218,5 @@
         private PictureBox field1;
         private ComboBox cmbType;
         private Label lblErrorNewObject;
-        private Button btnSubtract;
-        private Button btnAdd;
-        private TextBox txtStock;
     }
 }

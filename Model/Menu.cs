@@ -11,7 +11,7 @@
         public Menu()
         {
             menuItems = new List<MenuItem>();
-            menuType = MenuType.Lunch;
+            //menuType = MenuType.Lunch;
         }
     }
 }

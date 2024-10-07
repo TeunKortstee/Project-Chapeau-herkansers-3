@@ -20,7 +20,7 @@ namespace Project_Chapeau_herkansers_3
         {
             InitializeComponent();
             MenuItemService menuItemService = new MenuItemService();
-            Menu menu = menuItemService.GetAllItems();
+            Menu menu = menuItemService.GetAllMenuItemsInMenu();
             Bestelling bestelling = new Bestelling(tafel);
             buttonsVullen(menu, bestelling, menuItemService);
             VulTekstTafel(tafel);

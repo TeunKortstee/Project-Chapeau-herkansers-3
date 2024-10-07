@@ -37,19 +37,10 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        public void RemovePersoneel(Personeel selectedEmployee)
-        {
-            string query = "DELETE FROM Personeel WHERE PersoneelsId = @PersoneelsId";
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@PersoneelsId", selectedEmployee.Id),
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
         // Lucas
-        public List<Personeel> GetPersoneel()
+        public List<Personeel> GetAllPersoneel()
         {
-            string query = "SELECT * FROM Personeel";
+            string query = "SELECT PersoneelsId, Achternaam, FunctieId, Email FROM Personeel WHERE IsBeschikbaar = 1";
             return ReadTables(ExecuteSelectQuery(query));
         }
         public void UpdatePersoneel(Personeel selectedPersoneel)
@@ -61,6 +52,15 @@ namespace DAL
                 new SqlParameter("@Achternaam", selectedPersoneel.AchterNaam),
                 new SqlParameter("@Email", selectedPersoneel.Email),
                 new SqlParameter("@FunctieId", (int)selectedPersoneel.Functie),
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void SoftDeletePersoneel(Personeel selectedEmployee)
+        {
+            string query = "UPDATE Personeel SET IsBeschikbaar = 0 WHERE PersoneelsId = @PersoneelsId";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@PersoneelsId", selectedEmployee.Id),
             };
             ExecuteEditQuery(query, sqlParameters);
         }
