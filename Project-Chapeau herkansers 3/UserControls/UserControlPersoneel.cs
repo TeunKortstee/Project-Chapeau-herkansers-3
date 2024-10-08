@@ -38,7 +38,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             catch (Exception)
             {
-                DisplayErrorMessage("Er ging iets mis bij de database");
+                DisplayErrorMessage("Er ging iets mis");
             }
             return personeelList;   
         }
@@ -98,7 +98,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
             RemovePersoneel((Personeel)selectedLsvItem.Tag);
-            lsvDatabaseItems.Items.Remove(selectedLsvItem);
+            this.personeel = GetAllPersoneel();
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {

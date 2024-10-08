@@ -152,7 +152,7 @@
             btnLunch.TabIndex = 50;
             btnLunch.Text = "Lunch";
             btnLunch.UseVisualStyleBackColor = false;
-            btnLunch.EnabledChanged += DinerButtonEnabledChanged;
+            btnLunch.EnabledChanged += LunchButtonEnabledChanged;
             // 
             // lblTotalIncome
             // 
@@ -183,6 +183,7 @@
             btnDrank.TabIndex = 54;
             btnDrank.Text = "Drank";
             btnDrank.UseVisualStyleBackColor = false;
+            btnDrank.EnabledChanged += DrankButtonEnabledChanged;
             // 
             // UserControlMenu
             // 
