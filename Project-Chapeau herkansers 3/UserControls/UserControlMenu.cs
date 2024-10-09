@@ -1,8 +1,10 @@
 ﻿using Model;
 using Service;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
@@ -11,16 +13,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private Form1 form;
         private MenuItemService menuItemService;
         private List<Menu> menus;
+        private Menu selectedMenu;
         private MenuItemControl controlMode;
         public UserControlMenu(MenuItemControl controlMode)
         {
             InitializeComponent();
             this.form = Form1.Instance;
             this.controlMode = controlMode;
-            SetLogic(controlMode);
             this.menuItemService = new MenuItemService();
             this.menus = GetAllMenus();
-            DisplayMenuItems(GetMenu(MenuType.Lunch), controlMode);
+            SetLogic(controlMode);
+            SetDefault();
         }
         private List<Menu> GetAllMenus()
         {
@@ -44,6 +47,13 @@ namespace Project_Chapeau_herkansers_3.UserControls
             return menu;
         }
         #region ControlLogic
+        private void SetDefault()
+        {
+            Menu lunchMenu = GetMenu((MenuType)btnLunch.Tag);
+            SetSelectedMenu(lunchMenu);
+            DisplayMenuItems(lunchMenu, this.controlMode);
+            RenableMenuButtons(lunchMenu.MenuType);
+        }
         private void SetLogic(MenuItemControl controlMode)
         {
             SetButtons();
@@ -79,6 +89,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
             btnLunch.Click += LunchButtonClick;
             btnDiner.Click += DinerButtonClick;
             btnDrank.Click += DrankButtonClick;
+        }
+        private void SetSelectedMenu(Menu menu)
+        {
+            this.selectedMenu = menu;
         }
         #endregion
 
@@ -230,32 +244,38 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void LunchButtonEnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnLunch);
-            RenableMenuButtons((MenuType)btnLunch.Tag);
         }
         private void DinerButtonEnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnDiner);
-            RenableMenuButtons((MenuType)btnDiner.Tag);
         }
         private void DrankButtonEnabledChanged(object sender, EventArgs e)
         {
             SetEnableColor(btnDrank);
-            RenableMenuButtons((MenuType)btnDrank.Tag);
-        }
-        private void DinerButtonClick(object sender, EventArgs e)
-        {
-            SetSpecificLogic(this.controlMode);
-            DisplayMenuItems(GetMenu((MenuType)btnDiner.Tag), this.controlMode);
         }
         private void LunchButtonClick(object sender, EventArgs e)
         {
+            Menu lunchMenu = GetMenu((MenuType)btnLunch.Tag);
             SetSpecificLogic(this.controlMode);
-            DisplayMenuItems(GetMenu((MenuType)btnLunch.Tag), this.controlMode);
+            SetSelectedMenu(lunchMenu);
+            DisplayMenuItems(lunchMenu, this.controlMode);
+            RenableMenuButtons(lunchMenu.MenuType);
+        }
+        private void DinerButtonClick(object sender, EventArgs e)
+        {
+            Menu dinerMenu = GetMenu((MenuType)btnDiner.Tag);
+            SetSpecificLogic(this.controlMode);
+            SetSelectedMenu(dinerMenu);
+            DisplayMenuItems(dinerMenu, this.controlMode);
+            RenableMenuButtons(dinerMenu.MenuType);
         }
         private void DrankButtonClick(object sender, EventArgs e)
         {
+            Menu drankMenu = GetMenu((MenuType)btnDrank.Tag);
             SetSpecificLogic(this.controlMode);
-            DisplayMenuItems(GetMenu((MenuType)btnDrank.Tag), this.controlMode);
+            SetSelectedMenu(drankMenu);
+            DisplayMenuItems(drankMenu, this.controlMode);
+            RenableMenuButtons(drankMenu.MenuType);
         }
         private void SetEnableColor(Button button)
         {
@@ -334,6 +354,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
             lsvDatabaseItems.Items.Remove(selectedLsvItem);
+            this.selectedMenu.MenuItems.Remove((MenuItem)selectedLsvItem.Tag);
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
@@ -341,7 +362,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void RemoveMenuItem(MenuItem selectedMenuItem)
         {
-            menuItemService.SoftDeleteMenuItem(selectedMenuItem);
+            try
+            {
+                menuItemService.SoftDeleteMenuItem(selectedMenuItem);
+            }
+            catch (Exception) 
+            {
+                DisplayErrorMessage("Er ging iets mis");
+            }
+
         }
         #endregion
 
