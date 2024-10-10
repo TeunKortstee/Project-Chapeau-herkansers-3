@@ -1,10 +1,5 @@
 ﻿using Model;
 using Service;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Drawing2D;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
@@ -352,6 +347,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region ListViewItem
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
+            if (!IsConfirmed())
+            {
+                return;
+            }
             RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
             lsvDatabaseItems.Items.Remove(selectedLsvItem);
             this.selectedMenu.MenuItems.Remove((MenuItem)selectedLsvItem.Tag);
@@ -371,6 +370,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 DisplayErrorMessage("Er ging iets mis");
             }
 
+        }
+        private bool IsConfirmed()
+        {
+            DialogResult confirmResult = MessageBox.Show("Weet u zeker dat u dit werknemer wilt verwijderen?", "Ja of Nee", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
         }
         #endregion
 

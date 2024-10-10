@@ -21,6 +21,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         #region DisplayUIElements
 
+        private void RefreshListView()
+        {
+            CreateEmployeeListView();
+            DisplayAllPersoneel(this.personeel);
+        }
         private void CreateEmployeeListView()
         {
             lsvDatabaseItems.Clear();
@@ -94,11 +99,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        #region DeleteSelectedItem
+        #region Bottom Buttons
+
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
+            if (!IsConfirmed())
+            {
+                return;
+            }
             RemovePersoneel((Personeel)selectedLsvItem.Tag);
-            this.personeel = GetAllPersoneel();
+            personeel.Remove((Personeel)selectedLsvItem.Tag);
+            RefreshListView();
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
@@ -107,6 +118,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
         private void RemovePersoneel(Personeel selectedPersoneel)
         {
             this.personeelService.RemovePersoneel(selectedPersoneel);
+        }
+        private bool IsConfirmed()
+        {
+            DialogResult confirmResult = MessageBox.Show("Weet u zeker dat u dit werknemer wilt verwijderen?", "Ja of Nee",MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
         }
         #endregion
 
