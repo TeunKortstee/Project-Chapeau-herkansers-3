@@ -35,6 +35,10 @@
             btnRemove = new Button();
             btnReturn = new Button();
             lblErrorOverview = new Label();
+            btnBediening = new Button();
+            btnKeuken = new Button();
+            btnBar = new Button();
+            btnManagers = new Button();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -63,7 +67,7 @@
             // 
             btnAddNewObject.BackColor = Color.FromArgb(138, 210, 176);
             btnAddNewObject.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNewObject.Location = new Point(14, 177);
+            btnAddNewObject.Location = new Point(14, 121);
             btnAddNewObject.Margin = new Padding(3, 4, 3, 4);
             btnAddNewObject.Name = "btnAddNewObject";
             btnAddNewObject.Size = new Size(380, 48);
@@ -123,10 +127,66 @@
             lblErrorOverview.Text = "Error Bericht";
             lblErrorOverview.Visible = false;
             // 
+            // btnBediening
+            // 
+            btnBediening.BackColor = Color.FromArgb(138, 210, 176);
+            btnBediening.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnBediening.Location = new Point(14, 176);
+            btnBediening.Name = "btnBediening";
+            btnBediening.Size = new Size(90, 50);
+            btnBediening.TabIndex = 54;
+            btnBediening.Text = "Bediening";
+            btnBediening.UseVisualStyleBackColor = false;
+            btnBediening.Click += BedieningClick;
+            btnBediening.EnabledChanged += BedieningButtonEnabledChanged;
+            // 
+            // btnKeuken
+            // 
+            btnKeuken.BackColor = Color.FromArgb(138, 210, 176);
+            btnKeuken.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnKeuken.Location = new Point(110, 176);
+            btnKeuken.Name = "btnKeuken";
+            btnKeuken.Size = new Size(90, 50);
+            btnKeuken.TabIndex = 55;
+            btnKeuken.Text = "Keuken";
+            btnKeuken.UseVisualStyleBackColor = false;
+            btnKeuken.Click += KeukenClick;
+            btnKeuken.EnabledChanged += KeukenButtonEnabledChanged;
+            // 
+            // btnBar
+            // 
+            btnBar.BackColor = Color.FromArgb(138, 210, 176);
+            btnBar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnBar.Location = new Point(208, 176);
+            btnBar.Name = "btnBar";
+            btnBar.Size = new Size(90, 50);
+            btnBar.TabIndex = 56;
+            btnBar.Text = "Bar";
+            btnBar.UseVisualStyleBackColor = false;
+            btnBar.Click += BarClick;
+            btnBar.EnabledChanged += BarButtonEnabledChanged;
+            // 
+            // btnManagers
+            // 
+            btnManagers.BackColor = Color.FromArgb(138, 210, 176);
+            btnManagers.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnManagers.Location = new Point(304, 176);
+            btnManagers.Name = "btnManagers";
+            btnManagers.Size = new Size(90, 50);
+            btnManagers.TabIndex = 57;
+            btnManagers.Text = "Managers";
+            btnManagers.UseVisualStyleBackColor = false;
+            btnManagers.Click += ManagersClick;
+            btnManagers.EnabledChanged += ManagersButtonEnabledChanged;
+            // 
             // UserControlPersoneel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnManagers);
+            Controls.Add(btnBar);
+            Controls.Add(btnKeuken);
+            Controls.Add(btnBediening);
             Controls.Add(lblErrorOverview);
             Controls.Add(btnReturn);
             Controls.Add(btnRemove);
@@ -150,5 +210,9 @@
         private Button btnRemove;
         private Button btnReturn;
         private Label lblErrorOverview;
+        private Button btnBediening;
+        private Button btnKeuken;
+        private Button btnBar;
+        private Button btnManagers;
     }
 }

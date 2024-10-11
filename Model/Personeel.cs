@@ -14,7 +14,7 @@
             Email = "";
             AchterNaam = "";
             WachtWoord = "";
-            Functie = Functie.Serveerder;
+            Functie = Functie.Bediening;
         }
         public Personeel(string achternaam, string email, Functie functie)
         {

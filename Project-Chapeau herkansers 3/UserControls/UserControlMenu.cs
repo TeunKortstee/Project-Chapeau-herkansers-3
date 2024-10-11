@@ -46,12 +46,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             Menu lunchMenu = GetMenu((MenuType)btnLunch.Tag);
             SetSelectedMenu(lunchMenu);
-            DisplayMenuItems(lunchMenu, this.controlMode);
+            DisplayMenuItemsFromMenu(lunchMenu, this.controlMode);
             RenableMenuButtons(lunchMenu.MenuType);
         }
         private void SetLogic(MenuItemControl controlMode)
         {
-            SetButtons();
+            SetButtonTags();
             SetSpecificLogic(controlMode);
         }
         private void SetSpecificLogic(MenuItemControl controlMode)
@@ -76,14 +76,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     break;
             }
         }
-        private void SetButtons()
+        private void SetButtonTags()
         {
             btnLunch.Tag = MenuType.Lunch;
             btnDiner.Tag = MenuType.Diner;
             btnDrank.Tag = MenuType.Drank;
-            btnLunch.Click += LunchButtonClick;
-            btnDiner.Click += DinerButtonClick;
-            btnDrank.Click += DrankButtonClick;
         }
         private void SetSelectedMenu(Menu menu)
         {
@@ -138,7 +135,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        private void DisplayMenuItems(Menu menu, MenuItemControl controlMode)
+        private void DisplayMenuItemsFromMenu(Menu menu, MenuItemControl controlMode)
         {
             if (controlMode == MenuItemControl.Inkomen)
             {
@@ -253,7 +250,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             Menu lunchMenu = GetMenu((MenuType)btnLunch.Tag);
             SetSpecificLogic(this.controlMode);
             SetSelectedMenu(lunchMenu);
-            DisplayMenuItems(lunchMenu, this.controlMode);
+            DisplayMenuItemsFromMenu(lunchMenu, this.controlMode);
             RenableMenuButtons(lunchMenu.MenuType);
         }
         private void DinerButtonClick(object sender, EventArgs e)
@@ -261,7 +258,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             Menu dinerMenu = GetMenu((MenuType)btnDiner.Tag);
             SetSpecificLogic(this.controlMode);
             SetSelectedMenu(dinerMenu);
-            DisplayMenuItems(dinerMenu, this.controlMode);
+            DisplayMenuItemsFromMenu(dinerMenu, this.controlMode);
             RenableMenuButtons(dinerMenu.MenuType);
         }
         private void DrankButtonClick(object sender, EventArgs e)
@@ -269,19 +266,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
             Menu drankMenu = GetMenu((MenuType)btnDrank.Tag);
             SetSpecificLogic(this.controlMode);
             SetSelectedMenu(drankMenu);
-            DisplayMenuItems(drankMenu, this.controlMode);
+            DisplayMenuItemsFromMenu(drankMenu, this.controlMode);
             RenableMenuButtons(drankMenu.MenuType);
-        }
-        private void SetEnableColor(Button button)
-        {
-            if (button.Enabled)
-            {
-                button.BackColor = Color.FromArgb(255, 138, 210, 176);
-            }
-            else
-            {
-                button.BackColor = Color.FromArgb(114, 138, 210, 176);
-            }
         }
         #endregion
 
@@ -301,11 +287,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     break;
             }
         }
-        private void SetButtonStates(bool option1, bool option2, bool option3)
+        private void SetButtonStates(bool lunch, bool diner, bool drank)
         {
-            btnLunch.Enabled = option1;
-            btnDiner.Enabled = option2;
-            btnDrank.Enabled = option3;
+            btnLunch.Enabled = lunch;
+            btnDiner.Enabled = diner;
+            btnDrank.Enabled = drank;
+        }
+        private void SetEnableColor(Button button)
+        {
+            if (button.Enabled)
+            {
+                button.BackColor = Color.FromArgb(255, 138, 210, 176);
+            }
+            else
+            {
+                button.BackColor = Color.FromArgb(114, 138, 210, 176);
+            }
         }
 
         #endregion

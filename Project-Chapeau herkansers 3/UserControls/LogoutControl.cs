@@ -31,7 +31,7 @@ namespace Project_Chapeau_herkansers_3
             Form1 form = Form1.Instance;
             switch (form.personeel.Functie)
             {
-                case Functie.Serveerder:
+                case Functie.Bediening:
                     form.SwitchPanels(new TafelOverzichtUserControl());
                     break;
                 case Functie.Manager:

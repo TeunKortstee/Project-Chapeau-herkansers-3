@@ -97,9 +97,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     case MenuItemControl.Menu:
                         InsertMenuItem();
                         UpdateMenuItem();
+                        ReturnToOverview();
                         break;
                     case MenuItemControl.Voorraad:
                         UpdateVoorraad();
+                        ReturnToOverview();
                         break;
                 }
             }
@@ -107,7 +109,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 DisplayErrorMessage(ex.Message);
             }
-            ReturnToOverview();
         }
         #region Send to Service
         private void InsertMenuItem()

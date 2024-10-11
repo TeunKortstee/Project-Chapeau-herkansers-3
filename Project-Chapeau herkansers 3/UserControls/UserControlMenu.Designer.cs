@@ -140,6 +140,7 @@
             btnDiner.TabIndex = 51;
             btnDiner.Text = "Diner";
             btnDiner.UseVisualStyleBackColor = false;
+            btnDiner.Click += DinerButtonClick;
             btnDiner.EnabledChanged += DinerButtonEnabledChanged;
             // 
             // btnLunch
@@ -152,6 +153,7 @@
             btnLunch.TabIndex = 50;
             btnLunch.Text = "Lunch";
             btnLunch.UseVisualStyleBackColor = false;
+            btnLunch.Click += LunchButtonClick;
             btnLunch.EnabledChanged += LunchButtonEnabledChanged;
             // 
             // lblTotalIncome
@@ -183,6 +185,7 @@
             btnDrank.TabIndex = 54;
             btnDrank.Text = "Drank";
             btnDrank.UseVisualStyleBackColor = false;
+            btnDrank.Click += DrankButtonClick;
             btnDrank.EnabledChanged += DrankButtonEnabledChanged;
             // 
             // UserControlMenu

@@ -45,7 +45,7 @@
             btnEmployee.Name = "btnEmployee";
             btnEmployee.Size = new Size(335, 67);
             btnEmployee.TabIndex = 3;
-            btnEmployee.Text = "Personeel Management";
+            btnEmployee.Text = "Personeel";
             btnEmployee.UseVisualStyleBackColor = false;
             btnEmployee.Click += btnEmployee_Click;
             // 

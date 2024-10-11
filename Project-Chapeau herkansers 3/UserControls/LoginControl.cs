@@ -66,7 +66,7 @@ namespace Project_Chapeau_herkansers_3
             _form1.ChangeButtonText(personeel.AchterNaam);
             switch (personeel.Functie)
             {
-                case Functie.Serveerder:
+                case Functie.Bediening:
                     _form1.SwitchPanels(new TafelOverzichtUserControl());
                     break;
                 case Functie.Manager:

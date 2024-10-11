@@ -13,18 +13,17 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            CreateEmployeeListView();
             personeelService = new PersoneelService();
             this.personeel = GetAllPersoneel();
-            DisplayAllPersoneel(this.personeel);
+            SetButtonTags();
+            RefreshListView((Functie)btnBediening.Tag);
         }
 
         #region DisplayUIElements
-
-        private void RefreshListView()
+        private void RefreshListView(Functie functie)
         {
             CreateEmployeeListView();
-            DisplayAllPersoneel(this.personeel);
+            DisplayPersoneelByFunctie(functie);
         }
         private void CreateEmployeeListView()
         {
@@ -33,7 +32,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lsvDatabaseItems.Columns.Add("Naam", 100);
             lsvDatabaseItems.Columns.Add("Functie", 150);
         }
-        // Geef betere naam
         private List<Personeel> GetAllPersoneel()
         {
             List<Personeel> personeelList = new List<Personeel>();
@@ -45,27 +43,71 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 DisplayErrorMessage("Er ging iets mis");
             }
-            return personeelList;   
+            return personeelList;
         }
-        private void DisplayAllPersoneel(List<Personeel> personeel)
+        private void DisplayPersoneelByFunctie(Functie functie)
         {
-            foreach (Personeel werknemer in personeel)
+            foreach (Personeel werknemer in this.personeel)
             {
-                ListViewItem item = new ListViewItem(werknemer.AchterNaam);
-                item.SubItems.Add(werknemer.Functie.ToString());
-                item.Tag = werknemer;
-                lsvDatabaseItems.Items.Add(item);
+                if (werknemer.Functie == functie)
+                {
+                    ListViewItem item = new ListViewItem(werknemer.AchterNaam);
+                    item.SubItems.Add(werknemer.Functie.ToString());
+                    item.Tag = werknemer;
+                    lsvDatabaseItems.Items.Add(item);
+                }
             }
         }
 
         #endregion
 
-        #region Buttons
+        #region Top Buttons
         private void btnAddNewObject_Click(object sender, EventArgs e)
         {
             this.form.SwitchPanels(new UserControlPersoneelEdit(new Personeel(), false));
         }
+        private void BedieningButtonEnabledChanged(object sender, EventArgs e)
+        {
+            SetEnableColor(btnBediening);
+        }
+        private void KeukenButtonEnabledChanged(object sender, EventArgs e)
+        {
+            SetEnableColor(btnKeuken);
+        }
+        private void BarButtonEnabledChanged(object sender, EventArgs e)
+        {
+            SetEnableColor(btnBar);
+        }
+        private void ManagersButtonEnabledChanged(object sender, EventArgs e)
+        {
+            SetEnableColor(btnManagers);
+        }
+        private void BedieningClick(object sender, EventArgs e)
+        {
+            RefreshListView((Functie)btnBediening.Tag);
+            RenablePersoneelButtons((Functie)btnBediening.Tag);
+        }
 
+        private void KeukenClick(object sender, EventArgs e)
+        {
+            RefreshListView((Functie)btnKeuken.Tag);
+            RenablePersoneelButtons((Functie)btnKeuken.Tag);
+        }
+
+        private void BarClick(object sender, EventArgs e)
+        {
+            RefreshListView((Functie)btnBar.Tag);
+            RenablePersoneelButtons((Functie)btnBar.Tag);
+        }
+
+        private void ManagersClick(object sender, EventArgs e)
+        {
+            RefreshListView((Functie)btnManagers.Tag);
+            RenablePersoneelButtons((Functie)btnManagers.Tag);
+        }
+        #endregion
+
+        #region Bottom Buttons
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.form.SwitchPanels(new UserControlManager());
@@ -97,10 +139,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 DisplayErrorMessage(ex.Message);
             }
         }
-        #endregion
-
-        #region Bottom Buttons
-
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
             if (!IsConfirmed())
@@ -108,8 +146,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 return;
             }
             RemovePersoneel((Personeel)selectedLsvItem.Tag);
+            lsvDatabaseItems.Items.Remove(selectedLsvItem);
             personeel.Remove((Personeel)selectedLsvItem.Tag);
-            RefreshListView();
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
@@ -121,7 +159,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private bool IsConfirmed()
         {
-            DialogResult confirmResult = MessageBox.Show("Weet u zeker dat u dit werknemer wilt verwijderen?", "Ja of Nee",MessageBoxButtons.YesNo);
+            DialogResult confirmResult = MessageBox.Show("Weet u zeker dat u dit werknemer wilt verwijderen?", "Ja of Nee", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
                 return true;
@@ -129,6 +167,54 @@ namespace Project_Chapeau_herkansers_3.UserControls
             return false;
         }
         #endregion
+
+        #region ButtonStates
+        private void SetButtonTags()
+        {
+            btnBediening.Tag = Functie.Bediening;
+            btnKeuken.Tag = Functie.Keuken;
+            btnBar.Tag = Functie.Bar;
+            btnManagers.Tag = Functie.Manager;
+        }
+        private void RenablePersoneelButtons(Functie functie)
+        {
+            switch (functie)
+            {
+                case Functie.Bediening:
+                    SetButtonStates(false, true, true, true);
+                    break;
+                case Functie.Keuken:
+                    SetButtonStates(true, false, true, true);
+                    break;
+                case Functie.Bar:
+                    SetButtonStates(true, true, false, true);
+                    break;
+                case Functie.Manager:
+                    SetButtonStates(true, true, true, false);
+                    break;
+            }
+        }
+        private void SetButtonStates(bool bediening, bool keuken, bool bar, bool managers)
+        {
+            btnBediening.Enabled = bediening;
+            btnKeuken.Enabled = keuken;
+            btnBar.Enabled = bar;
+            btnManagers.Enabled = managers;
+        }
+        private void SetEnableColor(Button button)
+        {
+            if (button.Enabled)
+            {
+                button.BackColor = Color.FromArgb(255, 138, 210, 176);
+            }
+            else
+            {
+                button.BackColor = Color.FromArgb(114, 138, 210, 176);
+            }
+        }
+
+        #endregion
+
 
         private bool IsSelected()
         {

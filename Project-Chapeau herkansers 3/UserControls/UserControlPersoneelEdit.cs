@@ -17,7 +17,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.isEditing = isEditing;
             if (!isEditing)
             {
-                SetNewPersoneelLogic(Functie.Serveerder);
+                SetNewPersoneelLogic(Functie.Bediening);
             }
             else
             {
@@ -25,13 +25,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
         }
 
-        #region Menu Specific Logic
+        #region Personeel Logic
         private void SetEditPersoneelLogic(Personeel personeel)
         {
             SetCurrentObjectInfo(personeel.AchterNaam, personeel.Email);
             SetNewPersoneelLogic(personeel.Functie);
         }
- 
 
         private void SetNewPersoneelLogic(Functie function)
         {
@@ -61,12 +60,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 InsertPersoneel();
                 UpdatePersoneel();
+                ReturnToOverview();
             }
             catch (Exception ex)
             {
                 DisplayErrorMessage(ex.Message);
             }
-            ReturnToOverview();
         }
         #region Send to Database
         private void InsertPersoneel()
