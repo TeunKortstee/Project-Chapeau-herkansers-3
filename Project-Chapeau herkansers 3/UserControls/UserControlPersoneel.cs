@@ -141,7 +141,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void DeleteSelectedItem(ListViewItem selectedLsvItem)
         {
-            if (!IsConfirmed())
+            if (IsCurrentUser((Personeel)selectedLsvItem.Tag) || !IsConfirmed())
             {
                 return;
             }
@@ -151,6 +151,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
+            if (IsCurrentUser((Personeel)selectedLsvItem.Tag))
+            {
+                return;
+            }
             this.form.SwitchPanels(new UserControlPersoneelEdit((Personeel)selectedLsvItem.Tag, true));
         }
         private void RemovePersoneel(Personeel selectedPersoneel)
@@ -223,6 +227,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 return true;
             }
             DisplayErrorMessage("Selecteer een item uit de lijst");
+            return false;
+        }
+        private bool IsCurrentUser(Personeel ingelogdeGebruiker)
+        {
+            if (ingelogdeGebruiker.Id == form.personeel.Id)
+            {
+                MessageBox.Show("Je kan jezelf niet aanpassen of verwijderen");
+                return true;
+            }
             return false;
         }
         private void DisplayErrorMessage(string errorMessage)
