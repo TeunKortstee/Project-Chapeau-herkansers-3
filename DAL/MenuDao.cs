@@ -8,6 +8,7 @@ namespace DAL
     {
         // Enum van MenuType er in
         // Uit Menu met MenuItems
+        // Menu ophalen met een join naar menuItems
         public Menu GetAllMenuItemsByMenuType(MenuType menuType)
         {
             string query = "SELECT MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, MenuId FROM MenuItems WHERE MenuId = @MenuId AND IsBeschikbaar = 1";

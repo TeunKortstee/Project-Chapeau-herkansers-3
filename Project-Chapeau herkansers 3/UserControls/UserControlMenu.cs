@@ -187,14 +187,14 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private ListViewItem AddSubItemsInkomen(ListViewItem item, MenuItem menuItem)
         {
-            menuItem.TotaalVerkocht = GetMenuItemSales(menuItem);
+            menuItem.TotaalVerkocht = GetMenuItemSalesAmount(menuItem);
             item.SubItems.Add($"{menuItem.TotaalVerkocht}");
             item.SubItems.Add($"€ {menuItem.TotaleInkomen:0.00}");
             return item;
         }
         #endregion
 
-        private int GetMenuItemSales(MenuItem menuItem)
+        private int GetMenuItemSalesAmount(MenuItem menuItem)
         {
             int totalSales = 0;
             try

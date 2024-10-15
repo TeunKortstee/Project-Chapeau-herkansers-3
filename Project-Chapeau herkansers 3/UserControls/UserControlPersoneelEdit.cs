@@ -6,6 +6,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
     public partial class UserControlPersoneelEdit : UserControl
     {
         private Form1 form;
+        // hier Personeel service
         private bool isEditing;
         private Personeel currentPersoneel;
 
@@ -58,6 +59,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             try
             {
+                // Dishonest method (het liegt)
                 InsertPersoneel();
                 UpdatePersoneel();
                 ReturnToOverview();

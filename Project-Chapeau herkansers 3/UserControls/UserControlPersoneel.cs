@@ -34,16 +34,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private List<Personeel> GetAllPersoneel()
         {
-            List<Personeel> personeelList = new List<Personeel>();
+            personeel = new List<Personeel>();
             try
             {
-                personeelList = personeelService.GetAllPersoneel();
+                personeel = personeelService.GetAllPersoneel();
             }
             catch (Exception)
             {
                 DisplayErrorMessage("Er ging iets mis");
             }
-            return personeelList;
+            return personeel;
         }
         private void DisplayPersoneelByFunctie(Functie functie)
         {

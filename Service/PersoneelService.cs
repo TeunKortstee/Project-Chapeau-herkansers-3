@@ -6,6 +6,7 @@ namespace Service
 {
     public class PersoneelService
     {
+        // dit in app config
         const string chapeauDomain = "@chapeau.nl";
         const string defaultPassword = "0000";
 
@@ -43,13 +44,11 @@ namespace Service
                 // If not, append the domain
                 email = $"{email}{chapeauDomain}";
             }
-    
             return email.ToLower(); 
         }
         private string HashPasswordWithBCrypt(string password, int workfactor)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, workfactor, HashType.SHA512);
-            return hashedPassword;
+            return BCrypt.Net.BCrypt.EnhancedHashPassword(password, workfactor, HashType.SHA512);
         }
     }
 }
