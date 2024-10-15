@@ -73,6 +73,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     CreateInkomenListView();
                     btnAdjust.Visible = false;
                     dtpDatum.Visible = true;
+                    lblTotalIncome.Visible = true;
                     break;
             }
         }
@@ -137,10 +138,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void DisplayMenuItemsFromMenu(Menu menu, MenuItemControl controlMode)
         {
-            if (controlMode == MenuItemControl.Inkomen)
-            {
-                lblTotalIncome.Visible = true;
-            }
             double totaleInkomens = 0;
             foreach (MenuItem menuItem in menu.MenuItems)
             {
@@ -199,7 +196,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private int GetMenuItemSales(MenuItem menuItem)
         {
-            int totalSales = 0; 
+            int totalSales = 0;
             try
             {
                 DateTime datum = dtpDatum.Value;
@@ -339,6 +336,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 DisplayErrorMessage(ex.Message);
             }
         }
+        private void DatumValueChanged(object sender, EventArgs e)
+        {
+            DisplayMenuItemsFromMenu(this.selectedMenu, this.controlMode);
+        }
         #endregion
 
         #region ListViewItem
@@ -362,7 +363,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 menuItemService.SoftDeleteMenuItem(selectedMenuItem);
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 DisplayErrorMessage("Er ging iets mis");
             }

@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class MenuItemDao : BaseDao
+    public class MenuDao : BaseDao
     {
         // Enum van MenuType er in
         // Uit Menu met MenuItems
@@ -114,7 +114,7 @@ namespace DAL
         }
         public int GetMenuItemSales(MenuItem menuItem, DateTime datum)
         {
-            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId JOIN Rekeningen r ON b.TableNr = r.TafelID WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1 AND r.Datum BETWEEN @Datum AND CAST(GETDATE() AS DATE)";
+            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId JOIN Rekeningen r ON b.TableNr = r.TafelID WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1 AND r.Datum BETWEEN @Datum AND GETDATE()";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                 {

@@ -5,11 +5,11 @@ namespace Service
 {
     public class MenuItemService
     {
-        private MenuItemDao menuItemDao;
+        private MenuDao menuItemDao;
 
         public MenuItemService()
         {
-            menuItemDao = new MenuItemDao();
+            menuItemDao = new MenuDao();
         }
         public Menu GetAllMenuItemsInMenu()
         {
