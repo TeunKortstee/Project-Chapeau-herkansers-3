@@ -11,18 +11,29 @@ namespace DAL
         // Menu ophalen met een join naar menuItems
         public Menu GetAllMenuItemsByMenuType(MenuType menuType)
         {
-            string query = "SELECT MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, MenuId FROM MenuItems WHERE MenuId = @MenuId AND IsBeschikbaar = 1";
+            string query = "SELECT MenuType, MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, mi.MenuId FROM Menu m JOIN MenuItems mi ON m.MenuId = mi.MenuId WHERE m.MenuId = @MenuId AND IsBeschikbaar = 1";
             SqlParameter sqlParameter = new SqlParameter("@MenuId", (int)menuType);
 
-            return ReadTables(ExecuteSelectQuery(query, sqlParameter));
+            return ReadTablesWithMenu(ExecuteSelectQuery(query, sqlParameter));
         }
         public Menu GetAllMenuItemsInMenu()
         {
             string query = "SELECT MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, MenuId FROM MenuItems WHERE IsBeschikbaar = 1";
 
-            return ReadTables(ExecuteSelectQuery(query));
+            return ReadTablesWithoutMenu(ExecuteSelectQuery(query));
         }
-        private Menu ReadTables(DataTable dataTable)
+        private Menu ReadTablesWithMenu(DataTable dataTable)  //Lucas
+        {
+            Menu menu = new Menu();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                menu.MenuType = (MenuType)Convert.ToInt32(row["MenuType"]);
+                MenuItem menuItem = CreateMenuItemFromRow(row);
+                menu.MenuItems.Add(menuItem);
+            }
+            return menu;
+        }
+        private Menu ReadTablesWithoutMenu(DataTable dataTable) // Luciano
         {
             Menu menu = new Menu();
             foreach (DataRow row in dataTable.Rows)
