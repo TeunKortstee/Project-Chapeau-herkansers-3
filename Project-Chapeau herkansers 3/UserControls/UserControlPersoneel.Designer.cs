@@ -138,7 +138,6 @@
             btnBediening.Text = "Bediening";
             btnBediening.UseVisualStyleBackColor = false;
             btnBediening.EnabledChanged += BedieningButtonEnabledChanged;
-            btnBediening.Click += BedieningClick;
             // 
             // btnKeuken
             // 
@@ -151,7 +150,6 @@
             btnKeuken.Text = "Keuken";
             btnKeuken.UseVisualStyleBackColor = false;
             btnKeuken.EnabledChanged += KeukenButtonEnabledChanged;
-            btnKeuken.Click += KeukenClick;
             // 
             // btnBar
             // 
@@ -164,7 +162,6 @@
             btnBar.Text = "Bar";
             btnBar.UseVisualStyleBackColor = false;
             btnBar.EnabledChanged += BarButtonEnabledChanged;
-            btnBar.Click += BarClick;
             // 
             // btnManagers
             // 
@@ -177,7 +174,6 @@
             btnManagers.Text = "Managers";
             btnManagers.UseVisualStyleBackColor = false;
             btnManagers.EnabledChanged += ManagersButtonEnabledChanged;
-            btnManagers.Click += ManagersClick;
             // 
             // UserControlPersoneel
             // 

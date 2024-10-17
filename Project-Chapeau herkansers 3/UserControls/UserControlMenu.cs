@@ -7,7 +7,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private Form1 form;
         private MenuItemService menuItemService;
-        private List<Menu> menus;
         private Menu selectedMenu;
         private MenuItemControl controlMode;
         public UserControlMenu(MenuItemControl controlMode)
@@ -16,9 +15,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.form = Form1.Instance;
             this.controlMode = controlMode;
             this.menuItemService = new MenuItemService();
-            this.menus = GetAllMenus();
-            SetLogic(controlMode);
-            SetDefault();
+            List<Menu> menus = GetAllMenus();
+            SetLogic(controlMode, menus);
         }
         private List<Menu> GetAllMenus()
         {
@@ -42,17 +40,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
             return menu;
         }
         #region ControlLogic
-        private void SetDefault()
+        private void SetDefaultMenu(List<Menu> menus)
         {
-            Menu lunchMenu = GetMenu((MenuType)btnLunch.Tag);
+            Menu lunchMenu = GetMenu((MenuType)btnLunch.Tag, menus);
             SetSelectedMenu(lunchMenu);
             DisplayMenuItemsFromMenu(lunchMenu, this.controlMode);
             RenableMenuButtons(lunchMenu.MenuType);
         }
-        private void SetLogic(MenuItemControl controlMode)
+        private void SetLogic(MenuItemControl controlMode, List<Menu> menus)
         {
             SetButtonTags();
+            SetButtonClicks(menus);
             SetSpecificLogic(controlMode);
+            SetDefaultMenu(menus);
         }
         private void SetSpecificLogic(MenuItemControl controlMode)
         {
@@ -82,6 +82,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
             btnLunch.Tag = MenuType.Lunch;
             btnDiner.Tag = MenuType.Diner;
             btnDrank.Tag = MenuType.Drank;
+        }
+        private void SetButtonClicks(List<Menu> menus)
+        {
+            btnLunch.Click += (sender, e) => LunchButtonClick(GetMenu((MenuType)btnLunch.Tag, menus));
+            btnDiner.Click += (sender, e) => DinerButtonClick(GetMenu((MenuType)btnDiner.Tag, menus));
+            btnDrank.Click += (sender, e) => DrankButtonClick(GetMenu((MenuType)btnDrank.Tag, menus));
         }
         private void SetSelectedMenu(Menu menu)
         {
@@ -122,7 +128,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         #region Sorteer Items
 
-        private Menu GetMenu(MenuType menuType)
+        private Menu GetMenu(MenuType menuType, List<Menu> menus)
         {
             Menu chosenMenu = new Menu();
             foreach (Menu menu in menus)
@@ -242,25 +248,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             SetEnableColor(btnDrank);
         }
-        private void LunchButtonClick(object sender, EventArgs e)
+        private void LunchButtonClick(Menu lunchMenu)
         {
-            Menu lunchMenu = GetMenu((MenuType)btnLunch.Tag);
             SetSpecificLogic(this.controlMode);
             SetSelectedMenu(lunchMenu);
             DisplayMenuItemsFromMenu(lunchMenu, this.controlMode);
             RenableMenuButtons(lunchMenu.MenuType);
         }
-        private void DinerButtonClick(object sender, EventArgs e)
+        private void DinerButtonClick(Menu dinerMenu)
         {
-            Menu dinerMenu = GetMenu((MenuType)btnDiner.Tag);
             SetSpecificLogic(this.controlMode);
             SetSelectedMenu(dinerMenu);
             DisplayMenuItemsFromMenu(dinerMenu, this.controlMode);
             RenableMenuButtons(dinerMenu.MenuType);
         }
-        private void DrankButtonClick(object sender, EventArgs e)
+        private void DrankButtonClick(Menu drankMenu)
         {
-            Menu drankMenu = GetMenu((MenuType)btnDrank.Tag);
             SetSpecificLogic(this.controlMode);
             SetSelectedMenu(drankMenu);
             DisplayMenuItemsFromMenu(drankMenu, this.controlMode);

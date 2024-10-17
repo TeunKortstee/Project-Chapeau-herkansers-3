@@ -8,22 +8,26 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private Form1 form;
         private PersoneelService personeelService;
-        private List<Personeel> personeel;
         public UserControlPersoneel()
         {
             InitializeComponent();
             this.form = Form1.Instance;
             personeelService = new PersoneelService();
-            this.personeel = GetAllPersoneel();
-            SetButtonTags();
-            RefreshListView((Functie)btnBediening.Tag);
+            List<Personeel> personeel = GetAllPersoneel();
+            SetButtons(personeel);
+            RefreshListView((Functie)btnBediening.Tag, personeel);
+        }
+        private void RefreshPersoneelList()
+        {
+            List<Personeel> personeel = GetAllPersoneel();
+            SetButtons(personeel);
         }
 
         #region DisplayUIElements
-        private void RefreshListView(Functie functie)
+        private void RefreshListView(Functie functie, List<Personeel> personeel)
         {
             CreateEmployeeListView();
-            DisplayPersoneelByFunctie(functie);
+            DisplayPersoneelByFunctie(functie, personeel);
         }
         private void CreateEmployeeListView()
         {
@@ -34,7 +38,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private List<Personeel> GetAllPersoneel()
         {
-            personeel = new List<Personeel>();
+            List<Personeel> personeel = new List<Personeel>();
             try
             {
                 personeel = personeelService.GetAllPersoneel();
@@ -45,9 +49,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             return personeel;
         }
-        private void DisplayPersoneelByFunctie(Functie functie)
+        private void DisplayPersoneelByFunctie(Functie functie, List<Personeel> personeel)
         {
-            foreach (Personeel werknemer in this.personeel)
+            foreach (Personeel werknemer in personeel)
             {
                 if (werknemer.Functie == functie)
                 {
@@ -82,27 +86,27 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             SetEnableColor(btnManagers);
         }
-        private void BedieningClick(object sender, EventArgs e)
+        private void BedieningClick(List<Personeel> personeel)
         {
-            RefreshListView((Functie)btnBediening.Tag);
+            RefreshListView((Functie)btnBediening.Tag, personeel);
             RenablePersoneelButtons((Functie)btnBediening.Tag);
         }
 
-        private void KeukenClick(object sender, EventArgs e)
+        private void KeukenClick(List<Personeel> personeel)
         {
-            RefreshListView((Functie)btnKeuken.Tag);
+            RefreshListView((Functie)btnKeuken.Tag, personeel);
             RenablePersoneelButtons((Functie)btnKeuken.Tag);
         }
 
-        private void BarClick(object sender, EventArgs e)
+        private void BarClick(List<Personeel> personeel)
         {
-            RefreshListView((Functie)btnBar.Tag);
+            RefreshListView((Functie)btnBar.Tag, personeel);
             RenablePersoneelButtons((Functie)btnBar.Tag);
         }
 
-        private void ManagersClick(object sender, EventArgs e)
+        private void ManagersClick(List<Personeel> personeel)
         {
-            RefreshListView((Functie)btnManagers.Tag);
+            RefreshListView((Functie)btnManagers.Tag, personeel);
             RenablePersoneelButtons((Functie)btnManagers.Tag);
         }
         #endregion
@@ -147,7 +151,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             RemovePersoneel((Personeel)selectedLsvItem.Tag);
             lsvDatabaseItems.Items.Remove(selectedLsvItem);
-            personeel.Remove((Personeel)selectedLsvItem.Tag);
+            RefreshPersoneelList();
         }
         private void AdjustSelectedItem(ListViewItem selectedLsvItem)
         {
@@ -173,12 +177,24 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
 
         #region ButtonStates
+        private void SetButtons(List<Personeel> personeel)
+        {
+            SetButtonTags();
+            SetButtonClicks(personeel);
+        }
         private void SetButtonTags()
         {
             btnBediening.Tag = Functie.Bediening;
             btnKeuken.Tag = Functie.Keuken;
             btnBar.Tag = Functie.Bar;
             btnManagers.Tag = Functie.Manager;
+        }
+        private void SetButtonClicks(List<Personeel> personeel)
+        {
+            btnBediening.Click += (sender, e) => BedieningClick(personeel);
+            btnKeuken.Click += (sender, e) => KeukenClick(personeel);
+            btnBar.Click += (sender, e) => BarClick(personeel);
+            btnManagers.Click += (sender, e) => ManagersClick(personeel);
         }
         private void RenablePersoneelButtons(Functie functie)
         {

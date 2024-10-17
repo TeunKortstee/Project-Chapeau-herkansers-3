@@ -141,7 +141,6 @@
             btnDiner.Text = "Diner";
             btnDiner.UseVisualStyleBackColor = false;
             btnDiner.EnabledChanged += DinerButtonEnabledChanged;
-            btnDiner.Click += DinerButtonClick;
             // 
             // btnLunch
             // 
@@ -154,7 +153,6 @@
             btnLunch.Text = "Lunch";
             btnLunch.UseVisualStyleBackColor = false;
             btnLunch.EnabledChanged += LunchButtonEnabledChanged;
-            btnLunch.Click += LunchButtonClick;
             // 
             // lblTotalIncome
             // 
@@ -187,7 +185,6 @@
             btnDrank.Text = "Drank";
             btnDrank.UseVisualStyleBackColor = false;
             btnDrank.EnabledChanged += DrankButtonEnabledChanged;
-            btnDrank.Click += DrankButtonClick;
             // 
             // UserControlMenu
             // 

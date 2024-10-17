@@ -7,7 +7,6 @@ namespace DAL
     public class MenuDao : BaseDao
     {
         // Enum van MenuType er in
-        // Uit Menu met MenuItems
         // Menu ophalen met een join naar menuItems
         public Menu GetAllMenuItemsByMenuType(MenuType menuType)
         {

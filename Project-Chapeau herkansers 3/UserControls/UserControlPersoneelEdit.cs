@@ -27,6 +27,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
 
         #region Personeel Logic
+        private void SetAddButton()
+        {
+
+        }
         private void SetEditPersoneelLogic(Personeel personeel)
         {
             SetCurrentObjectInfo(personeel.AchterNaam, personeel.Email);
@@ -132,7 +136,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private bool IsEmpty(string nameInput, string emailInput)
         {
-            if (string.IsNullOrEmpty(nameInput) || string.IsNullOrWhiteSpace(nameInput))
+            if (string.IsNullOrEmpty(emailInput) || string.IsNullOrWhiteSpace(nameInput))
             {
                 DisplayErrorMessage("Vul alle velden in");
                 return false;
@@ -140,11 +144,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             return true;
         }
         #endregion
-
-        private string InvalidInput()
-        {
-            return "Vul een geldig getal in";
-        }
         private void DisplayErrorMessage(string errorMessage)
         {
             lblErrorNewObject.Visible = true;
