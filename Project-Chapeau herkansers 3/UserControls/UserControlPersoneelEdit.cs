@@ -7,29 +7,32 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private Form1 form;
         // hier Personeel service
+        private PersoneelService personeelService;
         private bool isEditing;
-        private Personeel currentPersoneel;
 
-        public UserControlPersoneelEdit(Personeel currentPersoneel, bool isEditing)
+        public UserControlPersoneelEdit()
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.currentPersoneel = currentPersoneel;
-            this.isEditing = isEditing;
-            if (!isEditing)
-            {
-                SetNewPersoneelLogic(Functie.Bediening);
-            }
-            else
-            {
-                SetEditPersoneelLogic(currentPersoneel);
-            }
+            this.isEditing = false;
+            personeelService = new PersoneelService();
+            SetNewPersoneelLogic(Functie.Bediening);
+            SetAddButton(new Personeel());
+        }
+        public UserControlPersoneelEdit(Personeel currentPersoneel)
+        {
+            InitializeComponent();
+            this.form = Form1.Instance;
+            this.isEditing = true;
+            personeelService = new PersoneelService();
+            SetEditPersoneelLogic(currentPersoneel);
+            SetAddButton(currentPersoneel);
         }
 
         #region Personeel Logic
-        private void SetAddButton()
+        private void SetAddButton(Personeel personeel)
         {
-
+            btnConfirm.Click += (sender, e) => PersoneelConfirmClick(personeel);
         }
         private void SetEditPersoneelLogic(Personeel personeel)
         {
@@ -59,42 +62,48 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
 
         #region Functionalities
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void PersoneelConfirmClick(Personeel personeel)
         {
             try
             {
                 // Dishonest method (het liegt)
-                InsertPersoneel();
-                UpdatePersoneel();
+                personeel = FillPersoneelObject(personeel);
+                InsertPersoneel(personeel);
+                UpdatePersoneel(personeel);
                 ReturnToOverview();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                DisplayErrorMessage(ex.Message);
+                DisplayErrorMessage("Er ging iets mis");
             }
+        }
+        private Personeel FillPersoneelObject(Personeel personeel)
+        {
+            if (!AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem))
+            {
+                throw new Exception();
+            }
+            personeel.AchterNaam = txt1.Text;
+            personeel.Email = CreateEmail(txt2.Text);
+            personeel.Functie = (Functie)cmbType.SelectedItem;
+            return personeel;
         }
         #region Send to Database
-        private void InsertPersoneel()
+        private void InsertPersoneel(Personeel newPersoneel)
         {
-            if (!AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem) || isEditing)
+            if (isEditing)
             {
                 return;
             }
-            PersoneelService personeelService = new PersoneelService();
-            Personeel newPersoneel = new Personeel(txt1.Text, personeelService.CreateEmail(txt2.Text), (Functie)cmbType.SelectedItem);
             personeelService.InsertPersoneel(newPersoneel);
         }
-        private void UpdatePersoneel()
+        private void UpdatePersoneel(Personeel existingPersoneel)
         {
-            if (!AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem) || !isEditing)
+            if (!isEditing)
             {
                 return;
             }
-            this.currentPersoneel.AchterNaam = txt1.Text;
-            this.currentPersoneel.Email = txt2.Text;
-            this.currentPersoneel.Functie = (Functie)cmbType.SelectedItem;
-            PersoneelService personeelService = new PersoneelService();
-            personeelService.UpdatePersoneel(this.currentPersoneel);
+            personeelService.UpdatePersoneel(existingPersoneel);
         }
         #endregion
         private void btnCancel_Click(object sender, EventArgs e)
@@ -103,9 +112,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        #region ErrorHandling
-
         #region PersoneelHandling
+        public string CreateEmail(string email)
+        {
+            if (!email.ToLower().EndsWith("@chapeau.nl"))
+            {
+                // If not, append the domain
+                email = $"{email}@chapeau.nl";
+            }
+            return email.ToLower();
+        }
         private bool AreValidPersoneelInputs(string nameInput, string emailInput, Functie selectedItem)
         {
             if (!IsEmpty(nameInput, emailInput) || !ValidCharacters(nameInput, emailInput) || !Enum.IsDefined(typeof(Functie), selectedItem))
@@ -118,7 +134,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             foreach (char character in emailInput)
             {
-                if (!char.IsLetter(character) && character != '_' && character != '.')
+                if (!char.IsLetter(character) && character != '_' && character != '.' && character != '@')
                 {
                     DisplayErrorMessage("Username is niet geldig");
                     return false;
@@ -144,6 +160,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
             return true;
         }
         #endregion
+
+        #region ErrorHandling
         private void DisplayErrorMessage(string errorMessage)
         {
             lblErrorNewObject.Visible = true;

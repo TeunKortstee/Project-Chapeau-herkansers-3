@@ -7,7 +7,7 @@ namespace Service
     public class PersoneelService
     {
         // dit in app config
-        const string chapeauDomain = "@chapeau.nl";
+        //const string chapeauDomain = "@chapeau.nl";
         const string defaultPassword = "0000";
 
         private PersoneelDao personeelDao;
@@ -23,7 +23,6 @@ namespace Service
         public void InsertPersoneel(Personeel personeel)
         {
             string slowSaltedHashedPassword = HashPasswordWithBCrypt(defaultPassword, 11);
-            personeel.Email = CreateEmail(personeel.Email);
             personeel.WachtWoord = slowSaltedHashedPassword;
             personeelDao.InsertPersoneel(personeel);
         }
@@ -33,19 +32,9 @@ namespace Service
         }
         public void UpdatePersoneel(Personeel personeel)
         {
-            personeel.Email = CreateEmail(personeel.Email);
             personeelDao.UpdatePersoneel(personeel);
         }
-        // Lucas
-        public string CreateEmail(string email)
-        {
-            if (!email.ToLower().EndsWith(chapeauDomain))
-            {
-                // If not, append the domain
-                email = $"{email}{chapeauDomain}";
-            }
-            return email.ToLower(); 
-        }
+
         private string HashPasswordWithBCrypt(string password, int workfactor)
         {
             return BCrypt.Net.BCrypt.EnhancedHashPassword(password, workfactor, HashType.SHA512);
