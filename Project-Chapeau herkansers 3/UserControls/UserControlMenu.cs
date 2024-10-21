@@ -71,11 +71,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 case MenuItemControl.Inkomen:
                     SetObjectText("Inkomen", "Menu Item");
                     CreateInkomenListView();
-                    btnAdjust.Visible = false;
-                    dtpDatum.Visible = true;
-                    lblTotalIncome.Visible = true;
+                    SetElementsVisibleInkomen();
                     break;
             }
+        }
+        private void SetElementsVisibleInkomen()
+        {
+            btnAdjust.Visible = false;
+            dtpDatumVan.Visible = true;
+            lblTotalIncome.Visible = true;
         }
         private void SetButtonTags()
         {
@@ -98,6 +102,23 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region DisplayUIElements
 
         #region ListViews
+        private ListViewItem CreateListViewItem(MenuItem menuItem, MenuItemControl controlMode)
+        {
+            ListViewItem item = new ListViewItem(menuItem.Naam);
+            switch (controlMode)
+            {
+                case MenuItemControl.Menu:
+                    item = AddSubItemsMenu(item, menuItem);
+                    break;
+                case MenuItemControl.Voorraad:
+                    item = AddSubItemsVoorraad(item, menuItem);
+                    break;
+                case MenuItemControl.Inkomen:
+                    item = AddSubItemsInkomen(item, menuItem);
+                    break;
+            }
+            return item;
+        }
         private void CreateMenuListView(MenuType menuType)
         {
             lsvDatabaseItems.Clear();
@@ -155,23 +176,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             lblTotalIncome.Text = $"Totale Inkomen: € {totaleInkomens:0.00}";
         }
-        private ListViewItem CreateListViewItem(MenuItem menuItem, MenuItemControl controlMode)
-        {
-            ListViewItem item = new ListViewItem(menuItem.Naam);
-            switch (controlMode)
-            {
-                case MenuItemControl.Menu:
-                    item = AddSubItemsMenu(item, menuItem);
-                    break;
-                case MenuItemControl.Voorraad:
-                    item = AddSubItemsVoorraad(item, menuItem);
-                    break;
-                case MenuItemControl.Inkomen:
-                    item = AddSubItemsInkomen(item, menuItem);
-                    break;
-            }
-            return item;
-        }
         #region SubItems
         private ListViewItem AddSubItemsMenu(ListViewItem item, MenuItem menuItem)
         {
@@ -205,8 +209,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             int totalSales = 0;
             try
             {
-                DateTime datum = dtpDatum.Value;
-                totalSales = menuItemService.GetMenuItemSales(menuItem, datum);
+                totalSales = menuItemService.GetMenuItemSales(menuItem, dtpDatumVan.Value, dtpDatumTot.Value);
             }
             catch (Exception)
             {

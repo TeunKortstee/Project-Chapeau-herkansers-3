@@ -66,7 +66,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             try
             {
-                // Dishonest method (het liegt)
                 personeel = FillPersoneelObject(personeel);
                 InsertPersoneel(personeel);
                 UpdatePersoneel(personeel);

@@ -38,8 +38,9 @@
             btnDiner = new Button();
             btnLunch = new Button();
             lblTotalIncome = new Label();
-            dtpDatum = new DateTimePicker();
+            dtpDatumVan = new DateTimePicker();
             btnDrank = new Button();
+            dtpDatumTot = new DateTimePicker();
             SuspendLayout();
             // 
             // lsvDatabaseItems
@@ -165,14 +166,14 @@
             lblTotalIncome.Text = "Inkomen";
             lblTotalIncome.Visible = false;
             // 
-            // dtpDatum
+            // dtpDatumVan
             // 
-            dtpDatum.Location = new Point(14, 620);
-            dtpDatum.Name = "dtpDatum";
-            dtpDatum.Size = new Size(252, 27);
-            dtpDatum.TabIndex = 53;
-            dtpDatum.Visible = false;
-            dtpDatum.ValueChanged += DatumValueChanged;
+            dtpDatumVan.Location = new Point(14, 620);
+            dtpDatumVan.Name = "dtpDatumVan";
+            dtpDatumVan.Size = new Size(188, 27);
+            dtpDatumVan.TabIndex = 53;
+            dtpDatumVan.Visible = false;
+            dtpDatumVan.ValueChanged += DatumValueChanged;
             // 
             // btnDrank
             // 
@@ -186,12 +187,22 @@
             btnDrank.UseVisualStyleBackColor = false;
             btnDrank.EnabledChanged += DrankButtonEnabledChanged;
             // 
+            // dtpDatumTot
+            // 
+            dtpDatumTot.Location = new Point(206, 621);
+            dtpDatumTot.Name = "dtpDatumTot";
+            dtpDatumTot.Size = new Size(188, 27);
+            dtpDatumTot.TabIndex = 55;
+            dtpDatumTot.Visible = false;
+            dtpDatumTot.ValueChanged += DatumValueChanged;
+            // 
             // UserControlMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dtpDatumTot);
             Controls.Add(btnDrank);
-            Controls.Add(dtpDatum);
+            Controls.Add(dtpDatumVan);
             Controls.Add(lblTotalIncome);
             Controls.Add(btnDiner);
             Controls.Add(btnLunch);
@@ -221,7 +232,8 @@
         private Button btnDiner;
         private Button btnLunch;
         private Label lblTotalIncome;
-        private DateTimePicker dtpDatum;
+        private DateTimePicker dtpDatumVan;
         private Button btnDrank;
+        private DateTimePicker dtpDatumTot;
     }
 }

@@ -123,14 +123,15 @@ namespace DAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        public int GetMenuItemSales(MenuItem menuItem, DateTime datum)
+        public int GetMenuItemSales(MenuItem menuItem, DateTime datumVan, DateTime datumTot)
         {
-            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId JOIN Rekeningen r ON b.TableNr = r.TafelID WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1 AND r.Datum BETWEEN @Datum AND GETDATE()";
+            string query = "SELECT COUNT(*) AS TotaalVerkocht FROM MenuItems mi JOIN BesteldeItems bi ON mi.MenuItemId = bi.MenuItemId JOIN Bestellingen b ON bi.BestellingsId = b.BestellingsId JOIN Rekeningen r ON b.TableNr = r.TafelID WHERE mi.MenuItemId = @MenuItemId AND b.Betaald = 1 AND r.Datum BETWEEN @DatumVan AND @DatumTot";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                 {
                 new SqlParameter("@MenuItemId", menuItem.MenuItemId),
-                new SqlParameter("@Datum", datum),
+                new SqlParameter("@DatumVan", datumVan),
+                new SqlParameter("@DatumTot", datumTot),
                 };
             return ReadTablesWithCount(ExecuteSelectQuery(query, sqlParameters));
         }

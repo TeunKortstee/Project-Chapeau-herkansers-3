@@ -36,9 +36,9 @@ namespace Service
         {
             menuItemDao.SoftDeleteMenuItem(selectedMenuItem);
         }
-        public int GetMenuItemSales(MenuItem menuItem, DateTime datum)
+        public int GetMenuItemSales(MenuItem menuItem, DateTime datumVan, DateTime datumTot)
         {
-            return menuItemDao.GetMenuItemSales(menuItem, datum);
+            return menuItemDao.GetMenuItemSales(menuItem, datumVan, datumTot);
         }
         // Luciano
         public void UpdateAllMenuItemsStock(Bestelling bestelling)

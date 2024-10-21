@@ -7,7 +7,6 @@ namespace Service
     public class PersoneelService
     {
         // dit in app config
-        //const string chapeauDomain = "@chapeau.nl";
         const string defaultPassword = "0000";
 
         private PersoneelDao personeelDao;
