@@ -377,7 +377,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private bool IsConfirmed()
         {
-            DialogResult confirmResult = MessageBox.Show("Weet u zeker dat u dit werknemer wilt verwijderen?", "Ja of Nee", MessageBoxButtons.YesNo);
+            DialogResult confirmResult = MessageBox.Show("Weet u zeker dat u dit item wilt verwijderen?", "Ja of Nee", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
                 return true;

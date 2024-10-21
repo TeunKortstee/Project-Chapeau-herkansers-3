@@ -68,7 +68,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #region Top Buttons
         private void btnAddNewObject_Click(object sender, EventArgs e)
         {
-            this.form.SwitchPanels(new UserControlPersoneelEdit());
+            this.form.SwitchPanels(new UserControlPersoneelEdit(new Personeel(), false));
         }
         private void BedieningButtonEnabledChanged(object sender, EventArgs e)
         {
@@ -159,7 +159,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 return;
             }
-            this.form.SwitchPanels(new UserControlPersoneelEdit((Personeel)selectedLsvItem.Tag));
+            this.form.SwitchPanels(new UserControlPersoneelEdit((Personeel)selectedLsvItem.Tag, true));
         }
         private void RemovePersoneel(Personeel selectedPersoneel)
         {

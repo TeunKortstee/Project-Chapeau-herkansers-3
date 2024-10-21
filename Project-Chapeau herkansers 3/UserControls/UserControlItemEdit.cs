@@ -6,26 +6,39 @@ namespace Project_Chapeau_herkansers_3.UserControls
     public partial class UserControlItemEdit : UserControl
     {
         private Form1 form;
+        private MenuItemService menuItemService;
         private bool isEditing;
-        private MenuItem currentMenuItem;
 
         public UserControlItemEdit(MenuItem currentMenuItem, bool isEditing, MenuItemControl menuItemControl)
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.currentMenuItem = currentMenuItem;
             this.isEditing = isEditing;
+            menuItemService = new MenuItemService();
+            SetMenuLogic(currentMenuItem, menuItemControl);
+        }
+        #region Menu Specific Logic
+        private void SetMenuLogic(MenuItem menuItem, MenuItemControl menuItemControl)
+        {
             if (!isEditing)
             {
                 SetNewMenuItemLogic(MenuType.Lunch);
             }
             else
             {
-                SetEditMenuItemLogic(this.currentMenuItem, menuItemControl);
+                SetEditMenuItemLogic(menuItem, menuItemControl);
             }
-            SetButtonTags(menuItemControl);
+            SetButtons(menuItem, menuItemControl);
         }
-        #region Menu Specific Logic
+        private void SetButtons(MenuItem menuItem, MenuItemControl menuItemControl)
+        {
+            SetButtonTags(menuItemControl);
+            SetAddButton(menuItem);
+        }
+        private void SetAddButton(MenuItem menuItem)
+        {
+            btnConfirm.Click += (sender, e) => MenuConfirmClick(menuItem);
+        }
         private void SetEditMenuItemLogic(MenuItem menuItem, MenuItemControl menuItemControl)
         {
             switch (menuItemControl)
@@ -38,8 +51,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     SetVoorraadLogic(menuItem.Voorraad);
                     break;
             }
-            btnCancel.Tag = menuItemControl;
-            btnConfirm.Tag = menuItemControl;
         }
         private void SetButtonTags(MenuItemControl menuItemControl)
         {
@@ -88,19 +99,20 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
 
         #region Functionalities
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void MenuConfirmClick(MenuItem menuItem)
         {
             try
             {
                 switch (btnConfirm.Tag)
                 {
                     case MenuItemControl.Menu:
-                        InsertMenuItem();
-                        UpdateMenuItem();
+                        MenuItem newMenuItem = FillMenuItemObject(menuItem);
+                        InsertMenuItem(newMenuItem);
+                        UpdateMenuItem(newMenuItem);
                         ReturnToOverview();
                         break;
                     case MenuItemControl.Voorraad:
-                        UpdateVoorraad();
+                        UpdateVoorraad(menuItem);
                         ReturnToOverview();
                         break;
                 }
@@ -110,40 +122,42 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 DisplayErrorMessage(ex.Message);
             }
         }
+        private MenuItem FillMenuItemObject(MenuItem menuItem)
+        {
+            if (AreValidMenuItemInputs(txt1.Text, txt2.Text, (MenuType)cmbType.SelectedItem))
+            {
+                menuItem.Naam = txt1.Text;
+                menuItem.Prijs = ParsePrice(txt2.Text);
+                menuItem.IsAlcoholisch = chkAlcoholisch.Checked;
+                menuItem.MenuType = (MenuType)cmbType.SelectedItem;
+            }
+            return menuItem;
+        }
         #region Send to Service
-        private void InsertMenuItem()
+        private void InsertMenuItem(MenuItem menuItem)
         {
-            if (!AreValidMenuItemInputs(txt1.Text, txt2.Text, (MenuType)cmbType.SelectedItem) || isEditing)
+            if (isEditing)
             {
                 return;
             }
-            MenuItemService menuItemService = new MenuItemService();
-            MenuItem newMenuItem = new MenuItem(txt1.Text, ParsePrice(txt2.Text), chkAlcoholisch.Checked, (MenuType)cmbType.SelectedItem);
-            menuItemService.AddNewMenuItem(newMenuItem);
+            menuItemService.AddNewMenuItem(menuItem);
         }
-        private void UpdateMenuItem()
+        private void UpdateMenuItem(MenuItem menuItem)
         {
-            if (!AreValidMenuItemInputs(txt1.Text, txt2.Text, (MenuType)cmbType.SelectedItem) || !isEditing)
+            if (!isEditing)
             {
                 return;
             }
-            this.currentMenuItem.Naam = txt1.Text;
-            this.currentMenuItem.Prijs = ParsePrice(txt2.Text);
-            this.currentMenuItem.IsAlcoholisch = chkAlcoholisch.Checked;
-            this.currentMenuItem.MenuType = (MenuType)cmbType.SelectedItem;
-            MenuItemService menuItemService = new MenuItemService();
-            menuItemService.UpdateMenuItem(this.currentMenuItem);
+            menuItemService.UpdateMenuItem(menuItem);
         }
-        private void UpdateVoorraad()
+        private void UpdateVoorraad(MenuItem menuItem)
         {
             if (!int.TryParse(txtStock.Text, out int stock) || stock < 0)
             {
-                DisplayErrorMessage(InvalidInput());
-                return;
+                throw new Exception("Ongeldig getal");
             }
-            MenuItemService menuItemService = new MenuItemService();
-            this.currentMenuItem.Voorraad = stock;
-            menuItemService.UpdateMenuItemStock(this.currentMenuItem);
+            menuItem.Voorraad = stock;
+            menuItemService.UpdateMenuItemStock(menuItem);
         }
         #endregion
         private void btnCancel_Click(object sender, EventArgs e)
@@ -175,8 +189,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (string.IsNullOrEmpty(nameInput) || string.IsNullOrEmpty(priceInput) || !Enum.IsDefined(typeof(MenuType), selectedItem))
             {
-                DisplayErrorMessage("Velden zijn niet geldig");
-                return false;
+                throw new Exception("Velden zijn niet geldig");
             }
             return true;
         }
@@ -188,7 +201,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             }
             return price;
         }
-
         #endregion
 
         #region VoorraadHandeling
@@ -219,7 +231,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             lblErrorNewObject.Visible = true;
             lblErrorNewObject.Text = errorMessage;
         }
-
         #endregion
 
         private void ReturnToOverview()

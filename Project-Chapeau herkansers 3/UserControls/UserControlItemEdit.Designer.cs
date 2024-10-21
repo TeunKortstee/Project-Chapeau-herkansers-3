@@ -71,7 +71,6 @@
             btnConfirm.TabIndex = 3;
             btnConfirm.Text = "Bevestig";
             btnConfirm.UseVisualStyleBackColor = false;
-            btnConfirm.Click += btnConfirm_Click;
             // 
             // btnCancel
             // 

@@ -5,6 +5,7 @@ namespace Service
 {
     public class MenuItemService
     {
+        const string DatabaseExceptionText = "Er ging iets mis";
         private MenuDao menuItemDao;
 
         public MenuItemService()
@@ -22,19 +23,47 @@ namespace Service
         }
         public void AddNewMenuItem(MenuItem newMenuItem)
         {
-            menuItemDao.AddNewMenuItem(newMenuItem);
+            try
+            {
+                menuItemDao.AddNewMenuItem(newMenuItem);
+            }
+            catch
+            {
+                throw new Exception(DatabaseExceptionText);
+            }
         }
         public void UpdateMenuItem(MenuItem selectedMenuItem)
         {
-            menuItemDao.UpdateMenuItem(selectedMenuItem);
+            try
+            {
+                menuItemDao.UpdateMenuItem(selectedMenuItem);
+            }
+            catch
+            {
+                throw new Exception(DatabaseExceptionText);
+            }
         }
         public void UpdateMenuItemStock(MenuItem selectedMenuItem)
         {
-            menuItemDao.UpdateMenuItemStock(selectedMenuItem);
+            try
+            {
+                menuItemDao.UpdateMenuItemStock(selectedMenuItem);
+            }
+            catch
+            {
+                throw new Exception(DatabaseExceptionText);
+            }
         }
         public void SoftDeleteMenuItem(MenuItem selectedMenuItem) 
         {
-            menuItemDao.SoftDeleteMenuItem(selectedMenuItem);
+            try
+            {
+                menuItemDao.SoftDeleteMenuItem(selectedMenuItem);
+            }
+            catch
+            {
+                throw new Exception(DatabaseExceptionText);
+            }
         }
         public int GetMenuItemSales(MenuItem menuItem, DateTime datumVan, DateTime datumTot)
         {

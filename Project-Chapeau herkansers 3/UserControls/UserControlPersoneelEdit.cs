@@ -6,30 +6,32 @@ namespace Project_Chapeau_herkansers_3.UserControls
     public partial class UserControlPersoneelEdit : UserControl
     {
         private Form1 form;
-        // hier Personeel service
         private PersoneelService personeelService;
         private bool isEditing;
 
-        public UserControlPersoneelEdit()
+        public UserControlPersoneelEdit(Personeel currentPersoneel, bool isEditing)
         {
             InitializeComponent();
             this.form = Form1.Instance;
-            this.isEditing = false;
+            this.isEditing = isEditing;
             personeelService = new PersoneelService();
-            SetNewPersoneelLogic(Functie.Bediening);
-            SetAddButton(new Personeel());
-        }
-        public UserControlPersoneelEdit(Personeel currentPersoneel)
-        {
-            InitializeComponent();
-            this.form = Form1.Instance;
-            this.isEditing = true;
-            personeelService = new PersoneelService();
-            SetEditPersoneelLogic(currentPersoneel);
+            SetPersoneelLogic(currentPersoneel);
             SetAddButton(currentPersoneel);
         }
 
         #region Personeel Logic
+        private void SetPersoneelLogic(Personeel currentPersoneel)
+        {
+            if (!isEditing)
+            {
+                SetNewPersoneelLogic(Functie.Bediening);
+            }
+            else
+            {
+                SetEditPersoneelLogic(currentPersoneel);
+            }
+            SetAddButton(currentPersoneel);
+        }
         private void SetAddButton(Personeel personeel)
         {
             btnConfirm.Click += (sender, e) => PersoneelConfirmClick(personeel);
@@ -71,20 +73,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 UpdatePersoneel(personeel);
                 ReturnToOverview();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                DisplayErrorMessage("Er ging iets mis");
+                DisplayErrorMessage(ex.Message);
             }
         }
         private Personeel FillPersoneelObject(Personeel personeel)
         {
-            if (!AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem))
+            if (AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem))
             {
-                throw new Exception();
+                personeel.AchterNaam = txt1.Text;
+                personeel.Email = CreateEmail(txt2.Text);
+                personeel.Functie = (Functie)cmbType.SelectedItem;
             }
-            personeel.AchterNaam = txt1.Text;
-            personeel.Email = CreateEmail(txt2.Text);
-            personeel.Functie = (Functie)cmbType.SelectedItem;
             return personeel;
         }
         #region Send to Database
@@ -111,7 +112,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         #endregion
 
-        #region PersoneelHandling
+        #region ErrorHandling
         public string CreateEmail(string email)
         {
             if (!email.ToLower().EndsWith("@chapeau.nl"))
@@ -123,28 +124,26 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private bool AreValidPersoneelInputs(string nameInput, string emailInput, Functie selectedItem)
         {
-            if (!IsEmpty(nameInput, emailInput) || !ValidCharacters(nameInput, emailInput) || !Enum.IsDefined(typeof(Functie), selectedItem))
+            if (!IsEmpty(nameInput, emailInput) || !AreValidCharacters(nameInput, emailInput) || !Enum.IsDefined(typeof(Functie), selectedItem))
             {
                 return false;
             }
             return true;
         }
-        private bool ValidCharacters(string nameInput, string emailInput)
+        private bool AreValidCharacters(string nameInput, string emailInput)
         {
             foreach (char character in emailInput)
             {
                 if (!char.IsLetter(character) && character != '_' && character != '.' && character != '@')
                 {
-                    DisplayErrorMessage("Username is niet geldig");
-                    return false;
+                    throw new Exception("Username is niet geldig");
                 }
             }
             foreach (char character in nameInput)
             {
                 if (!char.IsLetter(character) && character != ' ')
                 {
-                    DisplayErrorMessage("Achternaam is niet geldig");
-                    return false;
+                    throw new Exception("Achternaam is niet geldig");
                 }
             }
             return true;
@@ -153,20 +152,15 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (string.IsNullOrEmpty(emailInput) || string.IsNullOrWhiteSpace(nameInput))
             {
-                DisplayErrorMessage("Vul alle velden in");
-                return false;
+                throw new Exception("Vul alle velden in");
             }
             return true;
         }
-        #endregion
-
-        #region ErrorHandling
         private void DisplayErrorMessage(string errorMessage)
         {
             lblErrorNewObject.Visible = true;
             lblErrorNewObject.Text = errorMessage;
         }
-
         #endregion
 
         private void ReturnToOverview()

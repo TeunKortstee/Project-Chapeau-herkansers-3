@@ -6,8 +6,7 @@ namespace Service
 {
     public class PersoneelService
     {
-        // dit in app config
-        const string defaultPassword = "0000";
+        const string DatabaseExceptionText = "Er ging iets mis";
 
         private PersoneelDao personeelDao;
 
@@ -21,17 +20,37 @@ namespace Service
         }
         public void InsertPersoneel(Personeel personeel)
         {
-            string slowSaltedHashedPassword = HashPasswordWithBCrypt(defaultPassword, 11);
-            personeel.WachtWoord = slowSaltedHashedPassword;
-            personeelDao.InsertPersoneel(personeel);
+            try
+            {
+                personeel.WachtWoord = HashPasswordWithBCrypt("0000", 11);
+                personeelDao.InsertPersoneel(personeel);
+            }
+            catch
+            {
+                throw new Exception(DatabaseExceptionText);
+            }
         }
         public void RemovePersoneel(Personeel personeel)
         {
-            personeelDao.SoftDeletePersoneel(personeel);
+            try
+            {
+                personeelDao.SoftDeletePersoneel(personeel);
+            }
+            catch
+            {
+                throw new Exception(DatabaseExceptionText);
+            }
         }
         public void UpdatePersoneel(Personeel personeel)
         {
-            personeelDao.UpdatePersoneel(personeel);
+            try
+            {
+                personeelDao.UpdatePersoneel(personeel);
+            }
+            catch
+            {
+                throw new Exception(DatabaseExceptionText);
+            }
         }
 
         private string HashPasswordWithBCrypt(string password, int workfactor)
