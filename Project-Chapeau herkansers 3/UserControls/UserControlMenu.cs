@@ -79,6 +79,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             btnAdjust.Visible = false;
             dtpDatumVan.Visible = true;
+            dtpDatumTot.Visible = true;
             lblTotalIncome.Visible = true;
         }
         private void SetButtonTags()
