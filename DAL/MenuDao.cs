@@ -69,7 +69,7 @@ namespace DAL
         {
             string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId) " +
                 "VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId);" +
-                "SELECT SCOPE_IDENTITY();";
+                "SELECT SCOPE_IDENTITY();"; // verwijderen niet nodig
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Naam", menuItem.Naam),

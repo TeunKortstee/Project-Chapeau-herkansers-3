@@ -106,9 +106,11 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 switch (btnConfirm.Tag)
                 {
                     case MenuItemControl.Menu:
-                        MenuItem newMenuItem = FillMenuItemObject(menuItem);
-                        InsertMenuItem(newMenuItem);
-                        UpdateMenuItem(newMenuItem);
+                        UpdateMenuItemObject(menuItem);
+                        if (isEditing)
+                            menuItemService.UpdateMenuItem(menuItem);
+                        else
+                            menuItemService.AddNewMenuItem(menuItem);
                         ReturnToOverview();
                         break;
                     case MenuItemControl.Voorraad:
@@ -122,7 +124,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 DisplayErrorMessage(ex.Message);
             }
         }
-        private MenuItem FillMenuItemObject(MenuItem menuItem)
+        private void UpdateMenuItemObject(MenuItem menuItem)
         {
             if (AreValidMenuItemInputs(txt1.Text, txt2.Text, (MenuType)cmbType.SelectedItem))
             {
@@ -131,24 +133,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 menuItem.IsAlcoholisch = chkAlcoholisch.Checked;
                 menuItem.MenuType = (MenuType)cmbType.SelectedItem;
             }
-            return menuItem;
-        }
-        #region Send to Service
-        private void InsertMenuItem(MenuItem menuItem)
-        {
-            if (isEditing)
-            {
-                return;
-            }
-            menuItemService.AddNewMenuItem(menuItem);
-        }
-        private void UpdateMenuItem(MenuItem menuItem)
-        {
-            if (!isEditing)
-            {
-                return;
-            }
-            menuItemService.UpdateMenuItem(menuItem);
         }
         private void UpdateVoorraad(MenuItem menuItem)
         {
@@ -159,7 +143,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             menuItem.Voorraad = stock;
             menuItemService.UpdateMenuItemStock(menuItem);
         }
-        #endregion
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ReturnToOverview();

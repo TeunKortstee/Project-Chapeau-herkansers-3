@@ -16,7 +16,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             this.isEditing = isEditing;
             personeelService = new PersoneelService();
             SetPersoneelLogic(currentPersoneel);
-            SetAddButton(currentPersoneel);
         }
 
         #region Personeel Logic
@@ -68,9 +67,12 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             try
             {
-                personeel = FillPersoneelObject(personeel);
-                InsertPersoneel(personeel);
-                UpdatePersoneel(personeel);
+                UpdatePersoneelObject(personeel);
+                // InsertPersoneel(personeel);
+                if (!isEditing)
+                    personeelService.InsertPersoneel(personeel);
+                else
+                    personeelService.UpdatePersoneel(personeel);
                 ReturnToOverview();
             }
             catch (Exception ex)
@@ -78,7 +80,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 DisplayErrorMessage(ex.Message);
             }
         }
-        private Personeel FillPersoneelObject(Personeel personeel)
+        private void UpdatePersoneelObject(Personeel personeel)
         {
             if (AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem))
             {
@@ -86,26 +88,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 personeel.Email = CreateEmail(txt2.Text);
                 personeel.Functie = (Functie)cmbType.SelectedItem;
             }
-            return personeel;
         }
-        #region Send to Database
-        private void InsertPersoneel(Personeel newPersoneel)
-        {
-            if (isEditing)
-            {
-                return;
-            }
-            personeelService.InsertPersoneel(newPersoneel);
-        }
-        private void UpdatePersoneel(Personeel existingPersoneel)
-        {
-            if (!isEditing)
-            {
-                return;
-            }
-            personeelService.UpdatePersoneel(existingPersoneel);
-        }
-        #endregion
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ReturnToOverview();

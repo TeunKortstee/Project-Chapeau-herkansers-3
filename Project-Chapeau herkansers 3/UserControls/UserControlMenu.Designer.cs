@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lsvDatabaseItems = new ListView();
+            lsvMenuItems = new ListView();
             lblTitel = new Label();
             btnAddNewObject = new Button();
             btnAdjust = new Button();
@@ -43,17 +43,17 @@
             dtpDatumTot = new DateTimePicker();
             SuspendLayout();
             // 
-            // lsvDatabaseItems
+            // lsvMenuItems
             // 
-            lsvDatabaseItems.FullRowSelect = true;
-            lsvDatabaseItems.Location = new Point(14, 233);
-            lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
-            lsvDatabaseItems.MultiSelect = false;
-            lsvDatabaseItems.Name = "lsvDatabaseItems";
-            lsvDatabaseItems.Size = new Size(380, 380);
-            lsvDatabaseItems.TabIndex = 0;
-            lsvDatabaseItems.UseCompatibleStateImageBehavior = false;
-            lsvDatabaseItems.View = View.Details;
+            lsvMenuItems.FullRowSelect = true;
+            lsvMenuItems.Location = new Point(14, 233);
+            lsvMenuItems.Margin = new Padding(3, 4, 3, 4);
+            lsvMenuItems.MultiSelect = false;
+            lsvMenuItems.Name = "lsvMenuItems";
+            lsvMenuItems.Size = new Size(380, 380);
+            lsvMenuItems.TabIndex = 0;
+            lsvMenuItems.UseCompatibleStateImageBehavior = false;
+            lsvMenuItems.View = View.Details;
             // 
             // lblTitel
             // 
@@ -212,7 +212,7 @@
             Controls.Add(btnAdjust);
             Controls.Add(btnAddNewObject);
             Controls.Add(lblTitel);
-            Controls.Add(lsvDatabaseItems);
+            Controls.Add(lsvMenuItems);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlMenu";
             Size = new Size(414, 736);
@@ -222,7 +222,7 @@
 
         #endregion
 
-        private ListView lsvDatabaseItems;
+        private ListView lsvMenuItems;
         private Label lblTitel;
         private Button btnAddNewObject;
         private Button btnAdjust;

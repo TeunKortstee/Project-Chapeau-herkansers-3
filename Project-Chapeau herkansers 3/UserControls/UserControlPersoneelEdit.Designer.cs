@@ -104,9 +104,9 @@
             lbl2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl2.Location = new Point(49, 314);
             lbl2.Name = "lbl2";
-            lbl2.Size = new Size(59, 25);
+            lbl2.Size = new Size(58, 25);
             lbl2.TabIndex = 13;
-            lbl2.Text = "Veld2";
+            lbl2.Text = "Email";
             // 
             // lblEnum
             // 
@@ -115,9 +115,9 @@
             lblEnum.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lblEnum.Location = new Point(49, 378);
             lblEnum.Name = "lblEnum";
-            lblEnum.Size = new Size(97, 25);
+            lblEnum.Size = new Size(74, 25);
             lblEnum.TabIndex = 30;
-            lblEnum.Text = "VeldEnum";
+            lblEnum.Text = "Functie";
             // 
             // field3
             // 
@@ -135,9 +135,9 @@
             lbl1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lbl1.Location = new Point(49, 246);
             lbl1.Name = "lbl1";
-            lbl1.Size = new Size(59, 25);
+            lbl1.Size = new Size(116, 25);
             lbl1.TabIndex = 34;
-            lbl1.Text = "Veld1";
+            lbl1.Text = "Achternaam";
             // 
             // txt1
             // 

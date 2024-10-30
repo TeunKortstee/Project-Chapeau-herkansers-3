@@ -3,6 +3,7 @@ using Model;
 
 namespace Service
 {
+    // naar MenuService
     public class MenuItemService
     {
         const string DatabaseExceptionText = "Er ging iets mis";

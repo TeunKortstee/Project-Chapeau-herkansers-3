@@ -122,29 +122,29 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void CreateMenuListView(MenuType menuType)
         {
-            lsvDatabaseItems.Clear();
+            lsvMenuItems.Clear();
 
-            lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("Prijs", 60);
+            lsvMenuItems.Columns.Add("Item", 250);
+            lsvMenuItems.Columns.Add("Prijs", 60);
             if (menuType == MenuType.Drank)
             {
-                lsvDatabaseItems.Columns.Add("Alcoholisch", 60);
+                lsvMenuItems.Columns.Add("Alcoholisch", 60);
             }
         }
         private void CreateVoorraadListView()
         {
-            lsvDatabaseItems.Clear();
+            lsvMenuItems.Clear();
 
-            lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("In Voorraad", 60);
+            lsvMenuItems.Columns.Add("Item", 250);
+            lsvMenuItems.Columns.Add("In Voorraad", 60);
         }
         private void CreateInkomenListView()
         {
-            lsvDatabaseItems.Clear();
+            lsvMenuItems.Clear();
 
-            lsvDatabaseItems.Columns.Add("Item", 250);
-            lsvDatabaseItems.Columns.Add("Verkocht", 60);
-            lsvDatabaseItems.Columns.Add("Inkomen", 60);
+            lsvMenuItems.Columns.Add("Item", 250);
+            lsvMenuItems.Columns.Add("Verkocht", 60);
+            lsvMenuItems.Columns.Add("Inkomen", 60);
         }
         #endregion
 
@@ -172,7 +172,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
                 ListViewItem item = CreateListViewItem(menuItem, controlMode);
                 item.Tag = menuItem;
-                lsvDatabaseItems.Items.Add(item);
+                lsvMenuItems.Items.Add(item);
                 totaleInkomens += menuItem.TotaleInkomen;
             }
             lblTotalIncome.Text = $"Totale Inkomen: € {totaleInkomens:0.00}";
@@ -324,8 +324,8 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 return;
             }
-            ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
-            AdjustSelectedItem(selectedLsvItem);
+            ListViewItem selectedLsvItem = lsvMenuItems.SelectedItems[0];
+            AdjustSelectedItem((MenuItem)selectedLsvItem.Tag);
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
@@ -335,8 +335,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 {
                     return;
                 }
-                ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
-                DeleteSelectedItem(selectedLsvItem);
+                ListViewItem selectedLsvItem = lsvMenuItems.SelectedItems[0];
+                DeleteSelectedItem((MenuItem)selectedLsvItem.Tag);
+                lsvMenuItems.Items.Remove(selectedLsvItem);
             }
             catch (Exception ex)
             {
@@ -350,19 +351,18 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
 
         #region ListViewItem
-        private void DeleteSelectedItem(ListViewItem selectedLsvItem)
+        private void DeleteSelectedItem(MenuItem menuItem)
         {
             if (!IsConfirmed())
             {
                 return;
             }
-            RemoveMenuItem((MenuItem)selectedLsvItem.Tag);
-            lsvDatabaseItems.Items.Remove(selectedLsvItem);
-            this.selectedMenu.MenuItems.Remove((MenuItem)selectedLsvItem.Tag);
+            RemoveMenuItem(menuItem);
+            this.selectedMenu.MenuItems.Remove(menuItem);
         }
-        private void AdjustSelectedItem(ListViewItem selectedLsvItem)
+        private void AdjustSelectedItem(MenuItem menuItem)
         {
-            this.form.SwitchPanels(new UserControlItemEdit((MenuItem)selectedLsvItem.Tag, true, controlMode));
+            this.form.SwitchPanels(new UserControlItemEdit(menuItem, true, controlMode));
         }
         private void RemoveMenuItem(MenuItem selectedMenuItem)
         {
@@ -389,7 +389,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private bool IsSelected()
         {
-            if (lsvDatabaseItems.SelectedItems.Count > 0)
+            if (lsvMenuItems.SelectedItems.Count > 0)
             {
                 return true;
             }

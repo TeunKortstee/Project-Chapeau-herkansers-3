@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lsvDatabaseItems = new ListView();
+            lsvPersoneelItems = new ListView();
             lblOverview = new Label();
             btnAddNewObject = new Button();
             btnAdjust = new Button();
@@ -41,17 +41,17 @@
             btnManagers = new Button();
             SuspendLayout();
             // 
-            // lsvDatabaseItems
+            // lsvPersoneelItems
             // 
-            lsvDatabaseItems.FullRowSelect = true;
-            lsvDatabaseItems.Location = new Point(14, 233);
-            lsvDatabaseItems.Margin = new Padding(3, 4, 3, 4);
-            lsvDatabaseItems.MultiSelect = false;
-            lsvDatabaseItems.Name = "lsvDatabaseItems";
-            lsvDatabaseItems.Size = new Size(380, 380);
-            lsvDatabaseItems.TabIndex = 0;
-            lsvDatabaseItems.UseCompatibleStateImageBehavior = false;
-            lsvDatabaseItems.View = View.Details;
+            lsvPersoneelItems.FullRowSelect = true;
+            lsvPersoneelItems.Location = new Point(14, 233);
+            lsvPersoneelItems.Margin = new Padding(3, 4, 3, 4);
+            lsvPersoneelItems.MultiSelect = false;
+            lsvPersoneelItems.Name = "lsvPersoneelItems";
+            lsvPersoneelItems.Size = new Size(380, 380);
+            lsvPersoneelItems.TabIndex = 0;
+            lsvPersoneelItems.UseCompatibleStateImageBehavior = false;
+            lsvPersoneelItems.View = View.Details;
             // 
             // lblOverview
             // 
@@ -189,7 +189,7 @@
             Controls.Add(btnAdjust);
             Controls.Add(btnAddNewObject);
             Controls.Add(lblOverview);
-            Controls.Add(lsvDatabaseItems);
+            Controls.Add(lsvPersoneelItems);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UserControlPersoneel";
             Size = new Size(414, 736);
@@ -199,7 +199,7 @@
 
         #endregion
 
-        private ListView lsvDatabaseItems;
+        private ListView lsvPersoneelItems;
         private Label lblOverview;
         private Button btnAddNewObject;
         private Button btnAdjust;

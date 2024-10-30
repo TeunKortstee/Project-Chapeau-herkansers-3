@@ -13,14 +13,13 @@ namespace Project_Chapeau_herkansers_3.UserControls
             InitializeComponent();
             this.form = Form1.Instance;
             personeelService = new PersoneelService();
-            List<Personeel> personeel = GetAllPersoneel();
-            SetButtons(personeel);
-            RefreshListView((Functie)btnBediening.Tag, personeel);
+            RefreshPersoneelList();
         }
         private void RefreshPersoneelList()
         {
             List<Personeel> personeel = GetAllPersoneel();
             SetButtons(personeel);
+            RefreshListView((Functie)btnBediening.Tag, personeel);
         }
 
         #region DisplayUIElements
@@ -31,10 +30,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void CreateEmployeeListView()
         {
-            lsvDatabaseItems.Clear();
+            lsvPersoneelItems.Clear();
 
-            lsvDatabaseItems.Columns.Add("Naam", 100);
-            lsvDatabaseItems.Columns.Add("Functie", 150);
+            lsvPersoneelItems.Columns.Add("Naam", 100);
+            lsvPersoneelItems.Columns.Add("Functie", 150);
         }
         private List<Personeel> GetAllPersoneel()
         {
@@ -58,7 +57,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                     ListViewItem item = new ListViewItem(werknemer.AchterNaam);
                     item.SubItems.Add(werknemer.Functie.ToString());
                     item.Tag = werknemer;
-                    lsvDatabaseItems.Items.Add(item);
+                    lsvPersoneelItems.Items.Add(item);
                 }
             }
         }
@@ -119,51 +118,47 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnAdjust_Click(object sender, EventArgs e)
         {
-            if (!IsSelected())
+            if (!HasSelectedItem())
             {
                 return;
             }
-            ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
-            AdjustSelectedItem(selectedLsvItem);
+            ListViewItem selectedLsvItem = lsvPersoneelItems.SelectedItems[0];
+            AdjustSelectedPersoneel((Personeel)selectedLsvItem.Tag);
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!IsSelected())
+                if (!HasSelectedItem() || !IsConfirmed())
                 {
                     return;
                 }
-                ListViewItem selectedLsvItem = lsvDatabaseItems.SelectedItems[0];
+                //lsvDatebaseItem naam veranderen
+                ListViewItem selectedLsvItem = lsvPersoneelItems.SelectedItems[0];
 
-                DeleteSelectedItem(selectedLsvItem);
+                DeletePersoneel((Personeel)selectedLsvItem.Tag);
             }
             catch (Exception ex)
             {
                 DisplayErrorMessage(ex.Message);
             }
         }
-        private void DeleteSelectedItem(ListViewItem selectedLsvItem)
+        private void DeletePersoneel(Personeel personeel)
         {
-            if (IsCurrentUser((Personeel)selectedLsvItem.Tag) || !IsConfirmed())
+            if (IsCurrentUser(personeel))
             {
                 return;
             }
-            RemovePersoneel((Personeel)selectedLsvItem.Tag);
-            lsvDatabaseItems.Items.Remove(selectedLsvItem);
+            this.personeelService.RemovePersoneel(personeel);
             RefreshPersoneelList();
         }
-        private void AdjustSelectedItem(ListViewItem selectedLsvItem)
+        private void AdjustSelectedPersoneel(Personeel personeel)
         {
-            if (IsCurrentUser((Personeel)selectedLsvItem.Tag))
+            if (IsCurrentUser(personeel))
             {
                 return;
             }
-            this.form.SwitchPanels(new UserControlPersoneelEdit((Personeel)selectedLsvItem.Tag, true));
-        }
-        private void RemovePersoneel(Personeel selectedPersoneel)
-        {
-            this.personeelService.RemovePersoneel(selectedPersoneel);
+            this.form.SwitchPanels(new UserControlPersoneelEdit(personeel, true));
         }
         private bool IsConfirmed()
         {
@@ -236,9 +231,9 @@ namespace Project_Chapeau_herkansers_3.UserControls
         #endregion
 
 
-        private bool IsSelected()
+        private bool HasSelectedItem()
         {
-            if (lsvDatabaseItems.SelectedItems.Count > 0)
+            if (lsvPersoneelItems.SelectedItems.Count > 0)
             {
                 return true;
             }
