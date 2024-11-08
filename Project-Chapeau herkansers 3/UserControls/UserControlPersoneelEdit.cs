@@ -37,22 +37,22 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void SetEditPersoneelLogic(Personeel personeel)
         {
-            SetCurrentObjectInfo(personeel.AchterNaam, personeel.Email);
+            SetExistingPersoneelInfo(personeel.AchterNaam, personeel.Email);
             SetNewPersoneelLogic(personeel.Functie);
         }
 
         private void SetNewPersoneelLogic(Functie function)
         {
-            SetObjectText("Werknemer", "Achternaam", "Email", "De_Graaf", "Functie");
+            SetPersoneelText("Werknemer", "Achternaam", "Email", "De_Graaf", "Functie");
             cmbType.DataSource = Enum.GetValues(typeof(Functie));
             cmbType.SelectedItem = function;
         }
-        private void SetCurrentObjectInfo(string firstField, string secondField)
+        private void SetExistingPersoneelInfo(string firstField, string secondField)
         {
             txt1.Text = firstField;
             txt2.Text = secondField;
         }
-        private void SetObjectText(string objectType, string name, string emailOrPrice, string placeholder1, string enumType)
+        private void SetPersoneelText(string objectType, string name, string emailOrPrice, string placeholder1, string enumType)
         {
             lblObject.Text = $"Nieuw {objectType}";
             lbl1.Text = name;
@@ -68,7 +68,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
             try
             {
                 UpdatePersoneelObject(personeel);
-                // InsertPersoneel(personeel);
                 if (!isEditing)
                     personeelService.InsertPersoneel(personeel);
                 else
@@ -100,7 +99,6 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             if (!email.ToLower().EndsWith("@chapeau.nl"))
             {
-                // If not, append the domain
                 email = $"{email}@chapeau.nl";
             }
             return email.ToLower();

@@ -6,8 +6,6 @@ namespace DAL
 {
     public class MenuDao : BaseDao
     {
-        // Enum van MenuType er in
-        // Menu ophalen met een join naar menuItems
         public Menu GetAllMenuItemsByMenuType(MenuType menuType)
         {
             string query = "SELECT MenuType, MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, mi.MenuId FROM Menu m JOIN MenuItems mi ON m.MenuId = mi.MenuId WHERE m.MenuId = @MenuId AND IsBeschikbaar = 1";
@@ -67,9 +65,7 @@ namespace DAL
         }
         public void AddNewMenuItem(MenuItem menuItem)
         {
-            string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId) " +
-                "VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId);" +
-                "SELECT SCOPE_IDENTITY();"; // verwijderen niet nodig
+            string query = "INSERT INTO MenuItems (Naam, Prijs, Alcoholisch, MenuId) VALUES (@Naam, @Prijs, @Alcoholisch, @MenuId);";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@Naam", menuItem.Naam),

@@ -60,16 +60,16 @@ namespace Project_Chapeau_herkansers_3.UserControls
             {
                 case MenuItemControl.Menu:
                     CreateMenuListView((MenuType)btnLunch.Tag);
-                    SetObjectText("Menu", "Menu Item");
+                    SetFirstFieldText("Menu", "Menu Item");
                     btnAddNewObject.Visible = true;
                     btnRemove.Visible = true;
                     break;
                 case MenuItemControl.Voorraad:
-                    SetObjectText("Voorraad", "Menu Item");
+                    SetFirstFieldText("Voorraad", "Menu Item");
                     CreateVoorraadListView();
                     break;
                 case MenuItemControl.Inkomen:
-                    SetObjectText("Inkomen", "Menu Item");
+                    SetFirstFieldText("Inkomen", "Menu Item");
                     CreateInkomenListView();
                     SetElementsVisibleInkomen();
                     break;
@@ -227,7 +227,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
             return false;
         }
 
-        private void SetObjectText(string title, string objectType)
+        private void SetFirstFieldText(string title, string objectType)
         {
             lblTitel.Text = title;
             btnAddNewObject.Text = $"{objectType} toevoegen";

@@ -118,7 +118,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         private void btnAdjust_Click(object sender, EventArgs e)
         {
-            if (!HasSelectedItem())
+            if (!HasSelectedPersoneel())
             {
                 return;
             }
@@ -129,11 +129,10 @@ namespace Project_Chapeau_herkansers_3.UserControls
         {
             try
             {
-                if (!HasSelectedItem() || !IsConfirmed())
+                if (!HasSelectedPersoneel() || !IsConfirmed())
                 {
                     return;
                 }
-                //lsvDatebaseItem naam veranderen
                 ListViewItem selectedLsvItem = lsvPersoneelItems.SelectedItems[0];
 
                 DeletePersoneel((Personeel)selectedLsvItem.Tag);
@@ -230,8 +229,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
 
         #endregion
 
-
-        private bool HasSelectedItem()
+        private bool HasSelectedPersoneel()
         {
             if (lsvPersoneelItems.SelectedItems.Count > 0)
             {
