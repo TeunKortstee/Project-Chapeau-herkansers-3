@@ -28,187 +28,194 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lsvPersoneelItems = new ListView();
-            lblOverview = new Label();
-            btnAddNewObject = new Button();
-            btnAdjust = new Button();
-            btnRemove = new Button();
-            btnReturn = new Button();
-            lblErrorOverview = new Label();
-            btnBediening = new Button();
-            btnKeuken = new Button();
-            btnBar = new Button();
-            btnManagers = new Button();
+            lblObject = new Label();
+            btnConfirm = new Button();
+            btnCancel = new Button();
+            field2 = new PictureBox();
+            txt2 = new TextBox();
+            lbl2 = new Label();
+            lblEnum = new Label();
+            field3 = new PictureBox();
+            lbl1 = new Label();
+            txt1 = new TextBox();
+            field1 = new PictureBox();
+            cmbType = new ComboBox();
+            lblErrorNewObject = new Label();
+            ((System.ComponentModel.ISupportInitialize)field2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)field3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)field1).BeginInit();
             SuspendLayout();
             // 
-            // lsvPersoneelItems
+            // lblObject
             // 
-            lsvPersoneelItems.FullRowSelect = true;
-            lsvPersoneelItems.Location = new Point(14, 233);
-            lsvPersoneelItems.Margin = new Padding(3, 4, 3, 4);
-            lsvPersoneelItems.MultiSelect = false;
-            lsvPersoneelItems.Name = "lsvPersoneelItems";
-            lsvPersoneelItems.Size = new Size(380, 380);
-            lsvPersoneelItems.TabIndex = 0;
-            lsvPersoneelItems.UseCompatibleStateImageBehavior = false;
-            lsvPersoneelItems.View = View.Details;
+            lblObject.AutoSize = true;
+            lblObject.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+            lblObject.Location = new Point(27, 170);
+            lblObject.Name = "lblObject";
+            lblObject.Size = new Size(132, 46);
+            lblObject.TabIndex = 1;
+            lblObject.Text = "Nieuw ";
             // 
-            // lblOverview
+            // btnConfirm
             // 
-            lblOverview.AutoSize = true;
-            lblOverview.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOverview.Location = new Point(119, 14);
-            lblOverview.Name = "lblOverview";
-            lblOverview.Size = new Size(175, 46);
-            lblOverview.TabIndex = 1;
-            lblOverview.Text = "Personeel";
+            btnConfirm.BackColor = Color.FromArgb(138, 210, 176);
+            btnConfirm.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnConfirm.Location = new Point(30, 653);
+            btnConfirm.Margin = new Padding(3, 4, 3, 4);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.Size = new Size(111, 52);
+            btnConfirm.TabIndex = 3;
+            btnConfirm.Text = "Bevestig";
+            btnConfirm.UseVisualStyleBackColor = false;
             // 
-            // btnAddNewObject
+            // btnCancel
             // 
-            btnAddNewObject.BackColor = Color.FromArgb(138, 210, 176);
-            btnAddNewObject.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNewObject.Location = new Point(14, 121);
-            btnAddNewObject.Margin = new Padding(3, 4, 3, 4);
-            btnAddNewObject.Name = "btnAddNewObject";
-            btnAddNewObject.Size = new Size(380, 48);
-            btnAddNewObject.TabIndex = 2;
-            btnAddNewObject.Text = "Personeel Toevoegen";
-            btnAddNewObject.UseVisualStyleBackColor = false;
-            btnAddNewObject.Click += btnAddNewObject_Click;
+            btnCancel.BackColor = Color.FromArgb(245, 108, 117);
+            btnCancel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancel.Location = new Point(147, 653);
+            btnCancel.Margin = new Padding(3, 4, 3, 4);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(111, 52);
+            btnCancel.TabIndex = 4;
+            btnCancel.Text = "Annuleer";
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
             // 
-            // btnAdjust
+            // field2
             // 
-            btnAdjust.BackColor = Color.FromArgb(138, 210, 176);
-            btnAdjust.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAdjust.Location = new Point(14, 651);
-            btnAdjust.Margin = new Padding(3, 4, 3, 4);
-            btnAdjust.Name = "btnAdjust";
-            btnAdjust.Size = new Size(120, 52);
-            btnAdjust.TabIndex = 3;
-            btnAdjust.Text = "Aanpassen";
-            btnAdjust.UseVisualStyleBackColor = false;
-            btnAdjust.Click += btnAdjust_Click;
+            field2.BackColor = Color.FromArgb(196, 196, 196);
+            field2.Location = new Point(30, 295);
+            field2.Name = "field2";
+            field2.Size = new Size(352, 62);
+            field2.TabIndex = 6;
+            field2.TabStop = false;
             // 
-            // btnRemove
+            // txt2
             // 
-            btnRemove.BackColor = Color.FromArgb(245, 108, 117);
-            btnRemove.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnRemove.Location = new Point(136, 651);
-            btnRemove.Margin = new Padding(3, 4, 3, 4);
-            btnRemove.Name = "btnRemove";
-            btnRemove.Size = new Size(130, 52);
-            btnRemove.TabIndex = 4;
-            btnRemove.Text = "Verwijderen";
-            btnRemove.UseVisualStyleBackColor = false;
-            btnRemove.Click += btnRemove_Click;
+            txt2.Location = new Point(177, 312);
+            txt2.Name = "txt2";
+            txt2.Size = new Size(187, 27);
+            txt2.TabIndex = 10;
             // 
-            // btnReturn
+            // lbl2
             // 
-            btnReturn.BackColor = Color.FromArgb(255, 179, 71);
-            btnReturn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnReturn.Location = new Point(326, 20);
-            btnReturn.Margin = new Padding(3, 4, 3, 4);
-            btnReturn.Name = "btnReturn";
-            btnReturn.Size = new Size(68, 48);
-            btnReturn.TabIndex = 28;
-            btnReturn.Text = "Terug";
-            btnReturn.UseVisualStyleBackColor = false;
-            btnReturn.Click += btnReturn_Click;
+            lbl2.AutoSize = true;
+            lbl2.BackColor = Color.FromArgb(196, 196, 196);
+            lbl2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl2.Location = new Point(49, 314);
+            lbl2.Name = "lbl2";
+            lbl2.Size = new Size(58, 25);
+            lbl2.TabIndex = 13;
+            lbl2.Text = "Email";
             // 
-            // lblErrorOverview
+            // lblEnum
             // 
-            lblErrorOverview.AutoSize = true;
-            lblErrorOverview.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblErrorOverview.ForeColor = Color.Red;
-            lblErrorOverview.Location = new Point(17, 707);
-            lblErrorOverview.Name = "lblErrorOverview";
-            lblErrorOverview.Size = new Size(120, 25);
-            lblErrorOverview.TabIndex = 37;
-            lblErrorOverview.Text = "Error Bericht";
-            lblErrorOverview.Visible = false;
+            lblEnum.AutoSize = true;
+            lblEnum.BackColor = Color.FromArgb(196, 196, 196);
+            lblEnum.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEnum.Location = new Point(49, 378);
+            lblEnum.Name = "lblEnum";
+            lblEnum.Size = new Size(74, 25);
+            lblEnum.TabIndex = 30;
+            lblEnum.Text = "Functie";
             // 
-            // btnBediening
+            // field3
             // 
-            btnBediening.BackColor = Color.FromArgb(138, 210, 176);
-            btnBediening.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnBediening.Location = new Point(14, 176);
-            btnBediening.Name = "btnBediening";
-            btnBediening.Size = new Size(90, 50);
-            btnBediening.TabIndex = 54;
-            btnBediening.Text = "Bediening";
-            btnBediening.UseVisualStyleBackColor = false;
-            btnBediening.EnabledChanged += BedieningButtonEnabledChanged;
+            field3.BackColor = Color.FromArgb(196, 196, 196);
+            field3.Location = new Point(30, 359);
+            field3.Name = "field3";
+            field3.Size = new Size(352, 62);
+            field3.TabIndex = 28;
+            field3.TabStop = false;
             // 
-            // btnKeuken
+            // lbl1
             // 
-            btnKeuken.BackColor = Color.FromArgb(138, 210, 176);
-            btnKeuken.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnKeuken.Location = new Point(110, 176);
-            btnKeuken.Name = "btnKeuken";
-            btnKeuken.Size = new Size(90, 50);
-            btnKeuken.TabIndex = 55;
-            btnKeuken.Text = "Keuken";
-            btnKeuken.UseVisualStyleBackColor = false;
-            btnKeuken.EnabledChanged += KeukenButtonEnabledChanged;
+            lbl1.AutoSize = true;
+            lbl1.BackColor = Color.FromArgb(196, 196, 196);
+            lbl1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl1.Location = new Point(49, 246);
+            lbl1.Name = "lbl1";
+            lbl1.Size = new Size(116, 25);
+            lbl1.TabIndex = 34;
+            lbl1.Text = "Achternaam";
             // 
-            // btnBar
+            // txt1
             // 
-            btnBar.BackColor = Color.FromArgb(138, 210, 176);
-            btnBar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnBar.Location = new Point(208, 176);
-            btnBar.Name = "btnBar";
-            btnBar.Size = new Size(90, 50);
-            btnBar.TabIndex = 56;
-            btnBar.Text = "Bar";
-            btnBar.UseVisualStyleBackColor = false;
-            btnBar.EnabledChanged += BarButtonEnabledChanged;
+            txt1.Location = new Point(177, 244);
+            txt1.Name = "txt1";
+            txt1.Size = new Size(187, 27);
+            txt1.TabIndex = 33;
             // 
-            // btnManagers
+            // field1
             // 
-            btnManagers.BackColor = Color.FromArgb(138, 210, 176);
-            btnManagers.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnManagers.Location = new Point(304, 176);
-            btnManagers.Name = "btnManagers";
-            btnManagers.Size = new Size(90, 50);
-            btnManagers.TabIndex = 57;
-            btnManagers.Text = "Managers";
-            btnManagers.UseVisualStyleBackColor = false;
-            btnManagers.EnabledChanged += ManagersButtonEnabledChanged;
+            field1.BackColor = Color.Silver;
+            field1.Location = new Point(30, 227);
+            field1.Name = "field1";
+            field1.Size = new Size(352, 62);
+            field1.TabIndex = 32;
+            field1.TabStop = false;
             // 
-            // UserControlPersoneel
+            // cmbType
+            // 
+            cmbType.FormattingEnabled = true;
+            cmbType.Location = new Point(177, 379);
+            cmbType.Name = "cmbType";
+            cmbType.Size = new Size(187, 28);
+            cmbType.TabIndex = 35;
+            // 
+            // lblErrorNewObject
+            // 
+            lblErrorNewObject.AutoSize = true;
+            lblErrorNewObject.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblErrorNewObject.ForeColor = Color.Red;
+            lblErrorNewObject.Location = new Point(30, 424);
+            lblErrorNewObject.Name = "lblErrorNewObject";
+            lblErrorNewObject.Size = new Size(120, 25);
+            lblErrorNewObject.TabIndex = 36;
+            lblErrorNewObject.Text = "Error Bericht";
+            lblErrorNewObject.Visible = false;
+            // 
+            // UserControlPersoneelEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(btnManagers);
-            Controls.Add(btnBar);
-            Controls.Add(btnKeuken);
-            Controls.Add(btnBediening);
-            Controls.Add(lblErrorOverview);
-            Controls.Add(btnReturn);
-            Controls.Add(btnRemove);
-            Controls.Add(btnAdjust);
-            Controls.Add(btnAddNewObject);
-            Controls.Add(lblOverview);
-            Controls.Add(lsvPersoneelItems);
+            Controls.Add(lblErrorNewObject);
+            Controls.Add(cmbType);
+            Controls.Add(lbl1);
+            Controls.Add(txt1);
+            Controls.Add(field1);
+            Controls.Add(lblEnum);
+            Controls.Add(field3);
+            Controls.Add(lbl2);
+            Controls.Add(txt2);
+            Controls.Add(field2);
+            Controls.Add(btnCancel);
+            Controls.Add(btnConfirm);
+            Controls.Add(lblObject);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "UserControlPersoneel";
+            Name = "UserControlPersoneelEdit";
             Size = new Size(414, 736);
+            ((System.ComponentModel.ISupportInitialize)field2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)field3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)field1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private ListView lsvPersoneelItems;
-        private Label lblOverview;
-        private Button btnAddNewObject;
-        private Button btnAdjust;
-        private Button btnRemove;
-        private Button btnReturn;
-        private Label lblErrorOverview;
-        private Button btnBediening;
-        private Button btnKeuken;
-        private Button btnBar;
-        private Button btnManagers;
+        private Label lblObject;
+        private Button btnConfirm;
+        private Button btnCancel;
+        private PictureBox field2;
+        private PictureBox pictureBox5;
+        private TextBox txt2;
+        private Label lbl2;
+        private Label lblEnum;
+        private PictureBox field3;
+        private Label lbl1;
+        private TextBox txt1;
+        private PictureBox field1;
+        private ComboBox cmbType;
+        private Label lblErrorNewObject;
     }
 }

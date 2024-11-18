@@ -1,6 +1,5 @@
 ﻿using Model;
 using Service;
-using System.Collections.Generic;
 
 namespace Project_Chapeau_herkansers_3.UserControls
 {
@@ -8,249 +7,146 @@ namespace Project_Chapeau_herkansers_3.UserControls
     {
         private Form1 form;
         private PersoneelService personeelService;
-        public UserControlPersoneel()
+        private bool isEditing;
+
+        public UserControlPersoneel(Personeel currentPersoneel, bool isEditing)
         {
             InitializeComponent();
             this.form = Form1.Instance;
+            this.isEditing = isEditing;
             personeelService = new PersoneelService();
-            RefreshPersoneelList();
-        }
-        private void RefreshPersoneelList()
-        {
-            List<Personeel> personeel = GetAllPersoneel();
-            SetButtons(personeel);
-            RefreshListView((Functie)btnBediening.Tag, personeel);
+            SetPersoneelLogic(currentPersoneel);
         }
 
-        #region DisplayUIElements
-        private void RefreshListView(Functie functie, List<Personeel> personeel)
+        #region Personeel Logic
+        private void SetPersoneelLogic(Personeel currentPersoneel)
         {
-            CreateEmployeeListView();
-            DisplayPersoneelByFunctie(functie, personeel);
-        }
-        private void CreateEmployeeListView()
-        {
-            lsvPersoneelItems.Clear();
-
-            lsvPersoneelItems.Columns.Add("Naam", 100);
-            lsvPersoneelItems.Columns.Add("Functie", 150);
-        }
-        private List<Personeel> GetAllPersoneel()
-        {
-            List<Personeel> personeel = new List<Personeel>();
-            try
+            if (!isEditing)
             {
-                personeel = personeelService.GetAllPersoneel();
+                SetNewPersoneelLogic(Functie.Bediening);
             }
-            catch (Exception)
+            else
             {
-                DisplayErrorMessage("Er ging iets mis");
+                SetEditPersoneelLogic(currentPersoneel);
             }
-            return personeel;
+            SetAddButton(currentPersoneel);
         }
-        private void DisplayPersoneelByFunctie(Functie functie, List<Personeel> personeel)
+        private void SetAddButton(Personeel personeel)
         {
-            foreach (Personeel werknemer in personeel)
-            {
-                if (werknemer.Functie == functie)
-                {
-                    ListViewItem item = new ListViewItem(werknemer.AchterNaam);
-                    item.SubItems.Add(werknemer.Functie.ToString());
-                    item.Tag = werknemer;
-                    lsvPersoneelItems.Items.Add(item);
-                }
-            }
+            btnConfirm.Click += (sender, e) => PersoneelConfirmClick(personeel);
+        }
+        private void SetEditPersoneelLogic(Personeel personeel)
+        {
+            SetExistingPersoneelInfo(personeel.AchterNaam, personeel.Email);
+            SetNewPersoneelLogic(personeel.Functie);
         }
 
-        #endregion
-
-        #region Top Buttons
-        private void btnAddNewObject_Click(object sender, EventArgs e)
+        private void SetNewPersoneelLogic(Functie function)
         {
-            this.form.SwitchPanels(new UserControlPersoneelEdit(new Personeel(), false));
+            SetPersoneelText("Werknemer", "Achternaam", "Email", "De_Graaf", "Functie");
+            cmbType.DataSource = Enum.GetValues(typeof(Functie));
+            cmbType.SelectedItem = function;
         }
-        private void BedieningButtonEnabledChanged(object sender, EventArgs e)
+        private void SetExistingPersoneelInfo(string firstField, string secondField)
         {
-            SetEnableColor(btnBediening);
+            txt1.Text = firstField;
+            txt2.Text = secondField;
         }
-        private void KeukenButtonEnabledChanged(object sender, EventArgs e)
+        private void SetPersoneelText(string objectType, string name, string emailOrPrice, string placeholder1, string enumType)
         {
-            SetEnableColor(btnKeuken);
-        }
-        private void BarButtonEnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btnBar);
-        }
-        private void ManagersButtonEnabledChanged(object sender, EventArgs e)
-        {
-            SetEnableColor(btnManagers);
-        }
-        private void BedieningClick(List<Personeel> personeel)
-        {
-            RefreshListView((Functie)btnBediening.Tag, personeel);
-            RenablePersoneelButtons((Functie)btnBediening.Tag);
-        }
-
-        private void KeukenClick(List<Personeel> personeel)
-        {
-            RefreshListView((Functie)btnKeuken.Tag, personeel);
-            RenablePersoneelButtons((Functie)btnKeuken.Tag);
-        }
-
-        private void BarClick(List<Personeel> personeel)
-        {
-            RefreshListView((Functie)btnBar.Tag, personeel);
-            RenablePersoneelButtons((Functie)btnBar.Tag);
-        }
-
-        private void ManagersClick(List<Personeel> personeel)
-        {
-            RefreshListView((Functie)btnManagers.Tag, personeel);
-            RenablePersoneelButtons((Functie)btnManagers.Tag);
+            lblObject.Text = $"Nieuw {objectType}";
+            lbl1.Text = name;
+            lbl2.Text = emailOrPrice;
+            txt2.PlaceholderText = placeholder1;
+            lblEnum.Text = enumType;
         }
         #endregion
 
-        #region Bottom Buttons
-        private void btnReturn_Click(object sender, EventArgs e)
-        {
-            this.form.SwitchPanels(new UserControlManager());
-        }
-
-        private void btnAdjust_Click(object sender, EventArgs e)
-        {
-            if (!HasSelectedPersoneel())
-            {
-                return;
-            }
-            ListViewItem selectedLsvItem = lsvPersoneelItems.SelectedItems[0];
-            AdjustSelectedPersoneel((Personeel)selectedLsvItem.Tag);
-        }
-        private void btnRemove_Click(object sender, EventArgs e)
+        #region Functionalities
+        private void PersoneelConfirmClick(Personeel personeel)
         {
             try
             {
-                if (!HasSelectedPersoneel() || !IsConfirmed())
-                {
-                    return;
-                }
-                ListViewItem selectedLsvItem = lsvPersoneelItems.SelectedItems[0];
-
-                DeletePersoneel((Personeel)selectedLsvItem.Tag);
+                UpdatePersoneelObject(personeel);
+                if (!isEditing)
+                    personeelService.InsertPersoneel(personeel);
+                else
+                    personeelService.UpdatePersoneel(personeel);
+                ReturnToOverview();
             }
             catch (Exception ex)
             {
                 DisplayErrorMessage(ex.Message);
             }
         }
-        private void DeletePersoneel(Personeel personeel)
+        private void UpdatePersoneelObject(Personeel personeel)
         {
-            if (IsCurrentUser(personeel))
+            if (AreValidPersoneelInputs(txt1.Text, txt2.Text, (Functie)cmbType.SelectedItem))
             {
-                return;
+                personeel.AchterNaam = txt1.Text;
+                personeel.Email = CreateEmail(txt2.Text);
+                personeel.Functie = (Functie)cmbType.SelectedItem;
             }
-            this.personeelService.RemovePersoneel(personeel);
-            RefreshPersoneelList();
         }
-        private void AdjustSelectedPersoneel(Personeel personeel)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (IsCurrentUser(personeel))
-            {
-                return;
-            }
-            this.form.SwitchPanels(new UserControlPersoneelEdit(personeel, true));
-        }
-        private bool IsConfirmed()
-        {
-            DialogResult confirmResult = MessageBox.Show("Weet u zeker dat u dit werknemer wilt verwijderen?", "Ja of Nee", MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
-            {
-                return true;
-            }
-            return false;
+            ReturnToOverview();
         }
         #endregion
 
-        #region ButtonStates
-        private void SetButtons(List<Personeel> personeel)
+        #region ErrorHandling
+        public string CreateEmail(string email)
         {
-            SetButtonTags();
-            SetButtonClicks(personeel);
-        }
-        private void SetButtonTags()
-        {
-            btnBediening.Tag = Functie.Bediening;
-            btnKeuken.Tag = Functie.Keuken;
-            btnBar.Tag = Functie.Bar;
-            btnManagers.Tag = Functie.Manager;
-        }
-        private void SetButtonClicks(List<Personeel> personeel)
-        {
-            btnBediening.Click += (sender, e) => BedieningClick(personeel);
-            btnKeuken.Click += (sender, e) => KeukenClick(personeel);
-            btnBar.Click += (sender, e) => BarClick(personeel);
-            btnManagers.Click += (sender, e) => ManagersClick(personeel);
-        }
-        private void RenablePersoneelButtons(Functie functie)
-        {
-            switch (functie)
+            if (!email.ToLower().EndsWith("@chapeau.nl"))
             {
-                case Functie.Bediening:
-                    SetButtonStates(false, true, true, true);
-                    break;
-                case Functie.Keuken:
-                    SetButtonStates(true, false, true, true);
-                    break;
-                case Functie.Bar:
-                    SetButtonStates(true, true, false, true);
-                    break;
-                case Functie.Manager:
-                    SetButtonStates(true, true, true, false);
-                    break;
+                email = $"{email}@chapeau.nl";
             }
+            return email.ToLower();
         }
-        private void SetButtonStates(bool bediening, bool keuken, bool bar, bool managers)
+        private bool AreValidPersoneelInputs(string nameInput, string emailInput, Functie selectedItem)
         {
-            btnBediening.Enabled = bediening;
-            btnKeuken.Enabled = keuken;
-            btnBar.Enabled = bar;
-            btnManagers.Enabled = managers;
+            if (!IsEmpty(nameInput, emailInput) || !AreValidCharacters(nameInput, emailInput) || !Enum.IsDefined(typeof(Functie), selectedItem))
+            {
+                return false;
+            }
+            return true;
         }
-        private void SetEnableColor(Button button)
+        private bool AreValidCharacters(string nameInput, string emailInput)
         {
-            if (button.Enabled)
+            foreach (char character in emailInput)
             {
-                button.BackColor = Color.FromArgb(255, 138, 210, 176);
+                if (!char.IsLetter(character) && character != '_' && character != '.' && character != '@')
+                {
+                    throw new Exception("Username is niet geldig");
+                }
             }
-            else
+            foreach (char character in nameInput)
             {
-                button.BackColor = Color.FromArgb(114, 138, 210, 176);
+                if (!char.IsLetter(character) && character != ' ')
+                {
+                    throw new Exception("Achternaam is niet geldig");
+                }
             }
+            return true;
         }
-
-        #endregion
-
-        private bool HasSelectedPersoneel()
+        private bool IsEmpty(string nameInput, string emailInput)
         {
-            if (lsvPersoneelItems.SelectedItems.Count > 0)
+            if (string.IsNullOrEmpty(emailInput) || string.IsNullOrWhiteSpace(nameInput))
             {
-                return true;
+                throw new Exception("Vul alle velden in");
             }
-            DisplayErrorMessage("Selecteer een item uit de lijst");
-            return false;
-        }
-        private bool IsCurrentUser(Personeel ingelogdeGebruiker)
-        {
-            if (ingelogdeGebruiker.Id == form.personeel.Id)
-            {
-                MessageBox.Show("Je kan jezelf niet aanpassen of verwijderen");
-                return true;
-            }
-            return false;
+            return true;
         }
         private void DisplayErrorMessage(string errorMessage)
         {
-            lblErrorOverview.Visible = true;
-            lblErrorOverview.Text = errorMessage;
+            lblErrorNewObject.Visible = true;
+            lblErrorNewObject.Text = errorMessage;
+        }
+        #endregion
+
+        private void ReturnToOverview()
+        {
+            form.SwitchPanels(new UserControlPersoneelList());
         }
     }
 }

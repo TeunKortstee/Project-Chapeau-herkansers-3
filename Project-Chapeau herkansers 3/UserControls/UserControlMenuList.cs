@@ -158,6 +158,7 @@ namespace Project_Chapeau_herkansers_3.UserControls
                 if (menu.MenuType == menuType)
                 {
                     chosenMenu = menu;
+                    break;
                 }
             }
             return chosenMenu;

@@ -6,7 +6,7 @@ namespace DAL
 {
     public class MenuDao : BaseDao
     {
-        public Menu GetAllMenuItemsByMenuType(MenuType menuType)
+        public Menu GetMenuByMenuType(MenuType menuType)
         {
             string query = "SELECT MenuType, MenuItemId, Naam, Prijs, Alcoholisch, Voorraad, mi.MenuId FROM Menu m JOIN MenuItems mi ON m.MenuId = mi.MenuId WHERE m.MenuId = @MenuId AND IsBeschikbaar = 1";
             SqlParameter sqlParameter = new SqlParameter("@MenuId", (int)menuType);

@@ -33,10 +33,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UserControls\UserControlPersoneelEdit.cs">
+    <Compile Update="UserControls\UserControlPersoneel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControls\UserControlPersoneel.cs">
+    <Compile Update="UserControls\UserControlPersoneelList.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

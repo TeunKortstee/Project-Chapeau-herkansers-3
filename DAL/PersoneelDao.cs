@@ -43,15 +43,15 @@ namespace DAL
             string query = "SELECT PersoneelsId, Achternaam, FunctieId, Email FROM Personeel WHERE IsBeschikbaar = 1";
             return ReadTables(ExecuteSelectQuery(query));
         }
-        public void UpdatePersoneel(Personeel selectedPersoneel)
+        public void UpdatePersoneel(Personeel personeel)
         {
             string query = "UPDATE Personeel SET Achternaam = @Achternaam, Email = @Email, FunctieId = @FunctieId  WHERE PersoneelsId = @PersoneelsId";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@PersoneelsId", selectedPersoneel.Id),
-                new SqlParameter("@Achternaam", selectedPersoneel.AchterNaam),
-                new SqlParameter("@Email", selectedPersoneel.Email),
-                new SqlParameter("@FunctieId", (int)selectedPersoneel.Functie),
+                new SqlParameter("@PersoneelsId", personeel.Id),
+                new SqlParameter("@Achternaam", personeel.AchterNaam),
+                new SqlParameter("@Email", personeel.Email),
+                new SqlParameter("@FunctieId", (int)personeel.Functie),
             };
             ExecuteEditQuery(query, sqlParameters);
         }

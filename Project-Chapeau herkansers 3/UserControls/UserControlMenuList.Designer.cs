@@ -1,6 +1,6 @@
 ﻿namespace Project_Chapeau_herkansers_3.UserControls
 {
-    partial class UserControlMenu
+    partial class UserControlMenuList
     {
         /// <summary> 
         /// Required designer variable.

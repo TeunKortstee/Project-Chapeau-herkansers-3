@@ -7,26 +7,26 @@ namespace Service
     public class MenuItemService
     {
         const string DatabaseExceptionText = "Er ging iets mis";
-        private MenuDao menuItemDao;
+        private MenuDao menuDao;
 
         public MenuItemService()
         {
-            menuItemDao = new MenuDao();
+            menuDao = new MenuDao();
         }
         public Menu GetAllMenuItemsInMenu()
         {
-            return menuItemDao.GetAllMenuItemsInMenu();
+            return menuDao.GetAllMenuItemsInMenu();
         }
         // Lucas
         public Menu GetAllMenuItemsByMenuType(MenuType menuType)
         {
-            return menuItemDao.GetAllMenuItemsByMenuType(menuType);
+            return menuDao.GetMenuByMenuType(menuType);
         }
         public void AddNewMenuItem(MenuItem newMenuItem)
         {
             try
             {
-                menuItemDao.AddNewMenuItem(newMenuItem);
+                menuDao.AddNewMenuItem(newMenuItem);
             }
             catch
             {
@@ -37,7 +37,7 @@ namespace Service
         {
             try
             {
-                menuItemDao.UpdateMenuItem(selectedMenuItem);
+                menuDao.UpdateMenuItem(selectedMenuItem);
             }
             catch
             {
@@ -48,7 +48,7 @@ namespace Service
         {
             try
             {
-                menuItemDao.UpdateMenuItemStock(selectedMenuItem);
+                menuDao.UpdateMenuItemStock(selectedMenuItem);
             }
             catch
             {
@@ -59,7 +59,7 @@ namespace Service
         {
             try
             {
-                menuItemDao.SoftDeleteMenuItem(selectedMenuItem);
+                menuDao.SoftDeleteMenuItem(selectedMenuItem);
             }
             catch
             {
@@ -68,12 +68,12 @@ namespace Service
         }
         public int GetMenuItemSales(MenuItem menuItem, DateTime datumVan, DateTime datumTot)
         {
-            return menuItemDao.GetMenuItemSales(menuItem, datumVan, datumTot);
+            return menuDao.GetMenuItemSales(menuItem, datumVan, datumTot);
         }
         // Luciano
         public void UpdateAllMenuItemsStock(Bestelling bestelling)
         {
-            menuItemDao.UpdateAllMenuItemsStock(bestelling);
+            menuDao.UpdateAllMenuItemsStock(bestelling);
         }
     }
 }

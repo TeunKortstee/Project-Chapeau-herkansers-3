@@ -13,19 +13,19 @@ namespace Project_Chapeau_herkansers_3.UserControls
         }
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlPersoneel());
+            form.SwitchPanels(new UserControlPersoneelList());
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlMenu(MenuItemControl.Menu));
+            form.SwitchPanels(new UserControlMenuList(MenuItemControl.Menu));
         }
         private void btnSales_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlMenu(MenuItemControl.Inkomen));
+            form.SwitchPanels(new UserControlMenuList(MenuItemControl.Inkomen));
         }
         private void btnStock_Click(object sender, EventArgs e)
         {
-            form.SwitchPanels(new UserControlMenu(MenuItemControl.Voorraad));
+            form.SwitchPanels(new UserControlMenuList(MenuItemControl.Voorraad));
         }
     }
 }
